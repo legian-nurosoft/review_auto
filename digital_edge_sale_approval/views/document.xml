@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record model="ir.ui.view" id="folder_view_form_sale_approval">
+        <field name="name">folder_view_form_sale_approval</field>
+        <field name="model">documents.folder</field>
+        <field name="inherit_id" ref="documents.folder_view_form" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="ns_vendor_bill"/>
+            </field>
+        </field>
+    </record>
+</odoo>

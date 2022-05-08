@@ -1,0 +1,23 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+nrs_acc_sales_accounting,Sales Accounting,sale.model_sale_order,nrs_group_sale_accounting,1,0,0,0
+nrs_acc_sale_lines_accounting,Sale Lines Accounting,sale.model_sale_order_line,nrs_group_sale_accounting,1,0,0,0
+nrs_acc_crm_lead_accounting,Crm Leads Accounting,crm.model_crm_lead,nrs_group_sale_accounting,1,0,0,0
+nrs_acc_sales_ops,Sales Ops,sale.model_sale_order,nrs_group_sale_ops,1,1,0,0
+nrs_acc_sale_lines_ops,Sale Lines Ops,sale.model_sale_order_line,nrs_group_sale_ops,1,1,0,0
+nrs_acc_crm_lead_ops,Crm Leads Ops,crm.model_crm_lead,nrs_group_sale_ops,1,0,0,0
+nrs_acc_sales_rep,Sales Representative,sale.model_sale_order,nrs_group_sale_rep,1,1,1,0
+nrs_acc_sale_lines_rep,Sale Lines Representative,sale.model_sale_order_line,nrs_group_sale_rep,1,1,1,0
+nrs_acc_crm_lead_rep,Crm Leads Representative,crm.model_crm_lead,nrs_group_sale_rep,1,1,1,0
+nrs_acc_sales_manager,Sales Manager,sale.model_sale_order,nrs_group_sale_rep,1,1,1,0
+nrs_acc_sale_lines_manager,Sale Lines Manager,sale.model_sale_order_line,nrs_group_sale_rep,1,1,1,0
+nrs_acc_crm_lead_manager,Crm Leads Manager,crm.model_crm_lead,nrs_group_sale_rep,1,1,1,0
+nrs_acc_sales_con_man,Sales Country Manager,sale.model_sale_order,nrs_group_sale_rep,1,1,1,0
+nrs_acc_sale_lines_con_man,Sale Lines Country Manager,sale.model_sale_order_line,nrs_group_sale_rep,1,1,1,0
+nrs_acc_crm_lead_con_man,Crm Leads Country Manager,crm.model_crm_lead,nrs_group_sale_rep,1,1,1,0
+nrs_acc_sales_reg_man,Sales Regional Manager,sale.model_sale_order,nrs_group_sale_rep,1,1,1,1
+nrs_acc_sale_lines_reg_man,Sale Lines Regional Manager,sale.model_sale_order_line,nrs_group_sale_rep,1,1,1,1
+nrs_acc_crm_lead_reg_man,Crm Leads Regional Manager,crm.model_crm_lead,nrs_group_sale_rep,1,1,1,1
+nrs_acc_sales_reg_man,Sales Deal Desk,sale.model_sale_order,nrs_group_sale_rep,1,1,1,1
+nrs_acc_sale_lines_reg_man,Sale Lines Deal Desk,sale.model_sale_order_line,nrs_group_sale_rep,1,1,1,1
+nrs_acc_crm_lead_reg_man,Crm Leads Deal Desk,crm.model_crm_lead,nrs_group_sale_rep,1,1,1,1
+nrs_acc_sales_support,Sales Support,crm.model_crm_lead,nrs_group_sale_support,1,1,1,0

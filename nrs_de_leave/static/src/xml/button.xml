@@ -1,0 +1,9 @@
+<templates xml:space="preserve">
+    <t t-inherit="hr_holidays.dashboard.calendar.button" t-inherit-mode="extension">
+        <xpath expr="//button[hasclass('btn-secondary')]" position="replace">
+            <button class="btn btn-secondary btn-allocation" type="button" style="display:none">
+                <t t-esc="request"/>
+            </button>
+        </xpath>
+    </t>
+</templates>

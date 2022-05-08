@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ns_breaker_form" model="ir.ui.view">
+        <field name="name">ns_breaker_form</field>
+        <field name="model">ns.ns_breaker</field>
+        <field name="arch" type="xml">
+          <form>
+            <header>
+              <field name="ns_stage" widget="statusbar" clickable='1'  />
+            </header>
+            <sheet string="Breaker">
+              <widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+              <field name="active" invisible="1"/>
+              <div class="oe_title">
+                          <h1>
+                              <field name="ns_name" required="1" placeholder="Name..."/>
+                          </h1>
+                      </div>
+              <group name="studio_group_5390a4">
+                <group name="studio_group_5390a4_left">
+                  <field name="ns_sold"  invisible="1"/>
+                  <field name="ns_customer" string="Customer" options="{'no_create':true}" attrs="{'required': [['ns_sold', '=', True]], 'invisible': [['ns_sold', '=', False]]}"/>
+                  <field name="ns_pdu"/>
+                </group>
+                <group name="studio_group_5390a4_right">
+                  <field name="ns_reserved"  invisible="1"/>
+                  <field name="ns_reserve_date_until" />
+                  <field name="ns_sale_order_line_id" attrs="{'invisible': [('ns_reserved','=',False)]}" />
+                  <field name="company_id"/>
+                </group>
+              </group>
+            </sheet>
+            <div class="oe_chatter" name="oe_chatter">
+              <field name="message_follower_ids"/>
+              <field name="message_ids"/>
+              <field name="activity_ids"/>
+            </div>
+          </form>
+        </field>
+    </record>
+
+	<record id="ns_breaker_kanban" model="ir.ui.view">
+        <field name="name">ns_breaker_kanban</field>
+        <field name="model">ns.ns_breaker</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="ns_stage">
+				<field name="ns_name" required="1" placeholder="Name..."/>
+                <field name="ns_sold"  invisible="1" />
+                <field name="ns_customer" string="Customer" options="{'no_create':true}" attrs="{'required': [['ns_sold', '=', True]], 'invisible': [['ns_sold', '=', False]]}" />
+                <field name="ns_pdu" />
+				<field name="ns_reserved"  invisible="1" />
+				<field name="ns_reserve_date_until" />
+				<field name="ns_sale_order_line_id" attrs="{'invisible': [('ns_reserved','=',False)]}" />
+				<field name="ns_stage" widget="statusbar" clickable="1" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_content oe_kanban_global_click">
+                            <div>
+                                <strong class="o_kanban_record_title"><span><field name="ns_name"/></span></strong>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+     <record id="breaker_form_studio_inherit" model="ir.ui.view">
+        <field name="name">breaker_form_studio_inherit</field>
+        <field name="model">ns.ns_breaker</field>
+        <field name="inherit_id" ref="studio_customization.odoo_studio_ns_break_014e1011-6b0b-4725-bf52-187b7c8781a3"/>
+        <field name="arch" type="xml">
+          <xpath expr="//field[@name='x_studio_reserved']" position="attributes">
+            <attribute name="attrs">{"invisible":1}</attribute>
+          </xpath>
+          <xpath expr="//field[@name='ns_customer']" position="attributes">
+            <attribute name="attrs">{}</attribute>
+          </xpath>
+        </field>
+    </record>
+
+    <record id="breaker_tree_studio_inherit" model="ir.ui.view">
+        <field name="name">breaker_tree_studio_inherit</field>
+        <field name="model">ns.ns_breaker</field>
+        <field name="inherit_id" ref="studio_customization.odoo_studio_ns_break_12f504b2-a30c-49a8-856b-cccdb0cd7bb2"/>
+        <field name="arch" type="xml">
+          <xpath expr="//field[@name='x_studio_reserved']" position="replace">
+          </xpath>
+          <xpath expr="//field[@name='ns_sold']" position="replace">
+          </xpath>
+        </field>
+    </record>
+
+    <record id="ns_breaker_tree" model="ir.ui.view">
+        <field name="name">ns_breaker_tree</field>
+        <field name="model">ns.ns_breaker</field>
+        <field name="arch" type="xml">
+          <tree>
+            <field name="ns_sequence" widget="handle"/>
+            <field name="ns_name"/>
+            <field name="ns_pdu"/>
+          </tree>
+        </field>
+    </record>
+
+    <record id="ns_breaker_search" model="ir.ui.view">
+        <field name="name">ns_breaker_search</field>
+        <field name="model">ns.ns_breaker</field>
+        <field name="arch" type="xml">
+          <search>
+            <field name="ns_name"/>
+            <separator/>
+            <filter string="Archived" name="archived_ns_breaker" domain="[['active', '=', False]]"/>
+            <separator/>
+          </search>
+        </field>
+    </record>
+
+</odoo>

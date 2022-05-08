@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="res_users_form_inherit">
+        <field name="name">res_user_form_inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_show_groups']" position="before">
+                <button name="totp_disable" type="object" groups="base.group_no_one" class="oe_stat_button"
+                        icon="fa-ban" string="Disable 2FA" attrs="{'invisible': [('totp_enabled','=',False)]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

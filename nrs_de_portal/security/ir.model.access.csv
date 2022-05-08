@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_portal_carousel,portal.carousel,model_portal_carousel,nrs_de_portal.nrs_group_admin_customer_portal,1,1,1,1
+access_nrs_allowed_ticket_type,nrs.allowed.ticket.type,model_nrs_allowed_ticket_type,nrs_de_portal.nrs_group_admin_customer_portal,1,1,1,1
+access_nrs_req_service_selection,nrs.req.service.selection,model_nrs_req_service_selection,nrs_de_portal.nrs_group_admin_customer_portal,1,1,1,1
+access_nrs_notification,nrs.notification,model_nrs_notification,nrs_de_portal.nrs_group_admin_customer_portal,1,1,1,1
+access_nrs_faq,nrs.faq,model_nrs_faq,nrs_de_portal.nrs_group_admin_customer_portal,1,1,1,1
+access_nrs_faq_group,nrs.faq.group,model_nrs_faq_group,nrs_de_portal.nrs_group_admin_customer_portal,1,1,1,1
+access_nrs_documents,nrs.documents,model_nrs_documents,nrs_de_portal.nrs_group_admin_customer_portal,1,1,1,1
+access_nrs_external_link,nrs.external.link,model_nrs_external_link,nrs_de_portal.nrs_group_admin_customer_portal,1,1,1,1
+access_ns_helpdesk_ticket_shipment_detail,ns.helpdesk.ticket.shipment.detail,model_ns_helpdesk_ticket_shipment_detail,base.group_user,1,1,1,1
+access_ns_helpdesk_ticket_site_access_detail,ns.helpdesk.ticket.site.access.detail,model_ns_helpdesk_ticket_site_access_detail,base.group_user,1,1,1,1

@@ -1,0 +1,274 @@
+<t t-name="studio_report_document">
+    <t t-call="web.external_layout_order_form_mjo">
+        <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)"/>
+        <div class="page">
+    <div>
+            <div class="row">
+                <div class="col-6">
+                    <span t-field="doc.company_id.logo" t-options-widget="&quot;image&quot;" width="200px"/><br/>
+                    <t t-if="doc.partner_id.lang == &quot;en_US&quot;">
+                        <span t-field="doc.partner_id.display_name"/><br/>
+                        <span t-field="doc.partner_id.street"/><br/>
+                        <t t-if="doc.partner_id.street2"><span t-field="doc.partner_id.street2"/><br/></t>
+                        <span t-field="doc.partner_id.city"/> <span t-field="doc.partner_id.state_id.name"/> <span t-field="doc.partner_id.country_id.name"/> <span t-field="doc.partner_id.zip"/><br/><br/>
+                    </t>
+                    <t t-if="doc.partner_id.lang != &quot;en_US&quot;">
+                        <span t-field="doc.partner_id.name"/><br/>
+                        <span t-field="doc.partner_id.street"/><br/><br/>
+                    </t>
+                    Attn: <span t-field="doc.x_studio_quote_contact_1"/>
+                </div>
+                <div class="col-3">
+                    <br/><br/>
+                    Order Number<br/>
+                    Issued Date<br/>
+                    Currency<br/>
+                    Initial Term<br/>
+                </div>
+                <div class="col-3">
+                    <br/><br/>
+                    <span t-field="doc.opportunity_id.x_studio_agreement_number"/><br/>
+                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%b-%Y %H:%m')"/><br/>
+                    <span t-field="doc.currency_id"/><br/>
+                    <span t-field="doc.x_contract_term"/><br/>
+                </div>
+            </div>
+    </div>
+    <br/>
+    
+    <table>
+     <tr>
+                    <td width="180px"><span>Data Center</span></td>
+                    <td width="200px"><span t-field="doc.x_studio_operation_site"/></td>
+                    <td width="800px"><span t-field="doc.x_studio_operation_site.x_studio_site_address"/></td>
+                </tr>
+    </table>
+    <br/>
+    
+    <table width="100%">
+                <tr>
+                    <td colspan="3" class="text-left" style="background-color: #CAD4DF">
+                        <strong>Quotation</strong>
+                    </td>
+                </tr>
+               
+        </table>
+        
+        
+        <table class="table table-sm o_main_table">
+            <!-- In case we want to repeat the header, remove "display: table-row-group"--> 
+            <thead>
+                    
+                    <tr>
+                        <th name="th_product_code" class="text-left" width="180px">Product Code</th>
+                        <th name="th_description" class="text-left" width="200px">Description</th>
+                        <!--<th name="th_service_period" class="text-left" width="200px">Service Term</th>-->
+                        <th name="th_quantity" class="text-right" width="50px">Qty</th>
+                        <th name="th_uom" class="text-left" width="75px">Unit</th>
+                        <!--<th name="th_charge_type" class="text-left" width="125px">Charge Type</th>-->
+                        <th name="th_priceunit" class="text-right" width="75px">Unit Cost</th>
+                        <th name="th_discount" class="text-right" groups="product.group_discount_per_so_line" width="50px">
+                            <span>Disc.%</span>
+                        </th>
+                        <th name="th_subtotal" class="text-right" width="100px">
+                            <span groups="account.group_show_line_subtotals_tax_excluded">Subtotal</span>
+                            <span groups="account.group_show_line_subtotals_tax_included">Subtotal</span>
+                        </th>
+                        <th name="th_remarks" class="text-left" width="100px">Remarks</th>
+                    </tr>
+            </thead>
+            <tbody class="sale_tbody">
+
+                <t t-set="current_subtotal" t-value="0"/>
+
+                <t t-foreach="doc.order_line" t-as="line">
+
+                    <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                    <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+
+                    <tr t-att-class="'bg-200 font-weight-bold o_line_section' if line.display_type == 'line_section' else 'font-italic o_line_note' if line.display_type == 'line_note' else ''">
+                        <t t-if="not line.display_type">
+                            <td name="td_product_code"><span t-field="line.product_id.default_code"/></td>
+                            <td name="td_description"><span t-field="line.product_id.name"/></td>
+                            <!--<t t-if="line.product_id.x_studio_charge_type != 'One-Time'">-->
+                            <!--    <td name="td_service_period"><span t-field="doc.x_studio_service_request_date"/> - <span t-field="doc.x_studio_contract_end_date"/></td>-->
+                            <!--</t>-->
+                            <!--<t t-if="line.product_id.x_studio_charge_type == 'One-Time'">-->
+                            <!--    <td></td>-->
+                            <!--</t>-->
+                            <td name="td_quantity" class="text-right"><span t-field="line.product_uom_qty"/></td>
+                            <td name="td_uom" class="text-left"><span t-field="line.product_uom"/></td>
+                            <!--<td name="td_charge_type" class="text-left"><span t-field="line.x_studio_charge_type"/></td>-->
+                            <td name="td_priceunit" class="text-right"><span t-field="line.price_unit"/></td>
+                            <td class="text-right" groups="product.group_discount_per_so_line">
+                                <span t-field="line.discount"/>
+                            </td>
+                            <td name="td_subtotal" class="text-right o_price_total">
+                                <span t-field="line.price_subtotal"/>
+                            </td>
+                            <td name="td_remarks">
+                                <span t-field="line.x_studio_remarks"/>
+                            </td>
+                        </t>
+                        <t t-if="line.display_type == 'line_section'">
+                            <td name="td_section_line" colspan="99">
+                                <span t-field="line.name"/>
+                            </td>
+                            <t t-set="current_section" t-value="line"/>
+                            <t t-set="current_subtotal" t-value="0"/>
+                        </t>
+                        <!--<t t-if="line.display_type == 'line_note'">-->
+                        <!--    <td name="td_note_line" colspan="99">-->
+                        <!--        <span t-field="line.name"/>-->
+                        <!--    </td>-->
+                        <!--</t>-->
+                    </tr>
+                </t>
+                <tr class="o_bold">
+                    <td colspan="6" class="text-right">Grand Total (NRC)</td>
+                    <td class="text-right"><span t-field="doc.currency_id.symbol"/> <span t-field="doc.amount_nrc"/></td>
+                    <td > </td>
+                </tr>
+                <tr class="o_bold">
+                    <td colspan="6" class="text-right">Grand Total (MRC)</td>
+                    <td class="text-right"><span t-field="doc.currency_id.symbol"/> <span t-field="doc.amount_mrc"/></td>
+                    <td > </td>
+                </tr>
+
+            </tbody>
+        </table>
+                    
+        <br/>
+        <t t-if="doc.ns_is_ramp_up">
+            <table width="100%">
+                <tr>
+                    <td class="text-left" style="background-color: #CAD4DF">
+                        <strong>Ramp-Up Orders</strong>
+                    </td>
+                </tr>
+            </table>
+                
+            <table class="table table-sm o_main_table">
+                <thead>
+                    <tr>
+                        <th name="th_product_code" class="text-left" width="180px">Product Code</th>
+                        <th name="th_description" class="text-left" width="200px">Description</th>
+                        <th name="th_quantity" class="text-right" width="50px">Qty</th>
+                        <th name="th_uom" class="text-left" width="75px">Unit</th>
+                        <th name="th_priceunit" class="text-right" width="75px">Unit Cost</th>
+                        <th name="th_discount" class="text-right" width="50px" groups="product.group_discount_per_so_line">
+                            <span>Disc.%</span>
+                        </th>
+                        <th name="th_subtotal" class="text-right" width="100px">
+                            <span groups="account.group_show_line_subtotals_tax_excluded">Subtotal</span>
+                            <span groups="account.group_show_line_subtotals_tax_included">Subtotal</span>
+                        </th>
+                        <th name="th_remarks" class="text-left" width="100px">Remarks</th>
+                    </tr>
+                </thead>
+            
+                <t t-foreach="doc.ns_ramp_ups" t-as="rampup">
+                    <tbody class="sale_tbody">
+    
+                      <tr>
+                        <td colspan="8" style="background-color: #CAD4DF" name="td_ramp_up_name"><span t-field="rampup.name"/></td>
+                      </tr>
+                      <tr>
+                        <td name="td_section_line_o" style="background-color: #e7eef7"  colspan="8">
+                            <strong>Non-Recurring Revenue</strong>
+                        </td>
+                      </tr>
+                      <t t-foreach="rampup.ns_ramp_up_lines" t-as="lineopt">
+                        <tr>
+                            <t t-if="not lineopt.display_type and not lineopt.ns_product_id.recurring_invoice">
+                              <td name="td_product_code"><span t-field="lineopt.ns_product_id.default_code"/></td>
+                              <td name="td_description"><span t-field="lineopt.ns_product_id.name"/></td>
+                              <td name="td_quantity" class="text-right"><span t-field="lineopt.ns_qty"/></td>
+                              <td name="td_uom" class="text-left"><span t-field="lineopt.ns_sale_line_id.product_uom"/></td>
+                              <td name="td_priceunit" class="text-right"><span t-field="lineopt.ns_price_unit"/></td>
+                              <td class="text-right" groups="product.group_discount_per_so_line">
+                                  <span t-field="lineopt.ns_discount"/>
+                              </td>
+                              <td name="td_subtotal" class="text-right o_price_total">
+                                  <span t-field="lineopt.ns_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                  <span t-field="lineopt.ns_subtotal" groups="account.group_show_line_subtotals_tax_included"/>
+                              </td>
+                              <td name="td_remarks">
+                                  <span t-field="lineopt.ns_remarks"/>
+                              </td>
+                            </t>
+                        </tr>
+                      </t>
+                      <tr>
+                        <td name="td_section_line_o" style="background-color: #e7eef7" colspan="99">
+                            <strong>Monthly Recurring Revenue</strong>
+                        </td>
+                      </tr>
+                      <t t-foreach="rampup.ns_ramp_up_lines" t-as="lineopt">
+                        <tr>
+                            <t t-if="not lineopt.display_type and lineopt.ns_product_id.recurring_invoice">
+                              <td name="td_product_code"><span t-field="lineopt.ns_product_id.default_code"/></td>
+                              <td name="td_description"><span t-field="lineopt.ns_product_id.name"/></td>
+                              <td name="td_quantity" class="text-right"><span t-field="lineopt.ns_qty"/></td>
+                              <td name="td_uom" class="text-left"><span t-field="lineopt.ns_sale_line_id.product_uom"/></td>
+                              <td name="td_priceunit" class="text-right"><span t-field="lineopt.ns_price_unit"/></td>
+                              <td class="text-right" groups="product.group_discount_per_so_line">
+                                  <span t-field="lineopt.ns_discount"/>
+                              </td>
+                              <td name="td_subtotal" class="text-right o_price_total">
+                                  <span t-field="lineopt.ns_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                  <span t-field="lineopt.ns_subtotal" groups="account.group_show_line_subtotals_tax_included"/>
+                              </td>
+                              <td name="td_remarks">
+                                  <span t-field="lineopt.ns_remarks"/>
+                              </td>
+                            </t>
+                            <t t-if="lineopt.display_type == 'line_section'">
+                                <td name="td_section_line" colspan="99">
+                                    <span t-field="lineopt.name"/>
+                                </td>
+                            </t>
+                            <t t-if="lineopt.display_type == 'line_note'">
+                                <td name="td_note_line" colspan="99">
+                                    <span t-field="lineopt.name"/>
+                                </td>
+                            </t>
+
+                        </tr>
+                      </t>
+                  
+                        <tr class="o_bold">
+                            <td colspan="6" class="text-right">Subtotal (NRC)</td>
+                            <td class="text-right"><span t-field="doc.currency_id.symbol"/> <span t-field="rampup.ns_nrc_amount"/></td>
+                            <td > </td>
+                        </tr>
+                        <tr class="o_bold">
+                            <td colspan="6" class="text-right">Subtotal (MRC)</td>
+                            <td class="text-right"><span t-field="doc.currency_id.symbol"/> <span t-field="rampup.ns_mrc_amount"/></td>
+                            <td > </td>
+                        </tr>
+                    </tbody>
+                </t>
+            </table>            
+        </t>
+            
+        <div>
+            <t t-if="doc.x_studio_custom_installation">
+            <br/>
+            <strong>Custom Installation Scope of Work</strong><br/>
+            <span t-field="doc.x_studio_custom_installation"/>
+            </t>
+        </div>
+        <br/>
+        
+        <div>
+            <b>Terms and Conditions:</b><br/>
+            1.	This document does not constitute a formal offer and is non-binding and subject to contract.   <br/>    
+            2.	All prices stated herein are net of applicable taxes.<br/>
+            3.	The prices quoted herein are valid for 30 days; however, capacity is subject to availability at time of formal contracting between the parties.          <br/>    
+            4.	This document contains proprietary and/or confidential information belonging to Digital Edge.  <br/>
+        </div>
+        
+    </div>
+    </t>
+</t>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="nrs_config_sale_apr_tree" model="ir.ui.view">
+        <field name="name">nrs_config_sale_apr_tree</field>
+        <field name="model">ns.sale.permission.config</field>
+        <field name="arch" type="xml">
+            <tree create="0" delete="0">
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="nrs_config_sale_apr_form" model="ir.ui.view">
+        <field name="name">nrs_config_sale_apr_form</field>
+        <field name="model">ns.sale.permission.config</field>
+        <field name="arch" type="xml">
+            <form create="0" delete="0">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="ns_application_id" invisible="1" force_save="1"/>
+                            <field name="name" readonly="1" required="1" domain="[('category_id', '=', ns_application_id)]" options="{'no_create_edit': True}"/>
+                            <label for="ns_total_usd" class="o_light_label" />
+                            <div class="d-flex" >
+                                <field name="ns_operation_usd"  required="1" />
+                                <span class="o_form_label mx-3 " attrs="{'invisible': [('ns_operation_usd', '=', 'between')]}" > </span>
+                                <field name="ns_total_usd" attrs="{'invisible': [('ns_operation_usd', '=', 'between')], 'required': [('ns_operation_usd', '!=', 'between')]}" />
+                            </div>
+                            <label for="ns_total_usd_max" string="" attrs="{'invisible': [('ns_operation_usd', '!=', 'between')]}" />
+                            <div class="d-flex" attrs="{'invisible': [('ns_operation_usd', '!=', 'between')]}" >
+                                <field name="ns_total_usd"  attrs="{'required': [('ns_operation_usd', '=', 'between')]}" />
+                                <span class="o_form_label mx-3 " > to </span>
+                                <field name="ns_total_usd_max" attrs="{'required': [('ns_operation_usd', '=', 'between')]}" />
+                            </div>
+                            <label for="ns_disc_percent" class="o_light_label"/>
+                            <div class="d-flex" >
+                                <field name="ns_operation_percent"  required="1" />
+                                <span class="o_form_label mx-3 " attrs="{'invisible': [('ns_operation_percent', '=', 'between')]}"  > </span>
+                                <field name="ns_disc_percent"  attrs="{'invisible': [('ns_operation_percent', '=', 'between')], 'required': [('ns_operation_percent', '!=', 'between')]}"/>
+                            </div>
+                            <label for="ns_disc_percent_max" string="" attrs="{'invisible': [('ns_operation_percent', '!=', 'between')]}" />
+                            <div class="d-flex" attrs="{'invisible': [('ns_operation_percent', '!=', 'between')]}" >
+                                <field name="ns_disc_percent"   attrs="{'required': [('ns_operation_percent', '=', 'between')]}"  />
+                                <span class="o_form_label mx-3 " > to </span>
+                                <field name="ns_disc_percent_max"  attrs="{'required': [('ns_operation_percent', '=', 'between')]}" />
+                            </div>
+                            <filed name="ns_currency_id" invisible="1" force_save="1"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="nrs_sale_permission_action" model="ir.actions.act_window">
+        <field name="binding_type">action</field>
+        <field name="binding_view_types">list,form</field>
+        <field name="name">Sales Approval</field>
+        <field name="res_model">ns.sale.permission.config</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="nrs_sale_approval_menu" model="ir.ui.menu">
+        <field name="name">Sales Approval</field>
+        <field name="groups_id" eval="[(6, 0, [])]"/>
+        <field name="parent_id" ref="sale.menu_sale_config"/>
+        <field name="action" ref="nrs_sale_permission_action"/>
+        <field name="sequence" eval="99"/>
+    </record>
+
+</odoo>

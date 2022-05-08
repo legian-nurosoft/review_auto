@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ns_product_bundle,access_ns_product_bundle,model_ns_product_bundle,,1,1,1,1 
+access_ns_product_bundle_line,access_ns_product_bundle_line,model_ns_product_bundle_line,,1,1,1,1 

@@ -1,0 +1,55 @@
+<odoo>
+    <record id="sale_ramp_ups_form" model="ir.ui.view">
+        <field name="name">sale_ramp_ups_form</field>
+        <field name="model">sale.ramp.ups</field>
+        <field name="arch" type="xml">
+            <form>
+                <script>
+                    $(document).ready(function(){
+                        $('.modal-lg').css({'max-width': '70%'});
+                    });
+                </script>
+                <sheet>
+                    <group readonly="1">
+                        <field name="ramp_up_to_execute" invisible="1"/>
+                    </group>
+                    <p>Please ensure all the information and upload the signed document correctly</p>
+                    <field name="order_line" widget="section_and_note_one2many" mode="tree" readonly="1" invisible="1">
+                        <form>
+                            <group>
+                                <field name="sale_ramp_id" invisible="1"/>
+                                <field name="sale_line_id" invisible="1"/>
+                                <field name="product_id"/>
+                                <field name="name" widget="section_and_note_text"/>
+                                <field name="product_uom_qty"/>
+                                <field name="price_unit"/>
+                                <field name="tax_id" widget="many2many_tags"/>
+                                <field name="discount" string="Disc.%"/>
+                                <field name="currency_id" invisible="1"/>
+                                <field name="price_subtotal" widget="monetary"/>
+                            </group>
+                        </form>
+                        <tree>
+                            <field name="sequence" widget="handle"/>
+                            <field name="display_type" invisible="1"/>
+                            <field name="sale_ramp_id" invisible="1"/>
+                            <field name="sale_line_id" invisible="1"/>
+                            <field name="product_id" options="{'no_open': True}" force_save="1" widget="product_configurator"/>
+                            <field name="name" widget="section_and_note_text" optional="show"/>
+                            <field name="product_uom_qty"/>
+                            <field name="price_unit"/>
+                            <field name="tax_id" widget="many2many_tags" options="{'no_create': True}" optional="show"/>
+                            <field name="discount" string="Disc.%" optional="show"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="price_subtotal" widget="monetary"/>
+                        </tree>
+                    </field>
+                </sheet>
+                <footer>
+                    <button name="confirm_ramp_ups" string="OK" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class='oe_link' special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

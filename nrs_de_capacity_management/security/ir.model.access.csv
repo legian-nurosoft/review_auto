@@ -1,0 +1,20 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+space_group_user,Space group_user,model_ns_ns_space,base.group_user,1,1,1,0
+space_group_system,Space group_system,model_ns_ns_space,base.group_system,1,1,1,1
+room_group_user,Rooms group_user,model_ns_ns_rooms,base.group_user,1,1,1,0
+room_group_system,Rooms group_system,model_ns_ns_rooms,base.group_system,1,1,1,1
+pdu_group_user,PDU group_user,model_ns_ns_pdu,base.group_user,1,1,1,0
+pdu_group_system,PDU group_system,model_ns_ns_pdu,base.group_system,1,1,1,1
+floors_group_user,Floors group_user,model_ns_ns_floors,base.group_user,1,1,1,0
+floors_group_system,Floors group_system,model_ns_ns_floors,base.group_system,1,1,1,1
+breaker_group_user,Breaker group_user,model_ns_ns_breaker,base.group_user,1,1,1,0
+breaker_group_system,Breaker group_system,model_ns_ns_breaker,base.group_system,1,1,1,1
+patchpanel_group_user,PatchPanel group_user,model_ns_ns_patchpanel,base.group_user,1,1,1,0
+patchpanel_group_system,PatchPanel group_system,model_ns_ns_patchpanel,base.group_system,1,1,1,1
+ports_group_user,Ports group_user,model_ns_ns_ports,base.group_user,1,1,1,0
+ports_group_system,Ports group_system,model_ns_ns_ports,base.group_system,1,1,1,1
+access_ns_space_breaker_wizard_user,ns.space.breaker.wizard user,model_ns_space_breaker_wizard,base.group_user,1,1,1,1
+access_ns_space_wizard_line_user,ns.space.wizard.line user,model_ns_space_wizard_line,base.group_user,1,1,1,1
+access_ns_breaker_wizard_line_user,ns.breaker.wizard.line user,model_ns_breaker_wizard_line,base.group_user,1,1,1,1
+access_ns_port_wizard_line_user,access_ns_port_wizard_line_user,model_ns_port_wizard_line,base.group_user,1,1,1,1
+access_ns_patch_wizard_line_user,access_ns_patch_wizard_line_user,model_ns_patch_wizard_line,base.group_user,1,1,1,1

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record id="nrs_period_13_financial_record_view" model="ir.ui.view">
+        <field name="name">nrs.period.13.financial.record.view</field>
+        <field name="model">account.financial.html.report</field>
+        <field name="inherit_id" ref="account_reports.view_account_financial_report_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tax_report']" position="after">
+                <field name="nrs_period_13"  attrs="{'invisible': [('id','not in', (1,2))]}" />
+            </xpath>
+        </field>
+    </record>
+
+    <template id="period13_filter" inherit_id="account_reports.search_template_extra_options">
+        <xpath expr="//a[last()]" position="after">
+            <a role="menuitem" class="dropdown-item js_account_report_bool_filter" t-if="options.get('show_period_13') != None" title="Period 13" data-filter="show_period_13">Include Period 13</a>   
+            <a role="menuitem" class="dropdown-item js_account_report_bool_filter" t-if="options.get('show_period_13_only') != None" title="Period 13" data-filter="show_period_13_only">Show Period 13 Only</a>
+        </xpath>             
+    </template>
+</odoo>

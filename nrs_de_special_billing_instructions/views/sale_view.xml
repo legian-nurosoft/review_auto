@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sale_order_view_form_inherit_special_billing" model="ir.ui.view">
+            <field name="name">sale_order_view_form_inherit_special_billing</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="nrs_de_ramp_up_order.nrs_sale_rampups"/>
+            <field name="arch" type="xml">
+                <!-- Do action_preconfirm() instead of action_confirm() -->
+                <button id="action_confirm" position="replace">
+                    <button name="action_preconfirm" id="action_confirm" data-hotkey="v"
+                        string="Confirm" class="btn-primary" type="object"
+                        attrs="{'invisible': [('state', 'not in', ['sent'])]}" />
+                </button>
+                <field name="ns_is_ramp_up" position="after">
+                    <field name="ns_special_billing_user_restriction" invisible="1"/>
+                    <field name="ns_special_billing_instruction" attrs="{'readonly': ['|', ('ns_special_billing_user_restriction', '=', False), ('approval_state', '!=', 'sent')], 'invisible': [('approval_state', 'not in', ['sent', 'sale', 'done'])]}"/>
+                    <field name='ns_temp_sbi' invisible="1" />
+                    <field name='ns_sbi_changed' invisible="1" />
+                    <span class="oe_edit_only" style="color: blue;" attrs="{'invisible': ['|', ('ns_sbi_changed', '=', False), ('ns_special_billing_instruction', '=', False)]}">
+                    Please check the Special Billing Instructions tab
+                    </span>
+                </field>
+                <notebook position="inside">
+                    <page name="special_billing_instructions" class="appear" string="Special Billing Instructions" attrs="{'invisible': ['|', ('ns_sbi_changed', '=', False), ('ns_special_billing_instruction', '=', False)]}">
+                        <field name="ns_special_billing_instruction_ids">
+                            <tree>
+                                <field name='ns_order_id' invisible="1" />
+                                <field name="ns_start_date" />
+                                <field name="ns_end_date" />
+                                <field name="ns_special_billing_type" />
+                                <field name="ns_discount" string="Disc.%" widget="float" decimal_precision="2" attrs="{'invisible': [('ns_special_billing_type', '!=', 'discount')], 'required': [('ns_special_billing_type', '=', 'discount')]}" />
+                                <field name="ns_special_billing_type_description" attrs="{'readonly': [('ns_special_billing_type', '!=', 'others')], 'required': [('ns_special_billing_type', '=', 'others')]}" />
+                                <field name="ns_apply_to" />
+                                <field name="ns_product_description" widget="many2many_tags" attrs="{'readonly': [('ns_apply_to', '!=', 'specific_product')], 'required': [('ns_apply_to', '=', 'specific_product')]}" />
+                                <field name="ns_additional_remarks" />
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name='_ns_product_ids' invisible="1" />
+                                    <field name='ns_order_id' invisible="1" />
+                                    <field name="ns_start_date" />
+                                    <label for="ns_period" />
+                                    <div class="o_row">
+                                        <field name="ns_period" />
+                                        <span>days</span>
+                                    </div>
+                                    <field name="ns_end_date" />
+                                    <field name="ns_special_billing_type" />
+                                    <label for="ns_discount" attrs="{'invisible': [('ns_special_billing_type', '!=', 'discount')]}" />
+                                    <div class="o_row" attrs="{'invisible': [('ns_special_billing_type', '!=', 'discount')]}">
+                                        <field name="ns_discount" widget="float" decimal_precision="2" attrs="{'required': [('ns_special_billing_type', '=', 'discount')]}" />
+                                        <span>%</span>
+                                    </div>
+                                    <field name="ns_special_billing_type_description" attrs="{'invisible': [('ns_special_billing_type', '!=', 'others')], 'required': [('ns_special_billing_type', '=', 'others')]}" />
+                                    <field name="ns_apply_to" />
+                                    <field name="ns_product_description" widget="many2many_tags" attrs="{'invisible': [('ns_apply_to', '!=', 'specific_product')], 'required': [('ns_apply_to', '=', 'specific_product')]}" />
+                                    <field name="ns_additional_remarks" />
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                    <page name="special_billing_instructions" string="Special Billing Instructions" attrs="{'invisible': ['|', ('ns_sbi_changed', '=', True), ('ns_special_billing_instruction', '=', False)]}">
+                        <field name="ns_special_billing_instruction_ids">
+                            <tree>
+                                <field name='ns_order_id' invisible="1" />
+                                <field name="ns_start_date" />
+                                <field name="ns_end_date" />
+                                <field name="ns_special_billing_type" />
+                                <field name="ns_discount" string="Disc.%" widget="float" decimal_precision="2" attrs="{'invisible': [('ns_special_billing_type', '!=', 'discount')], 'required': [('ns_special_billing_type', '=', 'discount')]}" />
+                                <field name="ns_special_billing_type_description" attrs="{'readonly': [('ns_special_billing_type', '!=', 'others')], 'required': [('ns_special_billing_type', '=', 'others')]}" />
+                                <field name="ns_apply_to" />
+                                <field name="ns_product_description" widget="many2many_tags" attrs="{'readonly': [('ns_apply_to', '!=', 'specific_product')], 'required': [('ns_apply_to', '=', 'specific_product')]}" />
+                                <field name="ns_additional_remarks" />
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name='_ns_product_ids' invisible="1" />
+                                    <field name='ns_order_id' invisible="1" />
+                                    <field name="ns_start_date" />
+                                    <label for="ns_period" />
+                                    <div class="o_row">
+                                        <field name="ns_period" />
+                                        <span>days</span>
+                                    </div>
+                                    <field name="ns_end_date" />
+                                    <field name="ns_special_billing_type" />
+                                    <label for="ns_discount" attrs="{'invisible': [('ns_special_billing_type', '!=', 'discount')]}" />
+                                    <div class="o_row" attrs="{'invisible': [('ns_special_billing_type', '!=', 'discount')]}">
+                                        <field name="ns_discount" widget="float" decimal_precision="2" attrs="{'required': [('ns_special_billing_type', '=', 'discount')]}" />
+                                        <span>%</span>
+                                    </div>
+                                    <field name="ns_special_billing_type_description" attrs="{'invisible': [('ns_special_billing_type', '!=', 'others')], 'required': [('ns_special_billing_type', '=', 'others')]}" />
+                                    <field name="ns_apply_to" />
+                                    <field name="ns_product_description" widget="many2many_tags" attrs="{'invisible': [('ns_apply_to', '!=', 'specific_product')], 'required': [('ns_apply_to', '=', 'specific_product')]}" />
+                                    <field name="ns_additional_remarks" />
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+    </data>
+</odoo>

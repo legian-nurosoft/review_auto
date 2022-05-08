@@ -1,0 +1,76 @@
+<odoo>
+    <data>
+        <record id="group_documents_legal" model="res.groups">
+            <field name="name">Legal</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="base.module_category_productivity_documents"/>
+        </record>
+
+        <record id="group_documents_hr" model="res.groups">
+            <field name="name">Human Resource</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="base.module_category_productivity_documents"/>
+        </record>
+
+        <record id="group_documents_finance" model="res.groups">
+            <field name="name">Finance</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="base.module_category_productivity_documents"/>
+        </record>
+
+        <!-- Menu Item -->
+        <record model='ir.ui.menu' id='documents.menu_root'>
+            <field name="groups_id" eval="[(4,ref('nrs_de_document.group_documents_legal')), (4,ref('nrs_de_document.group_documents_hr')), (4,ref('nrs_de_document.group_documents_finance'))]"/>
+        </record>
+        <record model='ir.ui.menu' id='documents.dashboard'>
+            <field name="groups_id" eval="[(4,ref('nrs_de_document.group_documents_legal')), (4,ref('nrs_de_document.group_documents_hr')), (4,ref('nrs_de_document.group_documents_finance'))]"/>
+        </record>
+
+        <!-- Record Rule -->
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value
+                eval="[('name', '=', 'spreadsheet_own_templates'), ('module', '=', 'documents_spreadsheet')]"
+                />
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+        <record model='ir.rule' id='documents_spreadsheet.spreadsheet_own_templates'>
+            <field name="groups" eval="[(4,ref('nrs_de_document.group_documents_legal')), (4,ref('nrs_de_document.group_documents_hr')), (4,ref('nrs_de_document.group_documents_finance'))]"/>
+        </record>
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value
+                eval="[('name', '=', 'spreadsheet_own_templates'), ('module', '=', 'documents_spreadsheet')]"
+                />
+            </function>
+            <value eval="{'noupdate': True}" />
+        </function>
+
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value
+                eval="[('name', '=', 'documents_share_folder_create_uid_rule'), ('module', '=', 'documents')]"
+                />
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+        <record model='ir.rule' id='documents.documents_share_folder_create_uid_rule'>
+            <field name="groups" eval="[(4,ref('nrs_de_document.group_documents_legal')), (4,ref('nrs_de_document.group_documents_hr')), (4,ref('nrs_de_document.group_documents_finance'))]"/>
+        </record>
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value
+                eval="[('name', '=', 'documents_share_folder_create_uid_rule'), ('module', '=', 'documents')]"
+                />
+            </function>
+            <value eval="{'noupdate': True}" />
+        </function>
+
+        <!-- View -->
+        <record model='ir.ui.view' id='documents.documents_document_res_partner_view'>
+            <field name="groups_id" eval="[(4,ref('nrs_de_document.group_documents_legal')), (4,ref('nrs_de_document.group_documents_hr')), (4,ref('nrs_de_document.group_documents_finance'))]"/>
+        </record>
+
+    </data>
+</odoo>

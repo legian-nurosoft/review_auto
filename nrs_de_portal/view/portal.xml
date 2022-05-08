@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="action_open_portal_carousel" model="ir.actions.act_window">
+        <field name="name">Portal Carousel</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">portal.carousel</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_open_allowed_ticket" model="ir.actions.act_window">
+        <field name="name">Allowed Ticket</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">nrs.allowed.ticket.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_open_req_service_selection_ticket" model="ir.actions.act_window">
+        <field name="name">Request Service Seletion</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">nrs.req.service.selection</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_open_notification" model="ir.actions.act_window">
+        <field name="name">User Notification</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">nrs.notification</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_open_faq" model="ir.actions.act_window">
+        <field name="name">FAQ</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">nrs.faq.group</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_open_documents" model="ir.actions.act_window">
+        <field name="name">Documents</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">nrs.documents</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_open_external_link" model="ir.actions.act_window">
+        <field name="name">External Link</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">nrs.external.link</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="portal_carousel_form" model="ir.ui.view">
+        <field name="name">portal_carousel_form</field>
+        <field name="model">portal.carousel</field>
+        <field name="arch" type="xml">
+            <form string="Carousel">
+            	<sheet>
+            		<group>
+            			<field name="name" />
+            			<field name="sequence" />
+            			<field name="content" widget="html" />
+            		</group>
+            	</sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="portal_carousel_tree" model="ir.ui.view">
+        <field name="name">portal_carousel_tree</field>
+        <field name="model">portal.carousel</field>
+        <field name="arch" type="xml">
+            <tree>
+            	<field name="name" />
+            	<field name="sequence" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="allowed_ticket_form" model="ir.ui.view">
+        <field name="name">allowed_ticket_form</field>
+        <field name="model">nrs.allowed.ticket.type</field>
+        <field name="arch" type="xml">
+            <form string="Allowed Ticket">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="nrs_type" />
+                        <field name="nrs_ticket_type_ids" widget="many2many_tags" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="allowed_ticket_tree" model="ir.ui.view">
+        <field name="name">allowed_ticket_tree</field>
+        <field name="model">nrs.allowed.ticket.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="nrs_type" />
+                <field name="nrs_ticket_type_ids" widget="many2many_tags" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="request_service_selection_form" model="ir.ui.view">
+        <field name="name">request_service_selection_form</field>
+        <field name="model">nrs.req.service.selection</field>
+        <field name="arch" type="xml">
+            <form string="Request Service Seletion">
+                <sheet>
+                    <group>
+                        <field name="name" required="1" />
+                        <field name="nrs_selection_type" required="1" />
+                        <field name="nrs_selection_value" required="1" />                        
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="request_service_selection_tree" model="ir.ui.view">
+        <field name="name">request_service_selection_tree</field>
+        <field name="model">nrs.req.service.selection</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="nrs_selection_type" />
+                <field name="nrs_selection_value" />  
+            </tree>
+        </field>
+    </record>    
+
+    <record id="portal_notification_form" model="ir.ui.view">
+        <field name="name">portal_notification_form</field>
+        <field name="model">nrs.notification</field>
+        <field name="arch" type="xml">
+            <form string="Notification">
+                <sheet>
+                    <group>
+                        <field name="nrs_subject" />
+                        <field name="nrs_start_date" />
+                        <field name="nrs_end_date" />
+                        <field name="nrs_body" widget="html" />
+                        <field name="nrs_domain" widget="domain" options="{'model': 'res.partner'}" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="portal_notification_tree" model="ir.ui.view">
+        <field name="name">portal_notification_tree</field>
+        <field name="model">nrs.notification</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="nrs_subject" />
+                <field name="nrs_start_date" />
+                <field name="nrs_end_date" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="portal_faq_form" model="ir.ui.view">
+        <field name="name">portal_faq_form</field>
+        <field name="model">nrs.faq.group</field>
+        <field name="arch" type="xml">
+            <form string="FAQ">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="nrs_name" required="1" />                        
+                        </group>
+                        <group>
+                            <field name="nrs_sequence" required="1" />
+                        </group>                        
+                    </group>
+                    <notebook>
+                        <page string="FAQ List">
+                            <field name="nrs_faq_ids">
+                                <tree>
+                                    <field name="nrs_sequence" widget="handle" />
+                                    <field name="nrs_title" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="nrs_sequence" invisible="1" />
+                                        <field name="nrs_title" />
+                                        <field name="nrs_body" widget="html" />
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="portal_faq_tree" model="ir.ui.view">
+        <field name="name">portal_faq_tree</field>
+        <field name="model">nrs.faq.group</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="nrs_name" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="portal_documents_form" model="ir.ui.view">
+        <field name="name">portal_documents_form</field>
+        <field name="model">nrs.documents</field>
+        <field name="arch" type="xml">
+            <form string="Documents">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="nrs_title" required="1" />
+                            <field name="nrs_sequence" required="1" />
+                        </group>
+                        <group>
+                            <field name="nrs_type" required="1" />
+                            <field name="nrs_download_link" required="1" />
+                            <field name="nrs_description" attrs="{'required': [('nrs_type','=','user_guide')], 'invisible': [('nrs_type','=','policies')]}" />
+                            <field name="nrs_published_date" attrs="{'invisible': [('nrs_type','=','user_guide')], 'required': [('nrs_type','=','policies')]}" />
+                        </group>
+                        <field name="nrs_body" widget="html" attrs="{'required': [('nrs_type','=','user_guide')], 'invisible': [('nrs_type','=','policies')]}" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="portal_documents_tree" model="ir.ui.view">
+        <field name="name">portal_documents_tree</field>
+        <field name="model">nrs.documents</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="nrs_title" />
+                <field name="nrs_type" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="portal_external_link_form" model="ir.ui.view">
+        <field name="name">portal_external_link_form</field>
+        <field name="model">nrs.external.link</field>
+        <field name="arch" type="xml">
+            <form string="External Link">
+                <sheet>
+                    <group>
+                        <field name="nrs_name" />
+                        <field name="nrs_type" />
+                        <field name="nrs_url" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="portal_external_link_tree" model="ir.ui.view">
+        <field name="name">portal_external_link_tree</field>
+        <field name="model">nrs.external.link</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="nrs_name" />
+                <field name="nrs_url" />
+            </tree>
+        </field>
+    </record>
+
+	<menuitem name="Portal"
+            id="menu_portal_root"
+            groups="nrs_de_portal.nrs_group_admin_customer_portal"
+            web_icon="nrs_de_portal,static/src/img/portal.png"
+            sequence="25"/>
+
+    <menuitem id="menu_portal_carousel" name="Carousel"
+            parent="menu_portal_root"
+            action="action_open_portal_carousel" sequence="15"/>
+
+    <menuitem id="menu_allowed_ticket" name="Allowed Ticket"
+            parent="menu_portal_root"
+            action="action_open_allowed_ticket" sequence="25"/>
+
+    <menuitem id="menu_req_service_selection" name="Req. Service Selection"
+            parent="menu_portal_root"
+            action="action_open_req_service_selection_ticket" sequence="35"/>
+
+    <menuitem id="menu_user_notification" name="Notification"
+            parent="menu_portal_root"
+            action="action_open_notification" sequence="45"/>
+
+
+    <menuitem id="menu_document_root" name="Documents"
+            parent="menu_portal_root"
+            action="action_open_notification" sequence="55"/>
+
+
+    <menuitem id="menu_document_documents" name="Documents"
+            parent="menu_document_root"
+            action="action_open_documents" sequence="10"/>
+
+    <menuitem id="menu_document_faq" name="FAQ"
+            parent="menu_document_root"
+            action="action_open_faq" sequence="20"/>
+    
+    <menuitem id="menu_external_link" name="External Link"
+            parent="menu_portal_root"
+            action="action_open_external_link" sequence="65"/>
+
+</odoo>

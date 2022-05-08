@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="nrs_payment_instruction_form" model="ir.ui.view">
+        <field name="name">nrs_payment_instruction_form</field>
+        <field name="model">ns.payment.instruction</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="ns_name" required="True"/>
+                            <field name="ns_company_id" required="True"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="ns_account_holder" />
+                            <field name="ns_account_number" />                            
+                        </group>
+                        <group>
+                            <field name="ns_bank_name" />
+                            <field name="ns_bank_address" />
+                            <field name="ns_bank_address_2" />
+                            <field name="ns_swift_code" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="nrs_payment_instruction_tree" model="ir.ui.view">
+        <field name="name">nrs_payment_instruction_tree</field>
+        <field name="model">ns.payment.instruction</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="ns_name"  />
+                <field name="ns_account_holder" optional="show" />
+                <field name="ns_account_number" optional="show" />
+                <field name="ns_bank_address" optional="show" />
+                <field name="ns_bank_name" optional="show" />
+                <field name="ns_bank_address_2" optional="show" />
+                <field name="ns_swift_code" optional="show" />
+                <field name="ns_company_id" optional="show" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="nrs_payment_instruction_action" model="ir.actions.act_window">
+        <field name="name">Payment Instructions</field>
+        <field name="res_model">ns.payment.instruction</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem 
+        action="nrs_payment_instruction_action" 
+        id="nrs_payment_instruction_menu" 
+        parent="account.root_payment_menu"
+        name="Payment Instructions" 
+        sequence="10"/>
+
+</odoo>

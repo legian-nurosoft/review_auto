@@ -1,0 +1,32 @@
+<odoo>
+    <record id="view_sale_subscription_form_custom_tau" model="ir.ui.view">
+        <field name="name">sale.subscription.form.custom.tau</field>
+        <field name="model">sale.subscription</field>
+        <field name="inherit_id" ref="sale_subscription.sale_subscription_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_open_sales']" position="replace"/>
+            <xpath expr="//page[@id='other_info']" position="after">
+                <page name="Change Orders" string="Change Orders">
+                    <field name="x_sale_order_ids">
+                        <tree string="Sales Orders" decoration-muted="state=='cancel'">
+                            <field name="message_needaction" invisible="1"/>
+                            <field name="name" string="Order Number"/>
+                            <field name="date_order"/>
+                            <field name="x_date_to_confirm"/>
+                            <field name="partner_id"/>
+                            <field name="user_id"/>
+                            <field name="subscription_management"/>
+                            <field name="amount_total" sum="Total Tax Included" widget="monetary"/>
+                            <field name="invoice_status"/>
+                            <field name="state" invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='recurring_next_date']/.." position="after">
+                <field name="x_contract_end_date"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

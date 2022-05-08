@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="nrs_sale_rampups" model="ir.ui.view">
+        <field name="name">nrs_sale_rampups</field>
+        <field name="model">sale.order</field>
+        <field name="priority">102</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="ns_is_ramp_up" />
+                <field name="def_name_ramp" invisible="1" />
+            </field>
+            <notebook position="inside">
+                <page name="page_rampups" string="Ramp Up" attrs="{'invisible': [('ns_is_ramp_up', '=', False)]}" >
+                    <!-- <field name="ns_ramp_ups"  context="{'default_ns_sale_id': id, 'default_nsdate': def_name_ramp, 'default_order_line': order_line, 'form_view_ref': 'nrs_de_ramp_up_order.nrs_ramp_ups_form', 'tree_view_ref': 'nrs_de_ramp_up_order.nrs_ramp_ups_tree'}" force_save="1" /> -->
+
+                    <field name="ns_ramp_ups"  context="{'default_ns_sale_id': id, 'default_nsdate': def_name_ramp, 'default_order_line': order_line}" force_save="1" attrs="{'readonly': [ ('approval_state', 'not in', ('draft'))]}">
+                        <form>
+                            <script>
+                                $(document).ready(function(){
+                                    var el = $('.modal-footer > .btn-primary');
+                                    var tombol = $(el[1]);
+                                    tombol.hide();
+                                });
+                            </script>
+                            <sheet>
+                                <group>
+                                    <field name="ns_crm_id" readonly="1" invisible="1" force_save="1"/>
+                                    <field name="ns_sale_id" invisible="1"  force_save="1"/>
+                                    <group>
+
+                                        <field name="name" readonly="1" force_save="1"/>
+                                        <field name="ns_start_date" required="1" force_save="1" attrs="{'readonly': [('ns_subscription','!=',False)]}"/>                            
+                                        <field name="ns_subscription" readonly="1" force_save="1" attrs="{'invisible': [('ns_subscription','=',False)]}"/>
+                                        <field name="ns_project_task_id" widget="many2many_tags" />
+                                    </group>
+                                    <group>
+                                        <field name="ns_mrc_qty" readonly="1" force_save="1"/>
+                                        <field name="ns_nrc_qty" readonly="1" force_save="1"/>
+                                        <field name="ns_project_id" readonly="1" force_save="1" attrs="{'invisible': [('ns_project_id','=',False)]}"/>
+                                        <field name="ns_move_id" readonly="1" force_save="1" attrs="{'invisible': [('ns_move_id','=',False)]}"/>
+                                    </group>
+                                </group>
+                                <notebook>
+                                    <page string="Products" name="ramp_up_line">
+                                        <field name="ns_ramp_up_lines" widget="section_and_note_one2many" domain="[('display_type', '=', False)]"  required="1" force_save="1" context="{
+                                            'default_ns_ramp_up_id': id,
+                                            'default_ns_sale_id': parent.id}" >
+                                            <tree editable="top" create="0">
+                                                <field name="sequence" widget="handle" invisible="1" />
+                                                <field name="display_type" invisible="1" />
+                                                <field name="ns_ramp_up_id" invisible="1" />
+                                                <field name="ns_sale_id" invisible="1" />
+                                                <field name="name" readonly='1' force_save="1" />
+
+                                                <field name="ns_product_id" readonly='1' force_save="1" />
+                                                <field name="ns_sale_line_id" domain="[('order_id', '=', parent.ns_sale_id)]"  readonly='1' force_save="1"  />
+                                                <field name="ns_sale_qty"  readonly='1' force_save="1"  />
+                                                <field name="ns_qty" />
+                                                <field name="ns_discount"  readonly='1' force_save="1"  />
+                                                <field name="ns_price_unit"  readonly='1' force_save="1"  />
+                                                <field name="ns_tax_id" widget="many2many_tags" readonly='1' force_save="1"  />
+                                                <field name="ns_subtotal"  readonly='1' force_save="1"  />
+                                                <field name="ns_price_total" readonly='1' force_save="1"  />
+                                                <field name="ns_remarks"  readonly='1' force_save="1" />
+                                                <field name="display_name"  invisible="1" />
+                                                <field name="ns_sale_line_unique_id" invisible="1" />
+                                            </tree>
+                                        </field>
+                                    </page>
+                                </notebook>
+                            </sheet>
+                        </form>
+                    </field>
+
+                </page>
+            </notebook>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='company_id']" position="after">
+                <field name="subscription_id" optional="hide" attrs="{'column_invisible': [('parent.ns_is_ramp_up','=',True)]}" />
+                <field name="ns_project_task_id" optional="hide" attrs="{'column_invisible': [('parent.ns_is_ramp_up','=',True)]}" widget="many2many_tags"/>
+                <field name="ns_unique_id" invisible="1" />
+            </xpath>
+            <xpath expr="//field[@name='order_line']/form/group[1]/group[1]/field[@name='sequence']" position="after">
+                <field name="ns_project_task_id" widget="many2many_tags" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="nrs_ramp_ups_tree" model="ir.ui.view">
+        <field name="name">nrs_ramp_ups_tree</field>
+        <field name="model">ns.ramp.ups</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="ns_crm_id" readonly="1" invisible="1" force_save="1"/>
+                <field name="ns_sale_id"  invisible="1" force_save="1"/>
+                <field name="name" readonly="1" force_save="1"/>
+                <field name="ns_ramp_up_lines" domain="[('display_type', '=', False)]"  required="1" widget="many2many_tags" force_save="1" context="{'default_ns_sale_id': ns_sale_id }"/>
+                <field name="ns_mrc_qty" required="1" sum="Total MRC Qty" force_save="1"/>
+                <field name="ns_nrc_qty" required="1" sum="Total NRC Qty" force_save="1"/>
+                <field name="ns_start_date" required="1" force_save="1"/>
+                <field name="ns_project_id" invisible="1"  readonly="1" force_save="1" />
+                <field name="ns_subscription" readonly="1" force_save="1"/>
+                <field name="ns_project_task_id" widget="many2many_tags" />
+                <field name="ns_move_id" invisible="1"  readonly="1" />
+                <!-- attrs="{'column_invisible': [('parent.state','not in',['sale','done'])]}" -->
+            </tree>
+        </field>
+    </record>
+
+    <record id="nrs_ramp_ups_form" model="ir.ui.view">
+        <field name="name">nrs_ramp_ups_form</field>
+        <field name="model">ns.ramp.ups</field>
+        <field name="arch" type="xml">
+            <form>
+                <script>
+                    $(document).ready(function(){
+                        var el = $('.modal-footer > .btn-primary');
+                        var tombol = $(el[1]);
+                        tombol.hide();
+                    });
+                </script>
+                <sheet>
+                    <group>
+                        <field name="ns_crm_id" readonly="1" invisible="1" force_save="1"/>
+                        <field name="ns_sale_id" invisible="1"  force_save="1"/>
+                        <group>
+
+                            <field name="name" readonly="1" force_save="1"/>
+                            <field name="ns_start_date" required="1" force_save="1" attrs="{'readonly': [('ns_subscription','!=',False)]}"/>                            
+                            <field name="ns_subscription" readonly="1" force_save="1" attrs="{'invisible': [('ns_subscription','=',False)]}"/>
+                            <field name="ns_project_task_id" widget="many2many_tags" />
+                        </group>
+                        <group>
+                            <field name="ns_mrc_qty" readonly="1" force_save="1"/>
+                            <field name="ns_nrc_qty" readonly="1" force_save="1"/>
+                            <field name="ns_project_id" readonly="1" force_save="1" attrs="{'invisible': [('ns_project_id','=',False)]}"/>
+                            <field name="ns_move_id" readonly="1" force_save="1" attrs="{'invisible': [('ns_move_id','=',False)]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Products" name="ramp_up_line">
+                            <field name="ns_ramp_up_lines" widget="section_and_note_one2many" domain="[('display_type', '=', False)]"  required="1" force_save="1" context="{
+                                'default_ns_ramp_up_id': id,
+                                'default_ns_sale_id': parent.id}" >
+                                <tree editable="top" create="0">
+                                    <field name="sequence" widget="handle" invisible="1" />
+                                    <field name="display_type" invisible="1" />
+                                    <field name="ns_ramp_up_id" invisible="1" />
+                                    <field name="ns_sale_id" invisible="1" />
+                                    <field name="name" readonly='1' force_save="1" />
+
+                                    <field name="ns_product_id" readonly='1' force_save="1" />
+                                    <field name="ns_sale_line_id" domain="[('order_id', '=', parent.ns_sale_id)]"  readonly='1' force_save="1"  />
+                                    <field name="ns_sale_qty"  readonly='1' force_save="1"  />
+                                    <field name="ns_qty" />
+                                    <field name="ns_discount"  readonly='1' force_save="1"  />
+                                    <field name="ns_price_unit"  readonly='1' force_save="1"  />
+                                    <field name="ns_tax_id" widget="many2many_tags" readonly='1' force_save="1"  />
+                                    <field name="ns_subtotal"  readonly='1' force_save="1"  />
+                                    <field name="ns_remarks"  readonly='1' force_save="1" />
+                                    <field name="ns_price_total" readonly='1' force_save="1"  />
+                                    <field name="display_name"  invisible="1" />
+                                    <field name="ns_sale_line_unique_id" invisible="1" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="nrs_sale_subscription_nrc" model="ir.ui.view">
+        <field name="name">nrs_sale_subscription_nrc</field>
+        <field name="model">sale.subscription</field>
+        <field name="priority">102</field>
+        <field name="inherit_id" ref="sale_subscription.sale_subscription_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='subscription_log_ids']/tree/field[@name='amount_signed']" position="attributes">
+                <attribute name="string">Change in MRC</attribute>
+            </xpath>
+            <xpath expr="//field[@name='subscription_log_ids']/tree/field[@name='recurring_monthly']" position="attributes">
+                <attribute name="string">MRC after Change</attribute>
+            </xpath>
+            <page id="logs" position="after">
+                <page string="NRC Lines" id="nrc_lines">
+                    <div>
+                        <field name="ns_nrc_line_ids">
+                            <tree >
+                                <field name="product_id" domain="[('recurring_invoice', '=', False), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]" context="{'default_recurring_invoice': True}"/>
+                                <field name="name" optional="show"/>
+                                <field name="quantity"/>
+                                <field name="product_uom_category_id" invisible="1"/>
+                                <field name="uom_id" string="UoM" groups="uom.group_uom" optional="show"/>
+                                <field name="price_unit" widget="monetary"/>
+                                <field name="discount" groups="product.group_discount_per_so_line" optional="show"/>
+                                <field name="price_subtotal" widget="monetary" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                <field name="currency_id" invisible="1"/>
+                            </tree>
+                            <form string="NRC Lines">
+                                <group>
+                                    <group>
+                                        <field name="product_id" domain="[('recurring_invoice', '=', False), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]" context="{'default_recurring_invoice': False}"/>
+                                        <label for="quantity"/>
+                                        <field name="product_uom_category_id" invisible="1"/>
+                                        <div class="o_row">
+                                            <field name="quantity"/>
+                                            <field name="uom_id"/>
+                                        </div>
+                                        <field name="price_unit"/>
+                                        <field name="discount" groups="product.group_discount_per_so_line"/>
+                                    </group>
+                                </group>
+                                <label for="name"/>
+                                <field name="name"/>
+                            </form>
+                        </field>
+                        <group name="group_note">
+                            <group class="oe_subtotal_footer oe_right" name="group_nrc_total">
+                                <field name="ns_non_recurring_total" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            </group>
+                        </group>
+                    </div>
+                </page>
+                <page string="NRC Changes" id="nrc_logs">
+                    <field name="ns_nrc_log_ids" readonly="1">
+                        <tree decoration-muted="event_type == '2_snapshot'" decoration-success="event_type == '1_change' and amount_signed &gt; 0" decoration-danger="event_type == '3_churn'" decoration-warning="event_type == '1_change' and amount_signed &lt; 0" editable="bottom">
+                            <field name="create_date"/>
+                            <field name="event_type"/>
+                            <field name="amount_signed" string="Change in NRC"/>
+                            <field name="user_id"/>
+                            <field name="team_id"/>
+                            <field name="recurring_monthly" string="NRC after Change"/>
+                            <field name="category" groups="base.group_no_one"/>
+                            <field name="currency_id" invisible="1"/>
+                        </tree>
+                    </field>
+                </page>
+            </page>
+            <!-- <field name="recurring_invoice_line_ids" position="attributes"> -->
+                <!-- <attribute name="domain">[]</attribute> -->
+            <!-- </field> -->
+
+        </field>
+    </record>
+
+</odoo>

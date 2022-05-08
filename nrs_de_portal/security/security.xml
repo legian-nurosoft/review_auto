@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="nrs_group_admin_customer_portal" model="res.groups">
+        <field name="name">Customer Portal Admin</field>
+    </record>
+
+</odoo>

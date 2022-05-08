@@ -1,0 +1,54 @@
+<odoo>
+    <!-- change subscription wizard -->
+    <record model="ir.ui.view" id="change_order_wizard_form_view">
+        <field name="name">change.order.wizard.form</field>
+        <field name="model">change.subscription.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Change Order">
+                <p>
+                    Change details of the current subscription and send it to the customer for approval.
+                    When the quotation is confirmed, the products will be added to the subscription.
+                    Quotation prices will be prorated to the remaining time of the current invoicing period.
+                </p>
+                <group>
+                    <group>
+                        <field name="date_from" groups="base.group_no_one"/>
+                    </group>
+                </group>
+                <field name="change_order_lines">
+                    <tree string="Change Order" editable="bottom" create="false">
+                        <field name="wizard_id" invisible="1"/>
+                        <field name="ns_subscription_line_id" invisible="1" force_save="1"/>
+                        <field name="product_id" readonly="1" force_save="1"/>
+                        <field name="product_template_id" invisible="1"/>
+                        <field name="name" invisible="1"/>
+                        <field name="ns_product_attribute_domain" invisible="1"/>
+                        <field name="ns_product_attribute_value_origin" invisible="1"/>
+                        <field name="ns_product_attribute_value" domain="[('id', 'in', ns_product_attribute_domain)]"/>
+                        <field name="quantity" invisible="1"/>
+                        <field name="unit_price"/>
+                        <field name="product_uom_category_id" invisible="1"/>
+                        <field name="uom_id" groups="uom.group_uom" readonly="1" force_save="1"/>
+                        <field name="discount"/>
+                        <field name="tax_id" widget="many2many_tags" options="{'no_create': True}"/>
+                        <field name="ns_sale_line_id" readonly="1" force_save="1"/>
+                        <field name="ns_sub_task_id" widget="many2many_tags" readonly="1" force_save="1"/>
+                    </tree>
+                </field>
+                <footer>
+                    <button name="create_sale_order" type="object"
+                            string="Create &amp; View Quotation" class="oe_highlight"/>
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="change_order_wizard_action">
+        <field name="name">Change Order</field>
+        <field name="res_model">change.subscription.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="change_order_wizard_form_view"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

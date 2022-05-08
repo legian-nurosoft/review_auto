@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="hr_employee_view_form_inherit" model="ir.ui.view">
+            <field name="name">hr_employee_view_form_inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <field name="mobile_phone" position="before">
+                    <field name="ns_can_edit_restricted_field" invisible="1" />
+                    <field name="ns_surename"/>
+                    <field name="ns_first_name"/>
+                    <field name="ns_middle_name"/>
+                    <field name="ns_english_name"/>
+                    <field name="ns_prefix"/>
+                </field>
+                <field name="job_title" position="attributes">
+                    <attribute name="attrs">{'readonly': [('ns_can_edit_restricted_field','=',False)]}</attribute>
+                </field>
+                <field name="passport_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('ns_can_edit_restricted_field','=',False)]}</attribute>
+                </field>
+                <field name="birthday" position="attributes">
+                    <attribute name="attrs">{'readonly': [('ns_can_edit_restricted_field','=',False)]}</attribute>
+                </field>
+                <field name="place_of_birth" position="attributes">
+                    <attribute name="attrs">{'readonly': [('ns_can_edit_restricted_field','=',False)]}</attribute>
+                </field>
+                <field name="country_of_birth" position="attributes">
+                    <attribute name="attrs">{'readonly': [('ns_can_edit_restricted_field','=',False)]}</attribute>
+                </field>
+                <field name="visa_no" position="attributes">
+                    <attribute name="attrs">{'readonly': [('ns_can_edit_restricted_field','=',False)]}</attribute>
+                </field>
+                <field name="permit_no" position="attributes">
+                    <attribute name="attrs">{'readonly': [('ns_can_edit_restricted_field','=',False)]}</attribute>
+                </field>
+                <field name="visa_expire" position="attributes">
+                    <attribute name="attrs">{'readonly': [('ns_can_edit_restricted_field','=',False)]}</attribute>
+                </field>
+                <field name="gender" position="attributes">
+                    <attribute name="attrs">{'readonly': [('ns_can_edit_restricted_field','=',False)]}</attribute>
+                </field>
+                <field name="department_id" position="attributes">
+                    <attribute name="domain">[]</attribute>
+                </field>
+                <field name="department_id" position="before">
+                    <field name="ns_employee_id"/>
+                </field>
+                <field name="department_id" position="after">
+                    <field name="ns_cost_center_id"/>
+                    <field name="ns_job_title"/>
+                </field>
+                <field name="parent_id" position="attributes">
+                    <attribute name="domain">[]</attribute>
+                    <attribute name="options">{"no_create":true}</attribute>
+                </field>
+                <field name="parent_id" position="after">
+                    <field name="ns_head_of_department"/>
+                    <field name="ns_head_of_group"/>
+                </field>
+                <xpath expr="//sheet/notebook/page[1]" position="attributes">
+                    <attribute name ="string">Work</attribute>
+                </xpath>
+                <field name="work_location" position="after">
+                    <field name="ns_employee_type"/>
+                    <field name="ns_working_hours_type" widget="radio"/>
+                </field>
+                <field name="tz" position="after">
+                    <field name="ns_start_date"/>
+                    <field name="ns_end_date"/>
+                    <field name="ns_years_of_service"/>
+                </field>
+                <field name="address_home_id" position="before">
+                    <field name="ns_home_address"/>
+                    <field name="ns_contact_number"/>
+                </field>
+                <field name="private_email" position="after">
+                    <field name="ns_personal_email"/>
+                </field>
+                <field name="birthday" position="after">
+                    <label for="ns_age"/>
+                    <div class="o_row" name="div_km_home_work">
+                        <field name="ns_age"/>
+                        <span>Years</span>
+                    </div>
+                </field>
+                <field name="bank_account_id" position="after">
+                    <field name="is_show_personal_details" invisible="1"/>
+                    <field name="ns_blood_type"/>
+                    <field name="ns_politic_status"/>
+                    <field name="ns_health_status"/>
+                    <field name="ns_health_details" attrs="{'invisible': [('ns_health_status', '!=', 'disease')]}"/>
+                    <field name="ns_hukou_address"/>
+                    <field name="ns_tax_file_city"/>
+                    <field name="ns_former_employer"/>
+                </field>
+                <field name="identification_id" position="attributes">
+                    <attribute name="string">ID Card / Resident Registration / NRIC / FIN Number / Individual(my) number</attribute>
+                    <attribute name="attrs">{'readonly': [('ns_can_edit_restricted_field','=',False)]}</attribute>
+                </field>
+                <field name="identification_id" position="after">
+                    <field name="ns_company_country" invisible="1"/>
+                    <field name="ns_nric_issue_date"/>
+                    <field name="ns_race" attrs="{'readonly': [('ns_can_edit_restricted_field','=',False)]}"/>
+                </field>
+                <field name="country_id" position="attributes">
+                    <attribute name="attrs">{'readonly': [('ns_can_edit_restricted_field','=',False)]}</attribute>
+                </field>
+                <field name="country_id" position="after">
+                    <field name="gender" position="move"/>                    
+                </field>
+                <field name="spouse_birthdate" position="after">
+                    <field name="ns_spouse_gender" attrs="{'invisible': [('marital', 'not in', ['married', 'cohabitant'])]}"/>
+                    <field name="ns_spouse_id_no" attrs="{'invisible': [('marital', 'not in', ['married', 'cohabitant'])]}"/>
+                    <field name="ns_spouse_occupation" attrs="{'invisible': [('marital', 'not in', ['married', 'cohabitant'])]}"/>
+                    <field name="ns_spouse_mobile" attrs="{'invisible': [('marital', 'not in', ['married', 'cohabitant'])]}"/>
+                </field>
+                <field name="children" position="after">
+                    <field name="ns_children" mode="tree" attrs="{'invisible': [('children','=','0')]}">
+                        <tree editable="bottom" >
+                            <field name="ns_child_name"/>
+                            <field name="ns_child_id"/>
+                            <field name="ns_child_date_of_birth"/>
+                            <field name="ns_child_occupation"/>
+                        </tree>
+                    </field>
+                </field>
+                <field name="emergency_phone" position="after">
+                    <field name="ns_contact_relationship"/>
+                    <field name="ns_emergency_phone"/>
+                    <field name="ns_emergency_email"/>
+                </field>
+                <xpath expr="//sheet/notebook/page[@name='personal_information']/group/group[7]" position="after">
+                    <group></group>
+                    <group string="Pension / Insurance Information">
+                        <field name="ns_fund_contribution"/>
+                        <field name="ns_basic_pension_number"/>
+                        <field name="ns_employment_insurance_number"/>
+                        <field name="ns_mpf_entitlement"/>
+                        <field name="ns_mpf_exempted_reason"/>
+                        <field name="ns_insurance"/>
+                        <field name="ns_healthcare"/>
+                    </group>
+                </xpath>
+                <xpath expr="//sheet/notebook/page[@name='personal_information']" position="after">
+                    <page name="compensation_benefit" string="Compensation and Benefits">
+                        <group>
+                            <field name="ns_grade"/>
+                            <field name="ns_currency_id"/>
+                            <field name="ns_commuting_cost"/>
+                            <field name="ns_annual_base_salary"/>
+                            <field name="ns_incentive_plan"/>
+                            <field name="ns_annual_bonus_plan" attrs="{'invisible': [('ns_incentive_plan', '!=', 'bonus')]}"/>
+                            <field name="ns_sales_incentive_plan" attrs="{'invisible': [('ns_incentive_plan', '!=', 'sales')]}"/>
+                            <field name="ns_annual_total_target_compensation"/>
+                            <field name="ns_carry_points"/>
+                            <field name="ns_payroll_number"/>
+                        </group>
+                    </page>
+                    <page name="bank_account" string="Bank Account Pay" attrs="{'invisible': [('ns_can_edit_restricted_field','=',False)]}">
+                        <group>
+                            <field name="ns_bank_name"/>
+                            <field name="ns_account_holder"/>
+                            <field name="ns_account_number"/>
+                        </group>
+                        <group>
+                            <field name="ns_swift_code"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

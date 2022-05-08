@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ns_job_requisition_user,ns_job_requisition.user,model_ns_job_requisition,base.group_user,1,0,0,0
+access_ns_job_requisition_manager,ns_job_requisition.manager,model_ns_job_requisition,hr.group_hr_user,1,1,1,1
+access_ns_job_requisition_stage_user,ns_job_requisition_stage.user,model_ns_job_requisition_stage,base.group_user,1,0,0,0
+access_ns_job_requisition_stage_manager,ns_job_requisition_stage.manager,model_ns_job_requisition_stage,hr.group_hr_user,1,1,1,1
+access_ns_qualification_tag_user,ns_qualification_tag.user,model_ns_qualification_tag,base.group_user,1,0,0,0
+access_ns_qualification_tag_manager,ns_qualification_tag.manager,model_ns_qualification_tag,hr.group_hr_user,1,1,1,1
+access_ns_skill_tag_user,ns_skill_tag.user,model_ns_skill_tag,base.group_user,1,0,0,0
+access_ns_skill_tag_manager,ns_skill_tag.manager,model_ns_skill_tag,hr.group_hr_user,1,1,1,1
+access_hr_employee_expense_approver,hr_employee_expense_approver,model_hr_employee,hr_expense.group_hr_expense_team_approver,1,1,0,0

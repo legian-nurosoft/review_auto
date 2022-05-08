@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="invoice_view_form_inherit_special_billing" model="ir.ui.view">
+            <field name="name">invoice_view_form_inherit_special_billing</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="nrs_de_origin_mrc.account_move_origin_mrc_form"/>
+            <field name="arch" type="xml">
+                <field name="ns_origin_mrc" position="after">
+                    <field name="ns_special_billing_instruction"/>
+                </field>
+                <notebook position="inside">
+                    <page name="special_billing_instructions" string="Special Billing Instructions" attrs="{'invisible': [('ns_special_billing_instruction', '=', False)]}">
+                        <field name="ns_special_billing_instruction_ids">
+                            <tree>
+                                <field name='ns_move_id' invisible="1" />
+                                <field name="ns_start_date" />
+                                <field name="ns_end_date" />
+                                <field name="ns_special_billing_type" />
+                                <field name="ns_discount" string="Disc.%" widget="float" decimal_precision="2" attrs="{'invisible': [('ns_special_billing_type', '!=', 'discount')], 'required': [('ns_special_billing_type', '=', 'discount')]}" />
+                                <field name="ns_special_billing_type_description" attrs="{'readonly': [('ns_special_billing_type', '!=', 'others')], 'required': [('ns_special_billing_type', '=', 'others')]}" />
+                                <field name="ns_apply_to" />
+                                <field name="ns_product_description" widget="many2many_tags" attrs="{'readonly': [('ns_apply_to', '!=', 'specific_product')], 'required': [('ns_apply_to', '=', 'specific_product')]}" />
+                                <field name="ns_additional_remarks" />
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name='ns_move_id' invisible="1" />
+                                    <field name="ns_start_date" />
+                                    <label for="ns_period" />
+                                    <div class="o_row">
+                                        <field name="ns_period" />
+                                        <span>days</span>
+                                    </div>
+                                    <field name="ns_end_date" />
+                                    <field name="ns_special_billing_type" />
+                                    <label for="ns_discount" attrs="{'invisible': [('ns_special_billing_type', '!=', 'discount')]}" />
+                                    <div class="o_row" attrs="{'invisible': [('ns_special_billing_type', '!=', 'discount')]}">
+                                        <field name="ns_discount" widget="float" decimal_precision="2" attrs="{'required': [('ns_special_billing_type', '=', 'discount')]}" />
+                                        <span>%</span>
+                                    </div>
+                                    <field name="ns_special_billing_type_description" attrs="{'invisible': [('ns_special_billing_type', '!=', 'others')], 'required': [('ns_special_billing_type', '=', 'others')]}" />
+                                    <field name="ns_apply_to" />
+                                    <field name="ns_product_description" widget="many2many_tags" attrs="{'invisible': [('ns_apply_to', '!=', 'specific_product')], 'required': [('ns_apply_to', '=', 'specific_product')]}" />
+                                    <field name="ns_additional_remarks" />
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record id="view_move_tree_inherit_special_billing" model="ir.ui.view">
+            <field name="name">view_move_tree_inherit_special_billing</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_tree"/>
+            <field name="arch" type="xml">
+                <tree position="inside">
+                    <field name="ns_special_billing_instruction" optional="show" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_invoice_tree_inherit_special_billing" model="ir.ui.view">
+            <field name="name">view_invoice_tree_inherit_special_billing</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+                <tree position="inside">
+                    <field name="ns_special_billing_instruction" optional="show" />
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

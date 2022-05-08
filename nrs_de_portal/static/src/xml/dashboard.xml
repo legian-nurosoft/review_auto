@@ -1,0 +1,752 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="nrs_de_portal.de_portal_dashboard">
+        <div class="row">
+            <t t-foreach="notifications" t-as="notif">
+                <div class="col-md-4">
+                    <div class="de-notification-box">
+                        <div class="de-notification-header">
+                            <span class="de-notification-icon de-ic-verified"/>
+                            <span class="de-notification-subject">
+                                <t t-esc="notif['subject']" />
+                            </span>
+                        </div>
+                        <div class="de-notification-body">
+                            <t t-raw="notif['body']" />
+                        </div>
+                        <span class="de-notification-minimize de-ic-miniandbig"/>
+                        <span class="de-notification-hide de-ic-delete" t-att-data-notification-id="notif['id']"/>
+                    </div>                    
+                </div>
+            </t>
+        </div>
+        <!-- <div class="mt-4"></div> -->
+        <div class="de-portal-carousel de-mobile carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div>
+                        <span class="de-ticket-list-subicon de-ic-messages" /> 
+                        <span class="de-ticket-list-subtitle">
+                            KEP1 DC
+                        </span>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div>
+                        <span class="de-ticket-list-subicon de-ic-messages" /> 
+                        <span class="de-ticket-list-subtitle">
+                            KEP2 DC
+                        </span>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div>
+                        <span class="de-ticket-list-subicon de-ic-messages" /> 
+                        <span class="de-ticket-list-subtitle">
+                            KEP3 DC
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+        <div class="row">
+            <!-- messages -->
+            <div class="col-lg-3">
+                <div class="de-ticket-list-header">
+                    <span class="de-ticket-list-subicon de-ic-messages" /> 
+                    <span class="de-ticket-list-subtitle">Message</span>
+                    <div class="de-ticket-list-count align-items-center">
+                        <span>
+                            <t t-if="message_count > 99">
+                                99+
+                            </t>
+                            <t t-else="">
+                                <t t-esc="message_count" />
+                            </t>
+                        </span>
+                    </div>
+                </div>
+                <div class="de-ticket-list-content mb-3">
+                    <t t-foreach="global_messages" t-as="message">
+                        <div class="de-message-box">
+                            <h3 class="de-message-document">
+                                <t t-if="message['can_open']">
+                                    <a t-att-href="message['menu_id']">
+                                        <t t-esc="message['record_name']" />
+                                    </a>
+                                </t>
+                                <t t-else="">
+                                    <t t-esc="message['record_name']" />
+                                </t>
+                            </h3>
+                            <h3 class="de-message-author">
+                                <t t-esc="message['author']" />
+                            </h3>
+                            <h3 class="de-message-date">
+                                <t t-esc="message['date']" />
+                            </h3>
+                            <h3 class="de-message-body">
+                                <t t-raw="message['body']" />
+                            </h3>
+                            <div class="de-ticket-log-attachment-box">
+                                <t t-foreach="message['attachment_ids']" t-as="attachment">
+                                    <a class="de-ticket-log-attachment" t-att-href="attachment" target="_blank">
+                                        <span class="de-ic-download" />
+                                    </a>
+                                </t>
+                            </div>
+                            <span class="de-message-hide de-ic-close" t-att-data-message-id="message['id']"/>
+                            <div class="de-message-separator"></div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+            <!-- content -->
+            <div class="col-lg-9">
+                <div class="de-portal-subtitle-box">
+                    <t t-if="company == 'chuanjun'">
+                        <span class="de-portal-subicon de-ic-dashboard" /> <span class="de-portal-subtitle load-company">Chuanjun</span>
+                    </t>
+                    <t t-else="">
+                        <span class="de-portal-subicon de-ic-dashboard" /> <span class="de-portal-subtitle load-company">Digital Edge DC</span>
+                    </t>
+                </div>
+                <div class="de-portal-content-box">
+                    <div class="de-pending-action-box">
+                        <div class="de-pending-action-title">
+                            <h2>User Pending Actions</h2>
+                        </div>
+                        <h2 class="de-pending-action-count">
+                            <t t-esc="action_count" />
+                        </h2>
+                    </div>
+                    <h1 class="de-action-title">Actions</h1>
+                    <div class="row">
+                        <t t-if="has_ordering_right">                        
+                            <div class="col-lg-6">
+                                <div class="de-action-box">
+                                    <div class="de-action-header">
+                                        <h2>Orders</h2>
+                                    </div>
+                                    <div class="de-action-body">
+                                        <t t-foreach="order_messages" t-as="o_message">
+                                            <div class="de-action-item-box">
+                                                <h3 class="de-message-document">
+                                                    <t t-if="o_message['can_open']">
+                                                        <a t-att-href="o_message['menu_id']">
+                                                            <t t-esc="o_message['record_name']" />
+                                                        </a>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <t t-esc="o_message['record_name']" />
+                                                    </t>
+                                                </h3>
+                                                <h3 class="de-message-author">
+                                                    <t t-esc="o_message['author']" />
+                                                </h3>
+                                                <h3 class="de-message-date">
+                                                    <t t-esc="o_message['date']" />
+                                                </h3>
+                                                <h3 class="de-message-body">
+                                                    <t t-raw="o_message['body']" />
+                                                </h3>
+                                                <div class="de-ticket-log-attachment-box">
+                                                    <t t-foreach="o_message['attachment_ids']" t-as="attachment">
+                                                        <a class="de-ticket-log-attachment" t-att-href="attachment" target="_blank">
+                                                            <span class="de-ic-download" />
+                                                        </a>
+                                                    </t>
+                                                </div>
+                                                <div class="de-message-separator"></div>
+                                            </div>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>                        
+                        <t t-if="has_fault_report_right">                           
+                            <div class="col-lg-6">
+                                <div class="de-action-box">
+                                    <div class="de-action-header">
+                                        <h2>Ticketing</h2>
+                                    </div>
+                                    <div class="de-action-body">
+                                        <t t-foreach="helpdesk_messages" t-as="h_message">
+                                            <div class="de-action-item-box">
+                                                <h3 class="de-message-document">
+                                                    <t t-if="h_message['can_open']">
+                                                        <a t-att-href="h_message['menu_id']">
+                                                            <t t-esc="h_message['record_name']" />
+                                                        </a>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <t t-esc="h_message['record_name']" />
+                                                    </t>
+                                                </h3>
+                                                <h3 class="de-message-author">
+                                                    <t t-esc="h_message['author']" />
+                                                </h3>
+                                                <h3 class="de-message-date">
+                                                    <t t-esc="h_message['date']" />
+                                                </h3>
+                                                <h3 class="de-message-body">
+                                                    <t t-raw="h_message['body']" />
+                                                </h3>
+                                                <div class="de-ticket-log-attachment-box">
+                                                    <t t-foreach="h_message['attachment_ids']" t-as="attachment">
+                                                        <a class="de-ticket-log-attachment" t-att-href="attachment" target="_blank">
+                                                            <span class="de-ic-download" />
+                                                        </a>
+                                                    </t>
+                                                </div>
+                                                <div class="de-message-separator"></div>
+                                            </div>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                        <t t-if="has_provisioning_right">
+                            <div class="col-lg-6">
+                                <div class="de-action-box">
+                                    <div class="de-action-header">
+                                        <h2>Provisioning</h2>
+                                    </div>
+                                    <div class="de-action-body">
+                                        <t t-foreach="project_messages" t-as="p_message">
+                                            <div class="de-action-item-box">
+                                                <h3 class="de-message-document">
+                                                    <t t-if="p_message['can_open']">
+                                                        <a t-att-href="p_message['menu_id']">
+                                                            <t t-esc="p_message['record_name']" />
+                                                        </a>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <t t-esc="p_message['record_name']" />
+                                                    </t>
+                                                </h3>
+                                                <h3 class="de-message-author">
+                                                    <t t-esc="p_message['author']" />
+                                                </h3>
+                                                <h3 class="de-message-date">
+                                                    <t t-esc="p_message['date']" />
+                                                </h3>
+                                                <h3 class="de-message-body">
+                                                    <t t-raw="p_message['body']" />
+                                                </h3>
+                                                <div class="de-ticket-log-attachment-box">
+                                                    <t t-foreach="p_message['attachment_ids']" t-as="attachment">
+                                                        <a class="de-ticket-log-attachment" t-att-href="attachment" target="_blank">
+                                                            <span class="de-ic-download" />
+                                                        </a>
+                                                    </t>
+                                                </div>
+                                                <div class="de-message-separator"></div>
+                                            </div>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_breadcrumb">
+        <t t-foreach="breadcrums" t-as="item">
+            <span>
+                <t t-esc="item" />
+            </span>
+            <span class="de-breadcrumb-chevron fa fa-chevron-right"/>
+        </t>
+    </t>
+
+    <t t-name="nrs_de_portal.de_search_box">
+    	<span class="de-search-box de-not-mobile">
+    		<span class="de-search-icon de-ic-search" />
+    		<input type="text" class="de-search-input" placeholder="Search ..." />
+    		<span class="de-search-close de-ic-eraser" />
+    	</span>
+        <span class="de-search-icon de-ic-search de-mobile" />
+    </t>
+
+    <t t-name="nrs_de_portal.de_search_box_tags">
+        <div class="de-search-box de-not-mobile">
+    		<span class="de-search-icon de-ic-search" />
+            <t t-if="search_value">
+                <input type="text" class="de-search-input" placeholder="Search ..." id="de-search-input-tags" name="tags-2" t-att-value="search_value"/>        
+    		</t>
+            <t t-else="">
+                <input type="text" class="de-search-input" placeholder="Search ..." id="de-search-input-tags" name="tags-2" value=""/>        
+    		</t>
+            <span class="de-search-close de-ic-eraser" />
+        </div>    
+    </t>
+
+    <t t-name="nrs_de_portal.de_pagination">
+        <t t-set="from" t-value="offset + 1"/>
+        <t t-if="total == 0">
+            <t t-set="from" t-value="0"/>
+        </t>
+        <t t-set="to" t-value="offset + limit"/>
+        <t t-if="to &gt; total">
+            <t t-set="to" t-value="total"/>
+        </t>
+        <t t-if="pagination_type">
+            <t t-set="type" t-value="pagination_type"/>
+        </t>
+        <div class="de-pagination">               
+            <span class="de-pagination-info" t-att-data-offset='offset' t-att-data-limit='limit' t-att-data-total='total' t-att-data-type='type' style="display: none;"/>	
+            <div class="de-pagination-list">
+                <span class="fa fa-chevron-left de-pagination-prev" /> 
+                <span class="fa fa-chevron-right de-pagination-next" /> 
+                <span class="de-pagination-record-from" t-esc="from" />-<span class="de-pagination-record-to" t-esc="to" /> / <span class="de-pagination-total-row" t-esc="total" />            
+            </div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_alert">
+        <div class="de-dialog-container">
+            <div class="de-dialog-box">
+                <span class="de-dialog-close de-ic-close" />
+                <div class="de-dialog-body">
+                    <t t-esc="message" />
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_submit_order">
+        <div class="de-dialog-container de-submit-order-dialog">
+            <div class="de-dialog-box de-loader-dialog">
+                <span class="de-dialog-close de-ic-close" />
+                <div class="de-dialog-body">
+                    Are you sure you want to request this service?
+                </div>                            
+                <div class="de-dialog-footer">
+                    <button type="button" class="btn btn-secondary de-dialog-btn-confirm de-btn-save de-dialog-yes">Yes</button>
+                    <button type="button" class="btn btn-secondary de-dialog-btn-confirm de-dialog-close de-dialog-no">No</button>
+                </div>                            
+            </div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_confirm">
+        <div class="de-dialog-container">
+            <div class="de-dialog-box">
+                <span class="de-dialog-close de-ic-close" />
+                <div class="de-dialog-body">
+                    <t t-esc="message" />
+                </div>
+                <div class="de-dialog-footer">
+                    <button class="de-dialog-btn-confirm">
+                        <t t-esc="ok_label" />
+                    </button>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_loading_submit_form">
+        <div class="de-dialog-container de-loader-dialog">
+            <div class="de-dialog-box">
+                <div class="de-dialog-body">
+                    <h2>Loading... please wait!</h2>
+                    <div class="loader"/>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_2fa_wizard_popup">
+        <div class="de-dialog-container de-2fa-dialog">
+            <div class="de-dialog-box">
+                <span class="de-dialog-close de-ic-eraser de-close-2fa-popup" />
+                <div class="de-dialog-body">
+                    <div class="de-user-info-box">
+                        <span class="d-flex flex-row justify-content-center">                        
+                            <h2 class="de-user-title">
+                                Scan this QR code to Enable two-factor authentication 
+                            </h2>
+                            <small>                            
+                                <span
+                                    tabindex="0"
+                                    role="button"
+                                    class="fas fa-question-circle de-tooltips-popover ml-1"
+                                    data-toggle="popover"
+                                />
+                            </small>
+                        </span>
+                        <h3 class="de-user-title">
+                            Scan this QR code below with the authenticatior app on your phone.
+                        </h3>
+                        <br/>
+                        <h3 class="de-2fa-text">
+                            Having trouble? Here is an alternative option:
+                        </h3>
+                        <h3 class="de-2fa-text">
+                            <span class="de-2fa-text">Enter the two-factor secret code manually:</span>
+                            <a data-toggle="collapse"
+                                   href="#collapseTotpSecret" role="button" aria-expanded="false"
+                                   aria-controls="collapseTotpSecret" class="de-2fa-text de-2fa-show-code">See the secret code</a>
+                        </h3>
+                        <div class="collapse" id="collapseTotpSecret">
+                            <div class="card card-body">
+                                <h3 class="de-2fa-text">Your two-factor secret code:</h3>
+                                <code class="text-center de-2fa-text">
+                                    <t t-esc="data['secret']" />
+                                </code>
+                            </div>
+                        </div>
+                        <div class="">
+                            <img t-att-src="'data:image/png' + ';base64,' + data['qrcode']" />
+                        </div>
+                        <h3 class="de-user-title">Enter the 6-digit code from your app</h3>
+                        <div class="de-2fa-text">
+                            Once you scan the QR code, your app will display a 6 digit verification code you
+                            can enter below. Don't worry if the code changes in the app,
+                            it stays valid a bit longer.
+                        </div>
+                        <h3 class="de-user-title">
+                            Verification Code
+                        </h3>
+                        <div class="de-2fa-code-box">
+                            <div class="de-user-gray-border de-password-box">
+                                <input type="text" name="code" class="de-user-password" />
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+                <div class="de-dialog-2fa-footer">
+                    <div class="text-center">
+                        <label for="dont_show_message_2fa" class="de-checkbox-label">                            
+                            <input type="checkbox" value="" id="dont_show_message_2fa" /> Don't show this message again.
+                        </label>
+                    </div>
+                    <div class="d-flex">                                                      
+                        <button type="button" class="btn btn-secondary de-dialog-btn-confirm" data-action="enable-2fa-popup" t-att-data-wizard-id="data['id']">
+                            Enable
+                        </button>                                    
+                        <button type="button" class="btn btn-secondary de-dialog-btn-confirm de-dialog-close de-close-2fa-popup" data-action="disable-message-2fa-popup">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_order_form_2_popup">
+        <div class="de-dialog-container de-order-form-term-dialog de-order-dialog">
+            <div class="de-dialog-box">
+                <span class="de-dialog-close de-ic-eraser" />
+                <div class="de-dialog-body">
+                    <div class="de-user-info-box">
+                        <h3 class="de-2fa-text de-order-popup-2" style="text-align: justify;">
+                            This Online Order is submitted in accordance with and governed by the Master Country Agreement accepted and agreed by you and us and available at _t_url.
+                            You acknowledge and agree that by clicking the “I ACCEPT” button below, that this Online Order shall be binding on you and, upon our acceptance, shall constitute a valid and binding Service Order between the parties. 
+                            If you do not agree, please click the “I DO NOT ACCEPT” button and exit the Customer Portal. 
+                        </h3>
+                    </div>
+                </div>
+                <div class="de-dialog-footer">                                   
+                    <button type="button" class="btn btn-secondary de-dialog-btn-confirm de-btn-save">
+                        I ACCEPT
+                    </button>                                    
+                    <button type="button" class="btn btn-secondary de-dialog-btn-confirm de-dialog-close">
+                        I DO NOT ACCEPT
+                    </button>
+                </div>
+            </div>
+        </div>
+    </t>
+    <t t-name="nrs_de_portal.de_order_form_1_popup">
+        <div class="de-dialog-container de-order-form-dialog de-order-dialog">
+            <div class="de-dialog-box">
+                <span class="de-dialog-close de-ic-eraser" />
+                <div class="de-dialog-body">
+                    <div class="de-user-info-box">
+                        <h3 class="de-2fa-text mb-3" style="text-align: justify;">
+                            ATTENTION: PLEASE READ AS THIS CONTAINS VERY IMPORTANT INFORMATION ABOUT YOUR RIGHTS AND OBLIGATIONS IN RESPECT OF THE SERVICES YOU ARE ABOUT TO ORDER.
+                        </h3>
+                        <br/>
+                        <h3 class="de-2fa-text" style="text-align: justify;">
+                            YOU HAVE REACHED THE ORDERING PAGE OF OUR CUSTOMER PORTAL. 
+                            SHOULD YOU DESIRE TO PLACE THE ORDER, YOU WILL NEED TO CLICK THE “ I ACCEPT” BUTTON TO CONFIRM THE ORDER. 
+                            BY CLICKING THE “I ACCEPT” BUTTON, YOU WILL BE AGREEING TO PURCHASE THE SERVICE DESCRIBED THEREIN ON THE TERMS AND CONDITIONS SET FORTH IN YOUR MASTER COUNTRY AGREEMENT WITH US. 
+                            IF YOU DO NOT WISH TO PURCHASE THE SERVICES DESCRIBED THEREIN, CLICK THE “I DO NOT ACCEPT” BUTTON OR LEAVE THIS CUSTOMER PORTAL BY CLOSING THE SESSION WITHOUT CLICKING THE ‘I ACCEPT BUTTON’.  
+                        </h3>
+                    </div>
+                </div>
+                <div class="de-dialog-footer">                                   
+                    <button type="button" class="btn btn-secondary de-dialog-btn-confirm de-dialog-close de-understand-order-form-popup">
+                        I UNDERSTAND
+                    </button>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_dashboard_message_list">
+    	<div class="de-portal-subtitle-box d-flex justify-content-between align-items-center">
+            <div class="d-flex text-center">
+                <span class="de-portal-subicon de-ic-ticketing" />
+                <span class="de-portal-subtitle">Message List</span>
+            </div>     
+        </div>
+        <div class="de-portal-content-box">
+            <div class="de-table-box">
+                <table class="table ">
+                    <thead>
+                        <tr class="table-dark">
+                            <th class="text-center" style="width: 60%"> Discussion</th>
+                            <th class="text-center" style="width: 10%"> Messages </th>
+                            <th class="text-center" style="width: 30%"> Last Messages </th>
+                        </tr>
+                    </thead>
+                    <tbody >
+                        <!-- Sale Order -->
+                        <tr class="table-dark">
+                            <td colspan='3'>Sale Order</td>
+                        </tr>
+                        <t t-foreach="ordering" t-as="ordering_item">
+                            <tr class="de-message-list-row" t-att-data-message-name="ordering_item['mesage_name']" t-att-data-message-ref-id="ordering_item['ref_id']" data-ref-model="sale.order" style="cursor: pointer;">
+                                <td>
+                                    <span t-esc="ordering_item['mesage_name']" />
+                                </td>
+                                <td class="text-center">
+                                    <span t-esc="ordering_item['message_count']" />
+                                </td>
+                                <td class="text-center">
+                                    <span t-esc="ordering_item['last_message_date']" />
+                                </td>
+                            </tr>
+                        </t>
+                        <!-- Provisioning -->
+                        <tr class="table-dark">
+                            <td colspan='3'>Provisioning</td>
+                        </tr>                        
+                        <t t-foreach="provisioning" t-as="provisioning_item">
+                            <tr class="de-message-list-row" t-att-data-message-name="provisioning_item['mesage_name']" t-att-data-message-ref-id="provisioning_item['ref_id']" data-ref-model="project.task" style="cursor: pointer;">
+                                <td>
+                                    <span t-esc="provisioning_item['mesage_name']" />
+                                </td>
+                                <td class="text-center">
+                                    <span t-esc="provisioning_item['message_count']" />
+                                </td>
+                                <td class="text-center">
+                                    <span t-esc="provisioning_item['last_message_date']" />
+                                </td>
+                            </tr>
+                        </t>
+                        <!-- Invoicing -->
+                        <tr class="table-dark">
+                            <td colspan='3'>Invoicing</td>
+                        </tr>                        
+                        <t t-foreach="invoicing" t-as="invoicing_item">
+                            <tr class="de-message-list-row" t-att-data-message-name="invoicing_item['mesage_name']" t-att-data-message-ref-id="invoicing_item['ref_id']" data-ref-model="account.move" style="cursor: pointer;">
+                                <td>
+                                    <span t-esc="invoicing_item['mesage_name']" />
+                                </td>
+                                <td class="text-center">
+                                    <span t-esc="invoicing_item['message_count']" />
+                                </td>
+                                <td class="text-center">
+                                    <span t-esc="invoicing_item['last_message_date']" />
+                                </td>
+                            </tr>
+                        </t>
+                        <!-- Remote Hand -->
+                        <tr class="table-dark">                       
+                            <td colspan='3'>Remote Hand</td>
+                        </tr>                        
+                        <t t-foreach="remote_hand" t-as="remote_hand_item">
+                            <tr class="de-message-list-row" t-att-data-message-name="remote_hand_item['mesage_name']" t-att-data-message-ref-id="remote_hand_item['ref_id']" data-ref-model="helpdesk.ticket" style="cursor: pointer;">
+                                <td>
+                                    <span t-esc="remote_hand_item['mesage_name']" />
+                                </td>
+                                <td class="text-center">
+                                    <span t-esc="remote_hand_item['message_count']" />
+                                </td>
+                                <td class="text-center">
+                                    <span t-esc="remote_hand_item['last_message_date']" />
+                                </td>
+                            </tr>
+                        </t>
+                        <!-- Fault Report -->
+                        <tr class="table-dark">
+                            <td colspan='3'>Fault Report</td>
+                        </tr>
+                        <t t-foreach="fault_report" t-as="fault_report_item">
+                            <tr class="de-message-list-row" t-att-data-message-name="fault_report_item['mesage_name']" t-att-data-message-ref-id="fault_report_item['ref_id']" data-ref-model="helpdesk.ticket" style="cursor: pointer;">
+                                <td>
+                                    <span t-esc="fault_report_item['mesage_name']" />
+                                </td>
+                                <td class="text-center">
+                                    <span t-esc="fault_report_item['message_count']" />
+                                </td>
+                                <td class="text-center">
+                                    <span t-esc="fault_report_item['last_message_date']" />
+                                </td>
+                            </tr>
+                        </t>
+                        <!-- Site Access -->
+                        <tr class="table-dark">                      
+                            <td colspan='3'>Site Access</td>
+                        </tr>
+                        <t t-foreach="site_access" t-as="site_access_item">
+                            <tr class="de-message-list-row" t-att-data-message-name="site_access_item['mesage_name']" t-att-data-message-ref-id="site_access_item['ref_id']" data-ref-model="helpdesk.ticket" style="cursor: pointer;">
+                                <td>
+                                    <span t-esc="site_access_item['mesage_name']" />
+                                </td>
+                                <td class="text-center">
+                                    <span t-esc="site_access_item['message_count']" />
+                                </td>
+                                <td class="text-center">
+                                    <span t-esc="site_access_item['last_message_date']" />
+                                </td>
+                            </tr>
+                        </t>
+                        <!-- Shipment -->
+                        <tr class="table-dark">
+                            <td colspan='3'>Shipment</td>
+                        </tr>
+                        <t t-foreach="shipment" t-as="shipment_item">
+                            <tr class="de-message-list-row" t-att-data-message-name="shipment_item['mesage_name']" t-att-data-message-ref-id="shipment_item['ref_id']" data-ref-model="helpdesk.ticket" style="cursor: pointer;">
+                                <td>
+                                    <span t-esc="shipment_item['mesage_name']" />
+                                </td>
+                                <td class="text-center">
+                                    <span t-esc="shipment_item['message_count']" />
+                                </td>
+                                <td class="text-center">
+                                    <span t-esc="shipment_item['last_message_date']" />
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </t>
+    <t t-name="nrs_de_portal.de_dashboard_message_detail">
+        <div class="de-portal-content-box">
+            <span class="mb-3 de-back-to-notif-list" style="cursor: pointer;"><i class="fas fa-chevron-left"/> Back to List</span>
+            <br/>
+            <div class="de-ticket-log-body mt-3">
+                <t t-foreach="data['message']" t-as="log">
+                    <div class="de-ticket-log-item">
+                        <h2 class="de-ticket-log-author">
+                            <t t-esc="log['author']" />
+                        </h2>
+                        <h2 class="de-ticket-log-date">
+                            <t t-esc="log['date']" />
+                        </h2>
+                        <div class="de-ticket-log-message">
+                            <t t-raw="log['body']" />
+                        </div>
+                        <div class="de-ticket-log-attachment-box">
+                            <t t-foreach="log['attachment_ids']" t-as="attachment">
+                                <a class="de-ticket-log-attachment" t-att-href="attachment" target="_blank">
+                                    <span class="de-ic-download" />
+                                </a>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+                <div class="de-ticket-log-chat-container">
+                    <textarea class="de-ticket-log-chat-input" id="deticketlogchatinput" rows="4"></textarea>
+                    <div class="de-ticket-log-file-container"></div>
+                    <button class="de-ticket-log-file-emoji">
+                        <span class="fa fa-smile-o" />
+                    </button>
+                    <button class="de-ticket-log-file-button">
+                        <span class="fa fa-paperclip" />
+                        <input type="file" class="de-ticket-log-file" multiple="multiple" />
+                    </button>
+                    <div class="de-emoji-container de-hide"></div>
+                    <button class="de-ticket-log-chat-reply" t-att-data-ref-id="data['ref_id']" t-att-data-ref-model="data['ref_model']">Send</button>
+                    <button class="de-ticket-log-chat-reply-sending" t-att-data-ref-id="data['ref_id']" t-att-data-ref-model="data['ref_model']" style="display: none" disabled="disabled"><i class="fas fa-spinner de-ticket-log-chat-reply-sending-icon"></i> Sending...</button>
+                </div>
+            </div>
+        </div>
+    </t>    
+    <t t-name="nrs_de_portal.de_dashboard_notification_list">
+    	<div class="de-portal-subtitle-box d-flex justify-content-between align-items-center">
+            <div class="d-flex text-center">
+                <span class="de-portal-subicon de-ic-ticketing" />
+                <span class="de-portal-subtitle">Notification List</span>
+            </div>              
+            <t t-call="nrs_de_portal.de_search_box_tags" />      
+        </div>
+        <div class="de-portal-content-box">
+            <!-- <t t-call="nrs_de_portal.de_pagination" /> -->
+            <div class="de-table-box">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                Subject
+                                <span class="de-portal-order fa fa-chevron-down" data-order="create_date" />
+                            </th>
+                            <th>
+                                Notification Date Start
+                                <span class="de-portal-order fa fa-chevron-down" data-order="create_uid" />
+                            </th>
+                            <th>
+                                Notification Date End
+                                <span class="de-portal-order fa fa-chevron-down" data-order="name,id" />
+                            </th>
+                        </tr>
+                    </thead>
+                    <t t-call="nrs_de_portal.de_notification_list_table_body" />
+                </table>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </t> 
+    <t t-name="nrs_de_portal.de_notification_list_table_body">
+        <tbody class="de-portal-notification-list-body">
+            <t t-foreach="data" t-as="item">
+                <tr class="de-notification-list-table-tr" t-att-data-notif-id="item['id']" style="cursor: pointer;">
+                    <td>
+                        <span t-esc="item['subject']" />
+                    </td>
+                    <td>
+                        <span t-esc="item['notification_start_date']" />
+                    </td>
+                    <td>
+                        <span t-esc="item['notification_end_date']" />
+                    </td>
+                </tr>
+            </t>
+        </tbody>
+    </t>
+    <t t-name="nrs_de_portal.de_dashboard_notification_detail">
+        <div class="de-portal-content-box">
+            <span class="mb-3 de-back-to-notif-list" style="cursor: pointer;"><i class="fas fa-chevron-left"/> Back to List</span>
+            <br/>
+            <h3 class="mt-3">Subject : <span t-esc="data['subject']" /></h3>
+            <h3>Notifiaction Date : <i><span t-esc="data['notification_start_date']" /></i> to <i><span t-esc="data['notification_end_date']" /></i></h3>
+            <div>
+                <t t-raw="data['body']" />
+            </div>
+        </div>
+    </t> 
+</templates>

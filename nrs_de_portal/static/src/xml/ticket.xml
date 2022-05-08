@@ -1,0 +1,2600 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="nrs_de_portal.de_order_remote_hands">
+        <div class="row">
+            <div class="col-lg-10 order-2 order-md-1">
+                <div class="de-portal-subtitle-box">
+                    <span class="de-portal-subicon de-ic-order" />
+                    <span class="de-portal-subtitle">Request Services > Remote Hands</span>
+                </div>
+                <div class="de-portal-content-box de-relative-content-box">
+                    <form action="/" method="POST" class="de-portal-form">
+                        <div class="de-ticket-subject">
+                            <span>Remote Hands :</span>
+                            <input type="text" name="ns_ticket_subject" class="de-form-input de-ticket-subject-input" placeholder="Subject..."/>
+                        </div>
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Operation Site</span>
+                            <span class="de-form-input-box">
+                                <select name="x_studio_operation_site" class="de-form-select de-osite" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['operating_site']" t-as="o_site">
+                                        <t t-if="o_site['id'] == value['x_studio_operation_site']">
+                                            <option t-att-value="o_site['id']" selected="selected" t-att-data-timezone="o_site['timezone']">
+                                                <t t-esc="o_site['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="o_site['id']" t-att-data-timezone="o_site['timezone']">
+                                                <t t-esc="o_site['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Service ID</span>
+                            <span class="de-form-input-box">
+                                <select name="ns_service_id" class="de-form-select de-service-id" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['service']" t-as="service">
+                                        <t t-if="service['id'] == value['ns_service_id']">
+                                            <option t-att-value="service['id']" selected="selected">
+                                                <t t-esc="service['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="service['id']">
+                                                <t t-esc="service['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Designated Company</span>
+                            <span class="de-form-input-box">
+                                <select name="ns_designated_company" class="de-form-select de-partner-id" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['partner']" t-as="p">
+                                        <t t-if="p['id'] == value['ns_designated_company']">
+                                            <option t-att-value="p['id']" selected="selected">
+                                                <t t-esc="p['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="p['id']">
+                                                <t t-esc="p['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Ticket Type</span>
+                            <span class="de-form-input-box">
+                                <select name="ticket_type_id" class="de-form-select de-ticket-type-id" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['ticket_type']" t-as="t_type">
+                                        <t t-if="t_type['id'] == value['ticket_type_id']">
+                                            <option t-att-value="t_type['id']" selected="selected">
+                                                <t t-esc="t_type['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="t_type['id']">
+                                                <t t-esc="t_type['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box de-requested-service-date required mb-0 pb-0" style="display: none;">
+                            <span class="de-form-label">Scheduled Maintenance Date</span>
+                            <span class="de-form-input-box">
+                                <input type="text" name="x_studio_requested_service_date" class="de-form-input datetimepicker-input de-service-date" id="requestdatepicker" data-toggle="datetimepicker" data-target="#requestdatepicker" placeholder="Text input ..." />
+                            </span>
+                        </div>
+                        <div class="de-form-box-auto-height de-requested-service-date mt-0 pt-0" style="display: none; top: 0;">
+                            <span class="de-form-label"><span class="de-date-timezone">(UTC +00:00)</span></span>
+                        </div>
+
+                        <div class="de-form-box de-form-box-extra">
+                            <span class="de-form-label">Description</span>
+                            <span class="de-form-input-box">
+                                <textarea rows="4" name="description" required="required" placeholder="Text input ..." class="de-form-input"></textarea>
+                            </span>
+                        </div>
+                        <div class="de-service-price pull-right">
+                            0 USD / Hour
+                        </div>
+                        <div class="clearfix" />
+                    </form>
+                    <!-- <button type="submit" class="de-btn-save de-btn-full">Submit</button> -->
+                    <button class="de-btn-save-order de-btn-full">Submit</button>
+                </div>
+            </div>
+            <div class="col-lg-2 de-ticket-list-container order-1 order-md-2"></div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_read_order_remote_hands">
+        <div class="row">
+            <div class="col-lg-9 order-2 order-md-1">
+                <div class="de-portal-subtitle-box">
+                    <span class="de-portal-subicon de-ic-order" />
+                    <span class="de-portal-subtitle">Request Services > Remote Hands</span>
+                </div>
+                <div class="de-portal-content-box de-relative-content-box">
+                    <form action="/" method="POST" class="de-portal-form">                        
+                        <div class="de-ticket-subject">
+                            <t t-esc="value['display_name']" />
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Operation Site</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value" t-esc="value['x_studio_operation_site']" />
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Service ID</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value" t-esc="value['ns_service_id']" />
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Designated Company</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value" t-esc="value['ns_designated_company']" />
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Ticket Type</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value" t-esc="value['ticket_type_id']" />
+                            </span>
+                        </div>
+
+                        <div class="de-form-box de-requested-service-date required mb-0 pb-0">
+                            <span class="de-form-label">Scheduled Maintenance Date</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value" t-esc="value['x_studio_requested_service_date']" />
+                            </span>
+                        </div>                        
+                        <div class="de-form-box-auto-height de-requested-service-date mt-0 pt-0" style="top: 0;">
+                            <span class="de-form-label"><span class="de-date-timezone">(UTC +00:00)</span></span>
+                        </div>
+
+                        <div class="de-form-box de-form-box-extra">
+                            <span class="de-form-label">Description</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value">
+                                    <textarea rows="4" class="de-form-input de-form-input-ticket-description" disabled="disabled">
+                                        <t t-raw="value['description']" />
+                                    </textarea>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="de-service-price pull-right">
+                            <span t-esc="value['price']" />
+                        </div>
+                        <div class="de-hours-spent pull-right">
+                            <span t-esc="value['total_hours_spent']" />
+                            Hours Spent
+                        </div>
+                        <div class="clearfix" />
+                    </form>                    
+                    <t t-if="value['is_close']">
+                        <!-- <button class="de-btn-reset-new de-btn-full" t-att-data-ticket-id="value['id']">Re-open Ticket</button> -->
+                    </t>
+                    <t t-else="">
+                        <button class="de-btn-resolved de-btn-half-left" t-att-data-ticket-id="value['id']">Mark As Resolved</button>
+                        <button class="de-btn-edit de-btn-half-right" t-att-data-ticket-id="value['id']">Edit</button>
+                    </t>
+                </div>
+                <div class="de-ticket-log">
+                    <t t-call="nrs_de_portal.de_ticket_log" />
+                </div>
+            </div>
+            <div class="col-lg-3 de-ticket-list-container order-1 order-md-2"></div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_edit_order_remote_hands">
+        <div class="row">
+            <div class="col-lg-9 order-2 order-md-1">
+                <div class="de-portal-subtitle-box">
+                    <span class="de-portal-subicon de-ic-order" />
+                    <span class="de-portal-subtitle">Request Services > Remote Hands</span>
+                </div>
+                <div class="de-portal-content-box de-relative-content-box">
+                    <form action="/" method="POST" class="de-portal-form">
+                        <input type="hidden" name="ticket_id" t-att-value="value['id']" />                 
+                        <div class="de-ticket-subject">
+                            <span><t t-esc="value['display_name']" /> :</span>
+                            <input type="text" name="ns_ticket_subject" class="de-form-input de-ticket-subject-input" placeholder="Subject..." t-att-value="value['ns_ticket_subject']"/>
+                        </div>
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Operation Site</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <select name="x_studio_operation_site" class="de-form-select de-osite" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['operating_site']" t-as="o_site">
+                                        <t t-if="o_site['id'] == value['x_studio_operation_site']">
+                                            <option t-att-value="o_site['id']" selected="selected" t-att-data-timezone="o_site['timezone']">
+                                                <t t-esc="o_site['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="o_site['id']" t-att-data-timezone="o_site['timezone']">
+                                                <t t-esc="o_site['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Service ID</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <select name="ns_service_id" class="de-form-select de-service-id" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['service']" t-as="service">
+                                        <t t-if="service['id'] == value['ns_service_id']">
+                                            <option t-att-value="service['id']" selected="selected">
+                                                <t t-esc="service['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="service['id']">
+                                                <t t-esc="service['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Designated Company</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <select name="ns_designated_company" class="de-form-select de-partner-id" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['partner']" t-as="p">
+                                        <t t-if="p['id'] == value['ns_designated_company']">
+                                            <option t-att-value="p['id']" selected="selected">
+                                                <t t-esc="p['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="p['id']">
+                                                <t t-esc="p['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Ticket Type</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <select name="ticket_type_id" class="de-form-select de-ticket-type-id" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['ticket_type']" t-as="t_type">
+                                        <t t-if="t_type['id'] == value['ticket_type_id']">
+                                            <option t-att-value="t_type['id']" selected="selected">
+                                                <t t-esc="t_type['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="t_type['id']">
+                                                <t t-esc="t_type['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box de-requested-service-date required mb-0 pb-0" style="display: none;">
+                            <span class="de-form-label">Scheduled Maintenance Date</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <input type="text" name="x_studio_requested_service_date" class="de-form-input datetimepicker-input de-service-date" id="requestdatepicker" data-toggle="datetimepicker" data-target="#requestdatepicker" placeholder="Text input ..." t-att-value="value['x_studio_requested_service_date']" />
+                            </span>
+                        </div>                                                
+                        <div class="de-form-box-auto-height de-requested-service-date mt-0 pt-0" style="display: none; top: 0;">
+                            <span class="de-form-label"><span class="de-date-timezone">(UTC +00:00)</span></span>
+                        </div>
+
+                        <div class="de-form-box de-form-box-extra">
+                            <span class="de-form-label">Description</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <textarea rows="4" name="description" required="required" placeholder="Text input ..." class="de-form-input de-form-input-ticket-description">
+                                    <t t-raw="value['description']" />
+                                </textarea>
+                            </span>
+                        </div>
+
+                        <div class="de-service-price pull-right">
+                            0 USD / Hour
+                        </div>
+                        <div class="de-hours-spent pull-right">
+                            <span t-esc="value['total_hours_spent']" />
+                            Hours Spent
+                        </div>
+                        <div class="clearfix" />
+
+                    </form>
+                    <button class="de-btn-resolved de-three-btn-left" t-att-data-ticket-id="value['id']">Mark As Resolved</button>
+                    <button class="de-btn-cancel de-three-btn-center" t-att-data-ticket-id="value['id']">Cancel Changes</button>
+                    <button class="de-btn-save de-three-btn-right">Save</button>
+                </div>
+                <div class="de-ticket-log">
+                    <t t-call="nrs_de_portal.de_ticket_log" />
+                </div>
+            </div>
+            <div class="col-lg-3 de-ticket-list-container order-1 order-md-2"></div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_order_interconnection_services">
+        <div class="de-portal-subtitle-box">
+            <span class="de-portal-subicon de-ic-order" />
+            <span class="de-portal-subtitle">Request Services > Interconnection Services</span>
+        </div>
+        <div class="de-portal-content-box de-relative-content-box">
+            <form action="/" method="POST" class="de-portal-form" id="de-portal-form-interconnection-services">
+                <input type="hidden" name="mrc_product" class="de-mrc-product" />
+                <input type="hidden" name="nrc_product" class="de-nrc-product" />
+                <input type="hidden" name="loa" class="de-loa-file" />
+
+                <div class="de-form-box required">
+                    <span class="de-form-label">Operation Site</span>
+                    <span class="de-form-input-box">
+                        <select name="x_studio_operation_site" class="de-form-select de-osite" required="required">
+                            <option value="">Select ...</option>
+                            <t t-foreach="data['operating_site']" t-as="o_site">
+                                <option t-att-value="o_site['id']">
+                                    <t t-esc="o_site['name']" />
+                                </option>
+                            </t>
+                        </select>
+                    </span>
+                </div>
+
+                <div class="de-form-box required">
+                    <span class="de-form-label">Choose Service</span>
+                    <span class="de-form-input-box">
+                        <select name="choose_service" class="de-form-select de-choose-service" required="required">
+                            <option value="">Select ...</option>
+                            <t t-foreach="data['choose_service']" t-as="c_service">
+                                <option t-att-value="c_service['value']">
+                                    <t t-esc="c_service['name']" />
+                                </option>
+                            </t>
+                        </select>
+                    </span>
+                </div>
+
+
+                <div class="de-form-box required">
+                    <span class="de-form-label">Media Type</span>
+                    <span class="de-form-input-box">
+                        <select name="media_type" class="de-form-select de-media-type" required="required">
+                            <option value="">Select ...</option>
+                            <t t-foreach="data['media_type']" t-as="m_type">
+                                <option t-att-value="m_type['value']">
+                                    <t t-esc="m_type['name']" />
+                                </option>
+                            </t>
+                        </select>
+                    </span>
+                </div>
+
+                <!-- <div class="de-form-box">
+                    <span class="de-form-label">Intra Customer</span>
+                    <span class="de-form-input-box">
+                        <input type="checkbox" name="intra_customer" class="de-form-checkbox de-intra-customer" />
+                    </span>
+                </div> -->
+
+                <div class="de-form-box required">
+                    <span class="de-form-label">A-Side Service ID</span>
+                    <span class="de-form-input-box">
+                        <select name="a_end_service_id" class="de-form-select de-service-id" required="required">
+                            <option value="">Select ...</option>
+                        </select>
+                    </span>
+                </div>
+
+                <div class="de-form-box required">
+                    <span class="de-form-label">Designated Company</span>
+                    <span class="de-form-input-box">
+                        <select name="partner_id" class="de-form-select de-partner-id" required="required">
+                            <option value="">Select ...</option>
+                            <t t-foreach="data['partner']" t-as="p">
+                                <t t-if="p['selected']">
+                                    <option t-att-value="p['id']" selected="selected">
+                                        <t t-esc="p['name']" />
+                                    </option>
+                                </t>
+                                <t t-else="">
+                                    <option t-att-value="p['id']">
+                                        <t t-esc="p['name']" />
+                                    </option>
+                                </t>
+                            </t>
+                        </select>
+                    </span>
+                </div>
+
+                <div class="de-form-box required">
+                    <span class="de-form-label">Z-Side Service ID <input type="checkbox" name="intra_customer" class="de-form-checkbox de-intra-customer" /> <i><small>Intra Customer</small></i> </span>
+                    <span class="de-form-input-box">
+                        <input type="text" name="z_end_service_id" required="required" placeholder="Text input ..." class="de-form-input de-service-id-z" />
+                        <select name="z_end_service_id_select" class="de-form-select de-service-id-z-select" required="required" style="display: none;">
+                            <option value="">Select ...</option>
+                        </select>
+                    </span>
+                </div>
+
+                <div class="de-form-box required">
+                    <span class="de-form-label">Requested Delivery Date</span>
+                    <span class="de-form-input-box">
+                        <input type="text" name="x_studio_service_request_date" class="de-form-input datetimepicker-input de-req-service-date" id="requestdatepicker" data-toggle="datetimepicker" data-target="#requestdatepicker" placeholder="Text input ..." />
+                    </span>
+                </div>
+
+
+                <div class="de-form-box de-interconnection-loa" >
+                    <span class="de-form-label de-form-label-extra">
+                        Letter of Authorization (LOA)
+                        <span
+                            tabindex="0"
+                            role="button"
+                            class="fas fa-question-circle de-tooltips-popover ml-1"
+                            data-toggle="popover"
+                        />
+                    </span>
+                    <span class="de-form-input-box">
+                        <input type="file" required="required" placeholder="Text input ..."
+                        accept = ".pdf,.csv,.doc,.docx,.ppt,.pptx,.xls,.jpeg,.png"
+                        class="de-file-input de-input-loa" />
+                    </span>
+                </div>
+
+                <div class="de-form-box">
+                    <span class="de-form-label">Patch Panel ID</span>
+                    <span class="de-form-input-box">
+                        <input type="text" name="nrs_patch_panel_id" required="required" placeholder="Text input ..." class="de-form-input de-patch-panel-id" />
+                    </span>
+                </div>
+
+                <div class="de-form-box">
+                    <span class="de-form-label">Port Number</span>
+                    <span class="de-form-input-box">
+                        <input type="text" name="ns_port_number" required="required" placeholder="Text input ..." class="de-form-input de-port-number" />
+                    </span>
+                </div>
+
+                <div class="de-form-box required">
+                    <span class="de-form-label">Quantity</span>
+                    <span class="de-form-input-box">
+                        <input type="number" name="quantity" min="1" required="required" placeholder="Text input ..." class="de-form-input de-quantity" t-att-value="1"/>
+                    </span>
+                </div>
+
+                <div class="de-service-price pull-right">
+                    NRC 0 USD / MRC 0 USD
+                </div>
+                <div class="clearfix" />
+            </form>
+            <!-- <button type="submit" class="de-btn-save de-btn-full">Submit</button> -->
+            <button class="de-btn-save-order de-btn-full">Submit</button>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_order_colocation_accessories">
+        <div class="de-portal-subtitle-box">
+            <span class="de-portal-subicon de-ic-order" />
+            <span class="de-portal-subtitle">Request Services > Colocation Accessories</span>
+        </div>
+        <div class="de-portal-content-box de-relative-content-box">
+            <form action="/" method="POST" class="de-portal-form" id="de-portal-form-colocation-accessories">
+
+                <div class="de-form-box required">
+                    <span class="de-form-label">Operation Site</span>
+                    <span class="de-form-input-box">
+                        <select name="x_studio_operation_site" class="de-form-select de-osite" required="required">
+                            <option value="">Select ...</option>                            
+                            <t t-foreach="data['operating_site']" t-as="o_site">
+                                <option t-att-value="o_site['id']">
+                                    <t t-esc="o_site['name']" />
+                                </option>
+                            </t>
+                        </select>
+                    </span>
+                </div>
+
+                <div class="de-form-box required">
+                    <span class="de-form-label">Service ID</span>
+                    <span class="de-form-input-box">
+                        <select name="a_end_service_id" class="de-form-select de-service-id" data-product-categ="Space" required="required">
+                            <option value="">Select ...</option>
+                        </select>
+                    </span>
+                </div>
+
+                <div class="de-form-box required">
+                    <span class="de-form-label">Designated Company</span>
+                    <span class="de-form-input-box">
+                        <select name="partner_id" class="de-form-select de-partner-id" required="required">
+                            <option value="">Select ...</option>
+                            <t t-foreach="data['partner']" t-as="p">
+                                <t t-if="p['selected']">
+                                    <option t-att-value="p['id']" selected="selected">
+                                        <t t-esc="p['name']" />
+                                    </option>
+                                </t>
+                                <t t-else="">
+                                    <option t-att-value="p['id']">
+                                        <t t-esc="p['name']" />
+                                    </option>
+                                </t>
+                            </t>
+                        </select>
+                    </span>
+                </div>
+
+                <div class="de-form-box required">
+                    <span class="de-form-label">Product</span>
+                    <span class="de-form-input-box">
+                        <select name="product_id" class="de-form-select de-product-id" required="required">
+                            <option value="">Select ...</option>
+                            <t t-foreach="data['product']" t-as="p">
+                                <option t-att-value="p['id']">
+                                    <t t-esc="p['name']" />
+                                </option>
+                            </t>
+                        </select>
+                    </span>
+                </div>
+
+
+                <div class="de-form-box required">
+                    <span class="de-form-label">Requested Delivery Date</span>
+                    <span class="de-form-input-box">
+                        <input type="text" name="commitment_date" class="de-form-input datetimepicker-input de-req-service-date" id="requestdatepicker" data-toggle="datetimepicker" data-target="#requestdatepicker" placeholder="Text input ..." />
+                    </span>
+                </div>
+
+                <div class="de-form-box required">
+                    <span class="de-form-label">Quantity</span>
+                    <span class="de-form-input-box">
+                        <input type="number" name="qty" required="required" placeholder="Text input ..." class="de-form-input de-qty" />
+                    </span>
+                </div>
+
+                <div class="de-service-price pull-right">
+                    0 USD / Units
+                </div>
+                <div class="clearfix" />
+
+            </form>
+            <!-- <button type="submit" class="de-btn-save de-btn-full">Submit</button> -->
+            <button class="de-btn-save-order de-btn-full">Submit</button>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_new_fault_report">
+        <div class="row">
+            <div class="col-lg-10 order-2 order-md-1">
+                <div class="de-portal-subtitle-box">
+                    <span class="de-portal-subicon de-ic-ticketing" />
+                    <span class="de-portal-subtitle">New Fault Report Ticket</span>
+                </div>
+                <div class="de-portal-content-box de-relative-content-box">                   
+                    <form action="/" method="POST" class="de-portal-form">                        
+                        <div class="de-ticket-subject">
+                            <span>Fault Report :</span>
+                            <input type="text" name="ns_ticket_subject" class="de-form-input de-ticket-subject-input" placeholder="Subject..."/>
+                        </div>
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Operation Site</span>
+                            <span class="de-form-input-box">
+                                <select name="x_studio_operation_site" class="de-form-select de-osite" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['operating_site']" t-as="o_site">
+                                        <t t-if="o_site['id'] == value['x_studio_operation_site']">
+                                            <option t-att-value="o_site['id']" selected="selected">
+                                                <t t-esc="o_site['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="o_site['id']">
+                                                <t t-esc="o_site['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box">
+                            <span class="de-form-label">
+                                Service ID <span style="color:red;">*</span>
+                                <span
+                                    tabindex="0"
+                                    role="button"
+                                    class="fas fa-question-circle de-tooltips-popover ml-1"
+                                    data-toggle="popover"
+                                />
+                            </span>
+                            <span class="de-form-input-box">
+                                <select name="ns_service_id" class="de-form-select de-service-id" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['service']" t-as="service">
+                                        <t t-if="service['id'] == value['ns_service_id']">
+                                            <option t-att-value="service['id']" selected="selected">
+                                                <t t-esc="service['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="service['id']">
+                                                <t t-esc="service['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Designated Company</span>
+                            <span class="de-form-input-box">
+                                <select name="partner_id" class="de-form-select de-partner-id" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['partner']" t-as="p">
+                                        <t t-if="p['id'] == value['partner_id']">
+                                            <option t-att-value="p['id']" selected="selected">
+                                                <t t-esc="p['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="p['id']">
+                                                <t t-esc="p['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Type of Fault</span>
+                            <span class="de-form-input-box">
+                                <select name="ticket_type_id" class="de-form-select" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['ticket_type']" t-as="t_type">
+                                        <option t-att-value="t_type['id']">
+                                            <t t-esc="t_type['name']" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box de-form-box-extra">
+                            <span class="de-form-label">Additional Remark</span>
+                            <span class="de-form-input-box">
+                                <textarea rows="4" name="description" required="required" placeholder="Text input ..." class="de-form-input"></textarea>
+                            </span>
+                        </div>
+                    </form>
+                    <button type="submit" class="de-btn-save de-btn-full">Submit</button>
+                </div>
+            </div>
+            <div class="col-lg-2 de-ticket-list-container order-1 order-md-2"></div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_read_new_fault_report">
+        <div class="row">
+            <div class="col-lg-9 order-2 order-md-1">
+                <div class="de-portal-subtitle-box">
+                    <span class="de-portal-subicon de-ic-ticketing" />
+                    <span class="de-portal-subtitle">New Fault Report Ticket</span>
+                </div>
+                <div class="de-portal-content-box de-relative-content-box">
+                    <div class="de-ticket-subject">
+                        <t t-esc="value['display_name']" />
+                    </div>
+                    <form action="/" method="POST" class="de-portal-form">
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Operation Site</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value" t-esc="value['x_studio_operation_site']" />
+                            </span>
+                        </div>
+
+                        <div class="de-form-box">
+                            <span class="de-form-label">
+                                Service ID <span style="color:red;">*</span>
+                                <span
+                                    tabindex="0"
+                                    role="button"
+                                    class="fas fa-question-circle de-tooltips-popover ml-1"
+                                    data-toggle="popover"
+                                />
+                            </span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value" t-esc="value['ns_service_id']" />
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Designated Company</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value" t-esc="value['ns_designated_company']" />
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Type of Fault</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value" t-esc="value['ticket_type_id']" />
+                            </span>
+                        </div>
+
+                        <div class="de-form-box de-form-box-extra">
+                            <span class="de-form-label">Additional Remark</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value">
+                                    <textarea rows="4" class="de-form-input de-form-input-ticket-description" disabled="disabled">
+                                        <t t-raw="value['description']" />
+                                    </textarea>
+                                </span>
+                            </span>
+                        </div>
+                    </form>                    
+                    <t t-if="value['is_close']">
+                        <!-- <button class="de-btn-reset-new de-btn-full" t-att-data-ticket-id="value['id']">Re-open Ticket</button> -->
+                    </t>
+                    <t t-else="">
+                        <button class="de-btn-resolved de-btn-half-left" t-att-data-ticket-id="value['id']">Mark As Resolved</button>
+                        <button class="de-btn-edit de-btn-half-right" t-att-data-ticket-id="value['id']">Edit</button>
+                    </t>
+                </div>
+                <div class="de-ticket-log">
+                    <t t-call="nrs_de_portal.de_ticket_log" />
+                </div>
+            </div>
+            <div class="col-lg-3 de-ticket-list-container order-1 order-md-2"></div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_edit_new_fault_report">
+        <div class="row">
+            <div class="col-lg-9 order-2 order-md-1">
+                <div class="de-portal-subtitle-box">
+                    <span class="de-portal-subicon de-ic-ticketing" />
+                    <span class="de-portal-subtitle">New Fault Report Ticket</span>
+                </div>
+                <div class="de-portal-content-box de-relative-content-box">
+                    <form action="/" method="POST" class="de-portal-form">
+                        <input type="hidden" name="ticket_id" t-att-value="value['id']" />                
+                        <div class="de-ticket-subject">
+                            <span><t t-esc="value['display_name']" /> :</span>
+                            <input type="text" name="ns_ticket_subject" class="de-form-input de-ticket-subject-input" placeholder="Subject..." t-att-value="value['ns_ticket_subject']"/>
+                        </div>
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Operation Site</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <select name="x_studio_operation_site" class="de-form-select de-osite" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['operating_site']" t-as="o_site">
+                                        <t t-if="o_site['id'] == value['x_studio_operation_site']">
+                                            <option t-att-value="o_site['id']" selected="selected">
+                                                <t t-esc="o_site['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="o_site['id']">
+                                                <t t-esc="o_site['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box">
+                            <span class="de-form-label">
+                                Service ID <span style="color:red;">*</span>
+                                <span
+                                    tabindex="0"
+                                    role="button"
+                                    class="fas fa-question-circle de-tooltips-popover ml-1"
+                                    data-toggle="popover"
+                                />
+                            </span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <select name="ns_service_id" class="de-form-select de-service-id" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['service']" t-as="service">
+                                        <t t-if="service['id'] == value['ns_service_id']">
+                                            <option t-att-value="service['id']" selected="selected">
+                                                <t t-esc="service['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="service['id']">
+                                                <t t-esc="service['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Designated Company</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <select name="partner_id" class="de-form-select de-partner-id" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['partner']" t-as="p">
+                                        <t t-if="p['id'] == value['ns_designated_company']">
+                                            <option t-att-value="p['id']" selected="selected">
+                                                <t t-esc="p['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="p['id']">
+                                                <t t-esc="p['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Type of Fault</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <select name="ticket_type_id" class="de-form-select" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['ticket_type']" t-as="t_type">
+                                        <t t-if="t_type['id'] == value['ticket_type_id']">
+                                            <option t-att-value="t_type['id']" selected="selected">
+                                                <t t-esc="t_type['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="t_type['id']">
+                                                <t t-esc="t_type['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box de-form-box-extra">
+                            <span class="de-form-label">Additional Remark</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <textarea rows="4" name="description" required="required" placeholder="Text input ..." class="de-form-input de-form-input-ticket-description">
+                                    <t t-raw="value['description']" />
+                                </textarea>
+                            </span>
+                        </div>
+                    </form>
+                    <button class="de-btn-resolved de-three-btn-left" t-att-data-ticket-id="value['id']">Mark As Resolved</button>
+                    <button class="de-btn-cancel de-three-btn-center" t-att-data-ticket-id="value['id']">Cancel Changes</button>
+                    <button class="de-btn-save de-three-btn-right">Save</button>
+                </div>
+                <div class="de-ticket-log">
+                    <t t-call="nrs_de_portal.de_ticket_log" />
+                </div>
+            </div>
+            <div class="col-lg-3 de-ticket-list-container order-1 order-md-2"></div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_new_site_access">
+        <div class="row">
+            <div class="col-lg-10 order-2 order-md-1">
+                <div class="de-portal-subtitle-box">
+                    <span class="de-portal-subicon de-ic-ticketing" />
+                    <span class="de-portal-subtitle">New Site Access Ticket</span>
+                </div>
+                <div class="de-portal-content-box de-relative-content-box">
+                    <form action="/" method="POST" class="de-portal-form">                                            
+                        <div class="de-ticket-subject">
+                            <span>Site Access :</span>
+                            <input type="text" name="ns_ticket_subject" class="de-form-input de-ticket-subject-input" placeholder="Subject..."/>
+                        </div>
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Operation Site</span>
+                            <span class="de-form-input-box">
+                                <select name="x_studio_operation_site" class="de-form-select de-osite" data-team-name="Site Access" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['operating_site']" t-as="o_site">
+                                        <option t-att-value="o_site['id']" t-att-data-timezone="o_site['timezone']">
+                                            <t t-esc="o_site['name']" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Service ID</span>
+                            <span class="de-form-input-box">
+                                <select name="ns_service_id" class="de-form-select de-service-id" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['service']" t-as="service">
+                                        <option t-att-value="service['id']">
+                                            <t t-esc="service['name']" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Designated Company</span>
+                            <span class="de-form-input-box">
+                                <select name="partner_id" class="de-form-select de-partner-id" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['partner']" t-as="p">
+                                        <t t-if="p['selected']">
+                                            <option t-att-value="p['id']" selected="selected">
+                                                <t t-esc="p['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="p['id']">
+                                                <t t-esc="p['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Visit Type</span>
+                            <span class="de-form-input-box">
+                                <select name="ticket_type_id" class="de-form-select de-ticket-type-id" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['ticket_type']" t-as="t_type">
+                                        <option t-att-value="t_type['id']">
+                                            <t t-esc="t_type['name']" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required mb-0 pb-0">
+                            <span class="de-form-label">Visit Date</span>
+                            <span class="de-form-input-box d-flex">
+                                <input type="text" name="ns_site_visit_date_start" class="de-form-input datetimepicker-input de-visit-date" id="visitdate" data-toggle="datetimepicker" data-target="#visitdate" placeholder="Start date ..." />
+                                <input type="text" name="ns_site_visit_date_end" class="de-form-input datetimepicker-input de-visit-date-end" id="visitdateend" data-toggle="datetimepicker" data-target="#visitdateend" placeholder="End date ..." />
+                            </span>
+                        </div>                      
+                        <div class="de-form-box-auto-height mt-0 pt-0" style="top: 0;">
+                            <span class="de-form-label"><span class="de-date-timezone">(UTC +00:00)</span></span>
+                        </div>
+
+                        <div class="de-form-box">
+                            <span class="de-form-label">
+                                Special Visit Area <span style="color:red;">*</span>
+                                <span
+                                    tabindex="0"
+                                    role="button"
+                                    class="fas fa-question-circle de-tooltips-popover ml-1"
+                                    data-toggle="popover"
+                                />
+                            </span>
+                            <span class="de-form-input-box">
+                                <select name="ns_special_visit_area" class="de-form-select de-special-visit-area">
+                                    <option value="yes">Yes</option>
+                                    <option value="no" selected="selected">No</option>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box de-visit-area-name-box required" style="display: none;">
+                            <span class="de-form-label">Visit Area</span>
+                            <span class="de-form-input-box">
+                                <input type="text" name="ns_special_visit_area_name" placeholder="Text input ..." class="de-form-input de-visit-area-name" />
+                            </span>
+                        </div>
+
+                        <!-- <div class="de-form-box de-form-box-visitor required"  style="position: relative">
+                            <span class="de-form-label de-form-label-extra">Requested Visitor's Name</span>
+                            <span class="de-form-input-box de-form-input-box-visitor d-flex">
+                                <input type="text" name="x_studio_requested_visitor" required="required" placeholder="Visitor Name ..." class="de-form-input de-form-input-visitor" 
+                                    data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Please write down the visitors' name as is written in ID document that they will bring on the visit date"/>
+                                <button class="btn btn-default d-flex align-items-center add-visitor-btn"><span class="fa fa-plus"/></button>
+                            </span>
+                        </div> -->
+
+                        <div class="de-form-box de-form-box-extra">
+                            <span class="de-form-label">Additional Remark</span>
+                            <span class="de-form-input-box">
+                                <textarea rows="4" name="description" required="required" placeholder="Text input ..." class="de-form-input"></textarea>
+                            </span>
+                        </div>
+
+                    </form>
+                    <ul class="nav nav-tabs mt-3" id="site-accesFormTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="site-acces-detail-tab" data-toggle="tab" href="#site-acces-detail" role="tab" aria-controls="site-acces-detail" aria-selected="true">Site Acces Detail</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="site-accesFormTabContent">
+                        <div class="tab-pane fade show active p-3 " id="site-acces-detail" role="tabpanel" aria-labelledby="site-acces-detail-tab"> 
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Visitor Name</th>
+                                            <th scope="col">Visitor Identification Number</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="site-acces-detail-table-body">
+                                        <tr class="site-acces-detail-table-row de-form-box-visitor" data-site-acces-detail-id="new">
+                                            <td><input type="text" name="ns_site_access_detail_visitor_name" required="required" class="de-form-table-input de-form-input-visitor detail-visitor-name" placeholder="Text Input..." 
+                                                    data-toggle="popover" data-trigger="focus" data-placement="bottom" data-content="Please write down the visitors' name as is written in ID document that they will bring on the visit date"/></td>
+                                            <td><input type="text" name="ns_site_access_detail_visitor_id_number" class="de-form-table-input detail-visitor-id-number" placeholder="Text Input..."/></td>
+                                            <td class="table-tool"><button class="btn btn-sm btn-danger de-remove-table-line" data-table-name="site-acces-detail"><span class="fas fa-times"/></button></td>
+                                        </tr>                        
+                                        <tr class="site-acces-detail-table-add-line">
+                                            <td colspan="5">
+                                                <span class="de-table-add-line" data-table-name="site-acces-detail">
+                                                    <span class="fas fa-plus"/> add line ...
+                                                </span>
+                                            </td>                                        
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>                            
+                        </div>
+                    </div>
+                    <button type="submit" class="de-btn-save de-btn-full">Submit</button>
+                </div>
+            </div>
+            <div class="col-lg-2 de-ticket-list-container order-1 order-md-2"></div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_read_new_site_access">
+        <div class="row">
+            <div class="col-lg-9 order-2 order-md-1">
+                <div class="de-portal-subtitle-box">
+                    <span class="de-portal-subicon de-ic-ticketing" />
+                    <span class="de-portal-subtitle">New Site Access Ticket</span>
+                </div>
+                <div class="de-portal-content-box de-relative-content-box">
+                    <div class="de-ticket-subject">
+                        <t t-esc="value['display_name']" />
+                    </div>
+                    <form action="/" method="POST" class="de-portal-form">
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Operation Site</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value" t-esc="value['x_studio_operation_site']" />
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Service ID</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value" t-esc="value['ns_service_id']" />
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Designated Company</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value" t-esc="value['ns_designated_company']" />
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Visit Type</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value" t-esc="value['ticket_type_id']" />
+                            </span>
+                        </div>
+
+
+                        <div class="de-form-box required mb-0 pb-0">
+                            <span class="de-form-label">Visit Date</span>
+                            <span class="de-form-input-box de-form-input-box-read d-flex">
+                                <span class="de-form-value" t-esc="value['ns_site_visit_date_start']" />
+                                <span class="de-form-value" t-esc="value['ns_site_visit_date_end']" />
+                            </span>
+                        </div>                       
+                        <div class="de-form-box-auto-height de-requested-service-date mt-0 pt-0" style="top: 0;">
+                            <span class="de-form-label"><span class="de-date-timezone">(UTC +00:00)</span></span>
+                        </div>
+
+                        <t t-if="value['ns_special_visit_area'] == 'yes'">
+                            <div class="de-form-box">
+                                <span class="de-form-label">
+                                    Special Visit Area <span style="color:red;">*</span>
+                                    <span
+                                        tabindex="0"
+                                        role="button"
+                                        class="fas fa-question-circle de-tooltips-popover ml-1"
+                                        data-toggle="popover"
+                                    />
+                                </span>
+                                <span class="de-form-input-box de-form-input-box-read">
+                                    <span class="de-form-value">Yes</span>
+                                </span>
+                            </div>
+                             
+                            <div class="de-form-box">
+                                <span class="de-form-label">Visit Area</span>
+                                <span class="de-form-input-box de-form-input-box-read">
+                                    <span class="de-form-value" t-esc="value['ns_special_visit_area_name']" />
+                                </span>
+                            </div>
+                        </t>
+                        <t t-else="">
+                            <div class="de-form-box">
+                                <span class="de-form-label">
+                                    Special Visit Area <span style="color:red;">*</span>
+                                    <span
+                                        tabindex="0"
+                                        role="button"
+                                        class="fas fa-question-circle de-tooltips-popover ml-1"
+                                        data-toggle="popover"
+                                    />
+                                </span>
+                                <span class="de-form-input-box de-form-input-box-read">
+                                    <span class="de-form-value">No</span>
+                                </span>
+                            </div>
+                        </t>
+
+                        <!-- <t t-set="visitor_index" t-value="0"/>
+                        <t t-foreach="value['x_studio_requested_visitor_array']" t-as="visitor">
+                            <t t-if="visitor_index == 0">                                                 
+                                <div class="de-form-box required">
+                                    <span class="de-form-label de-form-label-extra">Requested Visitor's Name</span>
+                                    <span class="de-form-input-box de-form-input-box-read">
+                                        <span class="de-form-value" t-esc="visitor" />
+                                    </span>
+                                </div>
+                            </t>
+                            <t t-else="">
+                                <div class="de-form-box">
+                                    <span class="de-form-label de-form-label-extra"></span>
+                                    <span class="de-form-input-box de-form-input-box-read">
+                                        <span class="de-form-value" t-esc="visitor" />
+                                    </span>
+                                </div>
+                            </t>
+                            <t t-set="visitor_index" t-value="visitor_index + 1"/>
+                        </t> -->
+
+                        <div class="de-form-box de-form-box-extra">
+                            <span class="de-form-label">Additional Remark</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value">
+                                    <textarea rows="4" class="de-form-input de-form-input-ticket-description" disabled="disabled">
+                                        <t t-raw="value['description']" />
+                                    </textarea>
+                                </span>
+                            </span>
+                        </div>
+                    </form>                    
+                    <t t-if="value['is_close']">
+                        <!-- <button class="de-btn-reset-new de-btn-full" t-att-data-ticket-id="value['id']">Re-open Ticket</button> -->
+                    </t>
+                    <t t-else="">
+                        <button class="de-btn-resolved de-btn-half-left" t-att-data-ticket-id="value['id']">Mark As Resolved</button>
+                        <button class="de-btn-edit de-btn-half-right" t-att-data-ticket-id="value['id']">Edit</button>
+                    </t>
+                </div>
+                <div class="de-ticket-log">
+                    <t t-call="nrs_de_portal.de_ticket_log" />
+                </div>
+            </div>
+            <div class="col-lg-3 de-ticket-list-container order-1 order-md-2"></div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_edit_new_site_access">
+        <div class="row">
+            <div class="col-lg-9 order-2 order-md-1">
+                <div class="de-portal-subtitle-box">
+                    <span class="de-portal-subicon de-ic-ticketing" />
+                    <span class="de-portal-subtitle">New Site Access Ticket</span>
+                </div>
+                <div class="de-portal-content-box de-relative-content-box">
+                    <form action="/" method="POST" class="de-portal-form">
+                        <input type="hidden" name="ticket_id" t-att-value="value['id']" />                                       
+                        <div class="de-ticket-subject">
+                            <span><t t-esc="value['display_name']" /> :</span>
+                            <input type="text" name="ns_ticket_subject" class="de-form-input de-ticket-subject-input" placeholder="Subject..." t-att-value="value['ns_ticket_subject']"/>
+                        </div>
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Operation Site</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <select name="x_studio_operation_site" class="de-form-select de-osite" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['operating_site']" t-as="o_site">
+                                        <t t-if="o_site['id'] == value['x_studio_operation_site']">
+                                            <option t-att-value="o_site['id']" selected="selected" t-att-data-timezone="o_site['timezone']">
+                                                <t t-esc="o_site['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="o_site['id']" t-att-data-timezone="o_site['timezone']">
+                                                <t t-esc="o_site['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Service ID</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <select name="ns_service_id" class="de-form-select de-service-id" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['service']" t-as="service">
+                                        <t t-if="service['id'] == value['ns_service_id']">
+                                            <option t-att-value="service['id']" selected="selected">
+                                                <t t-esc="service['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="service['id']">
+                                                <t t-esc="service['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Designated Company</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <select name="partner_id" class="de-form-select de-partner-id" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['partner']" t-as="p">
+                                        <t t-if="p['id'] == value['ns_designated_company']">
+                                            <option t-att-value="p['id']" selected="selected">
+                                                <t t-esc="p['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="p['id']">
+                                                <t t-esc="p['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Visit Type</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <select name="ticket_type_id" class="de-form-select" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['ticket_type']" t-as="t_type">
+                                        <t t-if="t_type['id'] == value['ticket_type_id']">
+                                            <option t-att-value="t_type['id']" selected="selected">
+                                                <t t-esc="t_type['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="t_type['id']">
+                                                <t t-esc="t_type['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required mb-0 pb-0">
+                            <span class="de-form-label">Visit Date</span>
+                            <span class="de-form-input-box de-form-input-box-edit d-flex">
+                                <input type="text" name="ns_site_visit_date_start" t-att-value="value['ns_site_visit_date_start']" class="de-form-input datetimepicker-input de-visit-date" id="visitdate" data-toggle="datetimepicker" data-target="#visitdate" placeholder="Start date ..." />
+                                <input type="text" name="ns_site_visit_date_end" t-att-value="value['ns_site_visit_date_end']" class="de-form-input datetimepicker-input de-visit-date-end" id="visitdateend" data-toggle="datetimepicker" data-target="#visitdateend" placeholder="End date ..." />
+                            </span>
+                        </div>                                              
+                        <div class="de-form-box-auto-height mt-0 pt-0" style="top: 0;">
+                            <span class="de-form-label"><span class="de-date-timezone">(UTC +00:00)</span></span>
+                        </div>
+
+                        <div class="de-form-box">
+                            <span class="de-form-label">
+                                Special Visit Area <span style="color:red;">*</span>
+                                <span
+                                    tabindex="0"
+                                    role="button"
+                                    class="fas fa-question-circle de-tooltips-popover ml-1"
+                                    data-toggle="popover"
+                                />
+                            </span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <select name="ns_special_visit_area" class="de-form-select de-special-visit-area">
+                                    <t t-if="value['ns_special_visit_area'] == 'yes'">                                        
+                                        <option value="yes" selected="selected">Yes</option>
+                                        <option value="no">No</option>
+                                    </t>
+                                    <t t-else="">                                        
+                                        <option value="yes">Yes</option>
+                                        <option value="no" selected="selected">No</option>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box de-visit-area-name-box required" style="display: none;">
+                            <span class="de-form-label">Visit Area</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <input type="text" name="ns_special_visit_area_name" t-att-value="value['ns_special_visit_area_name']" placeholder="Text input ..." class="de-form-input de-visit-area-name" />
+                            </span>
+                        </div>
+
+                        <!-- <t t-set="visitor_index" t-value="0"/>
+                        <t t-set="visitor_length" t-value="value['x_studio_requested_visitor_array_length']"/>
+                        <t t-foreach="value['x_studio_requested_visitor_array']" t-as="visitor">
+                            <t t-if="visitor_index == 0">                                                 
+                                <div class="de-form-box de-form-box-visitor required">
+                                    <span class="de-form-label">Requested Visitor's Name</span>
+                                    <span class="de-form-input-box de-form-input-box-edit de-form-input-box-visitor d-flex">
+                                        <input type="text" name="x_studio_requested_visitor" required="required" placeholder="Text input ..." class="de-form-input de-form-input-visitor" t-att-value="visitor" />
+                                        <t t-if="visitor_length &gt; 1">                                        
+                                            <button class="btn btn-default d-flex align-items-center remove-visitor-btn"><span class="fa fa-close"/></button>
+                                        </t>
+                                        <t t-else="">  
+                                            <button class="btn btn-default d-flex align-items-center add-visitor-btn"><span class="fa fa-plus"/></button>
+                                        </t>
+                                    </span>
+                                </div>
+                            </t>
+                            <t t-elif="visitor_index &lt; visitor_length - 1">
+                                <div class="de-form-box de-form-box-visitor">
+                                    <span class="de-form-label"></span>
+                                    <span class="de-form-input-box de-form-input-box-edit de-form-input-box-visitor d-flex">
+                                        <input type="text" name="x_studio_requested_visitor" required="required" placeholder="Text input ..." class="de-form-input de-form-input-visitor" t-att-value="visitor" />
+                                        <button class="btn btn-default d-flex align-items-center remove-visitor-btn"><span class="fa fa-close"/></button>
+                                    </span>
+                                </div>
+                            </t>
+                            <t t-else="">                                
+                                <div class="de-form-box de-form-box-visitor">
+                                    <span class="de-form-label"></span>
+                                    <span class="de-form-input-box de-form-input-box-edit de-form-input-box-visitor d-flex">
+                                        <input type="text" name="x_studio_requested_visitor" required="required" placeholder="Text input ..." class="de-form-input de-form-input-visitor" t-att-value="visitor" />
+                                        <t t-if="visitor_length &lt; 5">                                        
+                                            <button class="btn btn-default d-flex align-items-center add-visitor-btn"><span class="fa fa-plus"/></button>
+                                        </t>
+                                        <t t-else="">                                        
+                                            <button class="btn btn-default d-flex align-items-center remove-visitor-btn"><span class="fa fa-close"/></button>
+                                        </t>
+                                    </span>
+                                </div>
+                            </t>
+                            <t t-set="visitor_index" t-value="visitor_index + 1"/>
+                        </t> -->
+
+                        <!-- <div class="de-form-box required required">
+                            <span class="de-form-label">Requested Visitor Identification Number</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <input type="text" name="x_studio_requested_visitor_identification_number" required="required" placeholder="Text input ..." class="de-form-input" t-att-value="value['x_studio_requested_visitor_identification_number']" />
+                            </span>
+                        </div> -->
+
+                        <!-- <div class="de-form-box de-form-box-edit required">
+                            <span class="de-form-label">Visit Area</span>
+                            <span class="de-form-input-box de-form-input-box-edit de-trigger-area de-trigger-selector" data-trigger-selector=".de-select-area">
+                                <input type="text" placeholder="Select ..." class="de-form-input de-chip-input de-hide" />
+                                <t t-foreach="value['visit_area']" t-as="area">
+                                    <span class="de-chip" t-att-data-value-id="area.id">
+                                        <span t-esc="area.name" />
+                                        <span class="de-chip-delete de-ic-eraser" />
+                                    </span>
+                                </t>
+                            </span>
+                            <div class="de-selector-container de-select-area de-hide">
+                                <div class="de-selector-box">
+                                    <t t-foreach="data['areas']" t-as="area">
+                                        <t t-if="area['selected']">
+                                            <div class="de-selector-item de-chip-selector-item de-hide" data-trigger-selector=".de-trigger-area" t-att-data-value-id="area['id']">
+                                                <t t-esc="area['name']" />
+                                            </div>
+                                        </t>
+                                        <t t-else="">
+                                            <div class="de-selector-item de-chip-selector-item" data-trigger-selector=".de-trigger-area" t-att-data-value-id="area['id']">
+                                                <t t-esc="area['name']" />
+                                            </div>
+                                        </t>
+                                    </t>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="de-form-box de-form-box-extra">
+                            <span class="de-form-label">Additional Remark</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <textarea rows="4" name="description" required="required" placeholder="Text input ..." class="de-form-input de-form-input-ticket-description">
+                                    <t t-raw="value['description']" />
+                                </textarea>
+                            </span>
+                        </div>
+                    </form>
+                    <ul class="nav nav-tabs mt-3" id="site-accesFormTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="site-acces-detail-tab" data-toggle="tab" href="#site-acces-detail" role="tab" aria-controls="site-acces-detail" aria-selected="true">Site Acces Detail</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="site-accesFormTabContent">
+                        <div class="tab-pane fade show active p-3 " id="site-acces-detail" role="tabpanel" aria-labelledby="site-acces-detail-tab"> 
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Visitor Name</th>
+                                            <th scope="col">Visitor Identification Number</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="site-acces-detail-table-body">
+                                        <t t-foreach="value['ns_site_access_detail_ids']" t-as="access_detail">                     
+                                            <tr class="site-acces-detail-table-row de-form-box-visitor" t-att-data-site-acces-detail-id="access_detail['detail_id']">
+                                                <td><input type="text" name="ns_site_access_detail_visitor_name" t-att-value="access_detail['detail_data']['ns_site_access_detail_visitor_name']" 
+                                                    class="de-form-table-input de-form-input-visitor detail-visitor-name" placeholder="Text Input..." data-toggle="popover" data-trigger="focus"/></td>
+                                                <td><input type="text" name="ns_site_access_detail_visitor_id_number" t-att-value="access_detail['detail_data']['ns_site_access_detail_visitor_id_number']" class="de-form-table-input detail-visitor-id-number" placeholder="Text Input..."/></td>
+                                                <td class="table-tool"><button class="btn btn-sm btn-danger de-remove-table-line" data-table-name="site-acces-detail"><span class="fas fa-times"/></button></td>
+                                            </tr>
+                                        </t>                        
+                                        <tr class="site-acces-detail-table-add-line">
+                                            <td colspan="5">
+                                                <span class="de-table-add-line" data-table-name="site-acces-detail">
+                                                    <span class="fas fa-plus"/> add line ...
+                                                </span>
+                                            </td>                                        
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>                            
+                        </div>
+                    </div>
+                    <button class="de-btn-resolved de-three-btn-left" t-att-data-ticket-id="value['id']">Mark As Resolved</button>
+                    <button class="de-btn-cancel de-three-btn-center" t-att-data-ticket-id="value['id']">Cancel Changes</button>
+                    <button class="de-btn-save de-three-btn-right">Save</button>
+                </div>
+                <div class="de-ticket-log">
+                    <t t-call="nrs_de_portal.de_ticket_log" />
+                </div>
+            </div>
+            <div class="col-lg-3 de-ticket-list-container order-1 order-md-2"></div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_new_shipment">
+        <div class="row">
+            <div class="col-lg-10 order-2 order-md-1">
+                <div class="de-portal-subtitle-box">
+                    <span class="de-portal-subicon de-ic-ticketing" />
+                    <span class="de-portal-subtitle">New Shipment Ticket</span>
+                </div>
+                <div class="de-portal-content-box de-relative-content-box">
+                    <form action="/" method="POST" class="de-portal-form">                                                                   
+                        <div class="de-ticket-subject">
+                            <span>Shipment :</span>
+                            <input type="text" name="ns_ticket_subject" class="de-form-input de-ticket-subject-input" placeholder="Subject..."/>
+                        </div>
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Operation Site</span>
+                            <span class="de-form-input-box">
+                                <select name="x_studio_operation_site" class="de-form-select de-osite" data-team-name="Shipment" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['operating_site']" t-as="o_site">
+                                        <t t-if="o_site['id'] == value['x_studio_operation_site']">
+                                            <option t-att-value="o_site['id']" selected="selected" t-att-data-timezone="o_site['timezone']">
+                                                <t t-esc="o_site['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="o_site['id']" t-att-data-timezone="o_site['timezone']">
+                                                <t t-esc="o_site['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Service ID</span>
+                            <span class="de-form-input-box">
+                                <select name="ns_service_id" class="de-form-select de-service-id" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['service']" t-as="service">
+                                        <t t-if="service['id'] == value['ns_service_id']">
+                                            <option t-att-value="service['id']" selected="selected">
+                                                <t t-esc="service['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="service['id']">
+                                                <t t-esc="service['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Designated Company</span>
+                            <span class="de-form-input-box">
+                                <select name="partner_id" class="de-form-select de-partner-id" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['partner']" t-as="p">
+                                        <t t-if="p['id'] == value['partner_id']">
+                                            <option t-att-value="p['id']" selected="selected">
+                                                <t t-esc="p['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="p['id']">
+                                                <t t-esc="p['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Shipping Type</span>
+                            <span class="de-form-input-box">
+                                <select name="ticket_type_id" class="de-form-select de-ticket-type-id" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['ticket_type']" t-as="t_type">
+                                        <option t-att-value="t_type['id']">
+                                            <t t-esc="t_type['name']" />
+                                        </option>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box">
+                            <span class="de-form-label">
+                                Require Loading Dock?
+                                <span
+                                    tabindex="0"
+                                    role="button"
+                                    class="fas fa-question-circle de-tooltips-popover ml-1"
+                                    data-toggle="popover"
+                                />
+                            </span>
+                            <span class="de-form-input-box">
+                                <select name="ns_require_loading_dock" class="de-form-select de-require-loading-dock">
+                                    <option value="yes">Yes</option>
+                                    <option value="no" selected="selected">No</option>
+                                </select>
+                            </span>
+                        </div>
+                        <input type="checkbox" name="x_studio_loading_dock_required" class="de-form-checkbox de-loading-dock" style="display: none;"/>
+
+                        <!-- <div class="de-form-box required">
+                            <span class="de-form-label">Number of Shipment</span>
+                            <span class="de-form-input-box">
+                                <input type="number" name="x_studio_number_of_shipment" required="required" placeholder="Text input ..." class="de-form-input de-number-of-shipment" />
+                            </span>
+                        </div> -->
+
+                        <div class="de-form-box required de-expected-date">
+                            <span class="de-form-label">Shipment Date</span>
+                            <span class="de-form-input-box">
+                                <input type="text" name="x_studio_shipment_date" class="de-form-input datetimepicker-input de-expected-date" id="expecteddate" data-toggle="datetimepicker" data-target="#expecteddate" placeholder="Text input ..." />
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required de-shipment-date-range mb-0 pb-0" style="display: none;">
+                            <span class="de-form-label">Shipment Date</span>
+                            <span class="de-form-input-box d-flex">
+                                <input type="text" name="ns_shipment_date_start" class="de-form-input datetimepicker-input de-shipment-date" id="shipmentdate" data-toggle="datetimepicker" data-target="#shipmentdate" placeholder="Date input ..." />
+                                <input type="text" name="ns_shipment_date_end" class="de-form-input datetimepicker-input de-shipment-date-end" id="shipmentdateend" data-toggle="datetimepicker" data-target="#shipmentdateend" placeholder="Date input ..." />
+                            </span>
+                        </div>                        
+                        <div class="de-form-box-auto-height de-shipment-date-range mt-0 pt-0" style="display: none; top: 0;">
+                            <span class="de-form-label"><span class="de-date-timezone">(UTC +00:00)</span></span>
+                        </div>
+
+                        <!-- <div class="de-form-box required">
+                            <span class="de-form-label de-form-label-extra">Shipment Tracking Number</span>
+                            <span class="de-form-input-box">
+                                <input type="text" name="x_studio_shipment_tracking_number" required="required" placeholder="Text input ..." class="de-form-input" />
+                            </span>
+                        </div> -->
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label de-form-label-extra">Courier Company</span>
+                            <span class="de-form-input-box">
+                                <input type="text" name="ns_courier_company" required="required" placeholder="Text input ..." class="de-form-input" />
+                            </span>
+                        </div>
+                        
+                        <div class="de-form-box required mb-0 de-form-box-handling-instruction" style="display: none;">
+                            <span class="de-form-label">Handling Instruction</span>
+                            <span class="de-form-input-box">
+                                <select name="ns_handling_instruction" class="de-form-select de-handling-instruction">
+                                    <option value="service_area" selected="selected">Leave items in my service area</option>
+                                    <option value="temporary_storage">Leave items in temporary storage</option>
+                                </select>
+                            </span>
+                        </div>
+                        <div class="de-form-box-auto-height text-center de-form-box-handling-instruction" style="display: none;">
+                            <div class="handling-instruction-text">
+                                <span id="de-handling-instruction-service-area">(Please make sure these items can fit into your service area; otherwise, special handling charges may apply or your items can be returned to sender at your expenses.)</span>
+                            </div>
+                        </div>
+
+
+                        <div class="de-form-box de-form-box-extra">
+                            <span class="de-form-label">Additional Remark</span>
+                            <span class="de-form-input-box">
+                                <textarea rows="4" name="description" required="required" placeholder="Text input ..." class="de-form-input"></textarea>
+                            </span>
+                        </div>
+
+                    </form> 
+
+                    <ul class="nav nav-tabs mt-3" id="shipmentFormTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="shipment-detail-tab" data-toggle="tab" href="#shipment-detail" role="tab" aria-controls="shipment-detail" aria-selected="true">Shipment Detail</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="shipmentFormTabContent">
+                        <div class="tab-pane fade show active p-3 " id="shipment-detail" role="tabpanel" aria-labelledby="shipment-detail-tab"> 
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Item number</th>
+                                            <th scope="col">Shipment Dimension</th>
+                                            <th scope="col">Shipment Weight</th>
+                                            <th scope="col">Shipment Weight Uom</th>
+                                            <th scope="col">Shipment Tracking Number</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="shipment-detail-table-body">
+                                        <tr class="shipment-detail-table-row" data-shipment-detail-id="new">
+                                            <td><input type="number" name="ns_shipment_detail_item_number" class="de-form-table-input detail-item-number" placeholder="Number Input..."/></td>
+                                            <td><input type="text" name="ns_shipment_detail_dimension" class="de-form-table-input detail-dimension" placeholder="Text Input..."/></td>
+                                            <td><input type="number" name="ns_shipment_detail_weight" class="de-form-table-input detail-weight" placeholder="Number Input..."/></td>
+                                            <td>
+                                                <select name="ns_uom" id="new0" class="de-form-select custom-select detail-weight-id" required="required" style="width: 150px">
+                                                    <option value="">Select ...</option>
+                                                    <t t-foreach="data['uom']" t-as="service">
+                                                        <option t-att-value="service['id']">
+                                                                <t t-esc="service['name']" />
+                                                        </option> 
+                                                    </t>
+                                                </select>
+                                            </td>
+                                            <td><input type="text" name="ns_shipment_detail_tracking_number" class="de-form-table-input detail-tracking-number" placeholder="Text Input..."/></td>
+                                            <td class="table-tool"><button class="btn btn-sm btn-danger de-remove-table-line" data-table-name="shipment-detail"><span class="fas fa-times"/></button></td>
+                                        </tr>                        
+                                        <tr class="shipment-detail-table-add-line">
+                                            <td colspan="5">
+                                                <span class="de-table-add-line" data-table-name="shipment-detail">
+                                                    <span class="fas fa-plus"/> add line ...
+                                                </span>
+                                            </td>                                        
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>                            
+                        </div>
+                    </div>
+
+                    <button type="submit" class="de-btn-save de-btn-full">Submit</button>
+                </div>
+            </div>
+            <div class="col-lg-2 de-ticket-list-container order-1 order-md-2"></div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_read_new_shipment">
+        <div class="row">
+            <div class="col-lg-9 order-2 order-md-1">
+                <div class="de-portal-subtitle-box">
+                    <span class="de-portal-subicon de-ic-ticketing" />
+                    <span class="de-portal-subtitle">New Shipment Ticket</span>
+                </div>
+                <div class="de-portal-content-box de-relative-content-box">
+                    <div class="de-ticket-subject">
+                        <t t-esc="value['display_name']" />
+                    </div>
+                    <form action="/" method="POST" class="de-portal-form">
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Operation Site</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value" t-esc="value['x_studio_operation_site']" />
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Service ID</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value" t-esc="value['ns_service_id']" />
+                            </span>
+                        </div>
+                        
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Designated Company</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value" t-esc="value['ns_designated_company']" />
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Shipping Type</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value" t-esc="value['ticket_type_id']" />
+                            </span>
+                        </div>
+
+
+                        <div class="de-form-box">
+                            <span class="de-form-label">
+                                Require Loading Dock?
+                                <span
+                                    tabindex="0"
+                                    role="button"
+                                    class="fas fa-question-circle de-tooltips-popover ml-1"
+                                    data-toggle="popover"
+                                />
+                            </span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <t t-if="value['x_studio_loading_dock_required']">
+                                    <!-- <input type="checkbox" disabled="disabled" checked="checked" class="de-form-checkbox" /> -->
+                                    <span class="de-form-value">Yes</span>
+                                </t>
+                                <t t-else="">
+                                    <!-- <input type="checkbox" disabled="disabled" class="de-form-checkbox" /> -->
+                                    <span class="de-form-value">No</span>
+                                </t>
+                            </span>
+                        </div>
+
+                        <!-- <div class="de-form-box required">
+                            <span class="de-form-label">Number of Shipment</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value" t-esc="value['x_studio_number_of_shipment']" />
+                            </span>
+                        </div> -->
+                    
+                        <t t-if="value['x_studio_loading_dock_required']">
+                            <div class="de-form-box required mb-0 pb-0">
+                                <span class="de-form-label">Shipment Date</span>
+                                <span class="de-form-input-box de-form-input-box-read d-flex">
+                                        <span class="de-form-value" t-esc="value['ns_shipment_date_start']" />
+                                        <span class="de-form-value" t-esc="value['ns_shipment_date_end']" />
+                                </span>
+                            </div>                        
+                            <div class="de-form-box-auto-height de-requested-service-date mt-0 pt-0" style="top: 0;">
+                                <span class="de-form-label"><span class="de-date-timezone">(UTC +00:00)</span></span>
+                            </div>
+                        </t>
+                        <t t-else="">
+                            <div class="de-form-box required">
+                                <span class="de-form-label">Shipment Date</span>
+                                <span class="de-form-input-box de-form-input-box-read d-flex">
+                                    <span class="de-form-value" t-esc="value['x_studio_shipment_date']" />
+                                </span>
+                            </div>
+                        </t>
+                        
+
+
+                        <!-- <div class="de-form-box required">
+                            <span class="de-form-label de-form-label-extra">Shipment Tracking Number</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value" t-esc="value['x_studio_shipment_tracking_number']" />
+                            </span>
+                        </div> -->
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label de-form-label-extra">Courier Company</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value" t-esc="value['ns_courier_company']" />
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required mb-0 de-form-box-handling-instruction" style="display: none;">
+                            <span class="de-form-label">Handling Instruction</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <t t-if="value['ns_handling_instruction'] == 'service_area'">
+                                    <span class="de-form-value" >Leave items in my service area</span>
+                                </t>
+                                <t t-else="value['ns_handling_instruction'] == 'temporary_storage'">
+                                    <span class="de-form-value" >Leave items in temporary storage</span>
+                                </t>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box-auto-height text-center de-form-box-handling-instruction" style="display: none;">
+                            <div class="handling-instruction-text">
+                                <t t-if="value['ns_handling_instruction'] == 'service_area'">
+                                    <span id="de-handling-instruction-service-area">(Please make sure these items can fit into your service area; otherwise, special handling charges may apply or your items can be returned to sender at your expenses.)</span>
+                                </t>
+                                <t t-else="value['ns_handling_instruction'] == 'temporary_storage'">
+                                    <span id="de-handling-instruction-temporary-storage">(Please confirm with operations for availability and maximum free storage days.  Your items can be returned to sender at your expenses or storage fees can apply.)</span>
+                                </t>
+                            </div>
+                        </div>
+
+                        <div class="de-form-box de-form-box-extra">
+                            <span class="de-form-label">Additional Remark</span>
+                            <span class="de-form-input-box de-form-input-box-read">
+                                <span class="de-form-value">
+                                    <textarea rows="4" class="de-form-input de-form-input-ticket-description" disabled="disabled">
+                                        <t t-raw="value['description']" />
+                                    </textarea>
+                                </span>
+                            </span>
+                        </div>
+                    </form>
+                    <ul class="nav nav-tabs mt-3" id="shipmentFormTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="shipment-detail-tab" data-toggle="tab" href="#shipment-detail" role="tab" aria-controls="shipment-detail" aria-selected="true">Shipment Detail</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="shipmentFormTabContent">
+                        <div class="tab-pane fade show active p-3 " id="shipment-detail" role="tabpanel" aria-labelledby="shipment-detail-tab"> 
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Item number</th>
+                                            <th scope="col">Shipment Dimension</th>
+                                            <th scope="col">Shipment Weight</th>
+                                            <th scope="col">Shipment Weight UOM</th>
+                                            <th scope="col">Shipment Tracking Number</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="value['ns_shipment_detail_ids']" t-as="shiping_detail">                                            
+                                            <tr>
+                                                <td><span t-esc="shiping_detail['detail_data']['ns_shipment_detail_item_number']"/></td>
+                                                <td><span t-esc="shiping_detail['detail_data']['ns_shipment_detail_dimension']"/></td>
+                                                <td><span t-esc="shiping_detail['detail_data']['ns_shipment_detail_weight']"/></td>
+                                                <td><span t-esc="shiping_detail['detail_data']['ns_uom']"/></td>
+                                                <td><span t-esc="shiping_detail['detail_data']['ns_shipment_detail_tracking_number']"/></td>
+                                            </tr> 
+                                        </t>  
+                                    </tbody>
+                                </table>
+                            </div>                            
+                        </div>
+                    </div>
+                    <t t-if="value['is_close']">
+                        <!-- <button class="de-btn-reset-new de-btn-full" t-att-data-ticket-id="value['id']">Re-open Ticket</button> -->
+                    </t>
+                    <t t-else="">
+                        <button class="de-btn-resolved de-btn-half-left" t-att-data-ticket-id="value['id']">Mark As Resolved</button>
+                        <button class="de-btn-edit de-btn-half-right" t-att-data-ticket-id="value['id']">Edit</button>
+                    </t>
+                </div>
+                <div class="de-ticket-log">
+                    <t t-call="nrs_de_portal.de_ticket_log" />
+                </div>
+            </div>
+            <div class="col-lg-3 de-ticket-list-container order-1 order-md-2"></div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_edit_new_shipment">
+        <div class="row">
+            <div class="col-lg-9 order-2 order-md-1">
+                <div class="de-portal-subtitle-box">
+                    <span class="de-portal-subicon de-ic-ticketing" />
+                    <span class="de-portal-subtitle">New Shipment Ticket</span>
+                </div>
+                <div class="de-portal-content-box de-relative-content-box">
+                    <form action="/" method="POST" class="de-portal-form">
+                        <input type="hidden" name="ticket_id" t-att-value="value['id']" />                                                               
+                        <div class="de-ticket-subject">
+                            <span><t t-esc="value['display_name']" /> :</span>
+                            <input type="text" name="ns_ticket_subject" class="de-form-input de-ticket-subject-input" placeholder="Subject..." t-att-value="value['ns_ticket_subject']"/>
+                        </div>
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Operation Site</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <select name="x_studio_operation_site" class="de-form-select de-osite" data-team-name="Shipment" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['operating_site']" t-as="o_site">
+                                        <t t-if="o_site['id'] == value['x_studio_operation_site']">
+                                            <option t-att-value="o_site['id']" selected="selected" t-att-data-timezone="o_site['timezone']">
+                                                <t t-esc="o_site['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="o_site['id']" t-att-data-timezone="o_site['timezone']">
+                                                <t t-esc="o_site['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Service ID</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <select name="ns_service_id" class="de-form-select de-service-id" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['service']" t-as="service">
+                                        <t t-if="service['id'] == value['ns_service_id']">
+                                            <option t-att-value="service['id']" selected="selected">
+                                                <t t-esc="service['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="service['id']">
+                                                <t t-esc="service['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Designated Company</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <select name="partner_id" class="de-form-select de-partner-id" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['partner']" t-as="p">
+                                        <t t-if="p['id'] == value['ns_designated_company']">
+                                            <option t-att-value="p['id']" selected="selected">
+                                                <t t-esc="p['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="p['id']">
+                                                <t t-esc="p['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label">Shipping Type</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <select name="ticket_type_id" class="de-form-select de-ticket-type-id" required="required">
+                                    <option value="">Select ...</option>
+                                    <t t-foreach="data['ticket_type']" t-as="t_type">
+                                        <t t-if="t_type['id'] == value['ticket_type_id']">
+                                            <option t-att-value="t_type['id']" selected="selected">
+                                                <t t-esc="t_type['name']" />
+                                            </option>
+                                        </t>
+                                        <t t-else="">
+                                            <option t-att-value="t_type['id']">
+                                                <t t-esc="t_type['name']" />
+                                            </option>
+                                        </t>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box">
+                            <span class="de-form-label">
+                                Require Loading Dock?
+                                <span
+                                    tabindex="0"
+                                    role="button"
+                                    class="fas fa-question-circle de-tooltips-popover ml-1"
+                                    data-toggle="popover"
+                                />
+                            </span>
+                            <span class="de-form-input-box">
+                                <select name="ns_require_loading_dock" class="de-form-select de-require-loading-dock">
+                                    <t t-if="value['x_studio_loading_dock_required']">
+                                        <option value="yes" selected="selected" >Yes</option>
+                                        <option value="no" >No</option>
+                                    </t>
+                                    <t t-else="">                       
+                                        <option value="yes">Yes</option>
+                                        <option value="no" selected="selected">No</option>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+                        <t t-if="value['x_studio_loading_dock_required']">                        
+                            <input type="checkbox" name="x_studio_loading_dock_required" checked="checked" class="de-form-checkbox de-loading-dock" style="display: none;"/>  
+                        </t>
+                        <t t-else="">                       
+                            <input type="checkbox" name="x_studio_loading_dock_required" class="de-form-checkbox de-loading-dock" style="display: none;"/>  
+                        </t>
+
+                        <!-- <div class="de-form-box required">
+                            <span class="de-form-label">Number of Shipment</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <input type="number" name="x_studio_number_of_shipment" t-att-value="value['x_studio_number_of_shipment']" required="required" placeholder="Text input ..." class="de-form-input de-number-of-shipment" />
+                            </span>
+                        </div> -->
+
+                        <t t-if="value['x_studio_loading_dock_required']">                     
+                            <div class="de-form-box required de-expected-date" style="display: none;">
+                                <span class="de-form-label">Shipment Date</span>
+                                <span class="de-form-input-box">
+                                    <input type="text" name="x_studio_shipment_date" t-att-value="value['x_studio_shipment_date']" class="de-form-input datetimepicker-input de-expected-date" id="expecteddate" data-toggle="datetimepicker" data-target="#expecteddate" placeholder="Text input ..." />
+                                </span>
+                            </div>
+                            <div class="de-form-box required de-shipment-date-range mb-0 pb-0" >
+                                <span class="de-form-label">Shipment Date</span>
+                                <span class="de-form-input-box d-flex">
+                                    <input type="text" name="ns_shipment_date_start" t-att-value="value['ns_shipment_date_start']" class="de-form-input datetimepicker-input de-shipment-date" id="shipmentdate" data-toggle="datetimepicker" data-target="#shipmentdate" placeholder="Date input ..." />
+                                    <input type="text" name="ns_shipment_date_end" t-att-value="value['ns_shipment_date_end']" class="de-form-input datetimepicker-input de-shipment-date-end" id="shipmentdateend" data-toggle="datetimepicker" data-target="#shipmentdateend" placeholder="Date input ..." />
+                                </span>
+                            </div>                                                    
+                            <div class="de-form-box-auto-height de-shipment-date-range mt-0 pt-0" style="top: 0;">
+                                <span class="de-form-label"><span class="de-date-timezone">(UTC +00:00)</span></span>
+                            </div>
+                        </t>
+                        <t t-else="">                  
+                            <div class="de-form-box required de-expected-date">
+                                <span class="de-form-label">Shipment Date</span>
+                                <span class="de-form-input-box">
+                                    <input type="text" name="x_studio_shipment_date" t-att-value="value['x_studio_shipment_date']" class="de-form-input datetimepicker-input de-expected-date" id="expecteddate" data-toggle="datetimepicker" data-target="#expecteddate" placeholder="Text input ..." />
+                                </span>
+                            </div>
+                            <div class="de-form-box required de-shipment-date-range mb-0 pb-0" style="display: none;">
+                                <span class="de-form-label">Shipment Date</span>
+                                <span class="de-form-input-box d-flex">
+                                    <input type="text" name="ns_shipment_date_start" t-att-value="value['ns_shipment_date_start']" class="de-form-input datetimepicker-input de-shipment-date" id="shipmentdate" data-toggle="datetimepicker" data-target="#shipmentdate" placeholder="Date input ..." />
+                                    <input type="text" name="ns_shipment_date_end" t-att-value="value['ns_shipment_date_end']" class="de-form-input datetimepicker-input de-shipment-date-end" id="shipmentdateend" data-toggle="datetimepicker" data-target="#shipmentdateend" placeholder="Date input ..." />
+                                </span>
+                            </div>                                                    
+                            <div class="de-form-box-auto-height de-shipment-date-range mt-0 pt-0" style="top: 0; display: none;">
+                                <span class="de-form-label"><span class="de-date-timezone">(UTC +00:00)</span></span>
+                            </div>
+                        </t>
+
+                        <!-- <div class="de-form-box required">
+                            <span class="de-form-label de-form-label-extra">Shipment Tracking Number</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <input type="text" name="x_studio_shipment_tracking_number" t-att-value="value['x_studio_shipment_tracking_number']" required="required" placeholder="Text input ..." class="de-form-input" />
+                            </span>
+                        </div> -->
+
+                        <div class="de-form-box required">
+                            <span class="de-form-label de-form-label-extra">Courier Company</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <input type="text" name="ns_courier_company" t-att-value="value['ns_courier_company']" placeholder="Text input ..." class="de-form-input" />
+                            </span>
+                        </div>
+
+                        <div class="de-form-box required mb-0 de-form-box-handling-instruction" style="display: none;">
+                            <span class="de-form-label">Handling Instruction</span>
+                            <span class="de-form-input-box">
+                                <select name="ns_handling_instruction" class="de-form-select de-handling-instruction">
+                                    <t t-if="value['ns_handling_instruction'] == 'service_area'">                                     
+                                        <option value="service_area" selected="selected">Leave items in my service area</option>
+                                        <option value="temporary_storage">Leave items in temporary storage</option>
+                                    </t>
+                                    <t t-else="value['ns_handling_instruction'] == 'temporary_storage'">                                    
+                                        <option value="service_area">Leave items in my service area</option>
+                                        <option value="temporary_storage" selected="selected">Leave items in temporary storage</option>
+                                    </t>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="de-form-box-auto-height text-center de-form-box-handling-instruction" style="display: none;">
+                            <div class="handling-instruction-text">
+                                <t t-if="value['ns_handling_instruction'] == 'service_area'">
+                                    <span id="de-handling-instruction-service-area">(Please make sure these items can fit into your service area; otherwise, special handling charges may apply or your items can be returned to sender at your expenses.)</span>
+                                </t>
+                                <t t-else="value['ns_handling_instruction'] == 'temporary_storage'">
+                                    <span id="de-handling-instruction-temporary-storage">(Please confirm with operations for availability and maximum free storage days.  Your items can be returned to sender at your expenses or storage fees can apply.)</span>
+                                </t>
+                            </div>
+                        </div>
+
+                        <div class="de-form-box de-form-box-extra">
+                            <span class="de-form-label">Additional Remark</span>
+                            <span class="de-form-input-box de-form-input-box-edit">
+                                <textarea rows="4" name="description" required="required" placeholder="Text input ..." class="de-form-input de-form-input-ticket-description">
+                                    <t t-raw="value['description']" />
+                                </textarea>
+                            </span>
+                        </div>
+                    </form>                    
+                    <ul class="nav nav-tabs mt-3" id="shipmentFormTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="shipment-detail-tab" data-toggle="tab" href="#shipment-detail" role="tab" aria-controls="shipment-detail" aria-selected="true">Shipment Detail</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="shipmentFormTabContent">
+                        <div class="tab-pane fade show active p-3 " id="shipment-detail" role="tabpanel" aria-labelledby="shipment-detail-tab"> 
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Item number</th>
+                                            <th scope="col">Shipment Dimension</th>
+                                            <th scope="col">Shipment Weight</th>
+                                            <th scope="col">Shipment Weight UOM</th>
+                                            <th scope="col">Shipment Tracking Number</th>
+                                            <th scope="col"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="shipment-detail-table-body">
+                                        <t t-foreach="value['ns_shipment_detail_ids']" t-as="shiping_detail">                                                
+                                            <tr class="shipment-detail-table-row" t-att-data-shipment-detail-id="shiping_detail['detail_id']">
+                                                <td><input type="number" name="ns_shipment_detail_item_number" t-att-value="shiping_detail['detail_data']['ns_shipment_detail_item_number']" class="de-form-table-input detail-item-number" placeholder="Number Input..."/></td>
+                                                <td><input type="text  " name="ns_shipment_detail_dimension" t-att-value="shiping_detail['detail_data']['ns_shipment_detail_dimension']" class="de-form-table-input detail-dimension" placeholder="Text Input..."/></td>
+                                                <td><input type="number" name="ns_shipment_detail_weight" t-att-value="shiping_detail['detail_data']['ns_shipment_detail_weight']" class="de-form-table-input detail-weight" placeholder="Number Input..."/></td>
+                                                <td> 
+                                                    <select name="ns_uom" t-att-id="shiping_detail['detail_id']" class="de-form-select custom-select detail-weight-id" required="required" style="width: 150px">
+                                                        <option value="">Select ...</option>
+                                                        <t t-foreach="data['uom']" t-as="service">
+                                                            <t t-if="service['id'] == shiping_detail['detail_data']['ns_uom']">
+                                                                <option t-att-value="service['id']" selected="selected">
+                                                                    <t t-esc="service['name']" />
+                                                                </option> 
+                                                            </t>
+                                                            <t t-else="">
+                                                                <option t-att-value="service['id']">
+                                                                    <t t-esc="service['name']" />
+                                                                </option> 
+                                                            </t>
+                                                        </t>
+                                                    </select> 
+                                                </td>   
+                                                <td><input type="text" name="ns_shipment_detail_tracking_number" t-att-value="shiping_detail['detail_data']['ns_shipment_detail_tracking_number']" class="de-form-table-input detail-tracking-number" placeholder="Text Input..."/></td>
+                                                <td class="table-tool"><button class="btn btn-sm btn-danger de-remove-table-line" data-table-name="shipment-detail"><span class="fas fa-times"/></button></td>
+                                        
+                                            </tr>   
+                                        </t>                     
+                                        <tr class="shipment-detail-table-add-line">
+                                            <td colspan="5">
+                                                <span class="de-table-add-line" data-table-name="shipment-detail">
+                                                    <span class="fas fa-plus"/> add line ...
+                                                </span>
+                                            </td>                                        
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>                            
+                        </div>
+                    </div>
+                    <button class="de-btn-resolved de-three-btn-left" t-att-data-ticket-id="value['id']">Mark As Resolved</button>
+                    <button class="de-btn-cancel de-three-btn-center" t-att-data-ticket-id="value['id']">Cancel Changes</button>
+                    <button class="de-btn-save de-three-btn-right">Save</button>
+                </div>
+                <div class="de-ticket-log">
+                    <t t-call="nrs_de_portal.de_ticket_log" />
+                </div>
+            </div>
+            <div class="col-lg-3 de-ticket-list-container order-1 order-md-2"></div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_ticket_list">
+        <div class="de-ticket-list-header">
+            <span class="de-ticket-list-subicon de-ic-list" />
+            <span class="de-ticket-list-subtitle">Ticket List</span>
+            <span class="de-ticket-list-count">
+                <span>
+                    <t t-esc="count" />
+                </span>
+            </span>
+        </div>
+        <div class="de-ticket-list-content">
+            <t t-foreach="data" t-as="ticket">
+                <t t-if="ticket.id == selected">
+                    <div class="de-ticket-list-box de-ticket-list-box-active" t-att-data-ticket-id="ticket.id" t-att-data-team="ticket.name">
+                        <div class="de-ticket-list-title">
+                            <span class="de-ticket-list-title-text">
+                                <t t-esc="ticket['name']" />
+                            </span>
+                            <span class="de-ticket-list-title-icon de-ic-edit" />
+                        </div>
+                        <div class="de-ticket-list-stage">
+                            <t t-esc="ticket['stage']" />
+                        </div>
+                        <div class="text-light">
+                            <div><small><i>Create Date : <t t-esc="ticket['create_date']" /></i></small></div>
+                            <div><small><i>Last Updated : <t t-esc="ticket['last_updated_date']" /></i></small></div>
+                        </div>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="de-ticket-list-box" t-att-data-ticket-id="ticket.id" t-att-data-team="ticket.name">
+                        <div class="de-ticket-list-title">
+                            <span class="de-ticket-list-title-text">
+                                <t t-esc="ticket['name']" />
+                            </span>
+                            <span class="de-ticket-list-title-icon de-ic-edit" />
+                        </div>
+                        <div class="de-ticket-list-stage">
+                            <t t-esc="ticket['stage']" />
+                        </div>
+                        <div class="text-muted">
+                            <div><small><i>Create Date : <t t-esc="ticket['create_date']" /></i></small></div>
+                            <div><small><i>Last Updated : <t t-esc="ticket['last_updated_date']" /></i></small></div>
+                        </div>
+                    </div>
+                </t>
+                <div class="de-ticket-list-separator"></div>
+            </t>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_ticket_log">
+        <div class="de-ticket-log-container">
+            <div class="de-ticket-log-header">
+                <span class="de-ticket-log-icon  de-ic-list" />
+                <span class="de-ticket-log-title">Ticket Log</span>
+            </div>
+            <div class="de-ticket-log-body">
+                <t t-foreach="value['logs']" t-as="log">
+                    <div class="de-ticket-log-item">
+                        <h2 class="de-ticket-log-author">
+                            <t t-esc="log['author']" />
+                        </h2>
+                        <h2 class="de-ticket-log-date">
+                            <t t-esc="log['date']" />
+                        </h2>
+                        <div class="de-ticket-log-message">
+                            <t t-raw="log['body']" />
+                        </div>
+                        <div class="de-ticket-log-attachment-box">
+                            <t t-foreach="log['attachment_ids']" t-as="attachment">
+                                <a class="de-ticket-log-attachment" t-att-href="attachment" target="_blank">
+                                    <span class="de-ic-download" />
+                                </a>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+                <div class="de-ticket-log-chat-container">
+                    <textarea class="de-ticket-log-chat-input" id="deticketlogchatinput" rows="4"></textarea>
+                    <div class="de-ticket-log-file-container"></div>
+                    <button class="de-ticket-log-file-emoji">
+                        <span class="fa fa-smile-o" />
+                    </button>
+                    <button class="de-ticket-log-file-button">
+                        <span class="fa fa-paperclip" />
+                        <input type="file" class="de-ticket-log-file" accept = ".pdf,.csv,.doc,.docx,.ppt,.pptx,.xls,.jpeg,.png" multiple="multiple" />
+                    </button>
+                    <div class="de-emoji-container de-hide"></div>
+                    <button class="de-ticket-log-chat-button" t-att-data-ticket-id="value['id']">Send</button>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_ticket_log_file">
+        <div class="de-ticket-log-file-box">
+            <input type="hidden" t-att-value="data" class="de-ticket-log-file-data" t-att-data-filename="filename" />
+            <h3 class="de-ticket-log-file-name">
+                <t t-esc="filename" />
+            </h3>
+            <span class="de-ticket-log-file-delete de-ic-eraser" />
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_emoji_popover">
+        <t t-foreach="emojis" t-as="emoji" t-key="emoji.unicode">
+            <span class="de-emoji" t-att-title="emoji.description" t-att-data-source="emoji.sources[0]" t-att-data-unicode="emoji.unicode">
+                <t t-esc="emoji.unicode" />
+            </span>
+        </t>
+    </t>
+
+    <t t-name="nrs_de_portal.de_operation_site_selection">
+        <option value="">Select ...</option>
+        <t t-foreach="data" t-as="o_site">
+            <t t-if="o_site['selected']">
+                <option t-att-value="o_site['id']" selected="selected" t-att-data-timezone="o_site['timezone']">
+                    <t t-esc="o_site['name']" />
+                </option>
+            </t>
+            <t t-else="">
+                <option t-att-value="o_site['id']" t-att-data-timezone="o_site['timezone']">
+                    <t t-esc="o_site['name']" />
+                </option>
+            </t>
+        </t>
+    </t>
+
+    <t t-name="nrs_de_portal.de_service_id_selection">
+        <option value="">Select ...</option>
+        <t t-foreach="data" t-as="service">
+            <t t-if="service['selected']">
+                <option t-att-value="service['id']" selected="selected">
+                    <t t-esc="service['name']" />
+                </option>
+            </t>
+            <t t-else="">
+                <option t-att-value="service['id']">
+                    <t t-esc="service['name']" />
+                </option>
+            </t>
+        </t>
+    </t>
+
+    <t t-name="nrs_de_portal.de_company_id_selection">
+        <option value="">Select ...</option>
+        <t t-foreach="data" t-as="p">
+            <t t-if="p['selected']">
+                <option t-att-value="p['id']" selected="selected">
+                    <t t-esc="p['name']" />
+                </option>
+            </t>
+            <t t-else="">
+                <option t-att-value="p['id']">
+                    <t t-esc="p['name']" />
+                </option>
+            </t>
+        </t>
+    </t>
+
+    <t t-name="nrs_de_portal.de_ticket_type_selection">
+        <option value="">Select ...</option>
+        <t t-foreach="data" t-as="ticket">
+            <option t-att-value="ticket['id']">
+                <t t-esc="ticket['name']" />
+            </option>
+        </t>
+    </t>
+
+    <t t-name="nrs_de_portal.de_area_selection">
+        <t t-foreach="data" t-as="area">
+            <div class="de-selector-item de-chip-selector-item" data-trigger-selector=".de-trigger-area" t-att-data-value-id="area['id']">
+                <t t-esc="area['name']" />
+            </div>
+        </t>
+    </t>
+
+    <t t-name="nrs_de_portal.de_shipment_detail_uom">
+        <option value="">Select ...</option>
+        <t t-foreach="data" t-as="uom">
+            <t t-if="uom['selected']">
+                <option t-att-value="uom['id']" selected="selected">
+                    <t t-esc="uom['name']" />
+                </option>
+            </t>
+            <t t-else="">
+                <option t-att-value="uom['id']">
+                    <t t-esc="uom['name']" />
+                </option>
+            </t>
+        </t>
+    </t>
+
+    <t t-name="nrs_de_portal.de_ticket_list_table">
+        <div class="de-portal-subtitle-box d-flex justify-content-between align-items-center">
+            <div class="d-flex text-center">
+                <span class="de-portal-subicon de-ic-ticketing" />
+                <span class="de-portal-subtitle">Ticket List</span>
+            </div>              
+            <t t-call="nrs_de_portal.de_search_box_tags" />      
+        </div>
+        <div class="de-portal-content-box">
+            <t t-call="nrs_de_portal.de_pagination" />
+            <div class="de-table-box">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                Create Date
+                                <span class="de-portal-order fa fa-chevron-down" data-order="create_date" />
+                            </th>
+                            <th>
+                                Create By
+                                <span class="de-portal-order fa fa-chevron-down" data-order="create_uid" />
+                            </th>
+                            <th>
+                                Ticket Name
+                                <span class="de-portal-order fa fa-chevron-down" data-order="name,id" />
+                            </th>
+                            <th>
+                                Operation Site
+                                <span class="de-portal-order fa fa-chevron-down" data-order="x_studio_operation_site" />
+                            </th>
+                            <th>
+                                Ticket Type
+                                <!-- <span class="de-portal-order fa fa-chevron-down" data-order="ticket_type_id" /> -->
+                            </th>
+                            <th>
+                                Status
+                                <!-- <span class="de-portal-order fa fa-chevron-down" data-order="stage_id" /> -->
+                            </th>
+                            <th>
+                                Last status updated date
+                                <span class="de-portal-order fa fa-chevron-down" data-order="write_date" />
+                            </th>
+                        </tr>
+                    </thead>
+                    <t t-call="nrs_de_portal.de_ticket_list_table_body" />
+                </table>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_ticket_list_table_body">
+        <tbody class="de-portal-ticket-list-body">
+            <t t-foreach="data" t-as="item">
+                <tr class="de-ticket-list-table-tr" t-att-data-ticket-id="item['id']" t-att-data-team="item['helpdesk_type']" style="cursor: pointer;">
+                    <td>
+                        <span t-esc="item['create_date']" />
+                    </td>
+                    <td>
+                        <span t-esc="item['created_by']" />
+                    </td>
+                    <td>
+                        <span t-esc="item['display_name']" />
+                    </td>                    
+                    <td>
+                        <span t-esc="item['operating_site']" />
+                    </td>
+                    <td>
+                        <span t-esc="item['ticket_type_id']" />
+                    </td>
+                    <td>
+                        <span t-esc="item['status']" />
+                    </td>
+                    <td>
+                        <span t-esc="item['last_update']" />
+                    </td>
+                </tr>
+            </t>
+        </tbody>
+    </t>
+
+    <t t-name="nrs_de_portal.de_service_selection_popup">
+        <div class="de-dialog-container de-service-id-selection-dialog">
+            <div class="de-dialog-box">
+                <span class="de-dialog-close de-ic-eraser de-close-service-id-selection-dialog" />
+                <div class="de-dialog-body">
+                    <div class="de-user-info-box">
+                        <!-- <t t-call="nrs_de_portal.de_search_box_tags" /> -->
+                        <div class="mt-3 service-list-pagination">                        
+                            <t t-call="nrs_de_portal.de_pagination" />
+                            <div>
+                                <h3>Service ID:</h3>
+                            </div>
+                        </div>
+                        <div class="de-table-box">
+                            <table class="table table-hover mt-3">
+                                <t t-call="nrs_de_portal.de_service_selection_popup_table_body" />
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_service_selection_popup_table_body">
+        <tbody class="de-portal-ticket-list-body text-left">
+            <t t-foreach="data" t-as="item">
+                <tr class="de-service-selection-popup-table-tr" t-att-data-service-id="item['id']" t-att-data-name="item['name']" t-att-data-partner="item['partner_id']" style="cursor: pointer;">
+                    <td>
+                        <h5><span t-esc="item['name']" /></h5>
+                    </td>
+                </tr>
+            </t>
+        </tbody>
+    </t>
+
+    <t t-name="nrs_de_portal.de_service_z_selection_popup">
+        <div class="de-dialog-container de-service-id-selection-dialog">
+            <div class="de-dialog-box">
+                <span class="de-dialog-close de-ic-eraser de-close-service-id-selection-dialog" />
+                <div class="de-dialog-body">
+                    <div class="de-user-info-box">
+                        <!-- <t t-call="nrs_de_portal.de_search_box_tags" /> -->
+                        <div class="mt-3 service-list-pagination">                        
+                            <t t-call="nrs_de_portal.de_pagination" />
+                            <div>
+                                <h3>Service ID:</h3>
+                            </div>
+                        </div>
+                        <div class="de-table-box">
+                            <table class="table table-hover mt-3">
+                                <t t-call="nrs_de_portal.de_service_z_selection_popup_table_body" />
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_service_z_selection_popup_table_body">
+        <tbody class="de-portal-ticket-list-body text-left">
+            <t t-foreach="data" t-as="item">
+                <tr class="de-service-z-selection-popup-table-tr" t-att-data-service-id="item['id']" t-att-data-name="item['name']" t-att-data-partner="item['partner_id']" style="cursor: pointer;">
+                    <td>
+                        <h5><span t-esc="item['name']" /></h5>
+                    </td>
+                </tr>
+            </t>
+        </tbody>
+    </t>
+
+    <t t-name="nrs_de_portal.de_uom_selection_popup">
+        <div class="de-dialog-container de-service-id-selection-dialog">
+            <div class="de-dialog-box">
+                <span class="de-dialog-close de-ic-eraser de-close-uom-id-selection-dialog" />
+                <div class="de-dialog-body">
+                    <div class="de-user-info-box">
+                        <!-- <t t-call="nrs_de_portal.de_search_box_tags" /> -->
+                        <div class="mt-3 uom-list-pagination">                        
+                            <t t-call="nrs_de_portal.de_pagination" />
+                            <div>
+                                <h3>UoM:</h3>
+                            </div>
+                        </div>
+                        <div class="de-table-box">
+                            <table class="table table-hover mt-3">
+                                <t t-call="nrs_de_portal.de_uom_selection_popup_table_body" />
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_uom_selection_popup_table_body">
+        <tbody class="de-portal-ticket-list-body text-left">
+            <t t-foreach="data" t-as="item">
+                <tr class="de-uom-selection-popup-table-tr" t-att-data-uom-id="item['id']" t-att-data-name="item['name']"  t-att-data-id="selectid" style="cursor: pointer;">
+                    <td>
+                        <h5><span t-esc="item['name']" /></h5>
+                    </td>
+                </tr>
+            </t>
+        </tbody>
+    </t>
+</templates>

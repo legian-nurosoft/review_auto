@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="ns_job_positions_form_action_window" model="ir.actions.act_window">
+            <field name="name">Job Positions</field>
+            <field name="res_model">hr.job</field>
+            <field name="view_mode">tree,form</field>
+            <field name="binding_type">action</field>
+            <field name="binding_view_types">list,form</field>
+            <field name="domain">[('ns_job_requisition_id', '=', active_id)]</field>
+            <field name="context">{'search_default_ns_job_requisition_id': active_id,'default_ns_job_requisition_id': active_id}</field>
+        </record>
+
+        <record id="hr_job_form_customization" model="ir.ui.view">
+            <field name="name">hr.job.form customization</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form"/>
+            <field name="priority">99</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='company_id']" position="before">
+                    <field name="ns_job_requisition_id" options="{'no_create':true}" required="1"/>                    
+                    <field name="ns_date_of_request" string="Plan Date"/>
+                    <field name="ns_type_of_position" />
+                </xpath>
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="ns_hiring_manager_id" />
+                    <field name="ns_hiring_managers_manager" />
+                </xpath>
+                <xpath expr="//field[@name='address_id']" position="replace">
+                    <field name="ns_work_location" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_job_tree_customization" model="ir.ui.view">
+            <field name="name">hr.job.tree customization</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_hr_job_tree"/>
+            <field name="priority">99</field>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr_job_kanban_customization" model="ir.ui.view">
+            <field name="name">hr.job.kanban customization</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr_recruitment.view_hr_job_kanban"/>
+            <field name="priority">99</field>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="create">false</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,14 @@
+@keyframes appear {
+    0%   {outline-color: #EEDD0000;}
+    20%  {outline-color: #EEDD00;}
+    40%  {outline-color: #EEDD0000;}
+    60%  {outline-color: #EEDD00;}
+    80%  {outline-color: #EEDD0000;}
+    100% {outline-color: #EEDD00;}
+}
+
+.appear {
+    outline: 3px solid #EEDD00;
+    animation-name: appear;
+    animation-duration: 2s;
+}

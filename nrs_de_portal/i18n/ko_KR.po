@@ -1,0 +1,1910 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* nrs_de_portal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e-20201007\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-09-20 05:19+0000\n"
+"PO-Revision-Date: 2021-09-20 05:19+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "0 USD / Hour"
+msgstr "0 원/시간"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "0 USD / Units"
+msgstr "유닛당 단가 xxxUSD"
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: model_terms:ir.ui.view,arch_db:nrs_de_portal.de_portal_index
+msgid ""
+"<span class=\"de-portal-logout-icon fa fa-sign-out\"/>\n"
+"                            <span class=\"de-portal-logout-text\">Logout</span>"
+msgstr ""
+"<span class=\"de-portal-logout-icon fa fa-sign-out\"/>\n"
+"                            <span class=\"de-portal-logout-text\">로그아웃</span>"
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: model_terms:ir.ui.view,arch_db:nrs_de_portal.de_portal_index
+msgid ""
+"<span class=\"de-user-show-company\">Select Company</span>\n"
+"                            <span class=\"de-user-show-profile de-menu-item\" data-menu-id=\"user-profile\">User Profile</span>"
+msgstr ""
+"<span class=\"de-user-show-company\">会社選択</span>\n"
+"                            <span class=\"de-user-show-profile de-menu-item\" data-menu-id=\"user-profile\"사용자 프로필</span>"
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: model:ir.model.fields,field_description:nrs_de_portal.field_sale_order__nrs_a_end_service_id
+#, python-format
+msgid "A-End Service ID"
+msgstr "A-Side Service ID "
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Access Configuration"
+msgstr "접근"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/dashboard.xml:0
+#, python-format
+msgid "Actions"
+msgstr "Actions"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Add User"
+msgstr "사용자 추가"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Additional Remark"
+msgstr "비고"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: model:ir.actions.act_window,name:nrs_de_portal.action_open_allowed_ticket
+#: model:ir.ui.menu,name:nrs_de_portal.menu_allowed_ticket
+#: model_terms:ir.ui.view,arch_db:nrs_de_portal.allowed_ticket_form
+msgid "Allowed Ticket"
+msgstr "발행가능 티켓"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: model:ir.model.fields,field_description:nrs_de_portal.field_nrs_allowed_ticket_type__nrs_ticket_type_ids
+msgid "Allowed Ticket Type"
+msgstr "발행가능 티켓타입"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/invoice.xml:0
+#, python-format
+msgid "Amount Due"
+msgstr "청구금액"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Associated Company"
+msgstr "관련회사"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: model_terms:ir.ui.view,arch_db:nrs_de_portal.de_login_layout
+msgid "Back to Login"
+msgstr "로그인페이지로 돌아가기"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "CONTACT US"
+msgstr "문의"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Cancel"
+msgstr "취소"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Cancel Changes"
+msgstr "변경사항 취소"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/models/partner.py:0
+#, python-format
+msgid "Cannot send email: user %s has no email address."
+msgstr "메일을 발송할 수 없습니다: %사용자의 이메일 주소가 없습니다"
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: model:ir.model.fields.selection,name:nrs_de_portal.selection__nrs_req_service_selection__nrs_selection_type__choose_service
+#, python-format
+msgid "Choose Service"
+msgstr "서비스선택"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/invoice.xml:0
+#, python-format
+msgid "Client Order Reference"
+msgstr "고객 주문번호"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: model_terms:ir.ui.view,arch_db:nrs_de_portal.de_login_layout
+msgid "Close Overlay"
+msgstr "창닫기"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "Colocation Accessories"
+msgstr "콜로케이션 악세서리"
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/invoice.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Company"
+msgstr "회사명"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Confirm"
+msgstr "확인"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: model:ir.model,name:nrs_de_portal.model_res_partner
+#: model_terms:ir.ui.view,arch_db:nrs_de_portal.de_login_layout
+msgid "Contact"
+msgstr ""
+
+#. module: nrs_de_portal
+#. openerp-web
+#: model_terms:ir.ui.view,arch_db:nrs_de_portal.de_portal_contact
+msgid "Contact Us"
+msgstr "Contact Us"
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: model:ir.model.fields,field_description:nrs_de_portal.field_portal_carousel__content
+msgid "Content"
+msgstr ""
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#, python-format
+msgid "Contract End Date"
+msgstr "계약만료일"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#, python-format
+msgid "Create Ticket"
+msgstr "티켓 발행"
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Current"
+msgstr "현재"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#, python-format
+msgid "Customer Reference Number"
+msgstr "고객 번호"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "DASHBOARD"
+msgstr "대시보드"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/dashboard.xml:0
+#, python-format
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "DOCUMENTS"
+msgstr "문서"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Delete User"
+msgstr "사용자 삭제"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Description"
+msgstr "설명"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Designated Company"
+msgstr "지정회사"
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/invoice.xml:0
+#, python-format
+msgid "Due Date"
+msgstr "납기일"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Edit"
+msgstr "편집"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Email"
+msgstr "이메일 주소"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/invoice.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#, python-format
+msgid "Excel Export"
+msgstr "Excel내려받기"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: model_terms:ir.ui.view,arch_db:nrs_de_portal.portal_faq_form
+msgid "FAQ List"
+msgstr ""
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Fault Report"
+msgstr "장애신고"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "HOME"
+msgstr "홈"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/dashboard.xml:0
+#, python-format
+msgid "Helpdesk"
+msgstr ""
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "ID Card Type"
+msgstr ""
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "ID Number"
+msgstr ""
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "INVOICE"
+msgstr "청수서"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#, python-format
+msgid "Installed Date"
+msgstr "설치일"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#, python-format
+msgid "Installed Services"
+msgstr "사용중 서비스"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "Interconnection Services"
+msgstr "인터커넥션 서비스"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: model:ir.model.fields.selection,name:nrs_de_portal.selection__nrs_req_service_selection__nrs_selection_type__intra_customer
+#, python-format
+msgid "Intra Customer"
+msgstr "인트라 고객"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Invalid Helpdesk Team"
+msgstr "헬프데스크 팀 무효"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#, python-format
+msgid "Inventory Summary"
+msgstr "Inventory Summary"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#, python-format
+msgid "Inventory Summary (User.ID)"
+msgstr "Inventory Summary (User ID)"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/invoice.xml:0
+#, python-format
+msgid "Invoice"
+msgstr "청구서"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/invoice.xml:0
+#, python-format
+msgid "Invoice Date"
+msgstr "청구일"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/invoice.xml:0
+#, python-format
+msgid "Invoice Number"
+msgstr "청구서 번호"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/invoice.xml:0
+#, python-format
+msgid "Invoice Status"
+msgstr "인보이스 상태"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Invoicing"
+msgstr "청구"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Job Position"
+msgstr "직위"
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: model:ir.model.fields,field_description:nrs_de_portal.field_sale_order__nrs_loa
+#, python-format
+msgid "Letter of Authorization (LOA)"
+msgstr "LOA"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "MARKETPLACE"
+msgstr "마켓플레이스"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Mark As Resolved"
+msgstr "처리완료표시"
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/dashboard.xml:0
+#: model:ir.model,name:nrs_de_portal.model_mail_message
+#, python-format
+msgid "Message"
+msgstr ""
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Mobile"
+msgstr ""
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "NRC 0 USD / MRC 0 USD"
+msgstr ""
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "New"
+msgstr "New"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "New Fault Report Ticket"
+msgstr "배송 티켓 발행"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "New Shipment Ticket"
+msgstr "배송 티켓 발행ト"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "New Site Access Ticket"
+msgstr "사이트 접근요청 티켓 발행"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "No closing stage"
+msgstr ""
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Number of Shipment"
+msgstr "배송물품 수량"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "ORDERS"
+msgstr "오더"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Operation Site"
+msgstr "사이트"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#, python-format
+msgid "Order Date"
+msgstr "주문일자"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/invoice.xml:0
+#, python-format
+msgid "Order Number"
+msgstr "주문번호"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Ordering"
+msgstr "오더"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/dashboard.xml:0
+#, python-format
+msgid "Orders"
+msgstr ""
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "POLICIES"
+msgstr ""
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/static/src/xml/documents.xml:0
+#: model:ir.model.fields.selection,name:nrs_de_portal.selection__nrs_documents__nrs_type__policies
+#, python-format
+msgid "Policies"
+msgstr ""
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "PROFILE"
+msgstr "사용자 프로필"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Password"
+msgstr "비밀번호"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: model:mail.template,subject:nrs_de_portal.reset_password_email
+msgid "Password reset"
+msgstr "비밀번호 재설정"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Permanent Site Access"
+msgstr ""
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Pin Code"
+msgstr ""
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please insert the Additional Remark"
+msgstr "비고사항을 입력해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "Please insert the Associated Company"
+msgstr "관련회사를 입력해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "Please insert the Company"
+msgstr "회사명을 입력해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please insert the Description"
+msgstr "설명을 입력해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "Please insert the Name"
+msgstr "이름을 입력해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please insert the Number of Shipment with positive value"
+msgstr "발송수량을 입력해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please insert the Quantity with positive value"
+msgstr "수량을 입력해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please insert the Requested Visitor Identification Number"
+msgstr "방문희망자의 신분증번호를 입력해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please insert the Requested Visitor's Name"
+msgstr "방문희망자의 이름을 입력해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please insert the Service Date with yyyy-mm-dd format"
+msgstr "서비스 요청일을  yyyy-mm-dd형식으로 입력해주세요 "
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please insert the Service Request Date with yyyy-mm-dd format"
+msgstr "서비스 요청 작성일을 yyyy-mm-dd형식으로 입력해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please insert the Shipment Date with yyyy-mm-dd format"
+msgstr "발송일을 yyyy-mm-dd형식으로 입력해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please insert the Shipment Tracking Number"
+msgstr "추적 번호를 입력해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please insert the Visit Date with yyyy-mm-dd format"
+msgstr "방문 희망일을 yyyy-mm-dd형식으로 입력해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please insert the Z-End Service ID"
+msgstr "Z-Side Service ID를 입력해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "Please insert the email"
+msgstr "이메일 주소를 입력해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "Please insert the password"
+msgstr "비밀번호를 입력해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please insert valid the Z-End Service ID"
+msgstr "정확한 Z-Side Service ID를 입력해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please select the A-End Service ID"
+msgstr "A-Side Service ID를 선택해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please select the Designated Company"
+msgstr "지정회사를 선택해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please select the Operation Site"
+msgstr "오퍼레이션 사이트를 선택해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please select the Product"
+msgstr "서비스를 선택해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please select the Service ID"
+msgstr "서비스 ID를 선택해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please select the Shipping Type"
+msgstr "발송형태를 선택해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please select the Tags"
+msgstr "태그를 선택해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please select the Ticket Type"
+msgstr "티켓 유형을 선택해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please select the Type of Fault"
+msgstr "장애 유형을 선택해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please select the Visit Area"
+msgstr "방문 구역을 선택해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please select the Visit Type"
+msgstr "방문 유형을 선택해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Please upload the Letter of Authorization (LOA)"
+msgstr "LOA 를 첨부해주세요"
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: model_terms:ir.ui.view,arch_db:nrs_de_portal.de_login_layout
+msgid "Portal Preview"
+msgstr "포털 미리보기"
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Position"
+msgstr "직위"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Primary Access Administrator"
+msgstr "메인 관리자"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: model_terms:ir.ui.view,arch_db:nrs_de_portal.de_login_layout
+msgid "Privacy Policy"
+msgstr "개인정보보호정책"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Product"
+msgstr "서비스"
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#, python-format
+msgid "Product Name"
+msgstr "서비스명"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/dashboard.xml:0
+#, python-format
+msgid "Projects"
+msgstr ""
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Provisioning"
+msgstr "프로비져닝"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Quantity"
+msgstr "수량을 적극적가치로 입력해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "Record does not exist"
+msgstr "기록에 존재하지 않습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Remote Hands"
+msgstr "리모트핸즈"
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#, python-format
+msgid "Request Remote Hands"
+msgstr "리모트핸즈 신청"
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "Request Services"
+msgstr "서비스 신청"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Request Services > Colocation Accessories"
+msgstr "서비스 신청 > 인터커넥션 서비스"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Request Services > Interconnection Services"
+msgstr "서비스 신청 > NRC"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Request Services > Remote Hands"
+msgstr "서비스 신청 > 리모트핸즈"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Requested Visitor Identification Number"
+msgstr "방문 희망자 ID번호"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Requested Visitor's Name"
+msgstr "방문 희망자 이름"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Require Loading Dock?"
+msgstr "하역장비는 필요하실까요?"
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Save"
+msgstr "저장"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/contact.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/dashboard.xml:0
+#, python-format
+msgid "Search ..."
+msgstr "검색"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Select ..."
+msgstr "선택"
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Send"
+msgstr ""
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Service Date"
+msgstr ""
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Service ID"
+msgstr "서비스 ID 번호"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Service Request Date"
+msgstr "서비스 신청일"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Shipment Date"
+msgstr "발송일"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Shipment Ticket"
+msgstr "발송 티켓"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Shipment Tracking Number"
+msgstr "추적번호"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Shipping Type"
+msgstr "발송 유형"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "Site Access Ticket"
+msgstr "사이트 방문 티켓"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#, python-format
+msgid "Status"
+msgstr "상황"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Subject"
+msgstr "주제"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Submit"
+msgstr "제출"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "TICKETING"
+msgstr "티켓 발행"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Tags"
+msgstr "태그"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Text input ..."
+msgstr "텍스트 입력"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "The \"%s\" individual type is not exist"
+msgstr "\"%s\"　개인유형은 존재하지 않습니다 "
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid ""
+"The A-End Service ID Customer and the Z-End Service ID Customer is different"
+msgstr "A-Side Service ID 고객과 Z-Side Service ID 고객이 일치하지 않습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid ""
+"The A-End Service ID Operation Site and the Z-End Service ID Operation Site "
+"is different"
+msgstr "A-Side Service ID 오퍼레이션 사이트와 Z-Side Service ID 오퍼레이션 사이트가 일치하지 않습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid ""
+"The MRC Product is not available. Please ensure that you have select the "
+"Choose Service and Media Type"
+msgstr "정기청구 서비스가 존재하지 않습니다. 서비스와 미디어 유형 선택을 확인해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid ""
+"The NRC Product is not available. Please ensure that you have select the "
+"Choose Service and Media Type"
+msgstr "NRC 서비스가 존재하지 않습니다. 서비스와 미디어 유형 선택을 확인해주세요"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "The current password is incorrect"
+msgstr "비밀번호가 정확하지 않습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "The data has been updated"
+msgstr "데이터가 업로드되었습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "The email is already used"
+msgstr "이미 사용중인 이메일 주소 입니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "The form is successfully submited"
+msgstr "폼이 정상적으로 제출되었습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "The password is different"
+msgstr "비밀번호가 일치하지 않습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "The request succesfully saved"
+msgstr "신청이 정상적으로 저장되었습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "The ticket is successfully resolved"
+msgstr "해당 티켓은 해결되었습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "The value of New Password and Confirm Password is different"
+msgstr "새로운 비밀번호와 재입력된 비밀번호가 일치하지 않습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Ticket List"
+msgstr "티켓 리스트"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Ticket Log"
+msgstr "티켓 로그"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: model:ir.model.fields,field_description:nrs_de_portal.field_nrs_allowed_ticket_type__name
+msgid "Ticket Name"
+msgstr "티켓명"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Ticket Type"
+msgstr "티켓 유형"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "Ticketing"
+msgstr "티켓 발행"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#, python-format
+msgid "Total"
+msgstr "계"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/invoice.xml:0
+#, python-format
+msgid "Total Amount"
+msgstr "통합 계"
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Type of Fault"
+msgstr "장애 유형"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/static/src/xml/order.xml:0
+#, python-format
+msgid "Under Provisioning"
+msgstr "프로비져닝 중"
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/user.xml:0
+#, python-format
+msgid "User Name"
+msgstr "사용자명"
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/dashboard.xml:0
+#, python-format
+msgid "User Pending Actions"
+msgstr "대기중인 User Action"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "User not found"
+msgstr "사용자가 존재하지 않습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/web.py:0
+#, python-format
+msgid "Verification code is invalid."
+msgstr "인증코드가 유효하지 않습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Visit Area"
+msgstr "방문 구역"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Visit Date"
+msgstr "방문 예정일"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Visit Type"
+msgstr "방문 유형"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: model_terms:ir.ui.view,arch_db:nrs_de_portal.de_portal_index
+msgid "Welcome,"
+msgstr "안녕하세요, ~님"
+
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "You can not access this A-End Service ID"
+msgstr "요청하신 A-Side Service ID에 접근할 수 없습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "You can not access this Designated Company"
+msgstr "요청하신 지정회사에 접근할 수 없습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "You can not access this Service ID"
+msgstr "요청하신 서비스 ID에 접근할 수 없습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#: code:addons/nrs_de_portal/controllers/ticket.py:0
+#, python-format
+msgid "You can not access this record"
+msgstr "요청하신 기록 내용에 접근할 수 없습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "You can not add a new user"
+msgstr "새로운 사용자를 추가할 수 없습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "You can not add new user"
+msgstr "새로운 사용자를 추가할 수 없습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "You can not delete the Primary Access Administrator user"
+msgstr "관리자는 삭제할 수 없습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "You can not delete yourself"
+msgstr "사용자 본인을 삭제할 수 없습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "You can not edit the \"%s\" access right"
+msgstr "\"%s\" 접근 권한을 수정 할 수 없습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "You can not edit this user"
+msgstr "요청하신 사용자는 편집할 수 없습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "You can not open this menu"
+msgstr "요청하신 메뉴는 열 수 없습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "You can not perform this action"
+msgstr "요청하신 액션을 실행할 수 없습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/models/partner.py:0
+#, python-format
+msgid "You cannot perform this action on an archived user."
+msgstr "아카이브된 사용자에게 요청하신 액션을 실행 할 수 없습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "You don't have access to edit this user"
+msgstr "요청하신 사용자를 편집할 권한이 없습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#, python-format
+msgid "Your password has been resetted"
+msgstr "비밀번호가 재설정 되었습니다"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: model:ir.model.fields,field_description:nrs_de_portal.field_sale_order__nrs_z_end_service_id
+#, python-format
+msgid "Z-End Service ID"
+msgstr "Z-Side Service ID"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/dashboard.xml:0
+#, python-format
+msgid "Digital Edge"
+msgstr "디지털 엣지"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/dashboard.xml:0
+#, python-format
+msgid "Media Type"
+msgstr "미디어 타입"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/dashboard.xml:0
+#, python-format
+msgid "Patch Panel ID"
+msgstr "패치 패널 ID"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/dashboard.xml:0
+#, python-format
+msgid "Port Number"
+msgstr "포트 번호"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/dashboard.xml:0
+#, python-format
+msgid "Requested Delivery Date"
+msgstr "납기 요청일"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/dashboard.xml:0
+#, python-format
+msgid "Customer Order Reference Number"
+msgstr "고객사 주문번호"
+
+#. module: nrs_de_portal
+#: model:ir.model.fields,field_description:nrs_de_portal.field_nrs_notification__nrs_start_date
+msgid "Start Date"
+msgstr "방문 시작일"
+
+#. module: nrs_de_portal
+#: model:ir.model.fields,field_description:nrs_de_portal.field_nrs_notification__nrs_end_date
+msgid "End Date"
+msgstr "방문 종료일"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Visitor Name"
+msgstr "방문자 이름"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#: model:ir.model.fields,field_description:nrs_de_portal.field_helpdesk_ticket__ns_courier_company
+#, python-format
+msgid "Courier Company"
+msgstr "배송업체명"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Create Date"
+msgstr "생성일"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Create By"
+msgstr "생성자 "
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/ticket.xml:0
+#, python-format
+msgid "Last status updated date"
+msgstr "최종업데이트일"
+
+#. module: nrs_de_portal
+#: model:ir.actions.act_window,name:nrs_de_portal.action_open_documents
+#: model:ir.ui.menu,name:nrs_de_portal.menu_document_documents
+#: model:ir.ui.menu,name:nrs_de_portal.menu_document_root
+#: model_terms:ir.ui.view,arch_db:nrs_de_portal.portal_documents_form
+msgid "Documents"
+msgstr "문서"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/static/src/xml/documents.xml:0
+#: model:ir.ui.menu,name:nrs_de_portal.menu_document_faq
+#: model_terms:ir.ui.view,arch_db:nrs_de_portal.portal_faq_form
+#, python-format
+msgid "FAQ"
+msgstr "FAQ"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/controllers/dashboard.py:0
+#: code:addons/nrs_de_portal/static/src/xml/documents.xml:0
+#: model:ir.actions.act_window,name:nrs_de_portal.action_open_faq
+#: model_terms:ir.ui.view,arch_db:nrs_de_portal.portal_faq_form
+#, python-format
+msgid "Group Name"
+msgstr "분류"
+
+#. module: nrs_de_portal
+#. openerp-web
+#: code:addons/nrs_de_portal/static/src/xml/contact.xml:0
+#, python-format
+msgid "Select Countries / Regions"
+msgstr "나라/지역 선택"

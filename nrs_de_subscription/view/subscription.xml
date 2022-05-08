@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sale_subscription_view_form_inherit" model="ir.ui.view">
+            <field name="name">sale_subscription_view_form_inherit</field>
+            <field name="model">sale.subscription</field>
+            <field name="inherit_id" ref="sale_subscription.sale_subscription_view_form"/>
+            <field name="arch" type="xml">
+                <button name="%(sale_subscription.wizard_action)d" position="replace">
+                    <button string="Add/Delete" name="show_upsell_wizard" type="object" attrs="{'invisible': [('stage_category', '!=', 'progress')]}"/>
+                    <button string="Adjust Billing" name="adjust_billing" type="object" attrs="{'invisible': [('stage_category', '!=', 'progress')]}"/>
+                    <button string="Change Order" name="show_change_order_wizard" type="object" attrs="{'invisible': [('stage_category', '!=', 'progress')]}"/>
+                </button>
+                <button name="action_subscription_invoice" position="before">
+                    <button class="oe_stat_button" icon="fa-credit-card" name="open_change_orders" type="object">
+                        <field name="sale_change_order_count" widget="statinfo" string="Sales"/>
+                    </button>
+                </button>
+                <xpath expr="//field[@name='recurring_invoice_line_ids']" position="before">
+                    <field name="can_edit_line" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='recurring_invoice_line_ids']" position="attributes">
+                    <attribute name="attrs">{'readonly': [('can_edit_line', '!=', True)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="wizard_form_view_inherit" model="ir.ui.view">
+            <field name="name">wizard_form_view_inherit</field>
+            <field name="model">sale.subscription.wizard</field>
+            <field name="inherit_id" ref="sale_subscription.wizard_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/field[@name='option_lines']/tree/field[@name='product_id']" position="attributes">
+                    <!-- <attribute name="domain">[('x_studio_available_operation_site','=',context.get('operation_site',False))]</attribute> -->
+                </xpath>
+                <xpath expr="//form/field[@name='option_lines']/tree/field[@name='product_id']" position="after">
+                    <field name="product_template_id" invisible="1"/>
+                    <field name="ns_product_attribute_value"/>
+                </xpath>
+                <xpath expr="//form/field[@name='option_lines']/tree/field[@name='product_id']" position="replace">
+                    <field name="product_id" context="{'default_recurring_invoice': True}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

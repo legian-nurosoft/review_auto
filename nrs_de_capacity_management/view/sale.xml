@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_inherit" model="ir.ui.view">
+        <field name="name">view_order_form_inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="before">
+                <button name="action_open_sale_order_line_shortcut" type="object" icon="fa-external-link"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='company_id']" position="after">
+                <field name="ns_has_reserved_space_or_breaker" invisible="1"/>
+                <field name="ns_can_assign_capacity" invisible="1"/>
+                <field name="ns_capacity_button_visibility" invisible="1"/>
+                <field name="ns_capacity_button_port_visibility" invisible="1"/>
+                <button type="object" string="Assign Capacity" name="assign_capacity" class="btn-primary"
+                        attrs="{'invisible': [('ns_capacity_button_visibility','=',False)]}"
+                        groups="project.group_project_manager"/>
+                <button type="object" string="Assign Patch/Port" name="assign_patchpanelport" class="btn-primary"
+                        attrs="{'invisible': [('ns_capacity_button_port_visibility','=',False)]}"
+                        groups="project.group_project_manager"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="ns_space_breaker_wizard_form" model="ir.ui.view">
+        <field name="name">ns_space_breaker_wizard_form</field>
+        <field name="model">ns.space.breaker.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="ns_order_line_id" invisible="1"/>
+                <field name="ns_type" invisible="1"/>
+                
+                <!-- Space -->
+                <p attrs="{'invisible': [('ns_type','!=','space')]}"><strong>Selected Spaces</strong></p>
+                <field name="ns_space_ids" attrs="{'invisible': [('ns_type','!=','space')]}">
+                    <tree create="0" editable="bottom" >
+                        <field name="ns_selected"/>
+                        <field name="ns_space_id" readonly="1"/>
+                    </tree>
+                </field>
+                <p attrs="{'invisible': [('ns_type','!=','space')]}"><strong>Unselected Spaces</strong></p>
+                <div class="o_row" name="is_search_space" attrs="{'invisible': [('ns_type','!=','space')]}">
+                    <field name="is_search_space"/>
+                    <span>Search Spaces</span>
+                </div>
+                
+                <field name="ns_space_search_ids" domain="[('id', 'in', ns_space_search_helper_ids)]" attrs="{'invisible': [('is_search_space','=',False)]}"/>
+                <field name="ns_space_search_helper_ids" invisible="1"/>
+                <field name="ns_space_ids_unselected" attrs="{'invisible': ['|',('is_search_space','=',True), ('ns_type','!=','space')]}">
+                    <tree create="0" editable="bottom" string="Unselected Spaces">
+                        <field name="ns_selected" force_save="1"/>
+                        <field name="ns_space_id" readonly="1"/>
+                    </tree>
+                </field>
+                <!-- Breaker -->
+                <p attrs="{'invisible': [('ns_type','!=','breaker')]}"><strong>Selected Breakers</strong></p>
+                <field name="ns_breaker_ids" attrs="{'invisible': [('ns_type','!=','breaker')]}">
+                    <tree create="0" editable="bottom">
+                        <field name="ns_selected"/>
+                        <field name="ns_breaker_id" readonly="1"/>
+                    </tree>
+                </field>
+                <p attrs="{'invisible': [('ns_type','!=','breaker')]}"><strong>Unselected Breakers</strong></p>
+                <div class="o_row" name="is_search_breaker" attrs="{'invisible': [('ns_type','!=','breaker')]}">
+                    <field name="is_search_breaker"/>
+                    <span>Search Breaker</span>
+                </div>
+                <field name="ns_breaker_search_ids" domain="[('id', 'in', ns_breaker_search_helper_ids)]" attrs="{'invisible': [('is_search_breaker','=',False)]}"/>
+                <field name="ns_breaker_search_helper_ids" invisible="1"/>
+                <field name="ns_breaker_ids_unselected" attrs="{'invisible': ['|',('is_search_breaker','=',True),('ns_type','!=','breaker')]}">
+                    <tree create="0" editable="bottom">
+                        
+                        <field name="ns_selected"/>
+                        <field name="ns_breaker_id" readonly="1"/>
+                    </tree>
+                </field>
+                <!-- Patch -->
+                <p attrs="{'invisible': [('ns_type','!=','patch_panel')]}"><strong>Selected Patchs</strong></p>
+                <field name="ns_patch_ids" attrs="{'invisible': [('ns_type','!=','patch_panel')]}">
+                    <tree create="0" editable="bottom">
+                        <field name="ns_selected"/>
+                        <field name="ns_patch_id" readonly="1"/>
+                    </tree>
+                </field>
+                <p attrs="{'invisible': [('ns_type','!=','patch_panel')]}"><strong>Unselected Patchs</strong></p>
+                <div class="o_row" name="is_search_breaker" attrs="{'invisible': [('ns_type','!=','patch_panel')]}">
+                    <field name="is_search_patch"/>
+                    <span>Search Patch</span>
+                </div>
+                <field name="ns_patch_search_ids" domain="[('id', 'in', ns_patch_search_helper_ids)]" attrs="{'invisible': [('is_search_patch','=',False)]}"/>
+                <field name="ns_patch_search_helper_ids" invisible="1"/>
+                <field name="ns_patch_ids_unselected" attrs="{'invisible': ['|',('is_search_patch','=',True),('ns_type','!=','patch_panel')]}">
+                    <tree create="0" editable="bottom">
+                        
+                        <field name="ns_selected"/>
+                        <field name="ns_patch_id" readonly="1"/>
+                    </tree>
+                </field>
+                <!-- Port -->
+                <p attrs="{'invisible': [('ns_type','!=','port')]}"><strong>Selected Ports</strong></p>
+                <field name="ns_port_ids" attrs="{'invisible': [('ns_type','!=','port')]}">
+                    <tree create="0" editable="bottom">
+                        <field name="ns_selected"/>
+                        <field name="ns_port_id" readonly="1"/>
+                    </tree>
+                </field>
+                <p attrs="{'invisible': [('ns_type','!=','port')]}"><strong>Unselected Ports</strong></p>
+                <div class="o_row" name="is_search_port" attrs="{'invisible': [('ns_type','!=','port')]}">
+                    <field name="is_search_port"/>
+                    <span>Search Port</span>
+                </div>
+                <field name="ns_port_search_ids" domain="[('id', 'in', ns_port_search_helper_ids)]" attrs="{'invisible': [('is_search_port','=',False)]}"/>
+                <field name="ns_port_search_helper_ids" invisible="1"/>
+                <field name="ns_port_ids_unselected" attrs="{'invisible': ['|',('is_search_port','=',True),('ns_type','!=','port')]}">
+                    <tree create="0" editable="bottom">   
+                        <field name="ns_selected"/>
+                        <field name="ns_port_id" readonly="1"/>
+                    </tree>
+                </field>
+                <footer>
+                    <button type="object" string="Reserve" name="assign_space_and_breaker" class="btn-primary" attrs="{'invisible': ['|',('is_search_breaker','=',True),('is_search_space','=',True)]}"/>
+                    <button name="button_finish_search" id="button_finish_search" string="Finish Search and Reserve" class="btn-primary" type="object" attrs="{'invisible': ['&amp;',('is_search_breaker','=',False),('is_search_space','=',False)]}" />
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

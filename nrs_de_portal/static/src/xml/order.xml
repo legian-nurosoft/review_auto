@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="nrs_de_portal.de_order_wip">
+    	<div class="de-portal-subtitle-box d-flex justify-content-between align-items-center">
+            <div class="d-flex text-center">
+                <span class="de-portal-subicon de-ic-order"/> <span class="de-portal-subtitle text-center">Under Provisioning</span>
+            </div>              
+            <t t-call="nrs_de_portal.de_search_box_tags" />      
+        </div>
+        <div class="de-portal-content-box">
+            <t t-call="nrs_de_portal.de_pagination" />
+            <div class="de-table-box">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Service ID <span class="de-portal-order fa fa-chevron-down" data-order="service_name" /></th>
+                            <th>Operation Site <span class="de-portal-order fa fa-chevron-down" data-order="location_name" /></th>
+                            <th>Product Name <span class="de-portal-order fa fa-chevron-down" data-order="product_name" /></th>
+                            <th>Order Date <span class="de-portal-order fa fa-chevron-down" data-order="order_date" /></th>
+                            <th>Status <span class="de-portal-order fa fa-chevron-down" data-order="status" /></th>
+                            <th>Requested Delivery Date <span class="de-portal-order fa fa-chevron-down" data-order="request_date" /></th>
+                        </tr>
+                    </thead>
+                    <t t-call="nrs_de_portal.de_order_wip_table_body" />
+                </table>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_order_wip_table_body">
+        <tbody class="de-portal-wip-body">
+            <t t-foreach="data" t-as="item">
+                <t t-if="item['id'] == highlight">
+                    <tr class="de-tr-highlight">
+                        <td>
+                            <span t-esc="item['service_name']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['location_name']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['product_name']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['order_date']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['status']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['request_date']"/>
+                        </td>
+                    </tr>
+                </t>
+                <t t-else="">
+                    <tr>
+                        <td>
+                            <span t-esc="item['service_name']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['location_name']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['product_name']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['order_date']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['status']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['request_date']"/>
+                        </td>
+                    </tr>
+                </t>             
+            </t>
+        </tbody>
+    </t>
+
+    <t t-name="nrs_de_portal.de_order_installed_summary">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Inventory Summary</th>
+                    <t t-foreach="location" t-as="loc">
+                        <th>
+                            <t t-esc="loc" />
+                        </th>
+                    </t>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="table" t-as="tab">
+                    <tr>
+                        <t t-foreach="tab" t-as="item">                            
+                            <td>
+                                <t t-if="item_index == 0">
+                                    <span class="de-p-category-color" t-att-data-color="item[0]" />
+                                    <span class="de-p-category-label"><t t-esc="item[1]" /></span> 
+                                </t>
+                                <t t-else="">
+                                    <t t-esc="item" />
+                                </t>                                
+                            </td>                            
+                        </t>
+                    </tr>
+                </t>
+                <tr>
+                    <td></td>
+                    <t t-foreach="total" t-as="to">
+                        <td>
+                            <t t-esc="to" />
+                        </td>
+                    </t>
+                </tr>
+            </tbody>
+        </table>
+    </t>
+
+    <t t-name="nrs_de_portal.de_order_installed_chart_summary">
+        <div class="col-md-4">
+            <canvas t-att-id="location"></canvas>
+            <p>
+                <t t-esc="total" />
+            </p>
+            <h3>
+                <t t-esc="location" />
+            </h3>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_order_installed">
+        <div class="de-portal-subtitle-box d-flex justify-content-between align-items-center">
+            <div class="d-flex text-center">
+                <span class="de-portal-subicon de-ic-order" /> <span class="de-portal-subtitle">Installed Services</span>
+            </div>              
+            <t t-call="nrs_de_portal.de_search_box_tags" />      
+        </div>
+        <div class="de-portal-content-box">
+            <h4 class="de-installed-service-summary">
+                Inventory Summary
+            </h4>
+            <div class="row de-installed-service-box">
+                <div class="col-lg-6 de-installed-service-left-box">
+                    
+                </div>
+                <div class="col-lg-6">
+                    <div class="row de-installed-service-right-box">
+                        
+                    </div>
+                </div>
+            </div>            
+            <t t-call="nrs_de_portal.de_pagination" />
+            <div class="de-table-box">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Service ID <span class="de-portal-order fa fa-chevron-down" data-order="service_name" /></th>
+                            <th>Operation Site <span class="de-portal-order fa fa-chevron-down" data-order="location_name" /></th>
+                            <th>Product <span class="de-portal-order fa fa-chevron-down" data-order="product_name" /></th>
+                            <th>Quantity <span class="de-portal-order fa fa-chevron-down" data-order="qty" /></th>
+                            <th>Customer Order Reference Number <span class="de-portal-order fa fa-chevron-down" data-order="po_number" /></th>
+                            <th>Service Order Number <span class="de-portal-order fa fa-chevron-down" data-order="sales_order_name" /></th>
+                            <th>Installed Date <span class="de-portal-order fa fa-chevron-down" data-order="installed_date" /></th>
+                            <th>Contract End Date <span class="de-portal-order fa fa-chevron-down" data-order="contract_end_date" /></th>
+                        </tr>
+                    </thead>
+                    <t t-call="nrs_de_portal.de_order_installed_table_body" /> 
+                </table>
+            </div>
+
+            <button class="de-portal-download pull-right">
+                <span class="de-ic-download" />
+                Excel Export
+            </button>
+            <div class="clearfix"></div>              
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_order_installed_table_body">
+        <tbody class="de-portal-installed-body">
+            <t t-foreach="data" t-as="item">
+                <t t-if="item['project_task_id'] == highlight">
+                    <tr class="de-tr-highlight">
+                        <td>
+                            <div class="de-intalled-ticket-container">
+                                <a href="#" class="de-installed-new-ticket" t-att-data-project-id="item['project_task_id']">
+                                    <span class="de-installed-new-ticket-icon de-ic-ticketing" />
+                                    <span class="de-installed-new-ticket-text">Create Ticket</span>
+                                </a>
+                                <div class="de-intalled-ticket-box de-hide">
+                                    <a href="#" class="de-intalled-new-fault-ticket" t-att-data-project-id="item['project_task_id']">New Fault Report Ticket</a>
+                                    <a href="#" class="de-intalled-new-remote-hands" t-att-data-project-id="item['project_task_id']">Request Remote Hands</a>
+                                    <a href="#" class="de-intalled-new-shipment" t-att-data-project-id="item['project_task_id']">New Shipment Ticket</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span t-esc="item['service_name']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['location_name']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['product_name']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['qty']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['po_number']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['so_name']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['installed_date']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['contract_end_date']"/>
+                        </td>
+                    </tr>
+                </t>
+                <t t-else="">
+                    <tr>
+                        <td>
+                            <div class="de-intalled-ticket-container">
+                                <a href="#" class="de-installed-new-ticket" t-att-data-project-id="item['project_task_id']">
+                                    <span class="de-installed-new-ticket-icon de-ic-ticketing" />
+                                    <span class="de-installed-new-ticket-text">Create Ticket</span>
+                                </a>
+                                <div class="de-intalled-ticket-box de-hide">
+                                    <a href="#" class="de-intalled-new-fault-ticket" t-att-data-project-id="item['project_task_id']">New Fault Report Ticket</a>
+                                    <a href="#" class="de-intalled-new-remote-hands" t-att-data-project-id="item['project_task_id']">Request Remote Hands</a>
+                                    <a href="#" class="de-intalled-new-shipment" t-att-data-project-id="item['project_task_id']">New Shipment Ticket</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span t-esc="item['service_name']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['location_name']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['product_name']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['qty']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['po_number']"/>
+                        </td>                        
+                        <td>
+                            <span t-esc="item['so_name']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['installed_date']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['contract_end_date']"/>
+                        </td>
+                    </tr>
+                </t>                
+            </t>
+        </tbody>
+    </t>
+    
+</templates>

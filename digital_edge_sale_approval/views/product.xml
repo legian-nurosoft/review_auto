@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="product_template_form_view_inherit" model="ir.ui.view">
+        <field name="name">product_template_form_view_inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+        	<field name="product_variant_id" position="after">
+        		<field name="ns_standard_product" required="1" />
+                <field name="ns_show_custom_attribute_value" />
+        	</field>
+        	<field name="categ_id" position="after">
+        		<field name="ns_product_attribute" attrs="{'required': [('ns_standard_product','=','depend')]}"/>
+        	</field>
+        </field>
+    </record>
+
+    <record id="product_product_attr_tree" model="ir.ui.view">
+        <field name="name">product_product_attr_tree</field>
+        <field name="model">ns.product.product.attr</field>
+        <field name="arch" type="xml">
+        	<tree>
+        		<field name="ns_name" />
+        		<field name="ns_product_id" />
+        		<field name="ns_standard" />
+        		<field name="ns_product_attribute_type" />
+        		<field name="ns_product_attribute_value" />
+        		<field name="ns_operation_site" />
+        	</tree>
+        </field>
+    </record>
+
+    <record id="product_product_attr_form" model="ir.ui.view">
+        <field name="name">product_product_attr_form</field>
+        <field name="model">ns.product.product.attr</field>
+        <field name="arch" type="xml">
+        	<form>
+        		<sheet>
+        			<div class="oe_title">
+        				<h1>
+        					<field name="ns_name" required="1" placeholder="Name..." />
+        				</h1>
+        			</div>
+        			<group>
+        				<group>
+        					<field name="ns_product_id" />
+        					<field name="ns_product_attribute_type" readonly="1" force_save="1" />
+        					<field name="ns_product_attribute_value" />
+        				</group>
+        				<group>
+        					<field name="ns_operation_site" />
+        					<field name="ns_standard" />
+        				</group>
+        			</group>
+        		</sheet>
+        	</form>
+        </field>
+    </record>
+
+    <record id="product_product_attr_action" model="ir.actions.act_window">
+        <field name="name">Product-Product Atribute Combination</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ns.product.product.attr</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <data noupdate="1">
+    	<menuitem id="product_product_attr_menu" name="Product-Product Atribute Combination" action="product_product_attr_action" />
+    </data>
+</odoo>

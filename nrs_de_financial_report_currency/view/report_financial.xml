@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+<template id="line_template_general_ledger_report_inherit" inherit_id="line_template_general_ledger_report" primary="True">
+    <xpath expr="//div[hasclass('o_account_reports_domain_dropdown')]/*[last()]" position="before">
+        <t t-if="line['caret_options'] != 'account.tax' and line['caret_options'] != 'account.account' and line['caret_options'] != 'account.analytic.account'"><a role="menuitem" tabindex="-1" t-att-data-id="line['id']" action="open_document" class="dropdown-item">View Journal Entry</a></t>
+    </xpath>
+</template>
+
+</data>
+</odoo>

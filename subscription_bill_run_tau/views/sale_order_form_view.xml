@@ -1,0 +1,26 @@
+<odoo>
+    <record id="view_sale_order_form_custom_tau" model="ir.ui.view">
+        <field name="name">sale.order.form.custom.tau</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="x_date_to_confirm"/>
+                <field name="subscription_management"/>
+                <field name="x_contract_term"/>
+                <field name="x_operating_sites" options="{'no_create':true}"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']//field[@name='price_subtotal']" position="after">
+                <field name="x_task"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_template_id']" position="after">
+                <field name="ns_merge_ib_task" optional="hide" />
+                <field name="ns_no_sub_task" optional="hide" />
+            </xpath>
+            <xpath expr="//field[@name='order_line']/form/group[1]/group[1]/field[@name='product_id']" position="after">
+                <field name="ns_merge_ib_task" />
+                <field name="ns_no_sub_task" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ns_billing_preview_user,ns.billing.preview,model_ns_billing_preview,sale_subscription.group_sale_subscription_view,1,1,1,0
+access_ns_billing_preview_detail_user,ns.billing.preview.detail,model_ns_billing_preview_detail,sale_subscription.group_sale_subscription_view,1,1,1,0

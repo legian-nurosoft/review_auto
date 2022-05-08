@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+operating_country_group_user_tau,operating_country.group_user,subscription_bill_run_tau.model_operating_country,base.group_user,1,1,1,0
+operating_country_group_system_tau,operating_country.group_system,subscription_bill_run_tau.model_operating_country,base.group_system,1,1,1,1
+operating_metros_group_user_tau,operating_metros.group_user,subscription_bill_run_tau.model_operating_metros,base.group_user,1,1,1,0
+operating_metros_group_system_tau,operating_metros.group_system,subscription_bill_run_tau.model_operating_metros,base.group_system,1,1,1,1
+operating_sites_group_user_tau,operating_sites.group_user,subscription_bill_run_tau.model_operating_sites,base.group_user,1,1,1,0
+operating_sites_group_system_tau,operating_sites.group_system,subscription_bill_run_tau.model_operating_sites,base.group_system,1,1,1,1
+date_to_confirm_group_user_tau,date_to_confirm.group_user,subscription_bill_run_tau.model_date_confirm,base.group_user,1,1,1,0
+date_to_confirm_group_system_tau,date_to_confirm.group_system,subscription_bill_run_tau.model_date_confirm,base.group_system,1,1,1,1

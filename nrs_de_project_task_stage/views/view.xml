@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record model="ir.ui.view" id="task_type_edit_inherit">
+        <field name="name">task_type_edit_inherit</field>
+        <field name="model">project.task.type</field>
+        <field name="inherit_id" ref="project.task_type_edit" />
+        <field name="arch" type="xml">
+        	<field name="sequence" position="after">
+        		<field name="ns_forbid_go_to_previous_stage" />
+                <field name="ns_forbid_category_id" widget="many2many_tags" />
+                <field name="ns_check_related_space_id" attrs="{'required': [('ns_forbid_category_id','!=',False)]}"/>
+        	</field>
+        </field>
+    </record>
+</odoo>

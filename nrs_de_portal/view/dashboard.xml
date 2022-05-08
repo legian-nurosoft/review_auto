@@ -1,0 +1,988 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="nrs_de_portal.de_portal_index" name="Portal Index">
+        <t t-call="nrs_de_portal.nrs_frontend_layout">
+            <t t-if="company == 'chuanjun'">
+                <t t-set="title">Portal | Chuanjun</t>
+            </t>
+            <t t-else="">
+                <t t-set="title">Portal | Digital Edge</t>
+            </t>
+            <t t-set="x_icon">/nrs_de_portal/static/src/img/favicon.png</t>
+            <div class="de-portal">
+                <nav class="navbar fixed-top de-portal-navbar">                
+                    <t t-if="company == 'chuanjun'">
+                        <a class="navbar-brand" href="/portal">
+                            <img src="/nrs_de_portal/static/src/img/chuanjun_logo.png" class="load-logo"/>
+                        </a>
+                    </t>
+                    <t t-else="">
+                        <a class="navbar-brand" href="/portal">
+                            <img src="/nrs_de_portal/static/src/img/portal_logo.png" class="load-logo"/>
+                        </a>
+                    </t>
+                    <div class="de-breadcrumb-box mr-auto"></div>
+                    <div class="de-user-box ml-auto">
+                        <span class="de-user-message">
+                            <t t-esc="user_name" />
+                        </span>
+                        <span class="de-user-message de-show-company mr-0">
+                            <t t-if="company == 'chuanjun'">
+                                <span class="de-company-name">Chuanjun</span>
+                            </t>
+                            <t t-else="">
+                                <span class="de-company-name">Digital Edge DC</span>
+                            </t>
+                            <div class="de-user-company-box de-hide">
+                                <t t-foreach="companies" t-as="com">
+                                    <span class="de-user-company" t-att-data-company-id="com['id']" t-att-data-company-name="com['name']">
+                                        <t t-esc="com['name']" />
+                                        <t t-if="com['active']">
+                                            <span class="de-company-active de-ic-select" />
+                                        </t>
+                                        <t t-else="">
+                                            <span class="de-company-active de-hide de-ic-select" />
+                                        </t>
+                                    </span>
+                                </t>
+                            </div>
+                        </span>                                                    
+                        <span
+                            tabindex="0"
+                            role="button"
+                            class="fas fa-question-circle de-tooltips-popover-navbar mr-1"
+                            data-toggle="popover"
+                            style="color: #959AA0;"
+                        />
+                        <span class="de-user-message de-show-language">
+                            <span class="de-language-name">
+                                <t t-esc="selected_language" />
+                            </span>
+                            <div class="de-language-box de-hide">
+                                <t t-foreach="languages" t-as="lang">
+                                    <span class="de-select-language" t-att-data-lang-code="lang['code']">
+                                        <t t-esc="lang['name']" />
+                                    </span>
+                                </t>
+                            </div>
+                        </span>
+                        <span class="de-user-photo de-menu-item" data-menu-id="user-profile">
+                            <img t-att-src="user_photo" />
+                        </span>
+                        <span class="de-user-message-mobile de-mobile">
+                            <t t-esc="user_name" />
+                        </span>
+                        <span class="de-user-burger de-ic-menu" />                        
+                        <div class="de-user-menu-box de-hide">
+                            <span class="de-user-menu-item de-mobile">Select Company</span>
+                            <div class="de-user-company-box-mobile">
+                            </div>
+                            <!-- <t t-foreach="companies" t-as="com">
+                                <span class="de-user-company de-user-menu-item-child de-mobile" t-att-data-company-id="com['id']" t-att-data-company-name="com['name']">
+                                    <t t-esc="com['name']" />
+                                    <t t-if="com['active']">
+                                        <span class="de-company-mobile-active de-ic-select" />
+                                    </t>
+                                    <t t-else="">
+                                        <span class="de-company-mobile-active de-hide de-ic-select" />
+                                    </t>
+                                </span>
+                            </t> -->
+                            <span class="de-user-menu-item de-user-show-profile de-menu-item" data-menu-id="user-profile">User Profile</span>
+                        </div>  
+                    </div>   
+                </nav>
+                <div class="de-portal-container">
+                    <div class="de-portal-sidebar">
+                        <div class="de-portal-sidebar-backdrop"></div>
+                        <ol class="de-menu-box">
+                            <t t-foreach="menuitems" t-as="item">
+                                <t t-if="item['type'] == 'menu_item'">
+                                    <li>
+                                        <a href="#" class="de-menu-item de-menu-level-1" t-att-data-menu-id="item['menu_id']">
+                                            <span t-att-class="'de-menu-icon ' + item['icon']" />
+                                            <span class="de-menu-text" t-esc="item['label']"/>
+                                        </a>
+                                    </li>
+                                </t>
+                                <t t-else="">                                
+                                    <t t-if="item['type'] == 'parent_menu_item'">
+                                        <li>
+                                            <a href="#" class="de-menu-item de-menu-level-1" data-parent-menu="true" t-att-data-menu-id="item['menu_id']">
+                                                <span t-att-class="'de-menu-icon ' + item['icon']" />
+                                                <span class="de-menu-text" t-esc="item['label']"/>
+                                                <span class="de-menu-chevron fa fa-chevron-right" />
+                                            </a>
+                                            <t t-if="item['child']">
+                                                <ol class="de-submenu-box de-hide">
+                                                    <t t-foreach="item['child']" t-as="subitem">
+                                                        <li>
+                                                            <t t-if="subitem['type'] == 'menu_item'">
+                                                                <a href="#" class="de-menu-item de-menu-level-2" t-att-data-menu-id="subitem['menu_id']">
+                                                                    <span class="de-menu-text" t-esc="subitem['label']"/>
+                                                                </a>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <a href="#" class="de-menu-parent de-menu-level-2" t-att-data-menu-id="subitem['menu_id']">
+                                                                    <span t-att-class="'de-menu-icon' + subitem['icon']" />
+                                                                    <span class="de-menu-text" t-esc="subitem['label']"/>
+                                                                    <span class="de-menu-chevron fa fa-chevron-right" />
+                                                                </a>
+                                                                <t t-if="subitem['child']">
+                                                                    <ol class="de-submenu-box de-hide">
+                                                                        <t t-foreach="subitem['child']" t-as="sub_subitem">
+                                                                            <li>
+                                                                                <a href="#" class="de-menu-item de-menu-level-3" t-att-data-menu-id="sub_subitem['menu_id']">
+                                                                                    <span class="de-menu-text" t-esc="sub_subitem['label']"/>
+                                                                                </a>
+                                                                            </li>
+                                                                        </t>
+                                                                    </ol>
+                                                                </t>
+                                                            </t>                                                        
+                                                        </li>
+                                                    </t>
+                                                </ol>
+                                            </t> 
+                                        </li>                                                                   
+                                    </t>
+                                    <t t-else="">                                    
+                                        <li>
+                                            <a href="#" class="de-menu-parent de-menu-level-1">
+                                                <span t-att-class="'de-menu-icon ' + item['icon']" />
+                                                <span class="de-menu-text" t-esc="item['label']"/>
+                                                <span class="de-menu-chevron fa fa-chevron-right" />
+                                            </a>
+                                            <t t-if="item['child']">
+                                                <ol class="de-submenu-box de-hide">
+                                                    <t t-foreach="item['child']" t-as="subitem">
+                                                        <li>
+                                                            <t t-if="subitem['type'] == 'menu_item'">
+                                                                <a href="#" class="de-menu-item de-menu-level-2" t-att-data-menu-id="subitem['menu_id']">
+                                                                    <span class="de-menu-text" t-esc="subitem['label']"/>
+                                                                </a>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <a href="#" class="de-menu-parent de-menu-level-2" t-att-data-menu-id="subitem['menu_id']">
+                                                                    <span t-att-class="'de-menu-icon' + subitem['icon']" />
+                                                                    <span class="de-menu-text" t-esc="subitem['label']"/>
+                                                                    <span class="de-menu-chevron fa fa-chevron-right" />
+                                                                </a>
+                                                                <t t-if="subitem['child']">
+                                                                    <ol class="de-submenu-box de-hide">
+                                                                        <t t-foreach="subitem['child']" t-as="sub_subitem">
+                                                                            <li>
+                                                                                <a href="#" class="de-menu-item de-menu-level-3" t-att-data-menu-id="sub_subitem['menu_id']">
+                                                                                    <span class="de-menu-text" t-esc="sub_subitem['label']"/>
+                                                                                </a>
+                                                                            </li>
+                                                                        </t>
+                                                                    </ol>
+                                                                </t>
+                                                            </t>                                                        
+                                                        </li>
+                                                    </t>
+                                                </ol>
+                                            </t> 
+                                        </li> 
+                                    </t>                                                                  
+                                </t>
+                            </t>                            
+                        </ol>
+                        <a href="/web/session/logout?redirect=/web/login" class="de-portal-logout">
+                            <span class="de-portal-logout-icon de-ic-logout-over"/>
+                            <span class="de-portal-logout-text">Logout</span>
+                        </a>
+                    </div>
+                    <div class="de-portal-main">
+                        <div class="de-portal-title">
+                            <h1></h1>
+                            <a class="navbar-brand-mobile de-mobile" href="/portal">
+                                <img src="" class="load-logo"/>
+                            </a>
+                        </div>
+                        <div class="de-portal-mobile-menu">
+                            <a href="#">Under Provisioning</a>
+                            <a href="#" class="active">Installed Services</a>
+                            <a href="#">Request Services</a>
+                        </div>
+                        <div class="de-portal-mobile-submenu">
+                            <a href="#">Remote Hands</a>
+                            <a href="#" class="active">Interconnection Services</a>
+                            <a href="#">NRC</a>
+                        </div>
+                        <div class="de-portal-content">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="de-bottom-mobile">
+                <span class="fa fa-bars de-trigger-sidebar" />
+                <div class="de-bottom-mobile-end">
+                    <span class="fa fa-question-circle" />
+                    <span class="fa fa-list de-message-icon" />
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="nrs_de_portal.de_portal_contact" name="Portal Index">
+        <t t-call="nrs_de_portal.nrs_frontend_layout">
+            <t t-if="company == 'chuanjun'">
+                <t t-set="title">Contact Us | Chuanjun</t>
+            </t>
+            <t t-else="">
+                <t t-set="title">Contact Us | Digital Edge</t>
+            </t>
+            <t t-set="x_icon">/nrs_de_portal/static/src/img/favicon.png</t>
+            <div class="de-web-contact">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="de-portal-title">
+                                <h1>Contact Us</h1>
+                                <a class="navbar-brand-mobile de-mobile" href="/portal">
+                                    <t t-if="company == 'digital-edge'">
+                                        <img src="/nrs_de_portal/static/src/img/portal_logo.png" />
+                                    </t>
+                                    <t t-else="company == 'chuanjun'">
+                                        <img src="/nrs_de_portal/static/src/img/chuanjun_logo.png" />
+                                    </t>
+                                </a>
+                            </div>
+                            <div class="de-portal-content">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    
+    <template id="nrs_de_portal.de_privacy_policy" name="Privacy Policy">
+        <div style="margin: 2rem 5rem 5rem 5rem;">
+            <button type="button" style="margin: 0rem 0rem 2rem 0rem;" class="btn btn-primary"><a href="/">back</a></button>
+            <p style="text-align:justify;"><strong><span style="font-family:'Arial Bold';font-weight:bold;font-size:15px;">Privacy
+                    Statement and Practices</span></strong></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">Terms used herein but not otherwise
+                    defined shall have the meanings ascribed to them in Section 19 of this Privacy Statement.</span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">At <t t-esc="company"/>, we value your privacy.
+                    <![CDATA[&nbsp;]]>Regardless of whether you are our customer, a visitor to one of our Websites or Facilities, or someone we
+                    deal with in the ordinary course of our business, protecting your privacy is important to us and is a
+                    responsibility that we take seriously. <![CDATA[&nbsp;]]>We understand the importance of ensuring that we collect, use,
+                    store, share and dispose of (collectively <![CDATA[&ldquo;]]>Process<![CDATA[&rdquo;]]>) Personal Data in a fair, ethical, transparent,
+                    secure, and lawful way. <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]></span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">This Privacy Statement describes the
+                    Privacy Practices we have adopted to protect your Personal Data and to be compliant with regulations pertaining
+                    to privacy and data protection. <![CDATA[&nbsp;]]>In certain jurisdictions around the world, we have additional requirements
+                    that apply to how we Process your Personal Data. <![CDATA[&nbsp;]]>Please see the applicable privacy riders for these
+                    locations in the links below. <![CDATA[&nbsp;]]></span></p>
+            <p style="margin-right:28.3500pt;margin-left:28.3500pt;text-align:justify;"><span
+                    style="font-family:Arial;font-size:15px;">California Residents | Korea | China | Japan | India | Singapore |
+                    Hong Kong | Indonesia | Philippines<![CDATA[&nbsp;]]></span></p>
+            <p style="text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">1.<![CDATA[&nbsp;]]></span></strong><strong><span
+                        style="font-family:'Arial Bold';font-weight:bold;font-size:15px;">Privacy Statement</span></strong></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">This Privacy Statement applies to 
+                    <t t-esc="company"/> and is addressed to individuals outside our organization with whom we interact with in respect of 
+                    our business, including our customers, prospective customers, job applicants, users of our Websites or Facilities,
+                    and other third parties who provide information to us through various other channels (together,
+                    <![CDATA[&ldquo;]]>you<![CDATA[&rdquo;]]>). <![CDATA[&nbsp;]]></span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">By using our Websites or Services, or
+                    otherwise providing information to us, you agree that your Personal Data will be handled as described in this
+                    Privacy Statement. <![CDATA[&nbsp;]]>Your use of our Websites is also subject to our Terms of Use, which sets forth
+                    important information about your use of our Websites. <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]></span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">This Privacy Statement may be amended or
+                    updated from time to time to reflect changes in our practices with respect to the Processing of Personal Data.
+                    <![CDATA[&nbsp;]]>We encourage you to read this Privacy Statement carefully, and to regularly check this page to review any
+                    changes we might make to the same. <![CDATA[&nbsp;]]>If you have any questions about how we Process your Personal Data, or
+                    would like to lodge a complaint, please contact us at<![CDATA[&nbsp;]]></span><a
+                    href="mailto:privacy@digitaledgedc.com"><u><span
+                            style="font-family:Arial;color:rgb(5,99,193);text-decoration:underline;">privacy@digitaledgedc.com</span></u></a><span
+                    style="font-family:Arial;font-size:15px;">.</span></p>
+            <p style="text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">2.</span></strong><strong><span
+                        style="font-family:'Arial Bold';font-weight:bold;font-size:15px;">Collection of Personal
+                        Data</span></strong></p>
+            <p style="margin-right:28.3500pt;margin-left:28.3500pt;text-align:justify;"><strong><em><span
+                            style="font-family:Arial;font-weight:bold;font-style:italic;font-size:15px;">Summary:
+                            <![CDATA[&nbsp;]]></span></em></strong><em><span style="font-family:Arial;font-style:italic;font-size:15px;">We
+                        collect or obtain Personal Data from you from different sources, including automatically as you use our
+                        Websites or Services; when you contact us or request information; during the course of our relationship with
+                        you (or your employer); when you make Personal Data public; when you register to use any of our Services; or
+                        when you interact with our third party content or advertising partners on their websites. <![CDATA[&nbsp;]]>We may also
+                        receive Personal Data about you from third parties (e.g., law enforcement authorities, research providers,
+                        and financial institutions).</span></em></p>
+            <p style="margin-right:28.3500pt;margin-left:28.3500pt;text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">PLEASE NOTE:</span></strong><span
+                    style="font-family:Arial;font-size:15px;"><![CDATA[&nbsp;]]> <![CDATA[&nbsp;]]>We do not ask about or collect sensitive or special
+                    category Personal Data about you, e.g., information relating to your health, genetic information, religion,
+                    political beliefs, union membership, race, or sexual orientation. <![CDATA[&nbsp;]]>We ask that you do not send or provide
+                    this information to us under any circumstances.<![CDATA[&nbsp;]]></span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">How we collect and Process Personal Data
+                    can vary based on how and why you interact with us. <![CDATA[&nbsp;]]>Namely, we Process Personal Data as follows:</span>
+            </p>
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><em><span
+                            style="font-family:Arial;font-size:11.0000pt;">Information We Collect Directly from
+                            You.</span></em><span style="font-family:Arial;font-size:11.0000pt;"><![CDATA[&nbsp;]]> When you communicate or do
+                        business with us, we collect information from you, and this may include personal information. <![CDATA[&nbsp;]]>For
+                        example, we collect information from you when you buy our Services, create an online account with us,
+                        request information from us, download information from our Website, submit a trouble ticket, access our
+                        Facilities, participate in a contest or survey given by us, attend any of our customer or marketing events,
+                        or otherwise engage with us in relation to a Service. <![CDATA[&nbsp;]]></span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><em><span
+                            style="font-family:Arial;font-size:11.0000pt;">Information We Collect Automatically.</span></em><span
+                        style="font-family:Arial;font-size:11.0000pt;"><![CDATA[&nbsp;]]>We automatically collect information about your use of
+                        our Websites or online Services through cookies, web beacons, log files and other technologies (including
+                        geotagging). <![CDATA[&nbsp;]]>We may use this information in aggregated form, or we may associate it with your username
+                        and other personal information that we collect about you. <![CDATA[&nbsp;]]>We may also combine information collected
+                        about you on one of our Websites with information collected through other means for the same purposes as we
+                        would use such information in non-combined form. <![CDATA[&nbsp;]]>Please see the section <![CDATA[&ldquo;]]>Our Use of Cookies and
+                        other Tracking Mechanisms<![CDATA[&rdquo;]]> below for more information.</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><em><span
+                            style="font-family:Arial;font-size:11.0000pt;">Information About Your Use of Our
+                            Services.</span></em><span style="font-family:Arial;font-size:11.0000pt;"><![CDATA[&nbsp;]]>Where permitted, we also
+                        collect information about your use of our Services, Facilities and Websites, including power utilization,
+                        capacity usage, traffic data, CCTV images, security data, and your access rights and privileges (e.g.,
+                        credentials supplied, biometric data, etc.).<![CDATA[&nbsp;]]></span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">Information We Collect from Third Parties. <![CDATA[&nbsp;]]>In addition,
+                        we may collect or obtain your Personal Data directly from third parties. <![CDATA[&nbsp;]]>These third parties typically
+                        consist of research service providers, credit agencies, and law enforcement agencies. Where permitted, we
+                        may combine this data with information that we already maintain about you. <![CDATA[&nbsp;]]></span></li>
+            </ul>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">You can choose not to provide Personal
+                    Data to us in certain circumstances. <![CDATA[&nbsp;]]>However, please note that if you decline to provide us with your
+                    Relevant Personal Data and such information is necessary for us to provide Services to you, or for you to access
+                    our Websites or Facilities, or to perform administrative functions in respect of the same (e.g., billing,
+                    customer support, etc.), we may be unable to do these things for you. <![CDATA[&nbsp;]]></span></p>
+            <p style="text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">3.</span></strong><strong><span
+                        style="font-family:'Arial Bold';font-weight:bold;font-size:15px;">Type and Categories of Personal
+                        Data<![CDATA[&nbsp;]]></span></strong></p>
+            <p style="margin-right:28.3500pt;margin-left:28.3500pt;text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">Summary: <![CDATA[&nbsp;]]></span></strong><em><span
+                        style="font-family:Arial;font-style:italic;font-size:15px;">The type and categories of Personal Data we
+                        collect and Process may include, but is not limited to: your personal details (e.g., your name, age, and
+                        gender); demographic data (e.g., your location and language preferences); your contact details (e.g., your
+                        telephone number and email address); records of your consents; work order details; information about our
+                        Websites (e.g., the type of device you are using); details of your employer; information about your
+                        interactions with our content or advertising; and any views or opinions you provide to us.</span></em></p>
+            <p style="margin-right:28.3500pt;margin-left:28.3500pt;text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">PLEASE NOTE:</span></strong><span
+                    style="font-family:Arial;font-size:15px;"><![CDATA[&nbsp;]]> We do not process personal information or data on behalf of our
+                    customers, and we do not have access to (nor monitor) our customers<![CDATA[&rsquo;]]> data which (i) is stored or processed
+                    by them on their servers or systems within our Facilities or (ii) otherwise transits over or through our Network
+                    Services. <![CDATA[&nbsp;]]><![CDATA[&nbsp;]]></span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">We Process the following type and
+                    categories of Personal Data:</span></p>
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><em><span
+                            style="font-family:Arial;font-size:11.0000pt;">Personal Details</span></em><span
+                        style="font-family:Arial;font-size:11.0000pt;">: given name(s), preferred name, age, and gender.</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><em><span
+                            style="font-family:Arial;font-size:11.0000pt;">Demographic Information</span></em><span
+                        style="font-family:Arial;font-size:11.0000pt;">: salutation, job title, and language preferences.</span>
+                </li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><em><span
+                            style="font-family:Arial;font-size:11.0000pt;">Contact Details</span></em><span
+                        style="font-family:Arial;font-size:11.0000pt;">: correspondence and business address, telephone number,
+                        email address, details of personal/executive assistants (where applicable), messenger application
+                        preference, online messaging details, and social media details.</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><em><span
+                            style="font-family:Arial;font-size:11.0000pt;">Consent Records</span></em><span
+                        style="font-family:Arial;font-size:11.0000pt;">: records of any consents you have given, together with the
+                        date and time, means of consent and any related information (e.g., the subject matter of the consent (i.e.,
+                        for credit checks, background checks, etc.).</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><em><span
+                            style="font-family:Arial;font-size:11.0000pt;">Access Records</span></em><span
+                        style="font-family:Arial;font-size:11.0000pt;">: dates, times and locations of access to our Websites or
+                        Facilities; access credentials, including any location data or biometric data you choose or consent to
+                        provide to us.</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><em><span
+                            style="font-family:Arial;font-size:11.0000pt;">Work Order Details</span></em><span
+                        style="font-family:Arial;font-size:11.0000pt;">: records of work orders placed on our Customer
+                        Portal.</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><em><span
+                            style="font-family:Arial;font-size:11.0000pt;">Data Relating to Our Websites</span></em><span
+                        style="font-family:Arial;font-size:11.0000pt;">: your device type, operating system, browser type, browser
+                        settings, IP address, language settings, date and time of connecting to a Site, usage data, and aggregate
+                        statistical information; as well as your Customer Portal usage statistics (including settings, dates and
+                        times of connecting to the Customer Portal and other technical communications information such as username,
+                        password, security login details).</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><em><span
+                            style="font-family:Arial;font-size:11.0000pt;">Employer Details</span></em><span
+                        style="font-family:Arial;font-size:11.0000pt;">: where you interact with us in your capacity as an employee
+                        of a third party, the name, address, telephone number and email address of your employer.</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><em><span
+                            style="font-family:Arial;font-size:11.0000pt;">Content and Advertising Data</span></em><span
+                        style="font-family:Arial;font-size:11.0000pt;">: records of your interactions with our online advertising
+                        and content, records of advertising and content displayed on pages, and any interaction you may have had
+                        with such content or advertising (e.g., mouse hover, mouse clicks, any forms you complete in whole or in
+                        part) and any touchscreen interactions.</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">Job Applicants: <![CDATA[&nbsp;]]>education details, job and salary
+                        history and other information gathered during the interview process. <![CDATA[&nbsp;]]></span></li>
+            </ul>
+            <p style="text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">4.</span></strong><strong><span
+                        style="font-family:'Arial Bold';font-weight:bold;font-size:15px;">Purposes of Processing and Legal
+                        Basis</span></strong></p>
+            <p style="margin-right:28.3500pt;margin-left:28.3500pt;text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">Summary: <![CDATA[&nbsp;]]></span></strong><em><span
+                        style="font-family:Arial;font-style:italic;font-size:15px;">We Process Personal Data for various reasons,
+                        including but not limited to providing you with access to our Websites, Customer Portal, and Services;
+                        communicate with you; manage our IT systems in connection with our business; ensuring health and safety of
+                        all our customers, employees, and allow access to our Facilities.</span></em></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">Subject to applicable laws, we Process
+                    Personal Data for the following purposes:</span></p>
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">To provide our Services to you, to communicate with you about
+                        your use of our Services, and to fulfil your orders for additional Services (including via email, telephone,
+                        audio or video conference, text message, social media, post or in person).</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">To provide secure access to our Facilities, including by
+                        means of secure access systems which processes your Personal Data, including any access credentials and any
+                        biometric data you may choose to provide for these purposes.</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">For the purpose for which you specifically provided the
+                        Personal Data to us, including, to respond to your inquiries, provide information that you requested,
+                        address trouble tickets, and provide you with support in respect of your Services. <![CDATA[&nbsp;]]></span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">To deliver customized content to you, offer location based,
+                        personalized help and instructions, and otherwise personalize your experience while using our Websites or
+                        our Services.</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">To better understand how users<![CDATA[&rsquo;]]> access and use our
+                        Websites and Services, both on an aggregated and individualized basis, to administer, monitor, and improve
+                        our Websites and Services, for our internal purposes, and for other research and analytical purposes.</span>
+                </li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">For marketing and promotional purposes (e.g., we may use your
+                        Personal Data to contact you with newsletters, special offers and promotions, or to otherwise about products
+                        or information we think may interest you, as well as to track the success of our marketing and advertising
+                        campaigns).</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">To assist us in advertising our products and services in
+                        various mediums including, without limitation, sending promotional emails, advertising our services on third
+                        party Websites and social media platforms, direct mail, and by telemarketing.</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">To undertake health and safety assessments and related
+                        compliance activities (including record keeping) in order to ensure a safe and secure environment to all
+                        individuals working or present at our Facilities.<![CDATA[&nbsp;]]></span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">To protect our customers, employees, or property, including
+                        management, monitoring and operation of our IT and security systems <![CDATA[&mdash;]]> for instance, to investigate
+                        fraud, harassment or other types of unlawful activities involving third parties that we do business with,
+                        and to enforce this Privacy Statement, as well as our Terms of Use. <![CDATA[&nbsp;]]></span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">For our recruitment activities, including interview
+                        activities; analysis of suitability for the relevant position; records of hiring decisions; offer details;
+                        and acceptance details.</span></li>
+            </ul>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">The legal basis on which we Process
+                    Personal Data depends on the type and context in which we obtained the information from you, and can
+                    include:</span></p>
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">Having a legitimate interest in providing our Services to you
+                        (to the extent that such legitimate interest is not overridden by your fundamental rights or freedoms),
+                        <![CDATA[&nbsp;]]></span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">Having obtained your prior consent (but only for the scope
+                        and purposes of that consent), or<![CDATA[&nbsp;]]></span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">Having an obligation or duty (i) to protect the vital
+                        interests of any person or (ii) to comply with a legal or regulatory obligation.</span></li>
+            </ul>
+            <p style="text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">5.</span></strong><strong><span
+                        style="font-family:'Arial Bold';font-weight:bold;font-size:15px;">Disclosure of Personal Data to Third
+                        Parties</span></strong></p>
+            <p style="margin-right:28.3500pt;margin-left:28.3500pt;text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">Summary: <![CDATA[&nbsp;]]></span></strong><em><span
+                        style="font-family:Arial;font-style:italic;font-size:15px;">We may disclose Personal Data to third parties,
+                        including but not limited to, legal and regulatory authorities, our external advisors, our Processors, and
+                        any third-party that as necessary in connection with: the provision of our Services to you, legal
+                        proceedings where the Personal Data may be relevant, and for investigating, detecting, or preventing
+                        criminal offences. <![CDATA[&nbsp;]]></span></em></p>
+            <p style="margin-right:28.3500pt;margin-left:28.3500pt;text-align:justify;"><strong><em><span
+                            style="font-family:Arial;font-weight:bold;font-style:italic;font-size:15px;">PLEASE
+                            NOTE:</span></em></strong><em><span style="font-family:Arial;font-style:italic;font-size:15px;"><![CDATA[&nbsp;]]>
+                        <![CDATA[&nbsp;]]>We<![CDATA[&nbsp;]]></span></em><strong><em><u><span
+                                style="font-family:Arial;font-weight:bold;text-decoration:underline;font-style:italic;font-size:15px;">do
+                                not</span></u></em></strong><em><span
+                        style="font-family:Arial;font-style:italic;font-size:15px;"><![CDATA[&nbsp;]]>sell Personal Data to third
+                        parties.<![CDATA[&nbsp;]]></span></em></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">To the extent permitted by law, we may
+                    share your information as follows:</span></p>
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><em><span
+                            style="font-family:Arial;font-size:11.0000pt;">Affiliates.</span></em><span
+                        style="font-family:Arial;font-size:11.0000pt;"><![CDATA[&nbsp;]]>We may disclose the information we collect from you to
+                        our affiliated companies. Our affiliates may use your information for the purposes indicated in this Privacy
+                        Statement, including to market their products and services to you.</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><em><span
+                            style="font-family:Arial;font-size:11.0000pt;">Marketing Partners.</span></em><span
+                        style="font-family:Arial;font-size:11.0000pt;"><![CDATA[&nbsp;]]>We may jointly offer a product or service, such as data
+                        and internet communications products and services, with third parties who are system integrators, resellers,
+                        solution partners, network partners and affinity organizations. <![CDATA[&nbsp;]]>If we do so, we may share your
+                        information, such as your email address, phone number, or mailing address, with these third parties to
+                        assist in providing and marketing that product or service to you, as well as to enable the third parties to
+                        market their own products and services to you. <![CDATA[&nbsp;]]></span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">Service Providers. We may disclose the information we collect
+                        from you to third party vendors, service providers, contractors or agents who perform functions on our
+                        behalf, including but not limited to entities that provide website hosting, service/order fulfilment,
+                        customer service, and credit card processing. <![CDATA[&nbsp;]]>These third parties are sometimes necessary for us to
+                        provide our Services to you or to fulfil your requests or orders. <![CDATA[&nbsp;]]>We take steps to ensure that third
+                        party contracts contain appropriate data protection and security language.</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">Business Transfers. If we are acquired by or merge with
+                        another company, or if substantially all our assets are transferred to another company, we may transfer the
+                        Personal Data we have collected from you to the other company.</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">In Response to Legal Process. We may disclose Personal Data
+                        we collect from you in order to comply with applicable law, judicial proceedings, court orders, or other
+                        legal process or proceedings. <![CDATA[&nbsp;]]></span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">To Protect Us and Others. <![CDATA[&nbsp;]]>We may disclose Personal Data
+                        we collect from you where we believe it is necessary to investigate, prevent or take action regarding
+                        illegal activities, suspected fraud, situations involving potential threats to the safety of any person,
+                        violations of our Terms of Use or this Privacy Statement, or as evidence in litigation in which we are
+                        involved.</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">Other Purposes for Which We May Seek Your Consent: <![CDATA[&nbsp;]]>From
+                        time to time, we may seek your consent to use your Personal Data for a purpose not described in this Privacy
+                        Statement, which may include the consent to share such Personal Data with third parties.<![CDATA[&nbsp;]]></span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">Aggregate and De-Identified Information. We may share
+                        aggregate or de-identified information about users with third parties for marketing, advertising, research,
+                        or similar purposes.</span></li>
+            </ul>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">The complete list of processors to whom
+                    we disclose Personal Data and the associated purposes can be found at the following<![CDATA[&nbsp;]]></span><span
+                    style="font-family:Arial;font-size:15px;background:rgb(255,255,0);"><a t-att-href="url">link</a></span><span
+                    style="font-family:Arial;font-size:15px;">. <![CDATA[&nbsp;]]></span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">If we engage a third-party
+                    <![CDATA[&ldquo;]]>Processor<![CDATA[&rdquo;]]> to Process your Personal Data, we will ensure the contract between us and the
+                    third-party Processor contains adequate provisions to (i) restrict their ability to Process the Personal Data
+                    only in accordance with our prior written instructions, and (ii) ensure adequate measures to protect the
+                    confidentiality and security of the Personal Data.</span></p>
+            <p style="text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">6.</span></strong><strong><span
+                        style="font-family:'Arial Bold';font-weight:bold;font-size:15px;">Communications and
+                        Marketing</span></strong></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">Where permitted by applicable law, we may
+                    send periodic promotional or informational emails to you. You may opt-out of such communications by following
+                    the opt-out instructions contained in the e-mail. <![CDATA[&nbsp;]]>Please note that it may take several days for us to
+                    process opt-out requests. If you opt-out of receiving emails about recommendations or other information we think
+                    may interest you, we may still send you e-mails about your account or any Services you have requested or
+                    received from us</span></p>
+            <p style="text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">7.</span></strong><strong><span
+                        style="font-family:'Arial Bold';font-weight:bold;font-size:15px;">Cross Border Transfers of Personal
+                        Data<![CDATA[&nbsp;]]></span></strong></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;"><t t-esc="company"/> may transfer Personal Data
+                    across national borders for Processing, but only if permitted by local law. The countries to which we transfer
+                    Personal Data are Hong Kong, Singapore, Australia and such other locations as may be specifically referenced in
+                    a particular county specific rider (if any). Where we transfer your Personal Data to recipients located outside
+                    the country in which the Personal Data was collected, we do so on the basis of Standard Contractual Clauses.
+                    <![CDATA[&nbsp;]]>You are entitled to request a copy of our Standard Contractual Clauses by contacting us in accordance with
+                    the <![CDATA[&lsquo;]]>How To Contact Us<![CDATA[&rsquo;]]> section below.</span></p>
+            <p style="text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">8.</span></strong><strong><span
+                        style="font-family:'Arial Bold';font-weight:bold;font-size:15px;">Third-Party Links</span></strong></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">Our Websites may contain links to
+                    third-party websites. Any access to and use of such linked websites is not governed by this Privacy Statement
+                    but is instead governed by the privacy policies of those third-party websites. <![CDATA[&nbsp;]]>We are not responsible for
+                    the information practices of such third-party websites.</span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">Our Websites may also include social
+                    media plugins such as <![CDATA[&ldquo;]]>like<![CDATA[&rdquo;]]> and <![CDATA[&ldquo;]]>share<![CDATA[&rdquo;]]> buttons. By clicking on such a plugin, the data
+                    you want to <![CDATA[&ldquo;]]>like<![CDATA[&rdquo;]]> or <![CDATA[&ldquo;]]>share<![CDATA[&rdquo;]]> will be provided to the relevant social media site.
+                    <![CDATA[&nbsp;]]>We are not responsible for the practices of such third-party social media sites once you have clicked on
+                    any such button. <![CDATA[&nbsp;]]>We will not collect any data about you from social media sites.</span></p>
+            <p style="text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">9.</span></strong><strong><span
+                        style="font-family:'Arial Bold';font-weight:bold;font-size:15px;">Data Security</span></strong></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">We have implemented appropriate technical
+                    and organizational security measures designed to protect your Personal Data against accidental or unlawful
+                    destruction, loss, alteration, unauthorized disclosure, unauthorized access, and other unlawful or unauthorized
+                    forms of Processing, in accordance with applicable law.</span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">Because the internet is an open system,
+                    the transmission of information via the internet is not completely secure. <![CDATA[&nbsp;]]>Although we will implement all
+                    reasonable measures to protect your Personal Data, we cannot guarantee the security of your data transmitted to
+                    us using the internet <![CDATA[&ndash;]]> any such transmission is at your own risk, and you are responsible for ensuring
+                    that any Personal Data that you send to us are sent securely.</span></p>
+            <p style="text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">10.</span></strong><strong><span
+                        style="font-family:'Arial Bold';font-weight:bold;font-size:15px;">Data Accuracy</span></strong></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">We take every reasonable step to ensure
+                    that the Personal Data that we collect about or from you is accurate and, where necessary, kept up to date.
+                    <![CDATA[&nbsp;]]>If any of your Personal Data is inaccurate (having regard to the purposes for which it was collected and
+                    Processed), we take necessary steps as is required to ensure that such inaccurate data is erased or rectified
+                    without delay.</span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">From time-to-time, we may ask you to
+                    confirm the accuracy of your Personal Data.</span></p>
+            <p style="text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">11.</span></strong><strong><span
+                        style="font-family:'Arial Bold';font-weight:bold;font-size:15px;">Data Minimization</span></strong></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">We take every reasonable step to ensure
+                    that your Personal Data that we Process are limited to the Personal Data reasonably necessary in connection with
+                    the purposes set out in this Notice.</span></p>
+            <p style="text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">12.</span></strong><strong><span
+                        style="font-family:'Arial Bold';font-weight:bold;font-size:15px;">Data Retention</span></strong></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">We take every reasonable step to ensure
+                    that your Personal Data are only Processed for the minimum period necessary for the purposes set out in this
+                    Privacy Statement. <![CDATA[&nbsp;]]>The criteria for determining the duration for which we will retain your Personal Data
+                    are as follows:</span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">We will retain Personal Data in a form
+                    that permits identification only for as long as:</span></p>
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">We maintain an ongoing relationship with you; or</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">Your Personal Data are necessary in connection with the
+                        lawful purposes set out in this Privacy Statement, for which we have a valid legal basis, plus</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">The duration of (i) any applicable limitation period under
+                        applicable law (i.e., any period during which any person could bring a legal claim against us in connection
+                        with your Personal Data, or to which your Personal Data are relevant); and (ii) an additional two (2) month
+                        period following the end of such applicable limitation period (so that, if a person brings a claim at the
+                        end of the limitation period, we are still afforded a reasonable amount of time in which to identify any
+                        Personal Data that are relevant to that claim); and<![CDATA[&nbsp;]]></span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">If any relevant legal claims are brought against us by you,
+                        we will continue to Process Personal Data for such additional periods as are necessary in connection with
+                        that claim.</span></li>
+            </ul>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">During the periods noted in the last 2
+                    paragraphs above, we will restrict our Processing of your Personal Data to storage of, and maintaining the
+                    security of, that data, except to the extent required to defend or prosecute a claim involving that Personal
+                    Data.<![CDATA[&nbsp;]]></span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">Once the foregoing retention period
+                    expires, we will either (i) permanently delete or destroy the relevant Personal Data; or (ii) anonymize the
+                    relevant Personal Data so that it is no longer considered Personal Data under relevant laws.<![CDATA[&nbsp;]]></span></p>
+            <p style="text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">13.</span></strong><strong><span
+                        style="font-family:'Arial Bold';font-weight:bold;font-size:15px;">Your Rights</span></strong></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">Subject to applicable law, you may have
+                    the following rights regarding our Processing of your Personal Data:</span></p>
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">Right to be informed: you have a right to know what Relevant
+                        Personal Data we have about you, what we do with it, where we get it from, who we share it with, how long we
+                        keep it and why we need it.</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">Right not to Provide. The right not to provide Personal Data
+                        to us, however, please note that as mentioned earlier, we may not be able to provide you with the full
+                        benefit of our Websites or Services if you elect not to provide us with your Personal Data).</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">Right of Access. <![CDATA[&nbsp;]]>The right to request access to, or
+                        copies of, your Relevant Personal Data.</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">Right of Rectification. The right to request rectification of
+                        any inaccuracies in your Relevant Personal Data.</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;">
+                    <span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span>
+                    <span style="font-family:Arial;font-size:11.0000pt;">Right to be Forgotten. The right to request, on legitimate
+                        grounds:</span>
+                    <ul style="list-style-type: undefined;">
+                        <li style="list-style-type:none; margin-top: 0.5rem;"><span
+                                style="font-family:'Courier New';font-size:15px;font-size:11.0000pt;">o<![CDATA[&nbsp;]]></span><span
+                                style="font-family:Arial;font-size:11.0000pt;">Erasure of your Relevant Personal Data; or</span>
+                        </li>
+                        <li style="list-style-type:none; margin-top: 0.5rem;"><span
+                                style="font-family:'Courier New';font-size:15px;font-size:11.0000pt;">o<![CDATA[&nbsp;]]></span><span
+                                style="font-family:Arial;font-size:11.0000pt;">Restriction of Processing of your Relevant Personal
+                                Data.</span></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">Right to Data Portability. The right to have certain Relevant
+                        Personal Data transferred to another Controller, in a structured, commonly used and machine-readable format,
+                        to the extent applicable and practicable.<![CDATA[&nbsp;]]></span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">Right to Withdraw Consent. Where we Process your Relevant
+                        Personal Data on the basis of your consent, you have the right to withdraw that consent (noting that such
+                        withdrawal does not affect the lawfulness of any Processing performed prior to the date on which we receive
+                        notice of such withdrawal and does not prevent the Processing of your Relevant Personal Data in reliance
+                        upon any other available legal basis).<![CDATA[&nbsp;]]></span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">Right to Complain. The right to lodge complaints regarding
+                        the Processing of your Relevant Personal Data with a Data Protection Authority.</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">Right to Restrict Use: You have the right to limit the way we
+                        Process your Relevant Personal Data.</span></li>
+            </ul>
+
+            <ul style="list-style-type: undefined;margin-left:26px;">
+                <li style="list-style-type:none;"><span style="font-family:Wingdings;font-size:11.0000pt;">v<![CDATA[&nbsp;]]></span><span
+                        style="font-family:Arial;font-size:11.0000pt;">Right to Challenge Automated Decisions: you have the right to
+                        query and review decisions made about you using purely automated means (i.e., without human involvement or
+                        intervention) based on your Relevant Personal Data.</span></li>
+            </ul>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">The forgoing rights are not intended to
+                    limit your statutory rights. To exercise one or more of these rights, or to ask a question about these rights or
+                    any other provision of this Privacy Statement, or about our Processing of your Relevant Personal Data, please
+                    send an email to<![CDATA[&nbsp;]]></span><a href="mailto:privacy@digitaledgedc.com"><u><span
+                            style="font-family:Arial;color:rgb(5,99,193);text-decoration:underline;">privacy@digitaledgedc.com</span></u></a><span
+                    style="font-family:Arial;font-size:15px;">. <![CDATA[&nbsp;]]>Please note that in some cases it will be necessary to provide
+                    evidence of your identity before we can give effect to these rights. In addition, where your request requires
+                    the establishment of additional facts (e.g., a determination of whether any Processing is non-compliant with
+                    applicable law) we will investigate your request promptly, before deciding what action to take. In addition,
+                    where permitted under applicable law, we may charge you a reasonable fee to access your Relevant Personal Data,
+                    however, we will advise you of any fee in advance of providing you access.<![CDATA[&nbsp;]]></span></p>
+            <p style="text-align:justify;"><strong><span
+                        style="font-family:'Arial Bold';font-weight:bold;font-size:15px;">14.</span></strong><strong><span
+                        style="font-family:'Arial Bold';font-weight:bold;font-size:15px;">Our Use of Cookies and other Tracking
+                        Mechanisms<![CDATA[&nbsp;]]></span></strong></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">When you visit our Websites, we will
+                    typically place Cookies onto your device, or read Cookies already on your device, subject always to obtaining
+                    your consent, where required, in accordance with applicable law. <![CDATA[&nbsp;]]>We use Cookies to record information
+                    about your device, your browser and, in some cases, your preferences and browsing habits. We Process Personal
+                    Data through Cookies and similar technologies, in accordance with our Cookie Policy.</span></p>
+            <p style="text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">15.</span></strong><strong><span
+                        style="font-family:'Arial Bold';font-weight:bold;font-size:15px;">Direct Marketing</span></strong></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">We Process Personal Data to contact you
+                    via email, telephone, direct mail, or other communication formats to provide you with information regarding
+                    services that may be of interest to you. If we provide our services to you, we may send information to you
+                    regarding our services, upcoming promotions and other information that may be of interest to you, using the
+                    contact details that you have provided to us, subject always to obtaining your prior opt-in consent to the
+                    extent required under applicable law.</span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">You may unsubscribe from our promotional
+                    email list at any time by simply clicking on the unsubscribe link included in every promotional email we send.
+                    After you unsubscribe, we will not send you further promotional emails, but in some circumstances, we will
+                    continue to contact you to the extent necessary for the purposes of any services you have requested.</span></p>
+            <p style="text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">16.</span></strong><strong><span
+                        style="font-family:'Arial Bold';font-weight:bold;font-size:15px;">Third-Party Ad Networks</span></strong>
+            </p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">We may use third parties such as network
+                    advertisers to display advertisements about <t t-esc="company"/> on third party websites. Network advertisers display
+                    advertisements on third-party sites, based on your visits to our Websites as well as other websites. <![CDATA[&nbsp;]]>This
+                    enables us and these third parties to target advertisements by displaying ads for products and services in which
+                    you might be interested.</span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">Third party ad network providers,
+                    advertisers, sponsors and/or traffic measurement services may use cookies, JavaScript, web beacons (including
+                    clear GIFs), Flash LSOs and other technologies to measure the effectiveness of their ads, to personalize
+                    advertising content to you, and to track your movements on our Websites and on other third-party sites.
+                    <![CDATA[&nbsp;]]>These third-party cookies and other technologies are governed by each third party<![CDATA[&rsquo;]]>s specific privacy
+                    policy, and not this one. We may provide these third-party advertisers with de-identified information about your
+                    usage of our Websites and our Services, as well as aggregate information about visitors to our Websites and
+                    users of our Services; however, we do not share your personal information with these third parties.</span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">You may opt-out of many third-party ad
+                    networks. For more information regarding this practice, and your choices regarding having this information used
+                    by these companies, including how to opt-out of third-party ad networks operated by, please visit their
+                    respective websites.</span></p>
+            <p style="text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">17.</span></strong><strong><span
+                        style="font-family:'Arial Bold';font-weight:bold;font-size:15px;">Children&apos;s Privacy</span></strong>
+            </p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">We encourage parents and guardians to
+                    take an active role in their children<![CDATA[&rsquo;]]>s online activities. <![CDATA[&nbsp;]]>We do not aim our Websites at children.
+                    <![CDATA[&nbsp;]]>If you believe that we may have collected Personal Data about someone who is under the applicable age of
+                    consent in your country without proper consent of the child<![CDATA[&rsquo;]]>s parent or guardian, please contact us by
+                    sending an email to privacy@digitaledgedc.com.</span></p>
+            <p style="text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">18.</span></strong><strong><span
+                        style="font-family:'Arial Bold';font-weight:bold;font-size:15px;">Details of Controllers</span></strong></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">For the purposes of this Privacy
+                    Statement, the relevant controllers are the affiliates of DEA TopCo LP and <t t-esc="company"/> (Singapore) Holdings Pte
+                    Ltd.<![CDATA[&nbsp;]]></span></p>
+            <p style="margin-bottom:0.0000pt;margin-left:36.0000pt;text-align:justify;">
+                <span style="font-family:Arial;font-size:15px;">Contact details:<![CDATA[&nbsp;]]></span>
+                <span style="font-family:Arial;font-size:15px;">
+                    John Freeman (
+                    <a href="mailto:privacy@digitaledgedc.com">
+                        <u><span
+                                style="font-family:Arial;color:rgb(5,99,193);text-decoration:underline;">privacy@digitaledgedc.com</span></u>
+                    </a> )
+                </span>
+            </p>
+            <p style="text-align:justify;"><strong><span
+                        style="font-family:Arial;font-weight:bold;font-size:15px;">19.</span></strong><strong><span
+                        style="font-family:'Arial Bold';font-weight:bold;font-size:15px;">Definitions</span></strong></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;"><![CDATA[&ldquo;]]>Cookie<![CDATA[&rdquo;]]> means a small file
+                    that is placed on your device when you visit a website (including our Websites). In this Privacy Statement, a
+                    reference to a <![CDATA[&ldquo;]]>Cookie<![CDATA[&rdquo;]]> includes analogous technologies such as web beacons and clear GIFs.</span>
+            </p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;"><![CDATA[&ldquo;]]>Controller<![CDATA[&rdquo;]]> means the entity
+                    that decides how and why Personal Data are Processed. <![CDATA[&nbsp;]]>In many jurisdictions, the Controller has primary
+                    responsibility for complying with applicable data protection laws.</span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;"><![CDATA[&ldquo;]]>Customer Portal<![CDATA[&rdquo;]]> means any
+                    online portal that provides information or interactive functionality.</span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;"><![CDATA[&ldquo;]]>Data Protection Authority<![CDATA[&rdquo;]]>
+                    means an independent public authority that is legally tasked with overseeing compliance with applicable data
+                    protection laws.</span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;"><![CDATA[&ldquo;]]><t t-esc="company"/><![CDATA[&rdquo;]]>,
+                    <![CDATA[&ldquo;]]>we<![CDATA[&rdquo;]]>, <![CDATA[&ldquo;]]>us<![CDATA[&rdquo;]]>, <![CDATA[&ldquo;]]>our<![CDATA[&rdquo;]]> means DEA TopCo L.P., <t t-esc="company"/> (Singapore) Holdings
+                    Pte Ltd., and their direct and indirect wholly owned and/or controlled subsidiaries.</span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;"><![CDATA[&ldquo;]]>Facilities<![CDATA[&rdquo;]]> means any of our
+                    offices and data centers and other property sites which we own, lease and/or operate in connection with our
+                    business.<![CDATA[&nbsp;]]></span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;"><![CDATA[&ldquo;]]>Network Services<![CDATA[&rdquo;]]> means
+                    network connectivity services provided by us to our customers in connection with our data center services (e.g.,
+                    cross connects, internet exchange and traditional voice, data and video connectivity services).<![CDATA[&nbsp;]]></span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;"><![CDATA[&ldquo;]]>Personal Data<![CDATA[&rdquo;]]> means
+                    information that is about any individual, or from which any individual is directly or indirectly identifiable,
+                    in particular by reference to an identifier such as a name, an identification number, location data, an online
+                    identifier or to one or more factors specific to the physical, physiological, genetic, mental, economic,
+                    cultural or social identity of that individual.</span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;"><![CDATA[&ldquo;]]>Process<![CDATA[&rdquo;]]>,
+                    <![CDATA[&ldquo;]]>Processing<![CDATA[&rdquo;]]> or <![CDATA[&ldquo;]]>Processed<![CDATA[&rdquo;]]> means anything that is done with any Personal Data, whether
+                    by automated means, such as collection, recording, organization, structuring, storage, adaptation or alteration,
+                    retrieval, consultation, use, disclosure by transmission, dissemination or otherwise making available, alignment
+                    or combination, restriction, erasure or destruction.</span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;"><![CDATA[&ldquo;]]>Processor<![CDATA[&rdquo;]]> means any person
+                    or entity that Processes Personal Data on behalf of the Controller (other than employees of the
+                    Controller).</span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;"><![CDATA[&ldquo;]]>Relevant Personal Data<![CDATA[&rdquo;]]>
+                    means Personal Data in respect of which we are the Controller.</span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;"><![CDATA[&ldquo;]]>Standard Contractual
+                    Clauses<![CDATA[&rdquo;]]> means template transfer clauses adopted by the European Commission or adopted by a Data
+                    Protection Authority.</span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;"><![CDATA[&ldquo;]]>Websites<![CDATA[&rdquo;]]> means any of the
+                    <t t-esc="company"/> websites operated, or maintained, by us or on our behalf, including our Customer Portal (including
+                    any mobile version of such websites), whether operated under the <t t-esc="company"/> brand or other name that we
+                    own.</span></p>
+            <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;"><![CDATA[&ldquo;]]>Services<![CDATA[&rdquo;]]> means all products
+                    and services offered by <t t-esc="company"/>, including Network Services, whether available online or offline.</span>
+            </p>
+            <div style="margin: 5rem 0 0 0;">
+                <p style="text-align:justify;"><span style="font-family:Arial;font-size:15px;">Last updated: 17 November 2021</span></p>
+            </div>
+        </div>
+    </template>
+    <template id="nrs_de_portal.de_customer_portal_user_guide" name="Privacy Policy">
+        <iframe t-att-src="pdf_source" width="100%" height="100%"/>
+    </template>
+</odoo>

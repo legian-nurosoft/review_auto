@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="nrs_de_portal.de_invoice">
+        <div class="de-portal-subtitle-box d-flex justify-content-between align-items-center">
+            <div class="d-flex text-center">
+            <span class="de-portal-subicon de-ic-invoice" /> <span class="de-portal-subtitle">INVOICE</span>
+            </div>              
+            <t t-call="nrs_de_portal.de_search_box_tags" />      
+        </div>
+        <div class="de-portal-content-box">
+            <t t-call="nrs_de_portal.de_pagination" />
+            <div class="de-table-box">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Invoice Number <span class="de-portal-order fa fa-chevron-down" data-order="invoice_number" /></th>
+                            <th>Company <span class="de-portal-order fa fa-chevron-down" data-order="company" /></th>
+                            <th>Customer Order Reference Number <span class="de-portal-order fa fa-chevron-down" data-order="ref" /></th>
+                            <th>Order Number <span class="de-portal-order fa fa-chevron-down" data-order="order_number" /></th>
+                            <th>Invoice Date <span class="de-portal-order fa fa-chevron-down" data-order="invoice_date" /></th>
+                            <th>Due Date <span class="de-portal-order fa fa-chevron-down" data-order="invoice_date_due" /></th>
+                            <t t-if="user_company != 'DIGITAL EDGE JP'">
+                                <th>Invoice Status <span class="de-portal-order fa fa-chevron-down" data-order="payment_state" /></th>
+                                <th>Total Amount <span class="de-portal-order fa fa-chevron-down" data-order="amount_total" /></th>
+                                <th>Amount Due <span class="de-portal-order fa fa-chevron-down" data-order="amount_residual" /></th>
+                            </t>
+                        </tr>
+                    </thead>
+                    <t t-call="nrs_de_portal.de_invoice_table_body" />
+                </table>
+            </div>
+            <button class="de-portal-download pull-right">
+                <span class="de-ic-download" />
+                Excel Export
+            </button>
+            <div class="clearfix"></div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_invoice_table_body">
+        <tbody class="de-portal-invoice-body">
+            <t t-foreach="data" t-as="item">
+                <t t-if="item['id'] == highlight">
+                    <tr class="de-tr-highlight">
+                        <td>
+                            <span t-esc="item['invoice_number']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['company']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['ref']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['order_number']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['invoice_date']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['invoice_date_due']"/>
+                        </td>
+                        <t t-if="user_company != 'DIGITAL EDGE JP'">
+                            <td>
+                                <span t-esc="item['payment_state']"/>
+                            </td>
+                            <td>
+                                <span t-esc="item['amount_total']"/>
+                            </td>
+                            <td>
+                                <span t-esc="item['amount_residual']"/>
+                            </td>
+                        </t>                        
+                    </tr>
+                </t>
+                <t t-else="">
+                    <tr>
+                        <td>
+                            <span t-esc="item['invoice_number']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['company']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['ref']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['order_number']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['invoice_date']"/>
+                        </td>
+                        <td>
+                            <span t-esc="item['invoice_date_due']"/>
+                        </td>
+                        <t t-if="user_company != 'DIGITAL EDGE JP'">
+                            <td>
+                                <span t-esc="item['payment_state']"/>
+                            </td>
+                            <td>
+                                <span t-esc="item['amount_total']"/>
+                            </td>
+                            <td>
+                                <span t-esc="item['amount_residual']"/>
+                            </td>
+                        </t> 
+                    </tr>
+                </t>                
+            </t>
+        </tbody>
+    </t>
+
+</templates>

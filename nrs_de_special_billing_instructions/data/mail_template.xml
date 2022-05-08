@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="special_billing_instructions_approval" model="mail.template">
+            <field name="name">[DE-Internal] Special Billing Instructions Confirmation</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Special Billing Instructions Approval</field>
+            <field name="email_from">"${object.company_id.name | safe}" &lt;${(object.company_id.email or user.email) | safe}&gt;</field>
+            <field name="email_to">${ctx.emails | safe}</field>
+            <field name="body_html" type="html">
+                <div class="de-mail-container" style="width:100%;padding: 90px; max-width: 900px; background-image: url('${object.nrs_default_url}/nrs_de_portal/static/src/img/bg_stroke.png');">
+                    <div class="de-mail-box" style="min-width:700px;margin-left: auto; margin-right: auto; border-radius: 20px; box-shadow: 0px 0px 30px #0000001A; background-color: white; text-align: center; border: 1px solid #CCCCD0;">
+                        <div class="de-mail-top" style="padding-top:60px;padding-left: 10px; padding-right: 10px">
+                            <div class="de-mail-logo-box" style="margin-bottom:40px;">
+                                <img src="${object.nrs_default_url}/nrs_de_portal/static/src/img/mail_logo.png" />
+                            </div>
+                            <h3 class="de-mail-subject" style="font-size:32px;color: #3D3D3D; margin: 0px;">Special Billing Instructions Confirmation</h3>
+                            <div class="de-mail-separator" style="border-top:1px solid #CCCCD0;height: 0px; margin-top: 40px; margin-bottom: 40px; margin-left: 60px; margin-right: 60px;"></div>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">Hello Country Finance Team,</h3>
+                            <br />
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">You have special billing instructions to confirm</h3>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">Order Number: <span style="font-weight:bolder;"><a href="${object.ns_erp_access_url}">${object.name}</a></span></h3>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">Sales Representative: ${object.user_id.name}</h3>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">Please kindly check and confirm after your review</h3>
+                        </div>
+                        <div class="de-mail-bottom" style="padding-bottom:60px;padding-left: 10px; padding-right: 10px; background-image: url('${object.nrs_default_url}/nrs_de_portal/static/src/img/mail_background.png'); background-repeat: no-repeat; background-size: cover; background-position: center bottom;">
+                            <div class="de-mail-url-box">
+                                <a href="${object.ns_erp_access_url}" style="display:inline-block;background-color: #FF7F00; font-size: 20px; color: white; border-radius: 100px; margin-top: 50px; margin-bottom: 50px; padding: 8px 20px 6px 20px; text-decoration: none;">See Quotation</a>
+                            </div>
+                            <div class="de-mail-separator" style="border-top:1px solid #CCCCD0;height: 0px; margin-top: 40px; margin-bottom: 40px; margin-left: 60px; margin-right: 60px;"></div>
+                            <div class="de-mail-footer">
+                                <img src="${object.nrs_default_url}/nrs_de_portal/static/src/img/mail_home_icon.png" style="margin-bottom:20px;" />
+                                <br />
+                                <span style="font-size:12px;color: #CCCCD0;">Have problem? Contact our Support Team at admin.odoo@digitaledgedc.com for help</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </field>
+            <field name="lang">${object.lang}</field>
+            <field name="auto_delete" eval="False" />
+        </record>
+        
+    </data>
+</odoo>

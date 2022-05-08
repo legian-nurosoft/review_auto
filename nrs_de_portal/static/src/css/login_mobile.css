@@ -1,0 +1,316 @@
+body {
+	font-family:'Acumin Pro' !important;
+	overflow-y: auto;
+	height: 100%;
+}
+
+.de-login-container {
+	height: 100%;
+	min-height: 100%;
+	background-image: url('/nrs_de_portal/static/src/img/background.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+
+}
+
+.de-login-container .container-fluid, .de-login-container .row{
+	height: 100%;
+}
+
+.de-login-left{
+	height: 100%;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+
+.de-login-box{
+	background-color: #FFFFFF;
+	border-radius: 10px;
+	height: 100%;
+	position: relative;
+}
+
+
+.oe_login_form, .oe_reset_password_form, .oe_signup_form{
+	max-width: 310px !important;
+	position: absolute;
+	margin: 0px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+
+.de-login-logo-box{
+	padding-left: 30px;
+	padding-right: 30px;
+	margin-bottom: 32px;
+}
+
+.de-login-label{
+	font-family:'Acumin Pro Bold' !important;
+	font-size: 22px;
+	color: #3D3D3D;
+	text-align: center;
+	margin-top: 0px;
+	margin-bottom: 50px;
+}
+
+.de-2fa-label{
+	font-family:'Acumin Pro Bold' !important;
+	font-size: 18px;
+	color: #3D3D3D;
+	text-align: center;
+	margin-top: 0px;
+	margin-bottom: 4px;
+}
+
+.de-input-box{
+	width: 100%;
+	height: 48px;
+	background-color: #FFFFFF;
+	border-radius: 27px;
+	margin-bottom: 20px;
+	position: relative;
+	border: 1px solid #CCCCD0;
+}
+
+.de-input-icon-left{
+	position: absolute;
+	left: 25px;
+	top: 15px;
+	color: #CCCCD0;
+}
+
+
+.de-input-icon-right{
+	position: absolute;
+	right: 25px;
+	top: 15px;
+	color: #CCCCD0;
+	font-size: 20px;
+}
+
+.de-text-input{
+	position: absolute;
+	left: 45px;
+	top: 12px;
+	width: 100%;
+	max-width: 220px;
+	border: none;
+	overflow-y: hidden;
+	/*font-size: 12px;*/
+}
+
+.de-text-input:focus{
+	outline: none;
+}
+
+.de-password-input{
+	position: absolute;
+	left: 45px;
+	top: 12px;
+	width: 100%;
+	max-width: 220px;
+	overflow-y: hidden;
+	border: none;
+	/*font-size: 12px;*/
+}
+
+.de-password-input:focus{
+	outline: none;
+}
+
+.de-show-password{
+	cursor: pointer;
+}
+
+.de-btn-login {
+	border-radius: 27px;
+	background-color: #3D3D3D;
+	border: none;
+	width: 100%;
+	height: 48px;
+	color: white;
+	font-size: 18px;
+}
+
+.de-reset-pass-box{
+	margin-top: 10px;
+}
+
+.de-remember-icon,.de-agreement-icon{
+	color: #CCCCD0;
+	font-size: 20px;
+	position: relative;
+	top: 3px;
+}
+
+.de-remember-text,.de-agreement-text{
+	font-size: 14px;
+}
+
+.de-btn-reset-password, .de-btn-back-to-login{
+	color: #FF7F00;
+	font-size: 14px;
+}
+
+.de-carousel-box{
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	z-index: 10000;
+	background-color: rgba(0,0,0,0.9);
+}
+
+.de-carousel{
+	padding: 10px;
+}
+
+.de-hide-caraousel{
+	background-color: #2680EB;
+	color: white;
+	font-size: 16px;
+	border-radius: 20px;
+	height: 40px;
+	width: 150px;
+	padding: 10px;
+	text-align: center;
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	z-index: 100000;
+}
+
+.de-hide-caraousel:hover{
+	text-decoration: none;
+}
+
+#de-login-carousel .carousel-indicators li{
+	width: 8px;
+	height: 8px;
+	border-radius: 100%;
+	opacity: 1;
+}
+
+#de-login-carousel .carousel-indicators .active{
+	background-color: #3D3D3D;
+}
+
+.de-login-footer{
+	text-align: center;
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.de-login-footer a{
+	font-size: 16px;
+	color: #3D3D3D;
+}
+
+.de-login-footer .de-login-separator{
+	display: inline-block;
+	border-right: 1px solid #3D3D3D;
+	margin-left: 10px;
+	margin-right: 10px;
+	height: 15px;
+	position: relative;
+	top: 3px;
+}
+
+
+.de-lang-box{
+	position: fixed;
+	top: 90px;
+	right: 90px;
+	border-radius: 20px;
+	background-color: white;
+	height: 40px;
+	width: 200px;	
+	padding: 0px;
+	cursor: pointer;
+}
+
+.de-selected-lang{
+	height: 40px;
+	width: 200px;
+	padding: 9px 4px 4px 10px;
+}
+
+.de-lang-box .de-lang-text{
+	font-size: 16px;
+	color: #FF7F00;
+	width: 130px;
+	display: inline-block;
+	margin-left: 3px;
+	position: relative;
+	top: -3px;
+}
+
+.de-lang-box .de-lang-icon{
+	font-size: 20px;
+}
+
+.de-lang-box .de-lang-chevron{
+	color: #CCCCD0;
+	font-size: 10px;
+	position: relative;
+	top: -5px;
+	right: -2px;
+}
+
+.de-lang-selector{
+	background-color: white;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+
+.de-select-language{
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+.de-unselect-language{
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+
+.de-selected-language{
+	background-color: #F0F0F0;
+}
+
+.de-lang-selector .de-lang-item{
+	display: block;
+	min-height: 40px;
+	padding: 14px 12px 10px 12px;
+	font-size: 16px;
+	color: #3D3D3D;
+}
+
+.de-lang-selector .de-lang-item:hover{
+	background-color: #F0F0F0;
+	text-decoration: none;
+}
+
+.de-lang-selector .de-lang-item:last-child:hover{
+	background-color: #F0F0F0;
+	text-decoration: none;
+	border-bottom-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+}
+
+
+.de-login-url{
+	position: fixed;
+	bottom: 66px;
+	right: 117px;
+	font-family:'Acumin Pro Bold' !important;
+	font-size: 22px;
+	color: #FFFFFF;
+}

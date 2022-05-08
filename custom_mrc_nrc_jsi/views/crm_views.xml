@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_lead_view_form_inherited_jsi" model="ir.ui.view">
+        <field name="name">crm.lead.inherited.jsi</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <field name="user_id" position="before">
+                <field name="mrc_nrc_currency_id" string="Currency"/>
+            </field>
+            <field name="priority" position="after">
+                <field name="expected_revenue_usd"/>
+                <field name="recurring_revenue_usd"/>
+            </field>
+        </field>
+    </record>
+    <record id="crm_kanban_view_leads_inherited_jsi" model="ir.ui.view">
+        <field name="name">crm.kanban.view.leads.inherited.jsi</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_kanban_view_leads" />
+        <field name="arch" type="xml">
+            <field name="expected_revenue" position="after">
+                <!-- <field name="expected_revenue_usd"/> -->
+                <field name="recurring_revenue_usd"/>
+            </field>
+            <progressbar position="attributes">
+                <!-- <attribute name="sum_field">expected_revenue_usd</attribute> -->
+                <attribute name="sum_field">recurring_revenue_usd</attribute>
+            </progressbar>
+        </field>
+    </record>
+</odoo>

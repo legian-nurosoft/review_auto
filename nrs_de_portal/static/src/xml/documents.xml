@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="nrs_de_portal.de_faq_document">
+        <t t-foreach="user_guides" t-as="guide">
+            <div class="de-user-guide-box">
+                <div class="row">
+                    <div class="col-md-1">
+                        <div class="de-user-guide-description">
+                            <h3>
+                                <t t-esc="guide['description']" />
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="col-md-11">
+                        <h2 class="de-user-guide-title">
+                            <t t-esc="guide['title']" />
+                        </h2>
+                        <div class="de-user-guide-body">
+                            <t t-raw="guide['body']" />
+                        </div>
+                        <a class="de-user-guide-url" t-att-href="guide['url']" target="_blank">
+                            <span class="de-ic-download" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </t>
+
+    	<div class="de-portal-subtitle-box">
+            <span class="de-portal-subicon de-ic-documents" /> <span class="de-portal-subtitle">FAQ</span>
+            <t t-call="nrs_de_portal.de_search_box" />
+        </div>
+        <div class="de-portal-content-box">            
+            <div class="de-faq-box">
+                <t t-call="nrs_de_portal.de_faq_document_detail" />
+            </div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_faq_document_detail">
+        <t t-foreach="faq_groups" t-as="group">
+            <div class="de-faq-container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <h1 class="de-faq-group-title">
+                            <t t-esc="group['name']" />
+                        </h1>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="accordion" t-att-id="'group' + group['id']">
+                            <t t-foreach="group['faqs']" t-as="faq">
+                                <div t-att-id="'head' + faq['id']">
+                                    <div class="de-faq-header collapsed" type="button" data-toggle="collapse" t-att-data-target="'#collapse' + faq['id']" aria-expanded="true" t-att-aria-controls="'collapse' + faq['id']">
+                                        <h2 class="de-faq-title">
+                                            <t t-esc="faq['title']" />
+                                        </h2>
+                                        <span class="de-faq-chevron fa fa-chevron-right" />
+                                    </div>
+                                </div>
+                                <div t-att-id="'collapse' + faq['id']" class="collapse" t-att-aria-labelledby="'head' + faq['id']" >
+                                    <div class="de-faq-body">
+                                        <t t-raw="faq['body']" />
+                                    </div>
+                                </div>
+                            </t>
+                        </div>                    
+                    </div>
+                </div>
+            </div>            
+        </t>
+    </t>
+
+    <t t-name="nrs_de_portal.de_policies_document">
+        <div class="de-portal-subtitle-box">
+            <span class="de-portal-subicon de-ic-documents" /> <span class="de-portal-subtitle">Policies</span>
+            <t t-call="nrs_de_portal.de_search_box" />
+        </div>
+        <div class="de-portal-content-box">            
+            <div class="de-policies-container">
+                <t t-call="nrs_de_portal.de_policies_document_detail" />
+            </div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_policies_document_detail">
+        <div class="row">
+            <t t-foreach="user_policies" t-as="policies">
+                <div class="col-md-2">
+                    <div class="de-policies-box">
+                        <h2 class="de-policies-title">
+                            <t t-esc="policies['title']" />
+                        </h2>
+                        <div class="de-policies-separator"></div>
+                        <h2 class="de-policies-date">
+                            <t t-esc="policies['published_date']" />
+                        </h2>
+                        <a class="de-policies-url" t-att-href="policies['url']" target="_blank">
+                            <span class="de-ic-download" />
+                        </a>
+                    </div>
+                </div>
+            </t>
+        </div>        
+    </t>
+</templates>

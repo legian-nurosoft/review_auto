@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ns_floor_form" model="ir.ui.view">
+        <field name="name">ns_floor_form</field>
+        <field name="model">ns.ns_floors</field>
+        <field name="arch" type="xml">
+          <form>
+            <header/>
+            <sheet string="Floors">
+              <widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+              <field name="active" invisible="1"/>
+              <div class="oe_title">
+                          <h1>
+                              <field name="ns_name" required="1" placeholder="Name..."/>
+                          </h1>
+                      </div>
+              <group name="studio_group_ebab44">
+                <group name="studio_group_ebab44_left">
+                  <field name="ns_operation_site" string="Operation Site"/>
+                  <field name="company_id"/>
+                </group>
+                <group name="studio_group_ebab44_right"/>
+              </group>
+            </sheet>
+            <div class="oe_chatter" name="oe_chatter">
+              <field name="message_follower_ids"/>
+              <field name="message_ids"/>
+              <field name="activity_ids"/>
+            </div>
+          </form>
+        </field>
+    </record>
+
+    <record id="ns_floor_tree" model="ir.ui.view">
+        <field name="name">ns_floor_tree</field>
+        <field name="model">ns.ns_floors</field>
+        <field name="arch" type="xml">
+          <tree>
+            <field name="ns_sequence" widget="handle"/>
+            <field name="ns_name"/>
+          </tree>
+        </field>
+    </record>
+
+    <record id="ns_floor_search" model="ir.ui.view">
+        <field name="name">ns_floor_search</field>
+        <field name="model">ns.ns_floors</field>
+        <field name="arch" type="xml">
+          <search>
+            <field name="ns_name"/>
+            <separator/>
+            <filter string="Archived" name="archived_ns_floors" domain="[['active', '=', False]]"/>
+            <separator/>
+          </search>
+        </field>
+    </record>
+
+</odoo>

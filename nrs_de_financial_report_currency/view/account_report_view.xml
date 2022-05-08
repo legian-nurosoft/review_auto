@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_financial_report_form_inherit" model="ir.ui.view">
+        <field name="name">account.financial.html.report.form.inherit</field>
+        <field name="model">account.financial.html.report</field>
+        <field name="inherit_id" ref="account_reports.view_account_financial_report_form" />
+        <field name="arch" type="xml">
+            <field name="unfold_all_filter" position="after">
+                <field name="ns_show_usd_budget" />
+                <field name="ns_show_usd_real" />
+                <field name="ns_show_ifrs" />
+                <field name="ns_show_gaap" />
+            </field>
+        </field>
+    </record>
+
+    <template id="search_template_extra_options_inherit" inherit_id="account_reports.search_template_extra_options">
+        <xpath expr="//a[last()]" position="after">
+            <a role="menuitem" class="dropdown-item js_account_report_bool_filter" t-if="options.get('show_usd_budget') != None" title="Show USD Budget" data-filter="show_usd_budget">Show USD Budget</a>
+            <a role="menuitem" class="dropdown-item js_account_report_bool_filter" t-if="options.get('show_usd_real') != None" title="Show USD Real" data-filter="show_usd_real">Show USD Real</a>           
+        </xpath>        
+    </template>
+
+    <template id="ifrs_gaap_filter" inherit_id="account_reports.search_template">
+        <xpath expr="//div[@id='extra_options_dropdown']/t" position="after">
+            <t t-if="options.get('show_ifrs') != None or options.get('show_gaap') != None">
+                <div class="btn-group o_dropdown">
+                    <button type="button" class="o_dropdown_toggler_btn btn btn-secondary dropdown-toggle" data-toggle="dropdown">
+                        <span class="fa fa-filter"/> Reports:
+                    </button>
+                    <div class="dropdown-menu o_filter_menu" role="menu">
+                        <a role="menuitem" class="dropdown-item js_account_report_bool_filter" t-if="options.get('show_ifrs') != None" title="GAAP" data-filter="show_ifrs">IFRS</a>
+                        <a role="menuitem" class="dropdown-item js_account_report_bool_filter" t-if="options.get('show_gaap') != None" title="IFRS" data-filter="show_gaap">GAAP</a>
+                    </div>
+                </div>
+            </t>            
+        </xpath>
+    </template>
+</odoo>

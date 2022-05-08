@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="nrs_period_13_entry_view" model="ir.ui.view">
+        <field name="name">nrs.period.13.entry.view</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='misc_group']" position="inside">
+            	<field name="nrs_period_13" attrs="{'readonly': [('state','=','posted')]}" />
+            </xpath>
+            <xpath expr="//page[@id='aml_tab']/field[@name='line_ids']/tree/field[@name='account_id']" position="before">
+                <field name="nrs_period" attrs="{'column_invisible': [('parent.nrs_period_13','=',False)]}" />
+            </xpath>
+            <xpath expr="//page[@id='aml_tab']/field[@name='line_ids']/form/group[1]/field[@name='account_id']" position="before">
+                <field name="nrs_period" attrs="{'column_invisible': [('parent.nrs_period_13','=',False)]}" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

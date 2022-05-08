@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ns_group_job_requisition_approver" model="res.groups">
+            <field name="name">Job Requisition Approver</field>
+        </record>
+    </data>
+</odoo>

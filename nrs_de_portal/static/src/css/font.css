@@ -1,0 +1,163 @@
+@font-face {
+    font-family: 'Acumin Pro';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Acumin Pro'), url('/nrs_de_portal/static/src/fonts/Acumin-RPro.woff') format('woff');
+}
+    
+
+@font-face {
+    font-family: 'Acumin Pro Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Acumin Pro Italic'), url('/nrs_de_portal/static/src/fonts/Acumin-ItPro.woff') format('woff');
+}
+    
+
+@font-face {
+    font-family: 'Acumin Pro Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Acumin Pro Bold'), url('/nrs_de_portal/static/src/fonts/Acumin-BdPro.woff') format('woff');
+}
+    
+
+@font-face {
+    font-family: 'Acumin Pro Bold Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Acumin Pro Bold Italic'), url('/nrs_de_portal/static/src/fonts/Acumin-BdItPro.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'de-icon';
+  src:  url('/nrs_de_portal/static/src/fonts/de-icon.eot?r3urf4');
+  src:  url('/nrs_de_portal/static/src/fonts/de-icon.eot?r3urf4#iefix') format('embedded-opentype'),
+    url('/nrs_de_portal/static/src/fonts/de-icon.ttf?r3urf4') format('truetype'),
+    url('/nrs_de_portal/static/src/fonts/de-icon.woff?r3urf4') format('woff'),
+    url('/nrs_de_portal/static/src/fonts/de-icon.svg?r3urf4#de-icon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="de-ic-"], [class*=" de-ic-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'de-icon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.de-ic-adduser:before {
+  content: "\e900";
+}
+.de-ic-boxic-password:before {
+  content: "\e901";
+}
+.de-ic-check:before {
+  content: "\e902";
+}
+.de-ic-close:before {
+  content: "\e903";
+}
+.de-ic-contact:before {
+  content: "\e904";
+}
+.de-ic-dashboard:before {
+  content: "\e905";
+}
+.de-ic-delete:before {
+  content: "\e906";
+}
+.de-ic-documents:before {
+  content: "\e907";
+}
+.de-ic-download:before {
+  content: "\e908";
+}
+.de-ic-edit:before {
+  content: "\e909";
+}
+.de-ic-eraser:before {
+  content: "\e90a";
+}
+.de-ic-eyes:before {
+  content: "\e90b";
+}
+.de-ic-eyes-slash:before {
+  content: "\e90c";
+}
+.de-ic-invoice:before {
+  content: "\e90d";
+}
+.de-ic-language:before {
+  content: "\e90e";
+}
+.de-ic-list:before {
+  content: "\e90f";
+}
+.de-ic-logfile:before {
+  content: "\e910";
+}
+.de-ic-logout-over:before {
+  content: "\e911";
+}
+.de-ic-market:before {
+  content: "\e912";
+}
+.de-ic-menu:before {
+  content: "\e913";
+}
+.de-ic-messages:before {
+  content: "\e914";
+}
+.de-ic-miniandbig:before {
+  content: "\e915";
+}
+.de-ic-order:before {
+  content: "\e916";
+}
+.de-ic-people:before {
+  content: "\e917";
+}
+.de-ic-photo:before {
+  content: "\e918";
+}
+.de-ic-policy:before {
+  content: "\e919";
+}
+.de-ic-search:before {
+  content: "\e91a";
+}
+.de-ic-select:before {
+  content: "\e91b";
+}
+.de-ic-setting:before {
+  content: "\e91c";
+}
+.de-ic-storage:before {
+  content: "\e91d";
+}
+.de-ic-support .path1:before {
+  content: "\e91e";
+  color: rgb(61, 61, 61);
+}
+.de-ic-support .path2:before {
+  content: "\e91f";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.de-ic-ticketing:before {
+  content: "\e920";
+}
+.de-ic-verified:before {
+  content: "\e921";
+}

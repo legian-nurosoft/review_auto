@@ -1,0 +1,12 @@
+<odoo>
+    <record id="view_project_task_type_form_custom_tau" model="ir.ui.view">
+        <field name="name">project.task.type.form.custom.tau</field>
+        <field name="model">project.task.type</field>
+        <field name="inherit_id" ref="project.task_type_edit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='is_closed']" position="after">
+                <field name="x_deprovisioning_stage"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- configuration default in permission sales team-->
+    <record id="nrs_config_deal_desk" model="ns.sale.permission.config">
+        <field name="name" ref="nrs_de_permission_sales_team.nrs_group_sale_deal_desk"></field>
+    </record>
+    <record id="nrs_config_reg_manager" model="ns.sale.permission.config">
+        <field name="name" ref="nrs_de_permission_sales_team.nrs_group_sale_reg_manager"></field>
+    </record>
+    <record id="nrs_config_cont_manager" model="ns.sale.permission.config">
+        <field name="name" ref="nrs_de_permission_sales_team.nrs_group_sale_cont_manager"></field>
+    </record>
+    <record id="nrs_config_sale_manager" model="ns.sale.permission.config">
+        <field name="name" ref="nrs_de_permission_sales_team.nrs_group_sale_manager"></field>
+    </record>
+    <record id="nrs_config_sale_rep" model="ns.sale.permission.config">
+        <field name="name" ref="nrs_de_permission_sales_team.nrs_group_sale_rep"></field>
+    </record>
+    <record id="nrs_config_sale_ops" model="ns.sale.permission.config">
+        <field name="name" ref="nrs_de_permission_sales_team.nrs_group_sale_ops"></field>
+    </record>
+    <record id="nrs_config_sale_accounting" model="ns.sale.permission.config">
+        <field name="name" ref="nrs_de_permission_sales_team.nrs_group_sale_accounting"></field>
+    </record>
+    <record id="nrs_config_sale_support" model="ns.sale.permission.config">
+        <field name="name" ref="nrs_de_permission_sales_team.nrs_group_sale_support"></field>
+    </record>
+
+</odoo>

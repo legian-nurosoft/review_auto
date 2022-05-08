@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="ns_ports_form" model="ir.ui.view">
+    <field name="name">ns_ports_form</field>
+    <field name="model">ns.ns_ports</field>
+    <field name="arch" type="xml">
+      <form>
+        <header>
+          <field name="ns_stage" widget="statusbar" options="{'clickable': 1}" />
+        </header>
+        <sheet string="Ports">
+          <widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}" />
+          <field name="active" invisible="1" />
+          <div class="oe_title">
+            <h1>
+              <field name="ns_name" required="1" placeholder="Name..." />
+            </h1>
+          </div>
+          <group>
+            <field name="ns_operation_site" />
+            <field name="ns_room"/>
+            <field name="ns_patchpanel"/>
+            <field name="ns_customer" options="{'no_create': true}" attrs="{'required': ['|', '|', ('ns_stage', '=', 'Installed'), ('ns_stage', '=', 'Assigned'), ('ns_stage', '=', 'Sold')], 'invisible': [('ns_stage', '=', 'Available')]}" />
+            <field name="ns_reserve_date_until" />
+            <field name="company_id"/>
+          </group>
+        </sheet>
+        <div class="oe_chatter" name="oe_chatter">
+          <field name="message_follower_ids" />
+          <field name="message_ids" />
+          <field name="activity_ids" />
+        </div>
+      </form>
+    </field>
+  </record>
+
+  	<record id="ns_ports_kanban" model="ir.ui.view">
+        <field name="name">ns_ports_kanban</field>
+        <field name="model">ns.ns_ports</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="ns_stage">
+                <field name="ns_name" required="1" placeholder="Name..." />
+                <field name="ns_operation_site" />
+				<field name="ns_room"/>
+				<field name="ns_patchpanel"/>
+				<field name="ns_customer" options="{'no_create': true}" attrs="{'required': ['|', '|', ('ns_stage', '=', 'Installed'), ('ns_stage', '=', 'Assigned'), ('ns_stage', '=', 'Sold')], 'invisible': [('ns_stage', '=', 'Available')]}" />
+				<field name="ns_reserve_date_until" />
+                <field name="ns_stage" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_content oe_kanban_global_click">
+                            <div>
+                                <strong class="o_kanban_record_title"><span><field name="ns_name"/></span></strong>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+  <record id="ns_ports_tree" model="ir.ui.view">
+    <field name="name">ns_ports_tree</field>
+    <field name="model">ns.ns_ports</field>
+    <field name="arch" type="xml">
+      <tree multi_edit="true">
+        <field name="ns_name" required="1" placeholder="Name..." />
+        <field name="ns_operation_site" />
+        <field name="ns_room"/>
+        <field name="ns_patchpanel"/>
+        <field name="ns_customer" options="{'no_create': true}" attrs="{'required': ['|', '|', ('ns_stage', '=', 'Installed'), ('ns_stage', '=', 'Assigned'), ('ns_stage', '=', 'Sold')], 'invisible': [('ns_stage', '=', 'Available')]}" />
+        <field name="ns_reserve_date_until" />
+        <field name="ns_stage" />
+      </tree>
+    </field>
+  </record>
+
+  <record id="ns_ports_search" model="ir.ui.view">
+    <field name="name">ns_ports_search</field>
+    <field name="model">ns.ns_ports</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="ns_name" />
+        <field name="ns_patchpanel" />
+        <field name="ns_operation_site" />
+        <field name="ns_room" />
+        <separator />
+        <filter string="Archived" name="archived_ns_space" domain="[['active', '=', False]]" />
+        <separator />
+        <filter name="ns_operation_site" context="{'group_by': 'ns_operation_site'}" />
+        <filter name="ns_room" context="{'group_by': 'ns_room'}" />
+        <filter name="ns_patchpanel" context="{'group_by': 'ns_patchpanel'}" />
+        <filter name="ns_stage" context="{'group_by': 'ns_stage'}" />
+        <separator />
+      </search>
+    </field>
+  </record>
+
+</odoo>

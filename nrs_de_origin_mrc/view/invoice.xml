@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_move_origin_mrc_form" model="ir.ui.view">
+        <field name="name">account_move_origin_mrc_form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <group id="header_left_group" position="inside">
+                <field name="ns_origin_mrc" readonly="1" attrs="{'invisible': ['|', ('move_type', 'not in', ['out_invoice', 'out_refund']), ('ns_origin_mrc', '=', False)]}" />
+                <field name="ns_billing_contact" attrs="{'invisible': ['|', ('move_type', 'not in', ['out_invoice', 'out_refund']), ('ns_origin_mrc', '=', False)]}" />
+                <field name="ns_operation_site" readonly="1" attrs="{'invisible': ['|', ('move_type', 'not in', ['out_invoice', 'out_refund']), ('ns_origin_mrc', '=', False)]}" />
+            </group>
+        </field>
+    </record>
+
+</odoo>

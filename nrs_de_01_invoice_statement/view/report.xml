@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="a4_landscape_no_head" model="report.paperformat"  >
+            <field name="margin_top">10.0</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">5</field>
+            <field name="format">A4</field>
+            <field name="margin_left">7.0</field>
+            <field name="page_height" eval="False"/>
+            <field name="page_width" eval="False"/>
+            <field name="print_page_width">297.0</field>
+            <field name="display_name">A4 Landscape No Header</field>
+            <field name="orientation">Landscape</field>
+            <field name="name">A4 Landscape No Header</field>
+            <field name="default" eval="False"/>
+            <field name="margin_right">7.0</field>
+            <field name="dpi">90</field>
+            <field name="margin_bottom">10.0</field>
+            <field name="print_page_height">210.0</field>
+        </record>
+
+
+        <template id="nrs_de_01_invoice_statement.external_layout_standard_invoice_mjo">
+        <!--Header-->
+            <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+            
+            </div>
+
+            <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <div>
+                    <!-- This div ensures that the address is not cropped by the header. -->
+                    <t t-call="web.address_layout"/>
+                </div>
+                <t t-raw="0"/>
+            </div>
+
+            <div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+                <div class="text-center" style="border-top: 1px solid black;">
+                    <ul class="list-inline mb4">
+                        <!-- using the list-inline-item class from bootstrap causes weird behaviours in pdf report
+                             adding d-inline class fixes the problem-->
+                        <li t-if="company.phone" class="list-inline-item d-inline"><span class="o_force_ltr" t-field="company.phone"/></li>
+                        <li t-if="company.email" class="list-inline-item d-inline"><span t-field="company.email"/></li>
+                        <li t-if="company.website" class="list-inline-item d-inline"><span t-field="company.website"/></li>
+                        <li t-if="company.vat" class="list-inline-item d-inline"><t t-esc="company.country_id.vat_label or 'Tax ID'"/>: <span t-field="company.vat"/></li>
+                    </ul>
+
+                    <div name="financial_infos">
+                        <span t-field="company.report_footer"/>
+                    </div>
+
+                    <div t-if="report_type == 'pdf'" class="text-muted">
+                        Page: <span class="page"/> / <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <template id="nrs_de_01_invoice_statement.external_layout_invoice_mjo">
+            <t t-if="not o" t-set="o" t-value="doc"/>
+
+            <t t-if="not company">
+                <!-- Multicompany -->
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id"/>
+                </t>
+                <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t>
+
+            <t t-if="company.external_report_layout_id" t-call="{{company.external_report_layout_id.key}}"><t t-raw="0"/></t>
+            <t t-else="else" t-call="nrs_de_01_invoice_statement.external_layout_standard_invoice_mjo"><t t-raw="0"/></t>
+        </template>
+
+        <record id="main_report_invoice_statement" model="ir.ui.view">
+            <field name="active" eval="True"/>
+            <field name="arch" type="xml">
+              <t t-name="studio_main_report">
+                <t t-call="web.html_container">
+                  <t t-call="nrs_de_01_invoice_statement.external_layout_invoice_mjo">
+                    <t t-call="nrs_de_01_invoice_statement.studio_report_docume_invoice_statement_document"/>
+                  </t>
+                </t>
+              </t>
+            </field>
+            <field name="field_parent" eval="False"/>
+            <field name="groups_id" eval="[(6, 0, [])]"/>
+            <field name="inherit_id" eval="False"/>
+            <field name="key">nrs_de_01_invoice_statement.rep_invoice_statement</field>
+            <field name="mode">primary</field>
+            <field name="model" eval="False"/>
+            <field name="name">nrs_de_01_invoice_statement.rep_invoice_statement</field>
+            <field name="priority">16</field>
+            <field name="type">qweb</field>
+        </record>
+
+        <record id="rep_invoice_statement" model="ir.ui.view" >
+            <field name="active" eval="True"/>
+            <field name="arch" type="xml">
+              <t t-name="studio_report_document">
+                  <div class="page">
+                    <t t-set="doc" t-value="data['doc']" />
+                    <t t-set="partner" t-value="data['partner']" />
+                    <t t-set="company" t-value="data['company']" />
+                    <div class="row col-12">
+                      <div class="col-6" style="padding-left: 0px;">
+                        <div class="col-6" style="padding-left: 0px;">
+                            <img t-if="company.logo" t-attf-src="data:image/png;base64,#{company.logo}" width="200px"/>
+                            <br/>
+                            <span t-esc="partner.parent_id.name or partner.name"/>
+                            <br/>
+                            <span t-field="partner.street"/>
+                            <br/>
+                            <t t-if="partner.street2">
+                              <span t-field="partner.street2"/>
+                              <br/>
+                            </t>
+                            <span t-field="partner.city"/>
+                            <span t-field="partner.state_id.name"/>
+                            <span t-field="partner.country_id.name"/>
+                            <span t-field="partner.zip"/>
+                            <!-- Attn: <span t-esc="data['billing_contact']"/> -->
+                        </div>
+                        <div class="col-6" />
+                      </div>
+                      <div class="col-3"><br/><br/>
+                            Invoice Date<br/>
+                            Payment Terms<br/>
+                            Payment Due Date<br/>
+                        </div>
+                      <div class="col-3">
+                        <br/>
+                        <br/>
+                        <span t-if="doc"  t-field="doc.date"/>
+                        <br/>
+                        <span t-if="doc"  t-field="doc.invoice_payment_term_id.name"/>
+                        <br/>
+                        <t t-set="i" t-value="0" />
+                        <t t-set="ns_long" t-value="len(data['invoice_date_due'])" />
+                        <t t-foreach="data['invoice_date_due']" t-as="due_date">
+                          <t t-set="i" t-value="i + 1" />
+                          <span  t-field="due_date.invoice_date_due"/>
+                          <t t-if="i &lt; ns_long" >
+                            <span>, </span>
+                          </t>
+                        </t>
+                        <br/>
+                      </div>
+                    </div>
+                    <br/>
+                    <!-- Summary of Charges and Payments -->
+                    <div>
+                      <table width="100%">
+                        <tr>
+                          <td colspan="2" class="text-left" style="background-color: #CAD4DF">
+                            <strong>Summary of Charges and Payments</strong>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td width="600px" class="text-left">Previous Charge</td>
+                          <td width="200px" class="text-right">
+                            <span t-esc="data['summary']['previous_charge']" t-options="{'widget': 'monetary', 'display_currency': data['summary']['currency']}" />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="text-left">Payment Received</td>
+                          <td class="text-right">
+                            <span t-esc="data['summary']['payment_received']" t-options="{'widget': 'monetary', 'display_currency': data['summary']['currency']}" /> CR
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="text-left">Balance Carried Forward</td>
+                          <td class="text-right">
+                            <span t-esc="data['summary']['balance_carried_forward']" t-options="{'widget': 'monetary', 'display_currency': data['summary']['currency']}" />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="text-left">Late Payment / Interest Charges</td>
+                          <td class="text-right">
+                            <span t-esc="data['summary']['late_payment']" t-options="{'widget': 'monetary', 'display_currency': data['summary']['currency']}" />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="text-left">Current Charges</td>
+                          <td class="text-right">
+                            <span t-esc="data['summary']['current_charge']" t-options="{'widget': 'monetary', 'display_currency': data['summary']['currency']}" />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="text-left">Adjustments</td>
+                          <td class="text-right">
+                            <span t-esc="data['summary']['adjustment']" t-options="{'widget': 'monetary', 'display_currency': data['summary']['currency']}" />
+                          </td>
+                        </tr>
+                        <tr class="o_bold">
+                          <td class="text-left">
+                            <strong>Total Payment Due</strong>
+                          </td>
+                          <td class="text-right">
+                            <string t-esc="data['summary']['total_payment_due']"  t-options="{'widget': 'monetary', 'display_currency': data['summary']['currency']}" />
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+                    <br/>
+                    <!-- Summary of Current Charges -->
+                    <div>
+                      <table width="100%">
+                        <tr>
+                          <td colspan="2" class="text-left" style="background-color: #CAD4DF">
+                            <strong>Summary of Current Charges</strong>
+                          </td>
+                        </tr>
+                      </table>
+                      <table>
+                        <t t-set="all_lines" t-value="data['lines']"/>
+                        <t t-set="operating_site" t-value="data['operating_site']"/>
+                        <t t-set="product_categs" t-value="data['product_categs']"/>
+                        <t t-set="summary_current" t-value="data['summary_current']"/>
+                        <t t-set="grand_total_qty" t-value="0"/>
+                        <t t-set="grand_total_nrc" t-value="0"/>
+                        <t t-set="grand_total_mrc" t-value="0"/>
+                        <t t-set="grand_total_sub" t-value="0"/>
+                        <t t-foreach="summary_current" t-as="operting">
+                          <tr>
+                            <td width="300px">Data Center</td>
+                            <td width="200px"><span t-esc="operting['name']" /></td>
+                            <td class="text-right" width="150px">Qty</td>
+                            <td class="text-right" width="150px">NRC</td>
+                            <td class="text-right" width="150px">MRC</td>
+                            <td width="150px" class="text-center">Taxes</td>
+                            <td width="150px" class="text-right">Subtotal</td>
+                          </tr>
+                          <t t-set="total_qty" t-value="0"/>
+                          <t t-set="total_nrc" t-value="0"/>
+                          <t t-set="total_mrc" t-value="0"/>
+                          <t t-set="total_sub" t-value="0"/>
+                          <t t-foreach="operting['detil']" t-as="detil">
+                            <tr>
+                              <td colspan="2">Total <span t-esc="detil['name']"/> Charges</td>
+                              <td class="text-right">
+                                <span t-esc="float(detil['quantity'])"/>
+                                <t t-set="total_qty" t-value="total_qty + detil['quantity']"  />
+                              </td>
+                              <td class="text-right">
+                                <span t-esc="detil['nrc']" t-options="{'widget': 'monetary', 'display_currency': data['summary']['currency']}" />
+                                <t t-set="total_nrc" t-value="total_nrc + detil['nrc']"/>
+                              </td>
+                              <td class="text-right">
+                                <span t-esc="detil['mrc']"  t-options="{'widget': 'monetary', 'display_currency': data['summary']['currency']}" />
+                                <t t-set="total_mrc" t-value="total_mrc + detil['mrc']"/>
+                              </td>
+                              <td class="text-center">
+                                <span t-esc="detil['taxes']"/>
+                              </td>
+                              <td class="text-right">
+                                <span t-esc="detil['subtotal']"  t-options="{'widget': 'monetary', 'display_currency': data['summary']['currency']}" />
+                                <t t-set="total_sub" t-value="total_sub + detil['subtotal']"/>
+                              </td>
+                            </tr>
+                          </t>
+                          <tr>
+                            <td>Subtotal</td>
+                            <td><span t-esc="operting['name']" /></td>
+                            <td class="text-right">
+                              <span t-esc="total_qty"/>
+                            </td>
+                            <td class="text-right">
+                              <span t-esc="total_nrc"  t-options="{'widget': 'monetary', 'display_currency': data['summary']['currency']}" />
+                            </td>
+                            <td class="text-right">
+                              <span t-esc="total_mrc"  t-options="{'widget': 'monetary', 'display_currency': data['summary']['currency']}" />
+                            </td>
+                            <td class="text-right">
+                            </td>
+                            <td class="text-right">
+                              <span t-esc="total_sub" t-options="{'widget': 'monetary', 'display_currency': data['summary']['currency']}" />
+                            </td>
+                          </tr>
+                          <tr><td><br/></td></tr>
+                          <t t-set="grand_total_qty" t-value="grand_total_qty + total_qty"/>
+                          <t t-set="grand_total_nrc" t-value="grand_total_nrc + total_nrc"/>
+                          <t t-set="grand_total_mrc" t-value="grand_total_mrc + total_mrc"/>
+                          <t t-set="grand_total_sub" t-value="grand_total_sub + total_sub"/>
+
+                        </t>
+                        <tr t-if="summary_current" class="o_bold">
+                          <td colspan="2">Grand Total</td>
+                          <td class="text-right">
+                            <span t-esc="grand_total_qty"/>
+                          </td>
+                          <td class="text-right">
+                            <span t-esc="grand_total_nrc"  t-options="{'widget': 'monetary', 'display_currency': data['summary']['currency']}" />
+                          </td>
+                          <td class="text-right">
+                            <span t-esc="grand_total_mrc"  t-options="{'widget': 'monetary', 'display_currency': data['summary']['currency']}" />
+                          </td>
+                          <td class="text-right">
+                          </td>
+                          <td class="text-right">
+                            <span t-esc="grand_total_sub" t-options="{'widget': 'monetary', 'display_currency': data['summary']['currency']}" />
+                          </td>
+                        </tr>
+
+                      </table>
+                    </div>
+                    <!-- <br/> -->
+                    <!-- Payment Instructions -->
+                    <div>
+                      <t t-set="payment_instruction" t-value="data['payment_instruction']"/>
+                      <table width="100%">
+                        <tr>
+                          <td colspan="4" class="text-left" style="background-color: #CAD4DF">
+                            <strong>Payment Instructions</strong>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td width="200px">Account Holder</td>
+                          <td width="200px" t-esc="payment_instruction.ns_account_holder" />
+                          <td width="200px">ns_account_number</td>
+                          <td width="200px" t-esc="payment_instruction.ns_account_number" />
+                        </tr>
+                        <tr>                          
+                          <td width="200px">Bank Name</td>
+                          <td width="200px" t-esc="payment_instruction.ns_bank_name"/>
+                          <td width="200px">SWIFT Code</td>
+                          <td width="200px" t-esc="payment_instruction.ns_swift_code" />
+                        </tr>
+                        <tr>                          
+                          <td width="200px">Bank Address</td>
+                          <td width="200px" t-esc="payment_instruction.ns_bank_address" />
+                          <td width="200px">Bank Address 2</td>
+                          <td width="200px" t-esc="payment_instruction.ns_bank_address_2" />
+                        </tr>                        
+                      </table>
+                      
+                      For any questions, please contact
+                      <br/>
+                      <span t-field="data['doc_user'].invoice_user_id.name"/>
+                      <span t-field="data['doc_user'].invoice_user_id.email"/>
+                    </div>
+                    <br/>
+                    <!-- Breakdown of Charges Payment Instructions -->
+                    <div>
+                      <table width="100%">
+                        <tr>
+                          <td class="text-left" style="background-color: #CAD4DF">
+                            <strong>Breakdown of Charges</strong>
+                          </td>
+                        </tr>
+                      </table>
+                      <table class="small">
+                        <thead>
+                          <th width="50px">Site ID</th>
+                          <th width="100px">Sales Order #</th>
+                          <th width="100px">Customer PO #</th>
+                          <th width="100px">Category</th>
+                          <th width="250px">Service Desciption</th>
+                          <th width="250px">Service Period</th>
+                          <th width="100px">Charge Type</th>
+                          <th width="80px">Unit</th>
+                          <th width="80px">Qty</th>
+                          <th width="80px">Subtotal</th>
+                        </thead>
+                        <tbody>
+                          <t t-foreach="all_lines" t-as="lines">
+                            <tr>
+                              <td>
+                                <span t-field="lines.x_operating_sites.name"/>
+                              </td>
+                              <td>
+                                <span t-field="lines.sale_line_ids.order_id.name"/>
+                                <span t-field="lines.subscription_id.x_studio_original_sales_order.name"/>
+                              </td>
+                              <td>
+                                <span t-field="lines.sale_line_ids.order_id.client_order_ref"/>
+                                <span t-field="lines.subscription_id.x_studio_original_sales_order.client_order_ref"/>
+                              </td>
+                              <td>
+                                <span t-field="lines.product_id.categ_id.name"/>
+                              </td>
+                              <td>
+                                <span t-field="lines.name"/>
+                              </td>
+                              <td>
+                                <span t-field="lines.sale_line_ids.order_id.x_studio_service_request_date"/>
+                                <span t-field="lines.subscription_id.x_studio_original_sales_order.x_studio_service_request_date"/> - 
+                                <span t-field="lines.sale_line_ids.order_id.x_studio_contract_end_date"/>
+                                <span t-field="lines.subscription_id.x_studio_original_sales_order.x_studio_contract_end_date"/>
+                              </td>
+                              <td>
+                                <span t-field="lines.product_id.x_studio_charge_type"/>
+                              </td>
+                              <td>
+                                <span t-field="lines.price_unit"/>
+                              </td>
+                              <td>
+                                <span t-field="lines.quantity"/>
+                              </td>
+                              <td>
+                                <span t-field="lines.price_subtotal"/>
+                              </td>
+                            </tr>
+                          </t>
+                        </tbody>
+                      </table>
+                    </div>
+
+
+                  </div>
+              </t>
+            </field>
+            <field name="field_parent" eval="False"/>
+            <field name="groups_id" eval="[(6, 0, [])]"/>
+            <field name="inherit_id" eval="False"/>
+            <field name="key">nrs_de_01_invoice_statement.studio_report_docume_invoice_statement_document</field>
+            <field name="mode">primary</field>
+            <field name="model" eval="False"/>
+            <field name="name">nrs_de_01_invoice_statement.studio_report_docume_invoice_statement_document</field>
+            <field name="priority">16</field>
+            <field name="type">qweb</field>
+        </record>
+
+
+        <record id="invoice_statement" model="ir.actions.report"  >
+            <field name="attachment" eval="False"/>
+            <field name="attachment_use" eval="False"/>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+            <field name="binding_view_types">list,form</field>
+            <field name="groups_id" eval="[(6, 0, [])]"/>
+            <field name="model">account.move</field>
+            <field name="multi" eval="False"/>
+            <field name="name">Invoice Statement MJO</field>
+            <field name="paperformat_id" ref="nrs_de_01_invoice_statement.a4_landscape_no_head"/>
+            <field name="report_name">nrs_de_01_invoice_statement.rep_invoice_statement</field>
+            <field name="report_type">qweb-pdf</field>
+        </record>
+
+    </data>
+</odoo>

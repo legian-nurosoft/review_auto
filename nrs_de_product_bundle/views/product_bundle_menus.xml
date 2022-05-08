@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+		<!-- Deklarasi Action -->
+		<record id="action_product_bundle" model="ir.actions.act_window" >
+		    <field name="name">Product Bundle</field>
+		    <field name="res_model">ns.product.bundle</field>
+		    <field name="view_mode">tree,form</field>
+		</record>
+		<!-- Deklarasi Menu -->
+		<menuitem 
+			id="menu_product_bundle" 
+			name="Product Bundle" 
+			sequence="1"       
+			parent="studio_customization.products_products_fbba1ff2-97b4-414c-8c19-ac016472668c"          
+			action="action_product_bundle"/>
+    </data>
+</odoo>

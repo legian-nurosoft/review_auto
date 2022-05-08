@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="contacts.action_contacts" model="ir.actions.act_window">
+        <field name="name">Contacts</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form,activity</field>
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="context">{'default_is_company': True, 'default_nrs_company_type': 'company',
+            'disabled_select_radio': True}
+        </field>
+        <field name="domain">[('nrs_company_type','in',['subcompany','company']), ('partner_share','=',True)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a contact in your address book
+            </p>
+            <p>
+                Odoo helps you to easily track all activities related to a customer.
+            </p>
+        </field>
+    </record>
+
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value
+                    eval="[('name', '=', 'contact_list_ee560d70-83dd-4258-9b4e-230000969984'), ('module', '=', 'studio_customization')]"
+            />
+        </function>
+        <value eval="{'noupdate': False}"/>
+    </function>
+    <record id="studio_customization.contact_list_ee560d70-83dd-4258-9b4e-230000969984" model="ir.actions.act_window">
+        <field name="domain">[('nrs_company_type','in',['person']), ('partner_share','=',True)]</field>
+    </record>
+    <function name="write" model="ir.model.data">
+        <function name="search" model="ir.model.data">
+            <value
+                    eval="[('name', '=', 'contact_list_ee560d70-83dd-4258-9b4e-230000969984'), ('module', '=', 'studio_customization')]"
+            />
+        </function>
+        <value eval="{'noupdate': True}"/>
+    </function>
+
+    <record id="account.res_partner_action_customer" model="ir.actions.act_window">
+        <field name="name">Customers</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[('customer_rank','&gt;',0)]</field>
+        <field name="context">{'search_default_customer': 1,'res_partner_search_mode': 'customer', 'default_is_company':
+            True, 'default_customer_rank': 1}
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new customer in your address book
+            </p>
+            <p>
+                Odoo helps you easily track all activities related to a customer.
+            </p>
+        </field>
+    </record>
+
+    <record id="account.res_partner_action_supplier" model="ir.actions.act_window">
+        <field name="name">Vendors</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[('supplier_rank','&gt;',0)]</field>
+        <field name="context">{'search_default_supplier': 1,'res_partner_search_mode': 'supplier', 'default_is_company':
+            True, 'default_supplier_rank': 1}
+        </field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new supplier in your address book
+            </p>
+            <p>
+                Odoo helps you easily track all activities related to a supplier.
+            </p>
+        </field>
+    </record>
+
+    <record id="base.action_partner_form" model="ir.actions.act_window">
+        <field name="name">Customers</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[('customer_rank','&gt;',0)]</field>
+        <field name="context">{'res_partner_search_mode': 'customer'}</field>
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new customer in your address book
+            </p>
+            <p>
+                Odoo helps you easily track all activities related to a customer.
+            </p>
+        </field>
+    </record>
+
+    <!-- <record id="studio_customization.contact_list_ee560d70-83dd-4258-9b4e-230000969984" model="ir.actions.act_window">
+        <field name="name">Contact List</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">kanban,tree,form,map,activity</field>
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="context">{'default_is_company': False, 'default_nrs_company_type': 'person', 'disabled_select_radio': True}</field>
+        <field name="domain">[('nrs_company_type','in',['person'])]</field>        
+    </record> -->
+
+    <record id="nrs_view_partner_form_inherit" model="ir.ui.view">
+        <field name="name">nrs_view_partner_form_inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="company_type" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="company_type" position="after">
+                <field name="nrs_company_type" widget="no_select_radio"
+                       class="oe_edit_only"
+                       options="{'horizontal': true}"/>
+            </field>
+            <field name="parent_id" position="replace">
+                <field name="parent_id"
+                       widget="res_partner_many2one"
+                       placeholder="Company"
+                       domain="[('is_company', '=', True)]" context="{'default_is_company': True, 'show_vat': True}"
+                       attrs="{'invisible': [('nrs_company_type','in',['person','company'])]}"/>
+            </field>
+            <xpath expr="//field[@name='child_ids']/form/sheet/field[@name='type']" position="after">
+                <field name="nrs_company_type" widget="no_select_radio"
+                       class="oe_edit_only"
+                       options="{'horizontal': true}" invisible="1"/>
+                <field name="is_company" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='child_ids']/form/sheet/field[@name='type']" position="attributes">
+                <attribute name="widget">no_contact_radio</attribute>
+            </xpath>
+            <page name="contact_addresses" position="attributes">
+                <attribute name="string">Address</attribute>
+            </page>
+            <field name="title" position="after">
+                <field name="ns_is_accountant" invisible="1"/>
+                <field name="ns_finance_approved"
+                       attrs="{'invisible': [('nrs_company_type','=','person')], 'readonly': [('ns_is_accountant','=',False)]}"/>
+                <field name="x_studio_company_code" attrs="{'required': [('nrs_company_type','!=','person')]}"/>
+                <field name="x_studio_existing_gtcmca"/>
+            </field>
+
+            <!-- DE44 Dev 2 & Dev 1 -->
+            <xpath expr="//field[@name='property_product_pricelist']" position="after">
+                <field name="ns_usd_currency_id" invisible="1"/>
+                <field name="ns_overdue_90" attrs="{'invisible': [('nrs_company_type','=','person')]}"/>
+                <field name="ns_credit_limit_mrc"  attrs="{'invisible': [('nrs_company_type','=','person')]}"/>
+                <field name="ns_credit_limit_nrc" attrs="{'invisible': [('nrs_company_type','=','person')]}"/>
+                <field name="ns_fortune_500" attrs="{'invisible': [('nrs_company_type','=','person')]}"/>
+                <field name="ns_sd_approval" attrs="{'invisible': [('ns_fortune_500','=', False )]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="nrs_view_partner_tree_inherit" model="ir.ui.view">
+        <field name="name">nrs_view_partner_tree_inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <field name="active" position="after">
+                <field name="x_studio_company_code" optional="show"/>
+                <field name="x_studio_existing_gtcmca" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="base.res_partner_kanban_view">
+        <field name="name">res.partner.kanban</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <kanban class="o_res_partner_kanban" sample="1">
+                <field name="id"/>
+                <field name="color"/>
+                <field name="display_name"/>
+                <field name="title"/>
+                <field name="email"/>
+                <field name="parent_id"/>
+                <field name="is_company"/>
+                <field name="function"/>
+                <field name="phone"/>
+                <field name="street"/>
+                <field name="street2"/>
+                <field name="zip"/>
+                <field name="city"/>
+                <field name="country_id"/>
+                <field name="mobile"/>
+                <field name="state_id"/>
+                <field name="category_id"/>
+                <field name="image_128"/>
+                <field name="type"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                            <t t-if="record.type.raw_value == 'invoice' || record.type.raw_value == 'delivery'">
+                                <t t-if="record.type.raw_value === 'delivery'" t-set="placeholder"
+                                   t-value="'/base/static/img/truck.png'"/>
+                                <t t-elif="record.type.raw_value === 'invoice'" t-set="placeholder"
+                                   t-value="'/base/static/img/money.png'"/>
+                                <t t-else="" t-set="placeholder" t-value="'/base/static/img/avatar_grey.png'"/>
+                                <div class="o_kanban_image_fill_left d-none d-md-block"
+                                     t-attf-style="background-image:url('#{kanban_image('res.partner', 'image_128', record.id.raw_value,  placeholder)}')">
+                                    <img class="o_kanban_image_inner_pic" t-if="record.parent_id.raw_value"
+                                         t-att-alt="record.parent_id.value"
+                                         t-att-src="kanban_image('res.partner', 'image_128', record.parent_id.raw_value)"/>
+                                </div>
+                                <div class="o_kanban_image d-md-none"
+                                     t-attf-style="background-image:url('#{kanban_image('res.partner', 'image_128', record.id.raw_value,  placeholder)}')">
+                                    <img class="o_kanban_image_inner_pic" t-if="record.parent_id.raw_value"
+                                         t-att-alt="record.parent_id.value"
+                                         t-att-src="kanban_image('res.partner', 'image_128', record.parent_id.raw_value)"/>
+                                </div>
+                            </t>
+                            <t t-else="">
+                                <t t-if="record.is_company.raw_value === true" t-set="placeholder"
+                                   t-value="'/base/static/img/company_image.png'"/>
+                                <t t-if="record.is_company.raw_value === false" t-set="placeholder"
+                                   t-value="'/base/static/img/avatar_grey.png'"/>
+                                <div class="o_kanban_image_fill_left o_kanban_image_full"
+                                     t-attf-style="background-image: url(#{kanban_image('res.partner', 'image_128', record.id.raw_value, placeholder)})"
+                                     role="img"/>
+                            </t>
+                            <div class="oe_kanban_details d-flex flex-column">
+                                <strong class="o_kanban_record_title oe_partner_heading">
+                                    <field name="display_name"/>
+                                </strong>
+                                <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+                                <ul>
+                                    <li t-if="record.parent_id.raw_value and !record.function.raw_value">
+                                        <field name="parent_id"/>
+                                    </li>
+                                    <li t-if="!record.parent_id.raw_value and record.function.raw_value">
+                                        <field name="function"/>
+                                    </li>
+                                    <li t-if="record.parent_id.raw_value and record.function.raw_value">
+                                        <field name="function"/>
+                                        at
+                                        <field name="parent_id"/>
+                                    </li>
+                                    <li t-if="record.city.raw_value or record.country_id.raw_value">
+                                        <t t-if="record.city.raw_value">
+                                            <field name="city"/>
+                                            <t t-if="record.country_id.raw_value">,</t>
+                                        </t>
+                                        <t t-if="record.country_id.raw_value">
+                                            <field name="country_id"/>
+                                        </t>
+                                    </li>
+                                    <li t-if="record.email.raw_value" class="o_text_overflow">
+                                        <field name="email"/>
+                                    </li>
+                                </ul>
+                                <div class="o_row">
+                                    <span class="oe_kanban_partner_links"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+</odoo>

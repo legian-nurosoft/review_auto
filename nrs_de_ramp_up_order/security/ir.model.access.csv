@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+ramp_up_group_user,Ramp Up group_user,model_ns_ramp_ups,base.group_user,1,1,1,1
+ramp_up_group_system,Ramp Up group_system,model_ns_ramp_ups,base.group_system,1,1,1,1
+ramp_up_line_group_user,Ramp Up Lines group_user,model_ns_ramp_ups_line,base.group_user,1,1,1,1
+ramp_up_line_group_system,Ramp Up Lines group_system,model_ns_ramp_ups_line,base.group_system,1,1,1,1
+sale_ramp_ups_group_user,Sale Ramp Ups group_user,model_sale_ramp_ups,base.group_user,1,1,1,1
+sale_ramp_ups_group_system,Sale Ramp Ups group_system,model_sale_ramp_ups,base.group_system,1,1,1,1
+sale_ramp_up_lines_group_user,Sale Ramp Up Lines group_user,model_sale_ramp_ups_line,base.group_user,1,1,1,1
+sale_ramp_up_lines_group_system,Sale Ramp Up Lines group_system,model_sale_ramp_ups_line,base.group_system,1,1,1,1

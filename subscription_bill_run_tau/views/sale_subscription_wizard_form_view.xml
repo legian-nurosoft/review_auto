@@ -1,0 +1,16 @@
+<odoo>
+    <record id="view_sale_subscription_wizard_form_custom_tau" model="ir.ui.view">
+        <field name="name">sale.subscription.wizard.form.custom.tau</field>
+        <field name="model">sale.subscription.wizard</field>
+        <field name="inherit_id" ref="sale_subscription.wizard_form_view"/>
+        <field name="arch" type="xml">
+        <xpath expr="//field[@name='date_from']" position="after">
+            <field name="subscription_id" invisible="1"/>
+        </xpath>
+            <xpath expr="//field[@name='uom_id']" position="after">
+                <field name="x_task" domain="[('sale_line_id.product_id', '=', product_id),
+                    ('sale_line_id.subscription_id', '=', parent.subscription_id), ('parent_id', '!=', False), ('stage_id.x_deprovisioning_stage', '=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

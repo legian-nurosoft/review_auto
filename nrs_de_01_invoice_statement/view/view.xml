@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="late_adjustment_invoice" model="ir.ui.view">
+        <field name="name">late_adjustment_invoice</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <field name="amount_residual" position="after">
+                <field name="ns_late_interest"/>
+                <field name="ns_adjustments"/>                
+            </field>
+        </field>
+    </record>
+</odoo>

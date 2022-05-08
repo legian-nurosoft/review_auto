@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+		<!-- Deklarasi Action -->
+
+		<!-- <record model="ir.actions.act_window.view" id="action_invoices_in_billing">
+			<field name="sequence" eval="1"/>
+			<field name="view_type">tree</field>
+			<field name="view_id" ref="invoice_in_billing_list_view"/>
+			<field name="act_window_id" ref="action_invoices_in_billing"/>
+		</record> -->
+
+		<record id="action_invoices_in_billing" model="ir.actions.act_window" >
+		    <field name="name">Invoices</field>
+		    <field name="res_model">account.move</field>
+		    <field name="view_mode">tree,kanban,form</field>
+			<!-- <field name="groups_id" eval="[(6, 0, [ref('account.group_account_invoice')])]"/> -->
+		</record>
+
+		<!-- Deklarasi Menu -->
+		<menuitem 
+			id="menu_invoices_in_billing" 
+			name="Invoices" 
+			sequence="4"    
+			parent="sale_subscription.menu_sale_subscription"          
+			action="action_invoices_in_billing"
+			groups="account.group_account_invoice"/>
+    </data>
+</odoo>

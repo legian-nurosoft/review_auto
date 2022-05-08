@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo><data>
+        <record id="ns_product_bundle_list_view" model="ir.ui.view">
+            <field name="name">ns.product.bundle.list.view</field>
+            <field name="model">ns.product.bundle</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Product Bundle">
+                    <field name="ns_product_bundle_name"/>
+                    <field name="ns_operation_metro"/>
+                    <field name="ns_operation_site"/>
+                    <field name="ns_product_list">
+                        <tree>
+                            <field name="ns_product_id"/>
+                            <field name="ns_product_attribute_value"/>
+                            <field name="ns_quantity"/>
+                            <field name="ns_product_uom"/>
+                            <field name="ns_price"/>
+                            <field name="ns_tax_id"/>
+                        </tree> 
+                    </field>
+                </tree>
+            </field>
+        </record>
+
+        <record id="ns_product_bundle_form_view" model="ir.ui.view" >
+             <field name="name">ns.product.bundle.form.view</field>
+             <field name="model">ns.product.bundle</field>
+             <field name="arch" type="xml">
+                 <form string="Product Bundle">
+                    <sheet>
+                        <group>
+                            <field name="ns_product_bundle_name" required="1"/>
+                            <field name="ns_operation_metro" required ="1" options="{'no_create': True}" widget="many2many_tags"/>
+                            <field name="ns_operation_site" required ="1" options="{'no_create': True}" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="ns_product_list" required ="1" widget="one2many" >
+                                <tree editable="bottom">
+                                    <field name="ns_product_id" domain="[('x_studio_available_operation_site','in',parent.ns_operation_site)]"/>
+                                    <field name="ns_product_attribute_type" invisible="1"/>
+                                    <field name="ns_product_attribute_value"/>
+                                    <field name="ns_quantity"/>
+                                    <field name="ns_product_uom"/>
+                                    <field name="ns_price"/>
+                                    <field name="ns_tax_id" widget="many2many_tags"/>
+                                </tree>  
+                            
+                                <!-- <form string="Form">
+                                    <group>
+                                        <field name="ns_product_id"/>
+                                        <field name="ns_product_attribute_type"/>
+                                        <field name="ns_product_attribute_value"/>
+                                        <field name="ns_quantity"/>
+                                        <field name="ns_product_uom"/>
+                                        <field name="ns_price"/>
+                                        <field name="ns_tax_id"/>
+                                    </group>
+                                </form> -->
+                            </field>
+                        </group>
+                    </sheet>
+                 </form>
+             </field>
+        </record>
+</data></odoo>

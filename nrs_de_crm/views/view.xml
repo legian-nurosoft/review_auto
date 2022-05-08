@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="crm_lead_list_view" model="ir.ui.view">
+            <field name="name">crm.lead.list.view</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+            <field name="arch" type="xml">
+                <xpath expr='//field[@name="expected_revenue"]' position="before">
+                    <field name="mrc_nrc_currency_id" invisible="1"/>
+                </xpath>
+                <xpath expr='//field[@name="expected_revenue"]' position="attributes">
+                    <attribute name="options">{'currency_field': 'mrc_nrc_currency_id'}</attribute>
+                </xpath>
+                <xpath expr='//field[@name="recurring_revenue_monthly"]' position="attributes">
+                    <attribute name="options">{'currency_field': 'mrc_nrc_currency_id'}</attribute>
+                </xpath>
+                <xpath expr='//field[@name="recurring_revenue"]' position="attributes">
+                    <attribute name="options">{'currency_field': 'mrc_nrc_currency_id'}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="crm_lead_form_view" model="ir.ui.view">
+            <field name="name">crm.lead.form.view</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr='//field[@name="recurring_revenue_usd"]' position="after">
+                    <field name="ns_currency_rate"/>
+                </xpath>
+                <xpath expr='//field[@name="recurring_revenue"]/parent::div/parent::div' position="before">
+                    <div name="replace_sequence_placeholder" invisible='1'></div>
+                </xpath>
+                <xpath expr='//field[@name="recurring_revenue"]/parent::div/parent::div/following-sibling::div[2]' position="after">
+                    <xpath expr='//field[@name="recurring_revenue"]/parent::div/parent::div' position="move"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="crm_lead_form_view_last" model="ir.ui.view">
+            <field name="name">crm.lead.form.view.last</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="priority">100</field>
+            <field name="arch" type="xml">
+                <xpath expr='//field[@name="expected_revenue"]' position="before">
+                    <xpath expr='//field[@name="expected_revenue"]/following-sibling::span' position="move"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

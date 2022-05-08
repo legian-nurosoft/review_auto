@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_saleorder_document_inherited_jsi" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[@name='so_total_summary']//table/tr[1]" position="before">
+            <tr class="border-black o_subtotal" style="">
+                <td><strong>MRC</strong></td>
+                <td class="text-right">
+                    <span t-field="doc.amount_mrc" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                </td>
+            </tr>
+            <tr class="border-black o_subtotal" style="">
+                <td><strong>NRC</strong></td>
+                <td class="text-right">
+                    <span t-field="doc.amount_nrc" t-options='{"widget": "monetary", "display_currency": doc.pricelist_id.currency_id}'/>
+                </td>
+            </tr>
+        </xpath>
+    </template>
+</odoo>

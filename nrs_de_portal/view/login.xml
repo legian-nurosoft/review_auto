@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="nrs_de_portal.nrs_frontend_layout" name="Frontend Layout" inherit_id="web.layout" primary="True">
+        <xpath expr="//head/meta[last()]" position="after">
+            <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+        </xpath>
+        <xpath expr="//head/link[last()]" position="after">
+            <link rel="preload" href="/web/static/lib/fontawesome/fonts/fontawesome-webfont.woff2?v=4.7.0" as="font" crossorigin=""/>  <t t-call-assets="web.assets_common" t-js="false"/>
+            <t t-call-assets="web.assets_frontend" t-js="false"/>
+        </xpath>
+        <xpath expr="//head/script[@id='web.layout.odooscript'] | //head/script[last()]" position="after">
+            <script type="text/javascript">
+                odoo.session_info = <t t-raw="json.dumps(request.env['ir.http'].get_frontend_session_info())"/>;
+                if (!/(^|;\s)tz=/.test(document.cookie)) {
+                    const userTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                    document.cookie = `tz=${userTZ}; path=/`;
+                }
+            </script>
+            <t t-call-assets="web.assets_common_minimal_js" t-css="false" defer_load="True"/>
+            <t t-call-assets="web.assets_frontend_minimal_js" t-css="false" defer_load="True"/>
+            <t t-call="web.conditional_assets_tests"/>
+            <t t-call-assets="web.assets_common_lazy" t-css="false" lazy_load="True"/>
+            <t t-call-assets="web.assets_frontend_lazy" t-css="false" lazy_load="True"/>            
+        </xpath>
+        <xpath expr="//t[@t-raw='0']" position="replace">
+            <t t-raw="0"/>
+        </xpath>
+    </template>
+
+    <template id="nrs_de_portal.de_login_layout" name="Login">
+        <t t-call="nrs_de_portal.nrs_frontend_layout">
+            <div class="de-login-container">
+                <div class="container-fluid">
+                    <div class="de-carousel-box de-hide">
+                        <a href="#" class="de-hide-caraousel">Close Overlay</a>
+                        <div class="de-carousel">
+                            <div id="de-login-carousel" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <t t-foreach="carousel" t-as="c">
+                                        <li data-target="#de-login-carousel" t-att-data-slide-to="c_index" t-att-class="'active' if c_index == 0 else ''"></li>
+                                    </t>
+                                </ol>
+                                <div class="carousel-inner">                                    
+                                    <t t-foreach="carousel" t-as="c">
+                                        <div t-att-class="'carousel-item active' if c_index == 0 else 'carousel-item'">
+                                            <t t-raw="c.content" />
+                                        </div>
+                                    </t>
+                                </div>
+                                <a class="carousel-control-prev" href="#de-login-carousel" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#de-login-carousel" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="de-lang-box de-unselect-language">
+                        <div class="de-selected-lang">
+                            <span class="de-lang-icon de-ic-language" />
+                            <span class="de-lang-text">Select Language</span>
+                            <span class="de-lang-chevron fa fa-chevron-down"/>
+                        </div>                        
+                        <div class="de-lang-selector de-hide">
+                            <t t-foreach="languages" t-as="lang">
+                                <a t-att-href="url_for(request.httprequest.path + '?' + keep_query(), lang_code=lang[0])" t-att-data-lang-url-code="lang[0]" class="de-lang-item">
+                                    <t t-esc="lang[2]" />
+                                </a>
+                            </t>
+                        </div>
+                    </div>
+
+                    <h2 class="de-login-url">
+                        digitaledgedc.com
+                    </h2>
+
+                    <div class="row">                        
+                        <div class="col-md-6 de-login-left">
+                            <div class="de-login-box">
+                                <div t-if="message" class="oe_login_form clearfix">
+                                    <p class="alert alert-success" t-if="message" role="status">
+                                        <t t-esc="message"/>
+                                    </p>
+                                    <a href="/web/login" class="btn btn-link btn-sm float-right" role="button">Back to Login</a>
+                                </div>
+                
+                                <t t-raw="0"/>
+
+                                <div class="de-login-footer">
+                                    <!-- <a href="#" class="de-login-portal-preview">
+                                        Portal Preview
+                                    </a>
+                                    <span class="de-login-separator" /> -->
+                                    <a href="/privacy-policy" class="de-login-privacy-policy">
+                                        Privacy Policy
+                                    </a>
+                                    <span class="de-login-separator" />
+                                    <a href="/contact" class="de-login-contact">
+                                        Contact
+                                    </a>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>                        
+        </t>
+    </template>
+
+    <template id="web.login" name="Login">
+        <t t-set="title">Login | Digital Edge</t>
+        <t t-set="x_icon">/nrs_de_portal/static/src/img/favicon.png</t>
+        <t t-call="nrs_de_portal.de_login_layout">
+            <form class="oe_login_form" role="form" t-attf-action="/web/login" method="post" onsubmit="this.action = '/web/login' + location.hash">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                <div class="de-login-logo-box">
+                    <!-- <img class="img-fluid de-login-logo" src="/nrs_de_portal/static/src/img/de-logo-vertical.png" /> -->
+                    <img class="img-fluid de-login-logo" src="" />
+                </div>
+
+                <h2 class="de-login-label"></h2>
+
+                <div class="form-group field-db" t-if="databases and len(databases) &gt; 1">
+                    <label for="db" class="col-form-label">Database</label>
+                    <div t-attf-class="input-group {{'input-group-sm' if form_small else ''}}">
+                        <input type="text" name="db" t-att-value="request.db" id="db" t-attf-class="form-control #{'form-control-sm' if form_small else ''}" required="required" readonly="readonly"/>
+                        <span class="input-group-append">
+                            <a role="button" href="/web/database/selector" class="btn btn-secondary">Select <i class="fa fa-database" role="img" aria-label="Database" title="Database"></i></a>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="de-input-box field-login">
+                    <span class="de-input-icon-left de-ic-contact"/>
+                    <input type="text" placeholder="email" name="login" t-att-value="login" id="login" class="de-text-input de-login-email" required="required" autofocus="autofocus" autocapitalize="off"/>
+                </div>
+
+                <div class="de-input-box field-password">
+                    <span class="de-input-icon-left de-ic-boxic-password"/>
+                    <input type="text"  style="font-family:text-security-disc;top:8px" autocomplete="off" onselectstart="return false" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" placeholder="password" name="password" id="password" class="de-password-input de-login-password" required="required"  t-att-autofocus="'autofocus' if login else None" maxlength="4096"/>
+                    <span class="de-input-icon-right de-show-password de-ic-eyes-slash"/>
+                </div>
+
+                <p class="alert alert-danger" t-if="error" role="alert">
+                    <t t-esc="error"/>
+                </p>
+                <p class="alert alert-success" t-if="message" role="status">
+                    <t t-esc="message"/>
+                </p>
+
+                <div t-attf-class="clearfix oe_login_buttons text-center mb-1 {{'pt-2' if form_small else 'pt-3'}}">
+                    <button type="submit" class="de-btn-login">Log in</button>
+                </div>
+                <div class="o_login_auth"/>                             
+
+                <input type="hidden" name="redirect" t-att-value="redirect"/>
+            </form>
+        </t>
+    </template>
+
+    <template id="auth_signup.login" inherit_id="web.login" name="Sign up - Reset Password">
+        <xpath expr="//button[@type='submit']" position="after">
+            <div class="de-reset-pass-box">
+                <div class="pull-left">
+                    <!-- <span class="de-remember-icon de-ic-check"/> <span class="de-remember-text">Remember me</span> -->
+                    <input class="de-remember-me-checkbox" type="checkbox" value=""/> <span class="de-remember-text">Remember me</span>
+                </div>
+                <div class="pull-right">
+                    <a t-if="signup_enabled" t-attf-href="/web/signup?{{ keep_query() }}">Don't have an account?</a>
+                    <a t-if="reset_password_enabled" t-attf-href="/web/reset_password?{{ keep_query() }}" class="de-btn-reset-password">Reset Password</a>
+                </div>
+                <div class="clearfix"></div>
+            </div>            
+            <div class="o_login_auth"/>
+        </xpath>
+    </template>
+
+
+
+    <template id="auth_signup.reset_password" name="Reset password">
+        <t t-set="title">Reset Password | Digital Edge</t>
+        <t t-set="x_icon">/nrs_de_portal/static/src/img/favicon.png</t>
+        <t t-call="nrs_de_portal.de_login_layout">
+            <form class="oe_reset_password_form" role="form" method="post" t-if="not message">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                <div class="de-login-logo-box">
+                    <!-- <img class="img-fluid de-login-logo" src="/nrs_de_portal/static/src/img/de-logo-vertical.png" /> -->
+                    <img class="img-fluid de-login-logo" src="" />
+                </div>
+
+                <h2 class="de-login-label"></h2>
+
+                <t t-if="token and not invalid_token">
+                    <t t-call="auth_signup.fields">
+                        <t t-set="only_passwords" t-value="1"/>
+                        <t t-set="show_ver_code" t-value="1"/>
+                    </t>
+                </t>
+
+                <t t-if="not token">
+                    <div class="de-input-box field-login">
+                        <span class="de-input-icon-left de-ic-contact"/>
+                        <input type="text" name="login" t-att-value="login" id="login" class="de-text-input"
+                            autofocus="autofocus" required="required" autocapitalize="off" placeholder="account email" />
+                    </div>
+                </t>
+
+                <p class="alert alert-danger" t-if="error" role="alert">
+                    <t t-esc="error"/>
+                </p>
+                <input type="hidden" name="redirect" t-att-value="redirect"/>
+                <input type="hidden" name="token" t-att-value="token"/>
+                <div class="clearfix oe_login_buttons">
+                    <button type="submit" class="de-btn-login">
+                        <t t-if="token and not invalid_token">
+                            RESET PASSWORD
+                        </t>
+                        <t t-else="">
+                            SEND VERIFICATION CODE
+                        </t>
+                    </button>
+                </div>
+                <div class="o_login_auth"/>
+
+            </form>
+        </t>
+    </template>
+
+    <template id="auth_signup.fields" name="Auth Signup/ResetPassword form fields">        
+
+        <t t-if="only_passwords">
+            <t t-if="show_ver_code">
+                <div class="de-input-box field-verification-code">
+                    <span class="de-input-icon-left de-ic-check"/>
+                    <input type="text" name="vercode" t-att-value="vercode" id="vercode" class="de-text-input"
+                        required="required" t-att-autofocus="'autofocus' if only_passwords else None" placeholder="verification code" />                   
+                </div>
+            </t>
+
+            <!-- <input type="hidden" name="login" t-att-value="login" id="login" />
+            <input type="hidden" name="name" t-att-value="name" id="name" /> -->
+            <div class="de-input-box field-login">
+                <span class="de-input-icon-left de-ic-contact"/>
+                <input type="text" name="login" t-att-value="login" id="login" class="de-text-input de-login-email" t-att-readonly="'readonly' if only_passwords else None"/>
+            </div>
+            
+            <div class="de-input-box field-login">
+                <span class="de-input-icon-left fas fa-user"/>
+                <input type="text" name="name" t-att-value="name" id="name" class="de-text-input de-login-email" t-att-readonly="'readonly' if only_passwords else None"/>
+            </div>
+            
+        </t>
+        <t t-else="">
+            <!-- <div class="form-group field-login">
+                <label for="login">Your Email</label>
+                <input type="text" name="login" t-att-value="login" id="login" class="form-control form-control-sm" autofocus="autofocus"
+                    autocapitalize="off" required="required" t-att-readonly="'readonly' if only_passwords else None"/>
+            </div>
+
+            <div class="form-group field-name">
+                <label for="name">Your Name</label>
+                <input type="text" name="name" t-att-value="name" id="name" class="form-control form-control-sm" placeholder="e.g. John Doe"
+                    required="required" t-att-readonly="'readonly' if only_passwords else None"
+                    t-att-autofocus="'autofocus' if login and not only_passwords else None" />
+            </div> -->
+
+            <div class="de-input-box field-login">
+                <span class="de-input-icon-left de-ic-contact"/>
+                <input type="text" name="login" t-att-value="login" id="login" class="de-text-input de-login-email" autofocus="autofocus"
+                    autocapitalize="off" required="required" t-att-readonly="'readonly' if only_passwords else None"/>
+            </div>
+            
+            <div class="de-input-box field-login">
+                <span class="de-input-icon-left fas fa-user"/>
+                <input type="text" name="name" t-att-value="name" id="name" class="de-text-input de-login-email" placeholder="e.g. John Doe"
+                    required="required" t-att-readonly="'readonly' if only_passwords else None"
+                    t-att-autofocus="'autofocus' if login and not only_passwords else None"/>
+            </div>
+        </t>
+        
+
+        <div class="de-input-box field-password">
+            <span class="de-input-icon-left de-ic-boxic-password"/>
+            <input type="password" name="password" id="password" class="de-password-input"
+                required="required" placeholder="new password" />
+            <span class="de-input-icon-right de-show-password de-ic-eyes-slash"/>
+        </div>
+
+        <div class="de-input-box confirm_password">
+            <span class="de-input-icon-left de-ic-boxic-password"/>
+            <input type="password" name="confirm_password" id="confirm_password" class="de-password-input" required="required" placeholder="retype new password"/>
+            <span class="de-input-icon-right de-show-password de-ic-eyes-slash"/>
+        </div>        
+
+        <div>
+            <input class="de-agreement-icon de-policy-agreement-checkbox" type="checkbox" value=""/> <span class="de-agreement-text">I have read and agreed with the <a t-attf-href="/privacy-policy">privacy policy</a></span>
+        </div>
+    </template>
+
+    <template id="auth_signup.signup" name="Sign up login">
+        <t t-set="title">Sign Up | Digital Edge</t>
+        <t t-set="x_icon">/nrs_de_portal/static/src/img/favicon.png</t>
+        <t t-call="nrs_de_portal.de_login_layout">
+            <form class="oe_signup_form" role="form" method="post" t-if="not message">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                <div class="de-login-logo-box">
+                    <!-- <img class="img-fluid de-login-logo" src="/nrs_de_portal/static/src/img/de-logo-vertical.png" /> -->
+                    <img class="img-fluid de-login-logo" src="" />
+                </div>
+
+                <h2 class="de-login-label"></h2>
+
+                <t t-call="auth_signup.fields">
+                    <t t-set="only_passwords" t-value="bool(token and not invalid_token)"/>                    
+                </t>
+
+                <p class="alert alert-danger" t-if="error" role="alert">
+                    <t t-esc="error"/>
+                </p>
+                <input type="hidden" name="redirect" t-att-value="redirect"/>
+                <input type="hidden" name="token" t-att-value="token"/>
+                <div class="text-center oe_login_buttons pt-3">
+                    <button type="submit" class="de-btn-login de-btn-sign-up" t-att-disabled="1" style="background-color: #aaaaaa;"> Sign up</button>
+                    <a t-attf-href="/web/login?{{ keep_query() }}" class="de-btn-back-to-login" role="button">Already have an account?</a>
+                </div>
+                <div class="o_login_auth"/>
+            </form>
+        </t>
+    </template>
+
+    <template id="auth_totp.auth_totp_form">
+        <t t-set="title">Two-factor Authentication | Digital Edge</t>
+        <t t-set="x_icon">/nrs_de_portal/static/src/img/favicon.png</t>
+        <t t-call="nrs_de_portal.de_login_layout">
+            <t t-set="disable_footer">1</t>
+            <div class="oe_login_form">
+                <form method="POST" action="" class="">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <input type="hidden" name="redirect" t-att-value="redirect"/>
+                    <div class="de-login-logo-box">
+                        <!-- <img class="img-fluid de-login-logo" src="/nrs_de_portal/static/src/img/de-logo-vertical.png" /> -->
+                        <img class="img-fluid de-login-logo" src="" />
+                    </div>
+
+                    <h2 class="de-login-label"></h2>
+
+                    <h2 class="de-2fa-label">
+                        Authentication Code (6 digits)
+                    </h2>
+
+                    <div class="de-input-box">
+                        <span class="de-input-icon-left de-ic-check"/>
+                        <input id="totp_token" name="totp_token" class="de-text-input"
+                               autofocus="autofocus" required="required" placeholder="authentication Code"/>                   
+                    </div>
+                    
+                    <p class="alert alert-danger" t-if="error" role="alert">
+                        <t t-esc="error"/>
+                    </p>
+                    <div t-attf-class="clearfix oe_login_buttons text-center mb-1">
+                        <button type="submit" class="de-btn-login">
+                            Verify
+                        </button>
+                    </div>
+                    <div class="small mb-2 mt-2 text-muted">
+                        <i class="fa fa-2x fa-mobile pull-left"/>
+                        Open the two-factor authentication app on your
+                        device to obtain a code and verify your identity
+                    </div>
+                </form>
+                <div class="text-center pb-2 border-top">
+                    <form method="POST" action="/web/session/logout" class="form-inline">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <button type="submit" class="btn btn-link btn-sm mb-2">
+                            Cancel
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+        </t>
+    </template>
+
+    
+    <template id="de_assets_frontend" inherit_id="portal.assets_frontend" name="Website Assets">
+        <xpath expr="//link[last()]" position="after">
+            <style>
+            @font-face{
+            font-family: text-security-disc;
+            src: url("https://raw.githubusercontent.com/noppa/text-security/master/dist/text-security-disc.woff");
+            }
+            input[name="password"]::-webkit-input-placeholder { /* Edge */
+            font-family: 'Acumin Pro';
+            }
+            input[name="password"]:-ms-input-placeholder { /* Internet Explorer */
+            font-family: 'Acumin Pro';
+            }
+            input[name="password"]::placeholder {
+            font-family: 'Acumin Pro';
+            }
+            </style>
+            <link rel="stylesheet" type="text/scss" href="/web/static/lib/tempusdominus/tempusdominus.scss"/>
+            <link rel="stylesheet" type="text/css" href="/nrs_de_portal/static/src/css/font.css"/>
+            <link rel="stylesheet" type="text/css" href="/nrs_de_portal/static/src/css/login_mobile.css"/>
+            <link rel="stylesheet" type="text/css" href="/nrs_de_portal/static/src/css/login_big_screen.css"/>
+            <link rel="stylesheet" type="text/css" href="/nrs_de_portal/static/src/css/portal.css"/>
+            <link rel="stylesheet" type="text/css" href="/nrs_de_portal/static/src/css/tags_input.css"/>
+            <link rel="stylesheet" type="text/css" href="/nrs_de_portal/static/src/plugin/fontawesome/css/all.min.css"/>
+        </xpath>
+        <xpath expr="//script[last()]" position="after">
+            <script type="text/javascript" src="/web/static/lib/moment/moment.js"></script>
+            <script type="text/javascript" src="/web/static/lib/tempusdominus/tempusdominus.js"/>
+            <script type="text/javascript" src="/nrs_de_portal/static/src/js/chart.js"></script>
+            <script type="text/javascript" src="/nrs_de_portal/static/src/js/login.js"></script>
+            <script type="text/javascript" src="/nrs_de_portal/static/src/js/emojis.js"></script>
+            <script type="text/javascript" src="/nrs_de_portal/static/src/js/portal.js"></script>
+            <script type="text/javascript" src="/nrs_de_portal/static/src/js/web_contact.js"></script>
+            <script type="text/javascript" src="/nrs_de_portal/static/src/js/tags_input.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+            <script async="async" defer="defer" src="https://www.googletagmanager.com/gtag/js?id=G-BSC8XHLJ9N"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-BSC8XHLJ9N');
+            </script>
+        </xpath>
+    </template>
+</odoo>

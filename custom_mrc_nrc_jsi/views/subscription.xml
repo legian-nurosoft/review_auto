@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="sale_subscription_view_form_inherit" model="ir.ui.view">
+        <field name="name">sale_subscription_view_form_inherit</field>
+        <field name="model">sale.subscription</field>
+        <field name="inherit_id" ref="sale_subscription.sale_subscription_view_form"/>
+        <field name="arch" type="xml">
+        	<button name="open_website_url" position="before">
+        		<button class="oe_stat_button"
+	                icon="fa-tasks"
+	                name="open_related_task"
+	                type="object">
+	                <field name="ns_task_count" widget="statinfo" string="Task"/>
+	            </button>
+        	</button>
+			<button name="start_subscription" position="attributes">
+				<attribute name="attrs">{'invisible':['|', ('ns_is_can_start','=',False), ('stage_category','!=', 'draft')]}</attribute>
+			</button>
+			<field name="company_id" position="after">
+				<field name="ns_is_can_start" invisible="1"/>
+			</field>
+        </field>
+    </record>
+</odoo>

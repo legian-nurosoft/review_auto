@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Space -->
+    <record id="nrs_rule_multi_company_ns_space" model="ir.rule">
+        <field name="name">Space Multi-Company</field>
+        <field name="model_id" ref="nrs_de_capacity_management.model_ns_ns_space" />
+        <field name="domain_force" >['|', ('company_id', '=', False),('company_id', 'in', company_ids)]</field>
+        <field name="perm_read">1</field>
+        <field name="perm_create">1</field>
+        <field name="perm_write">1</field>
+        <field name="perm_unlink">1</field>
+    </record>
+
+    <!-- Breaker -->
+    <record id="nrs_rule_multi_company_ns_breaker" model="ir.rule">
+        <field name="name">Breaker Multi-Company</field>
+        <field name="model_id" ref="nrs_de_capacity_management.model_ns_ns_breaker" />
+        <field name="domain_force" >['|', ('company_id', '=', False),('company_id', 'in', company_ids)]</field>
+        <field name="perm_read">1</field>
+        <field name="perm_create">1</field>
+        <field name="perm_write">1</field>
+        <field name="perm_unlink">1</field>
+    </record>
+
+    <!-- Patch Panel -->
+    <record id="nrs_rule_multi_company_ns_patch_panel" model="ir.rule">
+        <field name="name">Patch Panel Multi-Company</field>
+        <field name="model_id" ref="nrs_de_capacity_management.model_ns_ns_patchpanel" />
+        <field name="domain_force" >['|', ('company_id', '=', False),('company_id', 'in', company_ids)]</field>
+        <field name="perm_read">1</field>
+        <field name="perm_create">1</field>
+        <field name="perm_write">1</field>
+        <field name="perm_unlink">1</field>
+    </record>
+
+    <!-- Port -->
+    <record id="nrs_rule_multi_company_ns_port" model="ir.rule">
+        <field name="name">Port Mulit-Company</field>
+        <field name="model_id" ref="nrs_de_capacity_management.model_ns_ns_ports" />
+        <field name="domain_force" >['|', ('company_id', '=', False),('company_id', 'in', company_ids)]</field>
+        <field name="perm_read">1</field>
+        <field name="perm_create">1</field>
+        <field name="perm_write">1</field>
+        <field name="perm_unlink">1</field>
+    </record>
+
+    <!-- Floor -->
+    <record id="nrs_rule_multi_company_ns_floor" model="ir.rule">
+        <field name="name">Floor Mulit-Company</field>
+        <field name="model_id" ref="nrs_de_capacity_management.model_ns_ns_floors" />
+        <field name="domain_force" >['|', ('company_id', '=', False),('company_id', 'in', company_ids)]</field>
+        <field name="perm_read">1</field>
+        <field name="perm_create">1</field>
+        <field name="perm_write">1</field>
+        <field name="perm_unlink">1</field>
+    </record>
+
+    <!-- PDU -->
+    <record id="nrs_rule_multi_company_ns_pdu" model="ir.rule">
+        <field name="name">PDU Mulit-Company</field>
+        <field name="model_id" ref="nrs_de_capacity_management.model_ns_ns_pdu" />
+        <field name="domain_force" >['|', ('company_id', '=', False),('company_id', 'in', company_ids)]</field>
+        <field name="perm_read">1</field>
+        <field name="perm_create">1</field>
+        <field name="perm_write">1</field>
+        <field name="perm_unlink">1</field>
+    </record>
+
+    <!-- Room -->
+    <record id="nrs_rule_multi_company_ns_rooms" model="ir.rule">
+        <field name="name">Room Mulit-Company</field>
+        <field name="model_id" ref="nrs_de_capacity_management.model_ns_ns_rooms" />
+        <field name="domain_force" >['|', ('company_id', '=', False),('company_id', 'in', company_ids)]</field>
+        <field name="perm_read">1</field>
+        <field name="perm_create">1</field>
+        <field name="perm_write">1</field>
+        <field name="perm_unlink">1</field>
+    </record>
+</odoo>

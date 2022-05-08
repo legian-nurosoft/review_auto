@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.digital_edge_sale_approval</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_quotation_send' and @states='draft']" position="replace">
+                <button name="action_quotation_send" string="Send by Email" type="object" attrs="{'invisible': [('approval_state','!=','approved')]}" class="btn-primary"/>
+            </xpath>
+            <xpath expr="//button[@name='action_confirm' and @attrs=&quot;{'invisible': [('state', 'not in', ['draft'])]}&quot;]" position="attributes">
+                <attribute name="attrs">{'invisible': [('approval_state', 'not in', ['approved'])]}</attribute>
+                <attribute name="groups">nrs_de_permission_sales_team.nrs_group_sale_support</attribute>
+            </xpath>
+            <xpath expr="//button[@id='action_confirm']" position="attributes">
+                <attribute name="groups">nrs_de_permission_sales_team.nrs_group_sale_support</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_cancel']" position="before">
+                <button name="action_submit_quotation" type="object" string="Submit Quotation"
+                attrs="{'invisible': [('approval_state','!=','draft')]}" class="btn-primary" groups="sales_team.group_sale_salesman"/>
+                <button name="action_approve_quotation" type="object" string="Approve Quotation"
+                attrs="{'invisible': [('approval_state','!=','preapproved')]}" class="btn-primary" groups="sales_team.group_sale_manager"/>
+            </xpath>
+            <xpath expr="//field[@name='state']" position="replace">
+                <field name="state" invisible="1"/>
+                <field name="approval_state" widget="statusbar" statusbar_visible="draft,preapproved,approved,sent,sale"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="after">
+                <field name="ns_standard_product" invisible="1" />
+                <field name="ns_product_attribute" invisible="1" />
+                <field name="ns_show_custom_attribute_value" invisible="1" />
+                <field name="ns_product_attribute_value" optional="show" attrs="{'required': [('ns_standard_product','=','depend')], 'readonly': [('ns_product_attribute','=',False)]}"/>
+                <field name="ns_custom_attribute_value" optional="show" attrs="{'invisible': [('ns_show_custom_attribute_value','=',False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_quotation_tree" model="ir.ui.view">
+        <field name="name">sale.order.tree.inherit.digital_edge_sale_approval</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='state']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='state']" position="after">
+                <field name="approval_state"
+                    decoration-success="approval_state == 'sale' or approval_state == 'done'"
+                    decoration-info="approval_state == 'draft' or approval_state == 'sent'"
+                    decoration-warning="approval_state == 'preapproved'"
+                    decoration-primary="approval_state == 'approved'"
+                    widget="badge" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_sale_order_kanban" model="ir.ui.view">
+        <field name="name">sale.order.kanban.inherit.digital_edge_sale_approval</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sale_order_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="/kanban" position="attributes">
+                <attribute name="default_group_by">approval_state</attribute>
+            </xpath>
+            <xpath expr="//div[contains(@class, 'oe_kanban_bottom_right')]/field[@name='state']" position="replace">
+                <field name="approval_state" widget="label_selection"
+                    options="{'classes': {'draft': 'default', 'cancel': 'default', 'preapproved': 'warning', 'approved': 'primary', 'done': 'success'}}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_order_form_non_standard_wizard" model="ir.ui.view">
+        <field name="name">view_order_form_non_standard_wizard</field>
+        <field name="model">sale.order</field>
+        <field name="priority">1000</field>
+        <field name="arch" type="xml">
+            <form>
+                <p>
+                    This is the non standard product in this order.
+                </p>
+                <field name="approval_state" invisible="1" />
+                <field name="ns_non_standard_order_line" readonly="1">
+                    <tree>
+                        <field name="product_id" />
+                        <field name="ns_product_attribute_value" />
+                        <field name="ns_custom_attribute_value" />
+                        <field name="product_uom_qty" />
+                        <field name="product_uom" />
+                    </tree>
+                </field>
+                <footer>
+                    <button type="object" string="Confirm" name="do_submit_quotation" class="btn-primary" attrs="{'invisible': [('approval_state','!=', 'draft')]}" />
+                    <button type="object" string="Confirm" name="do_approve_quotation" class="btn-primary" attrs="{'invisible': [('approval_state','!=', 'preapproved')]}" />
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="sale_order_view_search" model="ir.ui.view">
+        <field name="name">sale.order.search.inherit.digital_edge_sale_approval</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='draft']" position="attributes">
+                <attribute name="domain">[('approval_state','in',('draft', 'sent', 'preapproved', 'approved'))]</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale.action_orders" model="ir.actions.act_window">
+        <field name="domain">[('approval_state', 'not in', ('draft', 'sent', 'cancel', 'preapproved', 'approved'))]</field>
+    </record>
+</odoo>

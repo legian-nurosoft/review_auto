@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record model="ir.ui.view" id="view_move_form_inherit">
+        <field name="name">view_move_form_inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@id='invoice_tab']/field[@name='invoice_line_ids']/tree/field[@name='name']" position="after">
+                <field name="ns_product_attribute_value" optional="show" />
+                <field name="ns_move_journal_type" invisible="1"/>
+                <field name="ns_serial_number" attrs="{'invisible': [('ns_move_journal_type','!=','purchase')]}"/>
+            </xpath>
+            <xpath expr="//page[@id='aml_tab']/field[@name='line_ids']/tree/field[@name='account_id']" position="after">
+                <field name="ns_product_attribute_value" invisible="1" />
+            </xpath>
+            <xpath expr="//page[@id='aml_tab']/field[@name='line_ids']/tree/field[@name='name']" position="after">
+                <field name="ns_move_journal_type" invisible="1"/>
+                <field name="ns_serial_number" attrs="{'invisible': [('ns_move_journal_type','!=','purchase')]}"/>
+            </xpath>
+            <field name="journal_id" position="before">
+                <field name="ns_have_expenses_journal" invisible="1"/>
+            </field>
+            <field name="journal_id" position="attributes">
+                <attribute name="attrs">{'readonly':['|', ('ns_have_expenses_journal','=', True), ('posted_before', '=', True)]}</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>

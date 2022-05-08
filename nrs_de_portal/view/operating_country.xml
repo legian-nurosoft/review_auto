@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="operating_country_form_inherit_portal" model="ir.ui.view">
+            <field name="name">operating_country_form_inherit_portal</field>
+            <field name="model">operating.country</field>
+            <field name="inherit_id" ref="subscription_bill_run_tau.operating_country_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/group/field[@name='x_operation_metros']" position="after" >                      
+                    <field name="ns_sales_phone" widget="phone"/>
+                    <field name="ns_sales_email" widget="email"/>                       
+                    <field name="ns_support_phone" widget="phone"/>
+                    <field name="ns_support_email" widget="email"/>                      
+                    <field name="ns_billing_phone" widget="phone"/>
+                    <field name="ns_billing_email" widget="email"/>   
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

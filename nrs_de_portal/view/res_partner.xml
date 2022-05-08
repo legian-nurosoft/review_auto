@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record model="ir.ui.view" id="res_partner_form_inherit">
+        <field name="name">res_partner_form_inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="nrs_show_2fa_setting_message" invisible="1"/>
+                <field name="nrs_privacy_policy_agreement" invisible="1"/>
+            </field> 
+        </field>
+    </record>
+</odoo>

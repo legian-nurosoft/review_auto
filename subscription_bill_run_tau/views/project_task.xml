@@ -1,0 +1,12 @@
+<odoo>
+    <record id="view_task_form2_inherit" model="ir.ui.view">
+        <field name="name">view_task_form2_inherit</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="ns_qty" readonly="1" force_save="1"  />
+            </field>
+        </field>
+    </record>
+</odoo>

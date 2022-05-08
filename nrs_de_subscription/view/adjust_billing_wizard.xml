@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding='utf-8'?>
+<odoo>
+    <!-- change subscription wizard -->
+    <record model="ir.ui.view" id="adjust_order_wizard_form_view">
+        <field name="name">adjust.order.wizard.form</field>
+        <field name="model">adjust.billing.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Adjusted Order">
+                <p>
+                    Change details of the current subscription and send it to the customer for approval.
+                    When the quotation is confirmed, the products will be added to the subscription.
+                    Quotation prices will be prorated to the remaining time of the current invoicing period.
+                </p>
+                <group>
+                    <group>
+                        <field name="date_from"/>
+                    </group>
+                </group>
+                <field name="change_order_lines">
+                    <tree string="Change Order" editable="bottom" create="false">
+                        <field name="wizard_id" invisible="1" />
+                        <field name="ns_sale_order_line_id" invisible="1"/>
+                        <field name="product_id" readonly="1" force_save="1"/>
+                        <field name="ns_sale_order_id" readonly="1" force_save="1"/>
+                        <field name="ns_sub_task_id" readonly="1" force_save="1"/>
+                        <field name="ns_is_mrc" invisible="1"/>
+                    </tree>
+                </field>
+                <footer>
+                    <button name="set_adjustment_date" type="object"
+                            string="Update" class="oe_highlight"/>
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="adjust_order_wizard_action">
+        <field name="name">Adjust Order</field>
+        <field name="res_model">adjust.billing.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="adjust_order_wizard_form_view"/>
+        <field name="target">new</field>
+    </record>
+
+    <data noupdate="1">
+        <record model="ir.cron" id="adjust_billing_scheduler">
+            <field name="name">Billing Automated Adjustment</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="type">ir.actions.server</field>
+            <field name="state">code</field>
+            <field name="code">model.adjust_billing()</field>
+            <field name="interval_number">6</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.menu" id="account_accountant.menu_action_change_lock_date">
+        <field name="groups_id" eval="[(6,0,[ref('nrs_de_period_13.group_ns_account_administrator')])]"/>
+    </record>
+
+    <record id="nrs_change_lock_date_view" model="ir.ui.view">
+        <field name="name">nrs.change.lock.date.view</field>
+        <field name="model">account.change.lock.date</field>
+        <field name="inherit_id" ref="account_accountant.view_account_change_lock_date" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group/field[@name='period_lock_date']" position="attributes">
+            	<attribute name="string">Lock Date for 12 Periods for Non-Advisers</attribute>
+            </xpath>
+            <xpath expr="//sheet/group/field[@name='fiscalyear_lock_date']" position="attributes">
+                <attribute name="string">Lock Date for All Entries and Users</attribute>
+            </xpath>
+            <xpath expr="//sheet/group/field[@name='period_lock_date']" position="after">
+                <field name="ns_period_lock_date_all_users"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="late_adjustment_invoice" model="ir.ui.view">
+        <field name="name">late_adjustment_invoice</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <button name="button_cancel" position="after">
+                <button name="open_adjustment_popup" type="object" string="Adjustment" class="oe_highlight" />
+            </button>
+            <field name="amount_residual" position="after">
+                <field name="ns_late_interest" readonly="1" force_save="1" />
+                <field name="ns_adjustments" readonly="1" force_save="1" />
+            </field>
+            <notebook position="inside">
+                <page name="payment_instruction_tab" string="Payment Instructions" >
+                    <group>
+                        <group>
+                            <field name="ns_payment_instruction_id" options="{'no_create':true}" domain="[('ns_company_id', '=', company_id)]" />
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="ns_account_holder" />
+                            <field name="ns_account_number" />                            
+                        </group>
+                        <group>
+                            <field name="ns_bank_name" />
+                            <field name="ns_bank_address" />
+                            <field name="ns_bank_address_2" />
+                            <field name="ns_swift_code" />
+                        </group>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <record id="adjustment_wizard" model="ir.ui.view">
+        <field name="name">adjustment_wizard</field>
+        <field name="model">ns.move.adjustment</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="ns_move_id" invisible="1" />
+                    <field name="ns_company_id" invisible="1" />
+                    <field name="ns_type" required="1" widget="radio" />
+                    <field name="ns_remark" required="1" />
+                    <field name="ns_currency_id" required="1" />
+                    <field name="ns_amount" required="1" />
+                    <field name="ns_account_id" required="1" domain="[('deprecated', '=', False), ('company_id', '=', ns_company_id),('is_off_balance', '=', False)]" />
+                </group>
+                <footer>
+                    <button string="Save" type="object" name="process" class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

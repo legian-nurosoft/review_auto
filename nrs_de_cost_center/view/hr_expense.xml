@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="hr_expense_view_form_inherit">
+        <field name="name">hr_expense_view_form_inherit</field>
+        <field name="model">hr.expense</field>
+        <field name="inherit_id" ref="hr_expense.hr_expense_view_form" />
+        <field name="arch" type="xml">
+            <field name="amount_residual" position="after">
+                <field name="ns_input_tax"/>
+                <field name="ns_expense_claim_on_behalf"/>
+                <field name="ns_other_employee" attrs="{'invisible': [('ns_expense_claim_on_behalf', '!=', True)], 'required': [('ns_expense_claim_on_behalf','=',True)]}"/>
+                <field name="ns_is_tax_required" invisible="1"/>
+            </field>
+        	<field name="analytic_account_id" position="before">
+        		<field name="ns_cost_center_id" />
+                <field name="ns_site_id" />
+                <field name="ns_project_id" />
+                <field name="ns_company_id" />
+        	</field>
+            <field name="company_id" position="attributes">
+                <attribute name="string">Related DE Company</attribute>
+            </field>
+            <field name="payment_mode" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="tax_ids" position="attributes">
+                <attribute name="attrs">{'required':[('ns_is_tax_required', '=', True)]}</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_expense_sheet_view_form_inherit">
+        <field name="name">hr.expense.sheet.view.form.inherit</field>
+        <field name="model">hr.expense.sheet</field>
+        <field name="inherit_id" ref="hr_expense.view_hr_expense_sheet_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="x_studio_i_accept_user_electronic_agreementdeclaration"/>
+            </xpath>
+            <xpath expr="//field[@name='expense_line_ids']/tree/field[@name='total_amount']" position="before">
+                <field name="ns_set_total_manual"/>
+            </xpath>
+            <xpath expr="//field[@name='expense_line_ids']/tree/field[@name='total_amount_company']" position="after">
+                <field name="ns_total_amount_company_manual" attrs="{'invisible': [('ns_set_total_manual', '!=', True)]}"/>
+            </xpath>
+            <xpath expr="//field[@name='expense_line_ids']/tree" position="after">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="e.g. Lunch with Customer"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="state" invisible="1"/>
+                                <field name="is_editable" invisible="1"/>
+                                <field name="is_ref_editable" invisible="1"/>
+                                <field name="product_id" required="1" context="{'default_can_be_expensed': 1, 'tree_view_ref': 'hr_expense.product_product_expense_tree_view'}"
+                                       widget="many2one_barcode"
+                                />
+                                <field name="unit_amount" required="1" widget="monetary" options="{'currency_field': 'currency_id', 'field_digits': True}"/>
+                                <field name="product_uom_category_id" invisible="1"/>
+                                <label for="quantity"/>
+                                <div class="o_row">
+                                    <field name="quantity" class="oe_inline"/>
+                                    <field name="product_uom_id" required="1" widget="selection" class="oe_inline" groups="uom.group_uom"/>
+                                </div>
+                                <field name="tax_ids" widget="many2many_tags" groups="account.group_account_readonly" attrs="{'readonly': [('is_editable', '=', False)], 'required':[('ns_is_tax_required', '=', True)]}" context="{'default_company_id': company_id}"/>
+                                <field name="total_amount" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                <field name="amount_residual" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                <field name="ns_input_tax"/>
+                                <field name="ns_expense_claim_on_behalf"/>
+                                <field name="ns_other_employee" attrs="{'invisible': [('ns_expense_claim_on_behalf', '!=', True)], 'required': [('ns_expense_claim_on_behalf','=',True)]}"/>
+                                <field name="ns_is_tax_required" invisible="1"/>
+                            </group><group>
+                                <field name="reference" attrs="{'readonly': [('is_ref_editable', '=', False)]}"/>
+                                <field name="date"/>
+                                <field name="accounting_date" attrs="{'invisible': ['|', ('accounting_date', '=', False), ('state', 'not in', ['approved', 'done'])]}" />
+                                <field name="account_id" options="{'no_create': True}" domain="[('internal_type', '=', 'other'), ('company_id', '=', company_id)]" groups="account.group_account_readonly" attrs="{'readonly': [('is_editable', '=', False)]}" context="{'default_company_id': company_id}"/>
+                                <field name="employee_id" groups="hr_expense.group_hr_expense_team_approver" context="{'default_company_id': company_id}"/>
+                                <field name="sheet_id" invisible="1"/>
+                                <field name="currency_id" groups="base.group_multi_currency"/>
+                                <field name="ns_cost_center_id" />
+                                <field name="ns_site_id" />
+                                <field name="ns_project_id" />
+                                <field name="ns_company_id" />
+                                <field name="analytic_account_id" domain="['|', ('company_id', '=', company_id), ('company_id', '=', False)]" groups="analytic.group_analytic_accounting" attrs="{'readonly': [('is_editable', '=', False)]}"/>
+                                <field name="analytic_tag_ids" widget="many2many_tags" groups="analytic.group_analytic_tags" attrs="{'readonly': [('is_editable', '=', False)]}"/>
+                                <field name="company_id" string="Related DE Company" groups="base.group_multi_company"/>
+                            </group>
+                        </group>
+                        <div>
+                            <field name="description" class="oe_inline" placeholder="Notes..."/>
+                        </div>
+                    </sheet>
+                </form>
+            </xpath>
+        </field>
+    </record>
+</odoo>

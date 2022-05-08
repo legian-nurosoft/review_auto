@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="set_password_email" model="mail.template">
+            <field name="name">Auth Signup: Odoo Connection</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="subject">Profile validation</field>
+            <field name="email_from">"${object.company_id.name | safe}" &lt;${(object.company_id.email or user.email) | safe}&gt;</field>
+            <field name="email_to">${object.email_formatted | safe}</field>
+            <field name="body_html" type="html">
+                <div class="de-mail-container" style="width: 100%; padding: 90px; max-width: 900px; background-image: url('${object.nrs_default_url}/nrs_de_portal/static/src/img/bg_stroke.png');" >
+                    <div class="de-mail-box" style="min-width: 700px; margin-left: auto; margin-right: auto; border-radius: 20px; box-shadow: 0px 0px 30px #0000001A; background-color: white; text-align: center; border: 1px solid #CCCCD0;">
+                        <div class="de-mail-top" style="padding-top: 60px; padding-left: 10px; padding-right: 10px">
+                            <div class="de-mail-logo-box" style="margin-bottom: 40px;">
+                                <img src="${object.nrs_default_url}/nrs_de_portal/static/src/img/mail_logo.png" />
+                            </div>
+                            <h3 class="de-mail-company" style="font-size: 32px; color: #3D3D3D; margin: 0px;">${ctx.get('company_name')}</h3>
+                            <h3 class="de-mail-subject" style="font-size: 32px; color: #3D3D3D; margin: 0px;">Profile validation</h3>
+                            <div class="de-mail-separator" style="border-top: 1px solid #CCCCD0; height: 0px; margin-top: 40px; margin-bottom: 40px; margin-left: 60px; margin-right: 60px;"></div>
+                            <h3 class="de-mail-message" style="font-size: 20px; color: #959AA0; margin: 0px;">Hello ${object.name},</h3>
+                            <h3 class="de-mail-message" style="font-size: 20px; color: #959AA0; margin: 0px;">You have been invited to validate your email in order access to</h3>
+                            <h3 class="de-mail-message" style="font-size: 20px; color: #959AA0; margin: 0px;"><strong style="color: black;">"${ctx.get('company_name')}"</strong> website.</h3>
+                            <h3 class="de-mail-message" style="font-size: 20px; color: #959AA0; margin: 0px;">To validate your email, please click on the following link.</h3>            
+                        </div>
+                        <div class="de-mail-bottom" style="padding-bottom: 60px; padding-left: 10px; padding-right: 10px; background-image: url('${object.nrs_default_url}/nrs_de_portal/static/src/img/mail_background.png'); background-repeat: no-repeat; background-size: cover; background-position: center bottom;">
+                            <div class="de-mail-url-box">
+                                <a href="${object.signup_url}" style="display: inline-block; background-color: #FF7F00; font-size: 20px; color: white; border-radius: 100px; margin-top: 50px; margin-bottom: 50px; padding: 8px 20px 6px 20px; text-decoration: none;">Validate my account</a>
+                                <!-- <a href="${ctx.get('signup_url')}" style="display: inline-block; background-color: #FF7F00; font-size: 20px; color: white; border-radius: 100px; margin-top: 50px; margin-bottom: 50px; padding: 8px 20px 6px 20px; text-decoration: none;">Validate my account</a> -->
+                            </div>
+                            <h3 class="de-mail-message" style="font-size: 20px; color: #959AA0; margin: 0px;">Thanks for your participation!</h3>
+                            <div class="de-mail-separator" style="border-top: 1px solid #CCCCD0; height: 0px; margin-top: 40px; margin-bottom: 40px; margin-left: 60px; margin-right: 60px;"></div>
+                            <div class="de-mail-footer">
+                                <h3 class="de-mail-footer-title" style="font-size: 16px; color: #CCCCD0; margin-bottom: 60px;">${ctx.get('company_name')}</h3>
+                                <a href="https://www.digitaledgedc.com" style="text-decoration: none;">
+                                    <img src="${object.nrs_default_url}/nrs_de_portal/static/src/img/mail_home_icon.png" style="margin-bottom: 20px;"/>
+                                    <br/>
+                                    <span style="font-size: 12px; color: #CCCCD0;">www.digitaledgedc.com</span>
+                                </a>
+                            </div>
+                        </div>        
+                    </div>
+                </div>
+            </field>
+            <field name="lang">${object.lang}</field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+        <record id="mail_template_user_signup_account_created_portal" model="mail.template">
+            <field name="name">Auth Signup: Odoo Account Created (Portal)</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="subject">Your Customer Portal is created</field>
+            <field name="email_from">"${object.company_id.name | safe}" &lt;${(object.company_id.email or user.email) | safe}&gt;</field>
+            <field name="email_to">${object.email_formatted | safe}</field>
+            <field name="body_html" type="html">
+                <div class="de-mail-container" style="width:100%;padding: 90px; max-width: 900px; background-image: url('${object.nrs_default_url}/nrs_de_portal/static/src/img/bg_stroke.png');">
+                <div class="de-mail-box" style="min-width:700px;margin-left: auto; margin-right: auto; border-radius: 20px; box-shadow: 0px 0px 30px #0000001A; background-color: white; text-align: center; border: 1px solid #CCCCD0;">
+                    <div class="de-mail-top" style="padding-top:60px;padding-left: 10px; padding-right: 10px">
+                        <div class="de-mail-logo-box" style="margin-bottom:40px;">
+                            <img src="${ctx.get('image_mail_logo')}"/>
+                        </div>
+                        <h3 class="de-mail-subject" style="font-size:32px;color: #3D3D3D; margin: 0px;">Account created</h3>
+                        <div class="de-mail-separator" style="border-top:1px solid #CCCCD0;height: 0px; margin-top: 40px; margin-bottom: 40px; margin-left: 60px; margin-right: 60px;"></div>
+                        <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">Hello ${object.name},</h3>
+                        <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">Your ${ctx.get('text_company_name')} Customer Portal account</h3>
+                        <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">has been successfully created.</h3>
+                        <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">Your login is <strong style="color:black;">${object.email}</strong></h3>
+                        <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">Please set your secure password now via the one-time link below to complete your email validation. </h3>            
+                    </div>
+                    <div class="de-mail-bottom" style="padding-bottom:60px;padding-left: 10px; padding-right: 10px; background-image: url('${object.nrs_default_url}/nrs_de_portal/static/src/img/mail_background.png'); background-repeat: no-repeat; background-size: cover; background-position: center bottom;">
+                        <div class="de-mail-url-box">
+                            <a href="${object.signup_url}" style="display:inline-block;background-color: #FF7F00; font-size: 20px; color: white; border-radius: 100px; margin-top: 50px; margin-bottom: 50px; padding: 8px 20px 6px 20px; text-decoration: none;">Setup My Password</a>
+                        </div>
+                        <div class="de-mail-separator" style="border-top:1px solid #CCCCD0;height: 0px; margin-top: 40px; margin-bottom: 40px; margin-left: 60px; margin-right: 60px;"></div>
+                        <div class="de-mail-footer">
+                                <img src="${object.nrs_default_url}/nrs_de_portal/static/src/img/mail_home_icon.png" style="margin-bottom:20px;"/>
+                                <br/>
+                                <span style="font-size:12px;color: #CCCCD0;">Have problem? Contact our IOC Team at support@digitaledgedc.com for help</span>
+                            
+                        </div>
+                    </div>        
+                </div>
+            </div>
+            </field>
+            <field name="lang">${object.lang}</field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+        <record id="mail_template_user_signup_account_created_internal" model="mail.template">
+            <field name="name">Auth Signup : Odoo Account Created (Internal)</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="subject">Welcome to Digital Edge BOSS</field>
+            <field name="email_from">"${object.company_id.name | safe}" &lt;${(object.company_id.email or user.email) | safe}&gt;</field>
+            <field name="email_to">${object.email_formatted | safe}</field>
+            <field name="body_html" type="html">
+                <div class="de-mail-container" style="width:100%;padding: 90px; max-width: 900px; background-image: url('${object.nrs_default_url}/nrs_de_portal/static/src/img/bg_stroke.png');">
+                    <div class="de-mail-box" style="min-width:700px;margin-left: auto; margin-right: auto; border-radius: 20px; box-shadow: 0px 0px 30px #0000001A; background-color: white; text-align: center; border: 1px solid #CCCCD0;">
+                        <div class="de-mail-top" style="padding-top:60px;padding-left: 10px; padding-right: 10px">
+                            <div class="de-mail-logo-box" style="margin-bottom:40px;">
+                                <img src="${object.nrs_default_url}/nrs_de_portal/static/src/img/mail_logo.png"/>
+                            </div>
+                            <h3 class="de-mail-subject" style="font-size:32px;color: #3D3D3D; margin: 0px;">Account created</h3>
+                            <div class="de-mail-separator" style="border-top:1px solid #CCCCD0;height: 0px; margin-top: 40px; margin-bottom: 40px; margin-left: 60px; margin-right: 60px;"></div>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">Hello ${object.name},</h3>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">Your Digital Edge Business Operations Support System account</h3>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">has been successfully created.</h3>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">Your login is <strong style="color:black;">${object.email}</strong></h3>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">Please set your secure password now via the one-time link below to complete your email validation. </h3>            
+                        </div>
+                        <div class="de-mail-bottom" style="padding-bottom:60px;padding-left: 10px; padding-right: 10px; background-image: url('${object.nrs_default_url}/nrs_de_portal/static/src/img/mail_background.png'); background-repeat: no-repeat; background-size: cover; background-position: center bottom;">
+                            <div class="de-mail-url-box">
+                                <a href="${object.signup_url}" style="display:inline-block;background-color: #FF7F00; font-size: 20px; color: white; border-radius: 100px; margin-top: 50px; margin-bottom: 50px; padding: 8px 20px 6px 20px; text-decoration: none;">Setup My Password</a>
+                            </div>
+                            <div class="de-mail-separator" style="border-top:1px solid #CCCCD0;height: 0px; margin-top: 40px; margin-bottom: 40px; margin-left: 60px; margin-right: 60px;"></div>
+                            <div class="de-mail-footer">
+                                    <img src="${object.nrs_default_url}/nrs_de_portal/static/src/img/mail_home_icon.png" style="margin-bottom:20px;"/>
+                                    <br/>
+                                    <span style="font-size:12px;color: #CCCCD0;">Have problem? Contact Admin at admin.odoo@digitaledgedc.com for help</span>
+                                
+                            </div>
+                        </div>        
+                    </div>
+                </div>
+            </field>
+            <field name="lang">${object.lang}</field>
+            <field name="auto_delete" eval="False"/>
+        </record>        
+        
+        <record id="reset_password_email_internal" model="mail.template">
+            <field name="name">Auth Signup: Reset Password (internal)</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="subject">Digital Edge BOSS Password Reset</field>
+            <field name="email_from">"${object.company_id.name | safe}" &lt;${(object.company_id.email or user.email) | safe}&gt;</field>
+            <field name="email_to">${object.email_formatted | safe}</field>
+            <field name="body_html" type="html">
+                <div class="de-mail-container" style="width:100%;padding: 90px; max-width: 900px; background-image: url('${object.nrs_default_url}/nrs_de_portal/static/src/img/bg_stroke.png');">
+                    <div class="de-mail-box" style="min-width:700px;margin-left: auto; margin-right: auto; border-radius: 20px; box-shadow: 0px 0px 30px #0000001A; background-color: white; text-align: center; border: 1px solid #CCCCD0;">
+                        <div class="de-mail-top" style="padding-top:60px;padding-left: 10px; padding-right: 10px">
+                            <div class="de-mail-logo-box" style="margin-bottom:40px;">
+                                <img src="${object.nrs_default_url}/nrs_de_portal/static/src/img/mail_logo.png"/>
+                            </div>
+                            <h3 class="de-mail-subject" style="font-size:32px;color: #3D3D3D; margin: 0px;">Password reset</h3>
+                            <div class="de-mail-separator" style="border-top:1px solid #CCCCD0;height: 0px; margin-top: 40px; margin-bottom: 40px; margin-left: 60px; margin-right: 60px;"></div>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">Hello ${object.name},</h3>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">We've received a request to reset your Digital Edge Back Operations Support System password.</h3>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">Please use the verification code below to set up a new password.</h3>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">The code is valid for 24 hours.</h3>
+                            <h3 class="de-mail-verification-code" style="font-size:20px;color: #959AA0;">${object.nrs_reset_password_code}</h3><br/>
+                            <h3 class="de-mail-verification-code" style="font-size:20px;color: #959AA0;">You can safely ignore this email if you didn't request to reset your password.</h3>             
+                        </div>
+                        <div class="de-mail-bottom" style="padding-bottom:60px;padding-left: 10px; padding-right: 10px; background-image: url('${object.nrs_default_url}/nrs_de_portal/static/src/img/mail_background.png'); background-repeat: no-repeat; background-size: cover; background-position: center bottom;">
+                            <div class="de-mail-url-box">
+                                <a href="${object.signup_url}" style="display:inline-block;background-color: #FF7F00; font-size: 20px; color: white; border-radius: 100px; margin-top: 50px; margin-bottom: 50px; padding: 8px 20px 6px 20px; text-decoration: none;">Change Password</a>
+                            </div>
+
+                        <div class="de-mail-separator" style="border-top:1px solid #CCCCD0;height: 0px; margin-top: 40px; margin-bottom: 40px; margin-left: 60px; margin-right: 60px;"></div>
+                            <div class="de-mail-footer">
+                                    <img src="${object.nrs_default_url}/nrs_de_portal/static/src/img/mail_home_icon.png" style="margin-bottom:20px;"/>
+                                    <br/>
+                                    <span style="font-size:12px;color: #CCCCD0;">Have questions? Contact our Admin at admin.odoo@digitaledgedc.com for help</span>
+                                
+                            </div>
+                        </div>        
+                    </div>
+                </div>
+            </field>
+            <field name="lang">${object.lang}</field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+        <record id="reset_password_email_portal" model="mail.template">
+            <field name="name">Auth Signup: Reset Password (portal)</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="subject">${ctx.get('text_company_name')} Customer Portal Password reset</field>
+            <field name="email_from">"${object.company_id.name | safe}" &lt;${(object.company_id.email or user.email) | safe}&gt;</field>
+            <field name="email_to">${object.email_formatted | safe}</field>
+            <field name="body_html" type="html">
+                <div class="de-mail-container" style="width:100%;padding: 90px; max-width: 900px; background-image: url('${object.nrs_default_url}/nrs_de_portal/static/src/img/bg_stroke.png');">
+                    <div class="de-mail-box" style="min-width:700px;margin-left: auto; margin-right: auto; border-radius: 20px; box-shadow: 0px 0px 30px #0000001A; background-color: white; text-align: center; border: 1px solid #CCCCD0;">
+                        <div class="de-mail-top" style="padding-top:60px;padding-left: 10px; padding-right: 10px">
+                            <div class="de-mail-logo-box" style="margin-bottom:40px;">
+                                <img src="${ctx.get('image_mail_logo')}"/>
+                            </div>
+                            <h3 class="de-mail-subject" style="font-size:32px;color: #3D3D3D; margin: 0px;">Password reset</h3>
+                            <div class="de-mail-separator" style="border-top:1px solid #CCCCD0;height: 0px; margin-top: 40px; margin-bottom: 40px; margin-left: 60px; margin-right: 60px;"></div>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">Hello ${object.name},</h3>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">We've received a request to reset your ${ctx.get('text_company_name')} Customer Portal password.</h3>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">Please use the verification code below to set up a new password.</h3>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">The code is valid for 24 hours.</h3>
+                            <h3 class="de-mail-verification-code" style="font-size:20px;color: #959AA0;">${object.nrs_reset_password_code}</h3><br/>
+                            <h3 class="de-mail-verification-code" style="font-size:20px;color: #959AA0;">You can safely ignore this email if you didn't request to reset your password.</h3>             
+                        </div>
+                        <div class="de-mail-bottom" style="padding-bottom:60px;padding-left: 10px; padding-right: 10px; background-image: url('${object.nrs_default_url}/nrs_de_portal/static/src/img/mail_background.png'); background-repeat: no-repeat; background-size: cover; background-position: center bottom;">
+                            <div class="de-mail-url-box">
+                                <a href="${object.signup_url}" style="display:inline-block;background-color: #FF7F00; font-size: 20px; color: white; border-radius: 100px; margin-top: 50px; margin-bottom: 50px; padding: 8px 20px 6px 20px; text-decoration: none;">Change password</a>
+                            </div>
+
+                        <div class="de-mail-separator" style="border-top:1px solid #CCCCD0;height: 0px; margin-top: 40px; margin-bottom: 40px; margin-left: 60px; margin-right: 60px;"></div>
+                            <div class="de-mail-footer">
+                                    <img src="${object.nrs_default_url}/nrs_de_portal/static/src/img/mail_home_icon.png" style="margin-bottom:20px;"/>
+                                    <br/>
+                                    <span style="font-size:12px;color: #CCCCD0;">Have questions? Contact our IOC Team at support@digitaledgedc.com for help</span>
+                                
+                            </div>
+                        </div>        
+                    </div>
+                </div>
+            </field>
+            <field name="lang">${object.lang}</field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+        <record id="reset_password_success_internal" model="mail.template">
+            <field name="name">Auth Signup: Reset Password Success (internal)</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="subject">Your Digital Edge BOSS's password was changed</field>
+            <field name="email_from">"${object.company_id.name | safe}" &lt;${(object.company_id.email or user.email) | safe}&gt;</field>
+            <field name="email_to">${object.email_formatted | safe}</field>
+            <field name="body_html" type="html">
+                <div class="de-mail-container" style="width:100%;padding: 90px; max-width: 900px; background-image: url('${object.nrs_default_url}/nrs_de_portal/static/src/img/bg_stroke.png');">
+                    <div class="de-mail-box" style="min-width:700px;margin-left: auto; margin-right: auto; border-radius: 20px; box-shadow: 0px 0px 30px #0000001A; background-color: white; text-align: center; border: 1px solid #CCCCD0;">
+                        <div class="de-mail-top" style="padding-top:60px;padding-left: 10px; padding-right: 10px">
+                            <div class="de-mail-logo-box" style="margin-bottom:40px;">
+                                <img src="${object.nrs_default_url}/nrs_de_portal/static/src/img/mail_logo.png"/>
+                            </div>
+                            <h3 class="de-mail-subject" style="font-size:32px;color: #3D3D3D; margin: 0px;">Your password was changed</h3>
+                            <div class="de-mail-separator" style="border-top:1px solid #CCCCD0;height: 0px; margin-top: 40px; margin-bottom: 40px; margin-left: 60px; margin-right: 60px;"></div>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">Hello ${object.name},</h3>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">Your Digital Edge Business Operations Support System's password has been changed.</h3>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">If you did not perform this action, you should go to https://boss.digitaledgedc.com/reset_password immediately to reset your password.</h3>
+                        </div>
+                        <div class="de-mail-bottom" style="padding-bottom:60px;padding-left: 10px; padding-right: 10px; background-image: url('${object.nrs_default_url}/nrs_de_portal/static/src/img/mail_background.png'); background-repeat: no-repeat; background-size: cover; background-position: center bottom;">
+                            <div class="de-mail-url-box">
+                                <a href="${ctx.get('host_url')}/web/login?auth_login=${object.email}" style="display:inline-block;background-color: #FF7F00; font-size: 20px; color: white; border-radius: 100px; margin-top: 50px; margin-bottom: 50px; padding: 8px 20px 6px 20px; text-decoration: none;">BOSS Login</a>
+                            </div>
+                        </div>
+
+                        <div class="de-mail-separator" style="border-top:1px solid #CCCCD0;height: 0px; margin-top: 40px; margin-bottom: 40px; margin-left: 60px; margin-right: 60px;"></div>
+                        <div class="de-mail-footer">
+                            <img src="${object.nrs_default_url}/nrs_de_portal/static/src/img/mail_home_icon.png" style="margin-bottom:20px;"/>
+                            <br/>
+                            <span style="font-size:12px;color: #CCCCD0;">Have questions? Contact our Admin at admin.odoo@digitaledgedc.com for help</span>
+                        </div>       
+                    </div>
+                </div>
+            </field>
+            <field name="lang">${object.lang}</field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+        <record id="reset_password_success_portal" model="mail.template">
+            <field name="name">Auth Signup: Reset Password Success (portal)</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="subject">Your ${ctx.get('text_company_name')} Customer Portal's password was changed</field>
+            <field name="email_from">"${object.company_id.name | safe}" &lt;${(object.company_id.email or user.email) | safe}&gt;</field>
+            <field name="email_to">${object.email_formatted | safe}</field>
+            <field name="body_html" type="html">
+                <div class="de-mail-container" style="width:100%;padding: 90px; max-width: 900px; background-image: url('${object.nrs_default_url}/nrs_de_portal/static/src/img/bg_stroke.png');">
+                    <div class="de-mail-box" style="min-width:700px;margin-left: auto; margin-right: auto; border-radius: 20px; box-shadow: 0px 0px 30px #0000001A; background-color: white; text-align: center; border: 1px solid #CCCCD0;">
+                        <div class="de-mail-top" style="padding-top:60px;padding-left: 10px; padding-right: 10px">
+                            <div class="de-mail-logo-box" style="margin-bottom:40px;">
+                                <img src="${ctx.get('image_mail_logo')}"/>
+                            </div>
+                            <h3 class="de-mail-subject" style="font-size:32px;color: #3D3D3D; margin: 0px;">Your password was changed</h3>
+                            <div class="de-mail-separator" style="border-top:1px solid #CCCCD0;height: 0px; margin-top: 40px; margin-bottom: 40px; margin-left: 60px; margin-right: 60px;"></div>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">Hello ${object.name},</h3>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">Your ${ctx.get('text_company_name')} Customer Portal password has been changed.</h3>
+                            <h3 class="de-mail-message" style="font-size:20px;color: #959AA0; margin: 0px;">If you did not perform this action, you should go to ${ctx.get('reset_password_link')} immediately to reset your password.</h3>
+                        </div>
+                        <div class="de-mail-bottom" style="padding-bottom:60px;padding-left: 10px; padding-right: 10px; background-image: url('${object.nrs_default_url}/nrs_de_portal/static/src/img/mail_background.png'); background-repeat: no-repeat; background-size: cover; background-position: center bottom;">
+                            <div class="de-mail-url-box">
+                                <a href="${ctx.get('host_url')}/web/login?auth_login=${object.email}" style="display:inline-block;background-color: #FF7F00; font-size: 20px; color: white; border-radius: 100px; margin-top: 50px; margin-bottom: 50px; padding: 8px 20px 6px 20px; text-decoration: none;">Customer Portal Login</a>
+                            </div>
+
+                        <div class="de-mail-separator" style="border-top:1px solid #CCCCD0;height: 0px; margin-top: 40px; margin-bottom: 40px; margin-left: 60px; margin-right: 60px;"></div>
+                            <div class="de-mail-footer">
+                                    <img src="${object.nrs_default_url}/nrs_de_portal/static/src/img/mail_home_icon.png" style="margin-bottom:20px;"/>
+                                    <br/>
+                                    <span style="font-size:12px;color: #CCCCD0;">Have questions? Contact our IOC at support.odoo@digitaledgedc.com for help</span>                                
+                            </div>
+                        </div>        
+                    </div>
+                </div>
+            </field>
+            <field name="lang">${object.lang}</field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+        
+    </data>
+</odoo>

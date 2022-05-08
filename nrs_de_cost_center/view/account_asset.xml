@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_account_asset_form_inherit">
+        <field name="name">view_account_asset_form_inherit</field>
+        <field name="model">account.asset</field>
+        <field name="inherit_id" ref="account_asset.view_account_asset_form" />
+        <field name="arch" type="xml">
+        	<field name="account_analytic_id" position="after">
+        		<field name="ns_cost_center_id" />
+                <field name="ns_site_id" />
+                <field name="ns_project_id" />
+                <field name="ns_company_id" />
+        	</field>
+        </field>
+    </record>
+</odoo>

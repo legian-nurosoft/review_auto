@@ -1,0 +1,172 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="hr_applicant_view_form_inherit" model="ir.ui.view">
+            <field name="name">hr_applicant_view_form_inherit</field>
+            <field name="model">hr.applicant</field>
+            <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+            <field name="arch" type="xml">
+                <button name="archive_applicant" position="attributes">
+                    <attribute name="string">Decline</attribute>
+                </button>
+                <field name="source_id" position="after">
+                    <field name="ns_show_finance_approval_button" invisible="1"/>
+                    <field name="ns_show_human_resource_approval_button" invisible="1"/>
+                    <field name="ns_show_ceo_office_approval_button" invisible="1"/>
+                    <field name="ns_show_approval_button" invisible="1"/>
+                </field>
+                <button name="archive_applicant" position="after">
+                    <button name="do_approval" string="Approve" type="object" class="oe_highlight" attrs="{'invisible': [('ns_show_approval_button','=',False)]}" />
+                </button>
+
+                <xpath expr="//field[@name='partner_name']" position="after">
+                    <label for="ns_name_local_language" class="oe_edit_only" modifiers="{}"/>
+                    <field name="ns_name_local_language"/>
+                    <label for="ns_preferred_title" class="oe_edit_only" modifiers="{}"/>
+                    <field name="ns_preferred_title"/>
+                    <label for="ns_other_preferred_title" class="oe_edit_only" modifiers="{}"/>
+                    <field name="ns_other_preferred_title"/>
+                </xpath>
+
+                <xpath expr="//field[@name='email_cc']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='email_cc']" position="after">
+                    <field name="ns_home_address"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_mobile']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='type_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='type_id']" position="after">
+                    <field name="ns_visa_required"/>
+                    <field name="ns_tentative_start_date"/>
+                </xpath>
+                
+                <xpath expr="//field[@name='categ_ids']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="ns_hiring_manager"/>
+                    <field name="ns_hiring_managers_manager" />
+                </xpath>
+                <xpath expr="//field[@name='priority']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='source_id']" position="after">
+                    <field name="ns_application_source"/>
+                    <field name="ns_name_of_employee_referrer"/>
+                    <field name="ns_external_agency_name"/>
+                    <field name="ns_interview_panel_names"/>
+                    <field name="ns_reference_check_date"/>
+                    <field name="ns_reason_for_no_external_reference_check"/>
+                    <field name="ns_background_check_requirement"/>
+                    <field name="ns_reason_for_no_background_check"/>
+                </xpath>
+                <xpath expr="//field[@name='job_id']" position="after">
+                    <field name="ns_job_requisition_id" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="ns_hire_group"/>
+                    <field name="ns_project_name"/>
+                    <field name="ns_work_location"/>
+                    <field name="ns_business_justification_for_hire"/>
+                    <field name="ns_proposed_job_title"/>
+                    <field name="ns_reporting_manager"/>
+                    <field name="ns_dotted_line_manager"/>
+                </xpath>
+                
+                <xpath expr="//label[@for='salary_expected']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='salary_expected']/parent::div" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//label[@for='salary_proposed']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='salary_proposed']/parent::div" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='availability']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='availability']" position="after">
+                    <field name="ns_name_of_employer"/>
+                    <field name="ns_annual_salary"/>
+                    <field name="ns_bonus"/>
+                    <field name="ns_other_payments_allowances"/>
+                    <field name="ns_method_of_verifying_compensation_details"/>
+                    <field name="ns_non_compete_non_solicitation_period"/>
+                </xpath>
+
+                <xpath expr="//field[@name='availability']/parent::group/parent::group" position="after">
+		            <group string="Proposed Compensation">
+                        <group string="Local Currency">
+                            <field name="ns_headcount_approved"/>
+                            <field name="ns_type_of_incentive_plan"/>
+                            <field name="ns_currency_id"/>
+                            <field name="ns_annual_base_salary"/>
+                            <field name="ns_annual_bonus_amount"/>
+                            <field name="ns_percent_of_base_salary" widget="percentage"/>
+                            <field name="ns_sales_commission_amount"/>
+                            <field name="ns_pay_mix_split"/>
+                            <field name="ns_headcount_plan_budget_ttc" />
+                            <field name="ns_total_target_compensation_ttc"/>
+                            <field name="ns_diff_between_budgeted_vs_proposed_ttc" force_save="1" readonly="1"/>
+                            <field name="ns_headcount_plan_budget_ttc_commision" />
+                            <field name="ns_total_target_compensation_ttc_commision"/>
+                            <field name="ns_diff_between_budgeted_vs_proposed_ttc_commision" force_save="1" readonly="1"/>
+                        </group>
+
+                        <group string="USD">
+                            <field name="ns_usd_currency_id"/>
+                            <field name="ns_annual_base_salary_usd"/>
+                            <field name="ns_annual_bonus_amount_usd"/>
+                            <field name="ns_sales_commission_amount_usd"/>
+                            <field name="ns_total_target_compensation_ttc_usd"/>
+                            <field name="ns_diff_between_budgeted_vs_proposed_ttc_usd"/>
+                        </group>
+                    </group>
+                    
+                    <group string="Completed by Group HR">
+                        <field name="ns_additional_one_time_payment"/>
+                        <field name="ns_hr_currency_id"/>
+                        <field name="ns_additional_one_time_payment_usd"/>
+                        <field name="ns_grade"/>
+                        <field name="ns_carry_points"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="applicant_get_refuse_reason_view_form" model="ir.ui.view">
+            <field name="name">applicant.get.refuse.reason.form</field>
+            <field name="model">applicant.get.refuse.reason</field>
+            <field name="arch" type="xml">
+                <form string="Decline Reason">
+                    <group class="oe_title">
+                        <field name="refuse_reason_id"/>
+                        <field name="applicant_ids" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button name="action_refuse_reason_apply" string="Submit" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="hr_recruitment.applicant_get_refuse_reason_action" model="ir.actions.act_window">
+            <field name="name">Decline Reason</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">applicant.get.refuse.reason</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="applicant_get_refuse_reason_view_form"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

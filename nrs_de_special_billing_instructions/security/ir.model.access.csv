@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+special_billing_instructions_group_user,Special Billing Instructions group_user,model_ns_special_billing_instruction,base.group_user,1,1,1,1
+special_billing_instructions_group_system,Special Billing Instructions group_system,model_ns_special_billing_instruction,base.group_system,1,1,1,1
+special_billing_instructions_invoice_group_user,Special Billing Instructions (Invoice) group_user,model_ns_special_billing_instruction_invoice,base.group_user,1,1,1,1
+special_billing_instructions_invoice_group_system,Special Billing Instructions (Invoice) group_system,model_ns_special_billing_instruction_invoice,base.group_system,1,1,1,1

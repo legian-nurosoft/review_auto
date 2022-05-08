@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="crm_fx_rate_view_form" model="ir.ui.view">
+        <field name="name">crm.fx.rate.view.form</field>
+        <field name="model">crm.fx.rate</field>
+        <field name="arch" type="xml">
+            <form string="CRM FX RATE">
+                <sheet>
+                    <group>
+                        <group name="left">
+                            <field name="currency_id"/>
+                            <field name="rate"/>
+                        </group>
+                        <group name="right">
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                        </group>
+                    </group>
+                    <button string="Update Old Leads" name="update_old_leads" type="object" class="oe_highlight"/>
+                    <span style="display: inline-block; margin-right: 10px;" />
+                    <button string="Update Old Orders" name="update_old_orders" type="object" class="oe_highlight"/>
+                    <span style="display: inline-block; margin-right: 10px;" />
+                    <button string="Update Old Journal Items" name="update_old_journal_items" type="object" class="oe_highlight"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="crm_fx_rate_view_tree" model="ir.ui.view">
+        <field name="name">crm.fx.rate.view.tree</field>
+        <field name="model">crm.fx.rate</field>
+        <field name="arch" type="xml">
+            <tree string="CRM FX RATE">
+                <field name="currency_id"/>
+                <field name="date_start"/>
+                <field name="date_end"/>
+                <field name="rate"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="crm_fx_rate_action_jsi" model="ir.actions.act_window">
+        <field name="name">CRM FX Rate</field>
+        <field name="res_model">crm.fx.rate</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_crm_fx_rate_jsi"
+        name="CRM FX Rate"
+        parent="crm.crm_menu_config"
+        action="crm_fx_rate_action_jsi"
+        sequence="3"/>
+</odoo>

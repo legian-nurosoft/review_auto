@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="ns_skill_tag_form" model="ir.ui.view">
+            <field name="name">ns_skill_tag_form</field>
+            <field name="model">ns.skill.tag</field>
+            <field name="priority">16</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Skill Tag">
+                        <widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('ns_active', '=', True)]}"/>
+                        <field name="ns_active" invisible="1"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="ns_name" required="1" placeholder="Name..."/>
+                            </h1>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="ns_skill_tag_tree" model="ir.ui.view">
+            <field name="name">ns_skill_tag_tree</field>
+            <field name="model">ns.skill.tag</field>
+            <field name="priority">16</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="ns_sequence" widget="handle"/>
+                    <field name="ns_name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="ns_skill_tag_search" model="ir.ui.view">
+            <field name="name">ns_skill_tag_search</field>
+            <field name="model">ns.skill.tag</field>
+            <field name="priority">16</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="ns_name"/>
+                    <separator/>
+                    <filter string="Archived" name="archived_ns_skill_tag" domain="[['ns_active', '=', False]]"/>
+                    <separator/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_open_ns_skill_tag" model="ir.actions.act_window">
+            <field name="name">Skill Tag</field>
+            <field name="res_model">ns.skill.tag</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_ns_active': True}</field>
+        </record>
+    </data>
+</odoo>

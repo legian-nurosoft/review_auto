@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="helpdesk_ticket_form_base_inherit_portal" model="ir.ui.view">
+        <field name="name">helpdesk_ticket_form_base_inherit_portal</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/header//button[@name='assign_ticket_to_self']" position="after">
+                <field name="ns_site_access_approve_button_visibility" invisible="1"/>
+                <button name="site_access_approve" string="Approve" type="object"  attrs="{'invisible': [('ns_site_access_approve_button_visibility','=',False)]}"/>
+                <field name="ns_site_access_submit_button_visibility" invisible="1"/>
+                <button name="site_access_submit" string="Submit" type="object"  attrs="{'invisible': [('ns_site_access_submit_button_visibility','=',False)]}"/>
+                <field name="ns_shipment_approve_button_visibility" invisible="1"/>
+                <button name="shipment_approve" string="Approve" type="object"  attrs="{'invisible': [('ns_shipment_approve_button_visibility','=',False)]}"/>
+            </xpath>
+            <field name="partner_id" position="before">
+                <field name="ns_partner_domain" invisible="1"/>
+            </field>
+            <field name="partner_id" position="attributes">
+                <attribute name="domain">[('id', 'in', ns_partner_domain)]</attribute>
+            </field>
+            <xpath expr="//sheet/group[1]" position="before">
+                <field name="ns_ticket_subject" invisible="1"/>  
+            </xpath> 
+            <xpath expr="//sheet/group[1]/group[1]/field[@name='team_id']" position="after">
+                <field name="ns_team_id_name" invisible="1"/>
+            </xpath> 
+            <xpath expr="//sheet/group[1]/group[1]/field[@name='priority']" position="replace">
+                <field name="priority" string="Severity"/>
+            </xpath>
+                <xpath expr="//page[@name='description']" position="after">                   
+                    <page string="Shipment Detail" name="shipment_detail"
+                        attrs="{'invisible': [('ns_team_id_name','not in',['Shipment ID', 'Shipment JP', 'Shipment CN', 'Shipment KR'])]}">
+                      <field name="ns_shipment_detail_ids" widget='one2many'>
+                          <tree>
+                              <field name="ns_shipment_detail_item_number"/>
+                              <field name="ns_shipment_detail_dimension"/>
+                              <field name="ns_shipment_detail_weight"/>
+                              <field name="ns_uom"/>
+                              <field name="ns_shipment_detail_tracking_number"/>
+                              <field name="ns_shipment_detail_dispatched"/>
+                              <field name="ns_shipment_detail_storage_location"/>
+                          </tree>
+                      </field>
+                  </page>    
+                </xpath>
+                <xpath expr="//page[@name='description']" position="after">                   
+                    <page string="Site Access Detail" 
+                        attrs="{'invisible': [('ns_team_id_name','not in',['Site Access ID', 'Site Access JP', 'Site Access CN', 'Site Access KR'])]}">
+                      <field name="ns_site_access_detail_ids" widget='one2many'>
+                          <tree>
+                              <field name="ns_site_access_detail_visitor_name"/>
+                              <field name="ns_site_access_detail_visitor_id_number"/>
+                          </tree>
+                      </field>
+                  </page>    
+                </xpath>
+        </field>
+    </record>
+    <record id="helpdesk_ticket_tree_base_inherit_portal" model="ir.ui.view">
+        <field name="name">helpdesk_ticket_tree_base_inherit_portal</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_tree"/>
+        <field name="arch" type="xml"> 
+            <xpath expr="//tree/field[@name='display_name']" position="after">
+                <field name="priority" widget="priority" string="Severity"/>
+            </xpath> 
+        </field>
+    </record>
+    <record id="helpdesk_tickets_view_search_inherit_portal" model="ir.ui.view">
+		<field name="name">helpdesk_tickets_view_search_inherit_portal</field>
+		<field name="model">helpdesk.ticket</field>
+		<field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_search"/>
+		<field name="arch" type="xml">
+			<xpath expr="//search" position="inside">
+				<field name="ns_shipment_detail_ids" string="Shipment Tracking Number" filter_domain="[('ns_shipment_detail_ids.ns_shipment_detail_tracking_number','ilike', self)]"/>
+			</xpath> 
+		</field>
+	</record>
+    <record id="helpdesk_ticket_form_studio_inherit_portal" model="ir.ui.view">
+        <field name="name">helpdesk_ticket_form_studio_inherit_portal</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="studio_customization.odoo_studio_helpdesk_077bc8cd-d36f-412d-82d2-35e6e6e9f008"/>
+        <field name="arch" type="xml">
+            <data position="inside">
+                <xpath expr="//field[@name='x_studio_timesheet_product']" position="before" >
+                    <field name="ns_requested_service_date"/>
+                </xpath>
+                <xpath expr="//field[@name='x_studio_visit_date']" position="replace" >                     
+                    <label for="ns_site_visit_date_start" string="Visit Date"/>
+                    <div class="o_row">                         
+                        <field name="ns_site_visit_date_start"/> - 
+                        <field name="ns_site_visit_date_end"/>                                
+                    </div>    
+                </xpath>
+                <xpath expr="//field[@name='x_studio_shipment_date']" position="after" >       
+                    <label for="ns_shipment_date_start" string="Shipment Date"/>
+                    <div class="o_row">                         
+                        <field name="ns_shipment_date_start"/> - 
+                        <field name="ns_shipment_date_end"/>                                
+                    </div>    
+                </xpath>                
+                <xpath expr="//field[@name='x_studio_shipment_tracking_number']" position="attributes" >
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='x_studio_special_visit_area']" position="replace" >                     
+                    <field name="ns_special_visit_area" attrs="{'required': [('ns_team_id_name','in',['Site Access ID', 'Site Access JP', 'Site Access CN', 'Site Access KR'])]}"/> 
+                    <field name="ns_special_visit_area_name"/>    
+                </xpath>
+                <xpath expr="//field[@name='x_studio_requested_visitor_identification_number']" position="attributes" >                     
+                     <attribute name="invisible">1</attribute>    
+                </xpath>
+                <xpath expr="//field[@name='x_studio_number_of_shipment']" position="after" >
+                    <field name="ns_courier_company"/>   
+                    <field name="ns_handling_instruction"/>   
+                </xpath>
+
+                <xpath expr="//group[@name='x_fault_report']/field[@name='x_studio_operation_site']" position="before">
+                    <field name="ns_designated_company"/>
+                </xpath>
+                <xpath expr="//group[@name='x_site_access']/field[@name='x_studio_operation_site']" position="before">
+                    <field name="ns_designated_company"/>
+                </xpath>
+                <xpath expr="//group[@name='x_shipment']/field[@name='x_studio_operation_site']" position="before">
+                    <field name="ns_designated_company"/>
+                </xpath>
+                <xpath expr="//group[@name='x_remote_hands']/field[@name='x_studio_designated_company']" position="replace">
+                    <field name="ns_designated_company"/>
+                </xpath>
+                <xpath expr="//group[@name='x_fault_report']/field[@name='x_studio_operation_site']" position="after">
+                    <field name="ns_service_id"/>
+                </xpath>
+                <xpath expr="//group[@name='x_site_access']/field[@name='x_studio_operation_site']" position="after">
+                    <field name="ns_service_id"/>
+                </xpath>
+                <xpath expr="//group[@name='x_shipment']/field[@name='x_studio_operation_site']" position="after">
+                    <field name="ns_service_id"/>
+                </xpath>
+                <xpath expr="//group[@name='x_remote_hands']/field[@name='x_studio_operation_site']" position="after">
+                    <field name="ns_service_id"/>
+                </xpath>                
+            </data>
+        </field>
+    </record>
+    <!-- <record id="helpdesk_stage_from_inherit" model="ir.ui.view">
+        <field name="name">helpdesk_stage_from_inherit</field>
+        <field name="model">helpdesk.stage</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_stage_view_form"/>
+        <field name="arch" type="xml"> 
+            <xpath expr="//field[@name='team_ids']" position="attributes">
+                <attribute name="team_ids">_onchange_team_id</attribute>
+            </xpath>
+            <xpath expr="//field[@name='team_ids']" position="after">
+                <field name="ns_is_site_access" invisible="1"/>
+                <field name="ns_approver_ids" widget="many2many_tags" attrs="{'invisible':[('ns_is_site_access','=',False)]}" />
+            </xpath> 
+        </field>
+    </record> -->
+</odoo>

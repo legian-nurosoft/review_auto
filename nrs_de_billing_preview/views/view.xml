@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_billing_preview_report" model="ir.actions.client">
+        <field name="name">Billing Preview</field>
+        <field name="tag">account_report</field>
+        <field name="context" eval="{'model': 'billing.preview.report'}" />
+    </record>
+
+	<menuitem id="menu_sale_subscription_billing_preview" name="Billing Preview" parent="sale_subscription.menu_sale_subscription_report" action="action_billing_preview_report" sequence="20"/>
+
+	<template id="custom_date" inherit_id="account_reports.search_template">
+        <xpath expr="//div[1]" position="before">
+            <t t-if="options.get('current_company') != None">
+            	<div class="btn-group">
+            		<b t-esc="options.get('current_company')" />
+            	</div>
+            </t>            
+        </xpath>
+    </template>
+
+</odoo>

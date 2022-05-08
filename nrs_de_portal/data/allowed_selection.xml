@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    	<record id="cross_connect_selection" model="nrs.req.service.selection">
+        	<field name="name">Cross-Connect</field>
+            <field name="nrs_selection_value">Cross Connect</field>
+            <field name="nrs_selection_type">choose_service</field>
+        </record>
+
+        <record id="cross_link_selection" model="nrs.req.service.selection">
+            <field name="name">Cross-Link</field>
+            <field name="nrs_selection_value">Cross Link</field>
+            <field name="nrs_selection_type">choose_service</field>
+        </record>
+
+        <record id="intra_customer_selection" model="nrs.req.service.selection">
+            <field name="name">Intra Customer</field>
+            <field name="nrs_selection_value">Intra-customer</field>
+            <field name="nrs_selection_type">intra_customer</field>
+        </record>
+
+        <record id="cat_5_utp_selection" model="nrs.req.service.selection">
+            <field name="name">Cat-5 UTP Media Type</field>
+            <field name="nrs_selection_value">Cat-5 UTP</field>
+            <field name="nrs_selection_type">media_type</field>
+        </record>
+
+        <record id="mm_fiber_selection" model="nrs.req.service.selection">
+            <field name="name">MM Fiber Media Type</field>
+            <field name="nrs_selection_value">MM Fiber</field>
+            <field name="nrs_selection_type">media_type</field>
+        </record>
+
+        <record id="nrc_postfix_selection" model="nrs.req.service.selection">
+            <field name="name">Installation NRC Postfix</field>
+            <field name="nrs_selection_value">Installation</field>
+            <field name="nrs_selection_type">nrc_postfix</field>
+        </record>
+
+    </data>
+</odoo>

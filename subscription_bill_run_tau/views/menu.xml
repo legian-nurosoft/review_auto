@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="operating_country_menu" model="ir.ui.menu">
+            <field name="name">Operating Country</field>
+            <field name="groups_id" eval="[(6, 0, [])]"/>
+            <field name="parent_id" ref="crm.crm_menu_config"/>
+            <field name="action" ref="operating_country_action"/>
+            <field name="sequence" eval="99"/>
+        </record>
+
+        <record id="operating_metros_menu" model="ir.ui.menu">
+            <field name="name">Operating Metros</field>
+            <field name="groups_id" eval="[(6, 0, [])]"/>
+            <field name="parent_id" ref="crm.crm_menu_config"/>
+            <field name="action" ref="operating_metros_action"/>
+            <field name="sequence" eval="99"/>
+        </record>
+
+        <record id="operating_sites_menu" model="ir.ui.menu">
+            <field name="name">Operating Sites</field>
+            <field name="groups_id" eval="[(6, 0, [])]"/>
+            <field name="parent_id" ref="crm.crm_menu_config"/>
+            <field name="action" ref="operating_sites_action"/>
+            <field name="sequence" eval="99"/>
+        </record>
+    </data>
+</odoo>

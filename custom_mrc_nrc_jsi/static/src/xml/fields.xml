@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="FieldRadio.button_no_select">
+        <div class="custom-control custom-radio o_radio_item" aria-atomic="true">
+        	<t t-if="can_edit">
+        		<input type="radio" class="custom-control-input o_radio_input" t-att-checked="checked ? true : undefined"
+                t-att-name="name" t-att-data-value="value[0]" t-att-data-index="index" t-att-id="id" />
+        	</t>
+        	<t t-else="">
+        		<input type="radio" class="custom-control-input o_radio_input" t-att-checked="checked ? true : undefined"
+                t-att-name="name" t-att-data-value="value[0]" t-att-data-index="index" t-att-id="id" disabled="disabled"/>
+        	</t>
+            
+            <label class="custom-control-label o_form_label" t-att-for="id"><t t-esc="value[1]"/></label>
+        </div>
+    </t>
+</templates>

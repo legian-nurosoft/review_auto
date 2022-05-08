@@ -1,0 +1,302 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+
+  <record id="capacity_management_root" model="ir.ui.menu" >
+    <field name="action" eval="False"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Capacity Management</field>
+    <field name="parent_id" eval="False"/>
+    <field name="sequence">10</field>
+    <field name="web_icon">fa fa-rocket,#FFFFFF,#34495e</field>
+  </record>
+
+  <record id="space_action_in_room" model="ir.actions.act_window" context="{'studio': True}">
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="binding_view_types">list,form</field>
+    <field name="context">{'search_default_ns_room': active_id,'default_ns_room': active_id}</field>
+    <field name="domain">[('ns_room', '=', active_id)]</field>
+    <field name="filter" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="help" eval="False"/>
+    <field name="limit">80</field>
+    <field name="name">Space</field>
+    <field name="res_model">ns.ns_space</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <field name="view_id" eval="False"/>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <record id="ns_space_action" model="ir.actions.act_window" >
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="binding_view_types">list,kanban,form</field>
+    <field name="context">{}</field>
+    <field name="domain" eval="False"/>
+    <field name="filter" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="help"><![CDATA[<p class="o_view_nocontent_smiling_face">
+                    This is your new action.
+                </p>
+                <p>By default, it contains a list and a form view and possibly
+                    other view types depending on the options you chose for your model.
+                </p>
+                <p>
+                    You can start customizing these screens by clicking on the Studio icon on the
+                    top right corner (you can also customize this help message there).
+                </p>
+            ]]></field>
+    <field name="limit">80</field>
+    <field name="name">Space</field>
+    <field name="res_model">ns.ns_space</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <field name="view_id" eval="False"/>
+    <field name="view_mode">tree,kanban,form</field>
+  </record>
+
+  <record id="ns_space_menu" model="ir.ui.menu" >
+    <field name="action" ref="nrs_de_capacity_management.ns_space_action"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Space</field>
+    <field name="parent_id" ref="nrs_de_capacity_management.capacity_management_root"/>
+    <field name="sequence">10</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+
+  <record id="ns_breaker_action" model="ir.actions.act_window" context="{'studio': True}">
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="binding_view_types">list,kanban,form</field>
+    <field name="context">{}</field>
+    <field name="domain" eval="False"/>
+    <field name="filter" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="help"><![CDATA[<p class="o_view_nocontent_smiling_face">
+                    This is your new action.
+                </p>
+                <p>By default, it contains a list and a form view and possibly
+                    other view types depending on the options you chose for your model.
+                </p>
+                <p>
+                    You can start customizing these screens by clicking on the Studio icon on the
+                    top right corner (you can also customize this help message there).
+                </p>
+            ]]></field>
+    <field name="limit">80</field>
+    <field name="name">Breaker</field>
+    <field name="res_model">ns.ns_breaker</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <field name="view_id" eval="False"/>
+    <field name="view_mode">tree,kanban,form</field>
+  </record>
+
+  <record id="ns_breaker_menu" model="ir.ui.menu" >
+    <field name="action" ref="nrs_de_capacity_management.ns_breaker_action"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Breaker</field>
+    <field name="parent_id" ref="nrs_de_capacity_management.capacity_management_root"/>
+    <field name="sequence">11</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+
+  <record id="ns_patchpanel_action" model="ir.actions.act_window" >
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="binding_view_types">list,kanban,form</field>
+    <field name="context">{}</field>
+    <field name="domain" eval="False"/>
+    <field name="filter" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="limit">80</field>
+    <field name="name">Patch Panel</field>
+    <field name="res_model">ns.ns_patchpanel</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <field name="view_id" eval="False"/>
+    <field name="view_mode">tree,kanban,form</field>
+  </record>
+
+  <record id="ns_patchpanel_menu" model="ir.ui.menu" >
+    <field name="action" ref="nrs_de_capacity_management.ns_patchpanel_action"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Patch Panel</field>
+    <field name="parent_id" ref="nrs_de_capacity_management.capacity_management_root"/>
+    <field name="sequence">12</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+
+    <record id="ns_ports_action" model="ir.actions.act_window" >
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="binding_view_types">list,kanban,form</field>
+    <field name="context">{}</field>
+    <field name="domain" eval="False"/>
+    <field name="filter" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="limit">80</field>
+    <field name="name">Ports</field>
+    <field name="res_model">ns.ns_ports</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <field name="view_id" eval="False"/>
+    <field name="view_mode">tree,kanban,form</field>
+  </record>
+
+  <record id="ns_ports_menu" model="ir.ui.menu" >
+    <field name="action" ref="nrs_de_capacity_management.ns_ports_action"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Ports</field>
+    <field name="parent_id" ref="nrs_de_capacity_management.capacity_management_root"/>
+    <field name="sequence">13</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+
+  <record id="capacity_management_configuration_menu" model="ir.ui.menu" >
+    <field name="action" ref="base.action_open_website"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Configuration</field>
+    <field name="parent_id" ref="nrs_de_capacity_management.capacity_management_root"/>
+    <field name="sequence">14</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+
+  <record id="ns_floor_action" model="ir.actions.act_window" context="{'studio': True}">
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="binding_view_types">list,form</field>
+    <field name="context">{}</field>
+    <field name="domain" eval="False"/>
+    <field name="filter" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="help"><![CDATA[<p class="o_view_nocontent_smiling_face">
+                    This is your new action.
+                </p>
+                <p>By default, it contains a list and a form view and possibly
+                    other view types depending on the options you chose for your model.
+                </p>
+                <p>
+                    You can start customizing these screens by clicking on the Studio icon on the
+                    top right corner (you can also customize this help message there).
+                </p>
+            ]]></field>
+    <field name="limit">80</field>
+    <field name="name">Floors</field>
+    <field name="res_model">ns.ns_floors</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <field name="view_id" eval="False"/>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <record id="ns_floors_menu" model="ir.ui.menu" >
+    <field name="action" ref="nrs_de_capacity_management.ns_floor_action"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Floors</field>
+    <field name="parent_id" ref="nrs_de_capacity_management.capacity_management_configuration_menu"/>
+    <field name="sequence">1</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+
+  <record id="ns_pdu_action" model="ir.actions.act_window" context="{'studio': True}">
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="binding_view_types">list,form</field>
+    <field name="context">{}</field>
+    <field name="domain" eval="False"/>
+    <field name="filter" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="help"><![CDATA[<p class="o_view_nocontent_smiling_face">
+                    This is your new action.
+                </p>
+                <p>By default, it contains a list and a form view and possibly
+                    other view types depending on the options you chose for your model.
+                </p>
+                <p>
+                    You can start customizing these screens by clicking on the Studio icon on the
+                    top right corner (you can also customize this help message there).
+                </p>
+            ]]></field>
+    <field name="limit">80</field>
+    <field name="name">PDU</field>
+    <field name="res_model">ns.ns_pdu</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <field name="view_id" eval="False"/>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <record id="ns_pdu_menu" model="ir.ui.menu" >
+    <field name="action" ref="nrs_de_capacity_management.ns_pdu_action"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">PDU</field>
+    <field name="parent_id" ref="nrs_de_capacity_management.capacity_management_configuration_menu"/>
+    <field name="sequence">2</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+
+  <record id="ns_rooms_action" model="ir.actions.act_window" context="{'studio': True}">
+    <field name="binding_model_id" eval="False"/>
+    <field name="binding_type">action</field>
+    <field name="binding_view_types">list,form</field>
+    <field name="context">{}</field>
+    <field name="domain" eval="False"/>
+    <field name="filter" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="help"><![CDATA[<p class="o_view_nocontent_smiling_face">
+                    This is your new action.
+                </p>
+                <p>By default, it contains a list and a form view and possibly
+                    other view types depending on the options you chose for your model.
+                </p>
+                <p>
+                    You can start customizing these screens by clicking on the Studio icon on the
+                    top right corner (you can also customize this help message there).
+                </p>
+            ]]></field>
+    <field name="limit">80</field>
+    <field name="name">Rooms</field>
+    <field name="res_model">ns.ns_rooms</field>
+    <field name="search_view_id" eval="False"/>
+    <field name="target">current</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="usage" eval="False"/>
+    <field name="view_id" eval="False"/>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <record id="ns_rooms_menu" model="ir.ui.menu" >
+    <field name="action" ref="nrs_de_capacity_management.ns_rooms_action"/>
+    <field name="active" eval="True"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="name">Rooms</field>
+    <field name="parent_id" ref="nrs_de_capacity_management.capacity_management_configuration_menu"/>
+    <field name="sequence" eval="False"/>
+    <field name="web_icon" eval="False"/>
+  </record>
+
+</odoo>

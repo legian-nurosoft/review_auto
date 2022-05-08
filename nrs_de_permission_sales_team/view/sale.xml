@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale_ops_form" model="ir.ui.view">
+        <field name="name">sale_ops_form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+             <field name="partner_id" position="before">
+                 <field name="ns_can_edit_so" invisible="1" />
+             </field>
+            <field name="order_line"  position="before">
+                <field name="ns_order_line_readonly" invisible="1" />                
+            </field>
+            <field name="partner_id" position="attributes">
+                <attribute name="attrs">{'readonly': [('ns_can_edit_so', '=', False)]}</attribute>
+            </field>
+            <field name="payment_term_id" position="attributes">
+                <attribute name="attrs">{'readonly': [('ns_can_edit_so', '=', False)]}</attribute>
+            </field>
+            <field name="client_order_ref" position="attributes">
+                <attribute name="attrs">{'readonly': [('ns_can_edit_so', '=', False)]}</attribute>
+            </field>
+            <field name="order_line"  position="attributes">
+                <attribute name="attrs">{'readonly': [('ns_can_edit_so', '=', False)]}</attribute>
+            </field>
+            <field name="user_id"  position="attributes">
+                <attribute name="attrs">{'readonly': [('ns_can_edit_so', '=', False)]}</attribute>
+            </field>
+            <field name="team_id"  position="attributes">
+                <attribute name="attrs">{'readonly': [('ns_can_edit_so', '=', False)]}</attribute>
+            </field>
+            <field name="require_signature"  position="attributes">
+                <attribute name="attrs">{'readonly': [('ns_can_edit_so', '=', False)]}</attribute>
+            </field>
+            <field name="require_payment"  position="attributes">
+                <attribute name="attrs">{'readonly': [('ns_can_edit_so', '=', False)]}</attribute>
+            </field>
+            <field name="tag_ids"  position="attributes">
+                <attribute name="attrs">{'readonly': [('ns_can_edit_so', '=', False)]}</attribute>
+            </field>
+            <field name="commitment_date"  position="attributes">
+                <attribute name="attrs">{'readonly': [('ns_can_edit_so', '=', False)]}</attribute>
+            </field>
+            <field name="fiscal_position_id"  position="attributes">
+                <attribute name="attrs">{'readonly': [('ns_can_edit_so', '=', False)]}</attribute>
+            </field>
+            <field name="analytic_account_id"  position="attributes">
+                <attribute name="attrs">{'readonly': [('ns_can_edit_so', '=', False)]}</attribute>
+            </field>
+            <field name="origin"  position="attributes">
+                <attribute name="attrs">{'readonly': [('ns_can_edit_so', '=', False)]}</attribute>
+            </field>
+            <field name="opportunity_id"  position="attributes">
+                <attribute name="attrs">{'readonly': [('ns_can_edit_so', '=', False)]}</attribute>
+            </field>
+            <field name="campaign_id"  position="attributes">
+                <attribute name="attrs">{'readonly': [('ns_can_edit_so', '=', False)]}</attribute>
+            </field>
+            <field name="medium_id"  position="attributes">
+                <attribute name="attrs">{'readonly': [('ns_can_edit_so', '=', False)]}</attribute>
+            </field>
+            <field name="source_id"  position="attributes">
+                <attribute name="attrs">{'readonly': [('ns_can_edit_so', '=', False)]}</attribute>
+            </field>
+            <field name="signed_by"  position="attributes">
+                <attribute name="attrs">{'readonly': [('ns_can_edit_so', '=', False)]}</attribute>
+            </field>
+            <field name="signed_on"  position="attributes">
+                <attribute name="attrs">{'readonly': [('ns_can_edit_so', '=', False)]}</attribute>
+            </field>
+            <field name="signature"  position="attributes">
+                <attribute name="attrs">{'readonly': [('ns_can_edit_so', '=', False)]}</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="sale_order_form_quote_inherit" model="ir.ui.view">
+        <field name="name">sale_order_form_quote</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_management.sale_order_form_quote" />
+        <field name="arch" type="xml">
+             <field name="sale_order_template_id" position="attributes">
+                <attribute name="attrs">{'readonly': [('ns_can_edit_so', '=', False)]}</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_sale_order_form_custom_tau_inherit" model="ir.ui.view">
+        <field name="name">view_sale_order_form_custom_tau_inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="subscription_bill_run_tau.view_sale_order_form_custom_tau" />
+        <field name="arch" type="xml">
+             <field name="x_contract_term" position="attributes">
+                <attribute name="attrs">{'readonly': [('ns_can_edit_so', '=', False)]}</attribute>
+            </field>
+        </field>
+    </record>
+
+</odoo>

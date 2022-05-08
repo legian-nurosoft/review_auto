@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_inherited_jsi" model="ir.ui.view">
+        <field name="name">view_order.form.inherited.jsi</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="amount_untaxed" position="before">
+                <field name="amount_mrc" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                <field name="amount_nrc" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+            </field>
+            <!-- <field name="x_studio_sla_agreement" position="after">
+                <field name="x_studio_gtc_mca" />
+            </field> -->
+            <field name="amount_total" position="after">
+                <field name="ns_total_usd_mrc" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                <field name="ns_total_usd_nrc" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+            </field>
+        </field>
+    </record>
+</odoo>

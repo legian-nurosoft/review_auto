@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo><data>
+        <record id="sale_order_list_view" model="ir.ui.view">
+            <field name="name">ns.product.bundle.line.list.view</field>
+            <field name="model">ns.product.bundle.line</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Product Bundle Line">
+                    <field name="ns_product_id"/>
+                    <field name="ns_product_attribute_type"/>
+                    <field name="ns_product_attribute_value"/>
+                    <field name="ns_product_uom"/>
+                    <field name="ns_quantity"/>
+                    <!-- <field name="ns_operation_site"/> -->
+                    <field name="ns_product_uom"/>
+                    <field name="ns_tax_id" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+</data></odoo>

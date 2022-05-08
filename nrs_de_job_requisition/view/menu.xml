@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="menu_ns_job_requisition" model="ir.ui.menu">
+            <field name="name">Job Requisitions</field>
+            <field name="parent_id" ref="hr_recruitment.menu_hr_recruitment_root"/>
+            <field name="action" ref="action_ns_job_requisition"/>
+            <field name="sequence" eval="2"/>
+        </record>        
+
+        <record id="menu_requisition_configuration" model="ir.ui.menu">
+            <field name="name">Requistion Configuration</field>
+            <field name="parent_id" ref="hr_recruitment.menu_hr_recruitment_configuration"/>
+            <field name="sequence" eval="10"/>
+        </record>
+
+        <record id="menu_requisition_stage" model="ir.ui.menu">
+            <field name="name">Job Requisition Stages</field>
+            <field name="parent_id" ref="menu_requisition_configuration"/>
+            <field name="action" ref="action_open_job_requisition_stage"/>
+            <field name="sequence" eval="0"/>
+        </record>
+
+        <record id="menu_skill_tag" model="ir.ui.menu">
+            <field name="name">Skill Tags</field>
+            <field name="parent_id" ref="menu_requisition_configuration"/>
+            <field name="action" ref="action_open_ns_skill_tag"/>
+            <field name="sequence" eval="1"/>
+        </record>
+
+        <record id="menu_qualification_tag" model="ir.ui.menu">
+            <field name="name">Qualification Tags</field>
+            <field name="parent_id" ref="menu_requisition_configuration"/>
+            <field name="action" ref="action_open_ns_qualification_tag"/>
+            <field name="sequence" eval="2"/>
+        </record>
+    </data>
+</odoo>

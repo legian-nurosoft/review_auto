@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.digital_edge_sale_approval</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="digital_edge_sale_approval.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_approve_quotation']" position="before">
+                <field name="ns_can_approve" invisible="1" />
+            </xpath>
+            <xpath expr="//button[@name='action_approve_quotation']" position="attributes">
+                <attribute name="groups"></attribute>
+                <attribute name="attrs">{'invisible': ['|', ('approval_state','!=','preapproved'), ('ns_can_approve', '=', False)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

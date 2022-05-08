@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="form_so_03" model="ir.ui.view">
+            <field name="name">form_so_03</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <data position="inside">
+                    <!-- <xpath position="attributes" expr="//field[@name='order_line']/tree/field[@name='product_id']">
+                        <attribute name="domain">[('x_studio_available_operation_site', '=', parent.x_studio_operation_site), ('sale_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]</attribute>
+                    </xpath> -->
+                    <field name="partner_id" position="before">
+                        <field name="is_not_adjusted" invisible="1"/>
+                        <field name="ns_is_change_order" invisible="1"/>
+                    </field>
+                </data>
+                
+            </field>
+        </record>
+    </data>
+</odoo>

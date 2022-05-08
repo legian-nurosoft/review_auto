@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record model="ir.ui.view" id="project_task_form_inherit_portal">
+        <field name="name">project_task_form_inherit_portal</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2" />
+        <field name="arch" type="xml">
+        	<data position="inside">
+                <!-- <xpath expr="//field[@name='x_studio_a_end_panel_id']" position="attributes" > 
+                    <attribute name="invisible">1</attribute>                 
+                </xpath>
+                <xpath expr="//field[@name='x_studio_z_end_panel_id']" position="attributes" > 
+                    <attribute name="invisible">1</attribute>                   
+                </xpath>
+                <xpath expr="//field[@name='x_studio_patch_panel_type']" position="attributes" > 
+                    <attribute name="invisible">1</attribute>                    
+                </xpath>
+                <xpath expr="//field[@name='x_studio_mc_a_end_panel_id']" position="attributes" > 
+                    <attribute name="invisible">1</attribute>                   
+                </xpath>                
+                <xpath expr="//field[@name='x_studio_mc_z_end_panel_id']" position="attributes" > 
+                    <attribute name="invisible">1</attribute>                   
+                </xpath> -->
+                <!-- <xpath expr="//field[@name='x_studio_mc_z_end_panel_id']" position="after" >                   
+                    <field name="nrs_a_end_service_id"/>
+                    <field name="nrs_z_end_service_id"/>
+                    <field name="nrs_patch_panel_id"/>
+                    <field name="ns_port_number"/>
+                </xpath> -->
+            </data>
+        </field>
+    </record>
+</odoo>

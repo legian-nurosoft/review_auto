@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend_inherit_custom_mrc_nrc_jsi" inherit_id="web.assets_backend" name="custom_mrc_nrc_jsi backend assets">
+    	<xpath expr="script[last()]" position="after">
+            <script type="text/javascript" src="/custom_mrc_nrc_jsi/static/src/js/no_select_radio.js"></script>
+        </xpath>
+    </template>
+</odoo>

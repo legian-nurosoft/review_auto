@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="operating_sites_form_inherit_portal" model="ir.ui.view">
+            <field name="name">operating_sites_form_inherit_portal</field>
+            <field name="model">operating.sites</field>
+            <field name="inherit_id" ref="subscription_bill_run_tau.operating_sites_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/group/field[@name='x_operation_metros']" position="after" >                      
+                    <field name="ns_timezone"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

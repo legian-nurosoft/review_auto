@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="hr_recruitment_stage_form_inherit" model="ir.ui.view">
+            <field name="name">hr_recruitment_stage_form_inherit</field>
+            <field name="model">hr.recruitment.stage</field>
+            <field name="inherit_id" ref="hr_recruitment.hr_recruitment_stage_form"/>
+            <field name="arch" type="xml">
+                <field name="fold" position="after">
+                    <field name="ns_need_approval_from_manager" />
+                    <field name="ns_approval_stage" />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

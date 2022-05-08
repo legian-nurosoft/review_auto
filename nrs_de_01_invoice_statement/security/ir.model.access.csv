@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+payment_instruction_group_user,Payment Instruction group_user,model_ns_payment_instruction,base.group_user,1,1,1,0
+payment_instruction_group_system,Payment Instruction group_system,model_ns_payment_instruction,base.group_system,1,1,1,1
+ns_move_adjustment_user,ns.move.adjustment.user,model_ns_move_adjustment,base.group_user,1,1,1,1

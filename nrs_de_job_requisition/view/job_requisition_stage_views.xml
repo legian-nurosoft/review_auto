@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+        <record id="job_requisition_stage_form" model="ir.ui.view">
+            <field name="name">job_requisition_stage_form</field>
+            <field name="model">ns.job.requisition.stage</field>
+            <field name="priority">16</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet string="Job Requisition Stages">
+                        <div class="oe_title">
+                            <h1>
+                                <field name="ns_name" required="1" placeholder="Name..."/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group name="group_1">                                
+                                <field name="ns_show_submit_button" />
+                                <field name="ns_show_approve_button" />
+                                <field name="ns_show_reject_button" />
+                                <field name="ns_approver_ids" widget="many2many_tags" attrs="{'required': [('ns_show_approve_button','=',True)]}" />
+                                <field name="ns_template_id" />
+                                <field name="ns_send_email_to_hiring_manager" attrs="{'invisible': [('ns_template_id','=',False)]}" />
+                                <field name="ns_send_email_to_approver" attrs="{'invisible': [('ns_template_id','=',False)]}" />
+                            </group>
+                            <group name="group_2">
+                                <field name="ns_sequence" />
+                                <field name="ns_active" />
+                                <field name="ns_color" />                                
+                                <field name="ns_is_approval_stage" />
+                                <field name="ns_is_rejected_stage" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="job_requisition_stage_tree" model="ir.ui.view">
+            <field name="name">job_requisition_stage_tree</field>
+            <field name="model">ns.job.requisition.stage</field>
+            <field name="priority">16</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom">
+                    <field name="ns_sequence" widget="handle"/>
+                    <field name="ns_name"/>
+                    <field name="ns_approver_ids" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="job_requisition_stage_search" model="ir.ui.view">
+            <field name="name">job_requisition_stage_search</field>
+            <field name="model">ns.job.requisition.stage</field>
+            <field name="priority">16</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="ns_name"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_open_job_requisition_stage" model="ir.actions.act_window">
+            <field name="name">Job Requisition Stages</field>
+            <field name="res_model">ns.job.requisition.stage</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_ns_active': True, 'default_ns_stage_id': 1}</field>
+        </record>
+    </data>
+</odoo>

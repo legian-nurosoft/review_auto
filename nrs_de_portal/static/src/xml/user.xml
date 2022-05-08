@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="nrs_de_portal.de_portal_user_profile">    	
+        <div class="de-portal-content-box de-relative-content-box de-user-profile-box">
+            <div class="de-user-photo-box">
+            	<img t-att-src="user_photo" />
+            </div>
+            <div class="de-user-photo-border">
+        	</div>
+            <div class="de-user-info-box">
+            	<h3 class="de-user-name">
+	            	<t t-esc="user_name" />
+	            </h3>
+	            <h3 class="de-user-title">
+	            	Email / Login ID <span style="color:red;">*</span>
+	            </h3>
+	            <div class="de-user-gray">
+	            	<span t-esc="user_email" />
+	            </div>
+	            <h3 class="de-user-title re">
+	            	Company <span style="color:red;">*</span>
+	            </h3>
+	            <div class="de-user-gray">
+	            	<span t-esc="company_name" />
+	            </div>
+                <h3 class="de-user-title">
+                    Permanent Site Access
+                </h3>
+                <div class="de-user-gray">
+                    <t t-if="permanent_site_access">                        
+                        <t t-foreach="permanent_site_access" t-as="site">
+                            <span class="de-chip">
+                                <span t-esc="site" />
+                            </span>                            
+                        </t>
+                    </t>
+                </div>
+                <h3 class="de-user-title">
+                    Mobile
+                </h3>
+                <div class="de-user-gray">
+                    <span t-esc="mobile" />
+                </div>
+                <h3 class="de-user-title">
+                    Phone
+                </h3>
+                <div class="de-user-gray">
+                    <span t-esc="phone" />
+                </div>
+	            <h3 class="de-user-title">
+	            	Job Position
+	            </h3>
+	            <div class="de-user-gray">
+	            	<span t-esc="user_position" />
+	            </div>
+                <t t-if="is_user_profile">                
+                    <span class="d-flex flex-row justify-content-center">
+                        <h3 class="de-user-title">
+                            Pin Code <span style="color:red;">*</span>
+                        </h3>                           
+                        <span
+                            tabindex="0"
+                            role="button"
+                            class="fas fa-question-circle de-tooltips-popover-user-pin-code ml-1"
+                            data-toggle="popover"
+                        />
+                    </span>
+                </t>
+                <t t-else=''>
+                    <h3 class="de-user-title">
+                        Pin Code <span style="color:red;">*</span>
+                    </h3> 
+                </t>
+                <div class="de-user-gray">
+                    <span t-esc="pin_code" />
+                </div>
+                <!-- <h3 class="de-user-title">
+                    ID Card Type
+                </h3>
+                <div class="de-user-gray">
+                    <span t-esc="id_type" />
+                </div>
+                <h3 class="de-user-title">
+                    ID Number
+                </h3>
+                <div class="de-user-gray">
+                    <span t-esc="id_number" />
+                </div>                 -->
+	            <t t-if="is_admin">
+                    <t t-if="is_user_profile">    
+                        <span
+                            tabindex="0"
+                            role="button"
+                            class="fas fa-question-circle de-tooltips-popover-user-paa ml-1 float-right"
+                            data-toggle="popover"
+                        />                       
+                        <button class="de-admin-button de-menu-item" data-menu-id="master-user">Primary Access Administrator</button>
+                    </t>
+                    <t t-else=''>                        
+	            	    <button class="de-admin-button de-menu-item" data-menu-id="master-user">Primary Access Administrator</button>
+                    </t>
+	            </t>
+                <t t-if="same_user">
+                    <t t-if="is_2fa_enabled">
+                        <button class="de-2fa-button" data-action="disable">Disable two-factor authentication</button>
+                    </t>
+                    <t t-else="">
+                        <button class="de-2fa-button" data-action="enable">Enable two-factor authentication</button>
+                    </t>                  
+                </t>	            
+            </div>
+            <t t-if="same_user">
+                <div class="de-user-agreement-info">
+                    <t t-if="is_privacy_policy_agreement">
+                        <span class="de-agreement-icon de-ic-check text-success"/>
+                    </t>
+                    <t t-else="">
+                        <span class="de-agreement-icon de-ic-check text-default"/>
+                    </t>
+                    <span>I have read and agreed with the <a t-attf-href="/privacy-policy">privacy policy</a></span>
+                </div>
+            </t>
+            <button type="submit" class="de-btn-edit-user de-btn-full" t-att-data-partner-id="partner_id">Edit</button>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_portal_user_edit">    	
+        <div class="de-portal-content-box de-relative-content-box de-user-profile-box">
+            <div class="de-user-photo-box">
+            	<img t-att-src="user_photo" />            	
+            </div>
+            <t t-if="same_user == 1">
+                <div class="de-user-photo-border">
+                    <span class="de-edit-user-photo de-ic-photo">
+                        <input type="file" class="de-image-input" accept=".png,.jpg,.jpeg,.bmp" />
+                    </span>
+                </div>
+            </t>
+            <t t-else="">
+                <div class="de-user-photo-border">
+                </div>
+            </t>
+            <div class="de-user-info-box">
+            	<form action="/" method="POST" class="de-portal-form">
+            		<input type="hidden" name="image" class="de-image-value" />
+            		<input type="hidden" name="partner_id" t-att-value="partner_id" />
+                    <input type="hidden" t-att-value="same_user" name="same_user" class="de-same-user" />
+	            	<h3 class="de-user-name">
+		            	<!-- <t t-esc="user_name" /> -->
+                        <div class="de-user-gray-border">
+                            <input type="text" class="de-user-input" name="user_name" t-att-value="user_name"/>
+                        </div>
+		            </h3>
+		            <h3 class="de-user-title">
+		            	Email / Login ID <span style="color:red;">*</span>
+		            </h3>
+		            <div class="de-user-gray-border">
+		            	<span t-esc="user_email" />
+		            </div>
+		            <h3 class="de-user-title">
+		            	Company <span style="color:red;">*</span>
+		            </h3>
+                    <t t-if="same_user == 1">
+                        <div class="de-user-gray">
+                            <span t-esc="company_name" />
+                        </div>
+                    </t>
+                    <t t-else="">                    
+                        <div class="de-user-gray-border de-trigger-company de-trigger-selector" data-trigger-selector=".de-select-company">
+                            <span class="de-selector-label">
+                                <t t-esc="company_name" />
+                            </span>
+                            <input class="de-selector-input" type="hidden" name="parent_id" t-att-value="company_id"/>                        
+                        </div>
+                    </t>
+                    <div class="de-selector-container de-select-company de-hide">
+                        <div class="de-selector-box">
+                            <t t-foreach="company_list" t-as="c_list">                            
+                                <div class="de-selector-item" data-trigger-selector=".de-trigger-company" t-att-data-value-id="c_list['id']">
+                                    <t t-esc="c_list['name']" />
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+		            <h3 class="de-user-title">
+		            	Associated Entities <span style="color:red;">*</span>
+		            </h3>
+                    <t t-if="same_user == 1">
+                        <div class="de-user-gray-border">
+                            <t t-foreach="associated_company" t-as="a_com">
+                                <span class="de-chip" t-att-data-value-id="a_com.id">
+                                    <span t-esc="a_com.name" />
+                                </span>                            
+                            </t>                    
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div class="de-user-gray-border de-trigger-a-company de-trigger-selector" data-trigger-selector=".de-select-a-company">
+                            <t t-foreach="associated_company" t-as="a_com">
+                                <span class="de-chip" t-att-data-value-id="a_com.id">
+                                    <span t-esc="a_com.name" />
+                                    <span class="de-chip-delete de-ic-eraser" />
+                                </span>                            
+                            </t>                    
+                        </div>
+                        <div class="de-selector-container de-select-a-company de-hide">
+                            <div class="de-selector-box">
+                                <t t-foreach="company_list" t-as="c_list">                            
+                                    <t t-if="c_list['selected'] == 1">
+                                        <div class="de-selector-item de-chip-selector-item de-hide" data-trigger-selector=".de-trigger-a-company" t-att-data-value-id="c_list['id']">
+                                            <t t-esc="c_list['name']" />
+                                        </div>
+                                    </t>
+                                    <t t-else="">
+                                        <div class="de-selector-item de-chip-selector-item" data-trigger-selector=".de-trigger-a-company" t-att-data-value-id="c_list['id']">
+                                            <t t-esc="c_list['name']" />
+                                        </div>
+                                    </t>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                    <h3 class="de-user-title">
+                        Permanent Site Access
+                    </h3>
+                    <t t-if="same_user == 1">
+                        <div class="de-user-gray-border">
+                            <t t-foreach="permanent_site_access" t-as="site">
+                                <span class="de-chip" t-att-data-value-id="site.id">
+                                    <span t-esc="site.name" />
+                                </span>                            
+                            </t>                    
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div class="de-user-gray-border de-trigger-o-site de-trigger-selector" data-trigger-selector=".de-select-o-site">
+                            <t t-foreach="permanent_site_access" t-as="site">
+                                <span class="de-chip" t-att-data-value-id="site.id">
+                                    <span t-esc="site.name" />
+                                    <span class="de-chip-delete de-ic-eraser" />
+                                </span>                            
+                            </t>                    
+                        </div>
+                        <div class="de-selector-container de-select-o-site de-hide">
+                            <div class="de-selector-box">
+                                <t t-foreach="site_list" t-as="s_list">                            
+                                    <t t-if="s_list['selected'] == 1">
+                                        <div class="de-selector-item de-chip-selector-item de-hide" data-trigger-selector=".de-trigger-o-site" t-att-data-value-id="s_list['id']">
+                                            <t t-esc="s_list['name']" />
+                                        </div>
+                                    </t>
+                                    <t t-else="">
+                                        <div class="de-selector-item de-chip-selector-item" data-trigger-selector=".de-trigger-o-site" t-att-data-value-id="s_list['id']">
+                                            <t t-esc="s_list['name']" />
+                                        </div>
+                                    </t>
+                                </t>
+                            </div>
+                        </div>
+                    </t>		            
+                    <h3 class="de-user-title">
+                        Mobile
+                    </h3>
+                    <div class="de-user-gray-border">
+                        <input type="text" class="de-user-input" name="mobile" t-att-value="mobile"/>
+                    </div>
+                    <h3 class="de-user-title">
+                        Phone
+                    </h3>
+                    <div class="de-user-gray-border">
+                        <input type="text" class="de-user-input" name="phone" t-att-value="phone"/>
+                    </div>
+		            <h3 class="de-user-title">
+		            	Job Position
+		            </h3>
+		            <div class="de-user-gray-border">
+		            	<input type="text" class="de-user-input" name="job_position" t-att-value="user_position"/>
+		            </div>
+                    <h3 class="de-user-title">
+                        Pin Code <span style="color:red;">*</span>
+                    </h3>
+                    <t t-if="same_user == 1">                        
+                        <div class="de-user-gray-border">
+                            <input type="text" class="de-user-input" name="pin_code" t-att-value="pin_code"/>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div class="de-user-gray">
+                            <span t-esc="pin_code" />
+                        </div>
+                    </t>
+                    <!-- <h3 class="de-user-title de-user-id-form" style="display: none;">
+                        ID Card Type
+                    </h3>
+                    <div class="de-user-gray-border de-user-id-form" style="display: none;">
+                        <select name="id_type" class="de-user-input">
+                            <t t-foreach="id_type_list" t-as="id_type">
+                                <t t-if="id_type['selected']">
+                                    <option t-att-value="id_type['name']" selected="selected">
+                                        <t t-esc="id_type['name']" />
+                                    </option>
+                                </t>
+                                <t t-else="">
+                                    <option t-att-value="id_type['name']">
+                                        <t t-esc="id_type['name']" />
+                                    </option>
+                                </t>
+                            </t>
+                        </select>
+                    </div>
+                    <h3 class="de-user-title de-user-id-form" style="display: none;">
+                        ID Number
+                    </h3>
+                    <div class="de-user-gray-border de-user-id-form" style="display: none;">
+                        <input type="text" class="de-user-input" name="id_number" t-att-value="id_number"/>
+                    </div> -->
+                    <t t-if="same_user">
+                        <h3 class="de-user-title">
+                            Password
+                        </h3>
+                        <div class="de-user-gray-border de-password-box">
+                            <span class="de-current-password-text">
+                                Current
+                            </span>
+                            <input type="password" name="current" class="de-current-password" />
+                        </div>
+                        <div class="de-user-gray-border de-password-box">
+                            <span class="de-new-password-text">
+                                New
+                            </span>
+                            <input type="password" name="new" class="de-password de-new-password" />
+                            <span class="de-show-password de-ic-eyes-slash" />
+                        </div>
+                        <div class="de-user-gray-border de-password-box">
+                            <span class="de-new-password-text">
+                                Confirm
+                            </span>
+                            <input type="password" name="confirm" class="de-password de-confirm-password" />
+                            <span class="de-show-password de-ic-eyes-slash" />
+                        </div>
+                    </t>	            
+		        </form>            
+            </div>
+            <t t-if="same_user">
+                <div class="de-user-agreement-info">
+                    <t t-if="is_privacy_policy_agreement">
+                        <span class="de-agreement-icon de-ic-check text-success de-agreement-icon-edit" style="cursor: pointer;"/>
+                    </t>
+                    <t t-else="">
+                        <span class="de-agreement-icon de-ic-check text-default de-agreement-icon-edit" style="cursor: pointer;"/>
+                    </t>
+                    <span>I have read and agreed with the <a t-attf-href="/privacy-policy">privacy policy</a></span>
+                </div>
+            </t>
+            <button class="de-btn-cancel de-btn-half-left" t-att-data-partner-id="partner_id">Cancel</button>
+            <button class="de-btn-save de-btn-half-right">Save</button>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_portal_master_user">    	
+        <div class="row">
+        	<div class="col-lg-3">
+        		<div class="de-master-user-left">
+        			
+        		</div>
+        	</div>
+        	<div class="col-lg-9">
+        		<div class="de-master-user-right">
+        			
+        		</div>
+        	</div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_portal_table_master_user">
+    	<!-- <div class="de-portal-subtitle-box de-portal-secondary-subtitle-box de-user-profile-box">
+            <span class="de-portal-subicon de-ic-setting" /> <span class="de-portal-subtitle">Access Configuration</span>
+        </div> -->
+        <div class="de-portal-subtitle-box d-flex justify-content-between align-items-center de-portal-secondary-subtitle-box de-user-profile-box">
+            <div class="d-flex text-center">
+            <span class="de-portal-subicon de-ic-setting" /> <span class="de-portal-subtitle">Access Configuration</span>
+            </div>              
+            <t t-call="nrs_de_portal.de_search_box_tags" />      
+        </div>
+        <div class="de-portal-content-box de-relative-content-box">
+        	<div class="de-table-box">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>User Name</th>
+                            <th>Position</th>
+                            <th>Company</th>
+                            <th>Associated Entities</th>
+                            <th>Ordering</th>
+                            <th>Remote Hands</th>
+                            <th>Provisioning</th>
+                            <th>Invoicing</th>
+                            <th>Fault Report</th>
+                            <th>Site Access Ticket</th>
+                            <th>Shipment Ticket</th>
+                        </tr>
+                    </thead>
+                    <t t-call="nrs_de_portal.de_portal_table_master_user_body" />
+                </table>   
+            </div>  
+        	<button class="de-btn-filter-inactive-user pull-right ml-2 mt-2" t-att-data-filter="false">    
+                <span class="fas fa-users-slash" />          
+                Inactive User
+            </button>                      
+        	<button class="de-btn-add-user de-menu-item pull-right mt-2" data-menu-id="add-user">
+                <span class="de-ic-adduser" />  
+                Add User
+            </button>
+            <div class="clearfix"></div>
+            <button class="de-btn-delete de-master-user-delete de-three-btn-left">Delete User</button>
+            <button class="de-btn-cancel de-three-btn-center">Cancel Changes</button>
+            <button class="de-btn-save de-three-btn-right">Save</button>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_portal_table_master_user_body">
+        <tbody class="de_portal_master_user_body">
+            <t t-foreach="associated_company" t-as="a_com">
+                <tr t-att-data-partner-id="a_com['partner_id']">
+                    <td class="de-master-user-row">
+                        <img t-att-src="a_com['user_photo']" class="de-master-user-photo" />
+                    </td>
+                    <td class="de-master-user-row">
+                        <t t-esc="a_com['user_name']" />
+                    </td>
+                    <td class="de-master-user-row">
+                        <t t-esc="a_com['user_position']" />
+                    </td> 
+                    <td class="de-master-user-row">
+                        <t t-esc="a_com['parent_company']" />
+                    </td> 
+                    <td class="de-master-user-row de-master-user-row-extra">
+                        <t t-foreach="a_com['associated']" t-as="a_company">
+                            <span class="de-chip">
+                                <span t-esc="a_company" />
+                            </span>                            
+                        </t> 
+                    </td>                                
+                    <td class="de-center-column">
+                        <t t-if="a_com['ordering']">
+                            <span class="de-access-right-item de-access-right-active" t-att-data-access-right-id="'ordering'" />
+                        </t>
+                        <t t-else="">
+                            <span class="de-access-right-item de-access-right-inactive" t-att-data-access-right-id="'ordering'" />
+                        </t>
+                    </td>
+                    <td class="de-center-column">
+                        <t t-if="a_com['remote-hands']">
+                            <span class="de-access-right-item de-access-right-active" t-att-data-access-right-id="'remote-hands'" />
+                        </t>
+                        <t t-else="">
+                            <span class="de-access-right-item de-access-right-inactive" t-att-data-access-right-id="'remote-hands'" />
+                        </t>
+                    </td>
+                    <td class="de-center-column">
+                        <t t-if="a_com['provisioning']">
+                            <span class="de-access-right-item de-access-right-active" t-att-data-access-right-id="'provisioning'" />
+                        </t>
+                        <t t-else="">
+                            <span class="de-access-right-item de-access-right-inactive" t-att-data-access-right-id="'provisioning'" />
+                        </t>
+                    </td>
+                    <td class="de-center-column">
+                        <t t-if="a_com['invoicing']">
+                            <span class="de-access-right-item de-access-right-active" t-att-data-access-right-id="'invoicing'" />
+                        </t>
+                        <t t-else="">
+                            <span class="de-access-right-item de-access-right-inactive" t-att-data-access-right-id="'invoicing'" />
+                        </t>
+                    </td>
+                    <td class="de-center-column">
+                        <t t-if="a_com['fault-report']">
+                            <span class="de-access-right-item de-access-right-active" t-att-data-access-right-id="'fault-report'" />
+                        </t>
+                        <t t-else="">
+                            <span class="de-access-right-item de-access-right-inactive" t-att-data-access-right-id="'fault-report'" />
+                        </t>
+                    </td>
+                    <td class="de-center-column">
+                        <t t-if="a_com['site-access-ticket']">
+                            <span class="de-access-right-item de-access-right-active" t-att-data-access-right-id="'site-access-ticket'" />
+                        </t>
+                        <t t-else="">
+                            <span class="de-access-right-item de-access-right-inactive" t-att-data-access-right-id="'site-access-ticket'" />
+                        </t>
+                    </td>
+                    <td class="de-center-column">
+                        <t t-if="a_com['shipment-ticket']">
+                            <span class="de-access-right-item de-access-right-active" t-att-data-access-right-id="'shipment-ticket'" />
+                        </t>
+                        <t t-else="">
+                            <span class="de-access-right-item de-access-right-inactive" t-att-data-access-right-id="'shipment-ticket'" />
+                        </t>
+                    </td>
+                </tr>
+            </t>
+        </tbody>
+    </t>
+
+    <t t-name="nrs_de_portal.de_portal_user_add">      
+        <div class="de-portal-content-box de-relative-content-box de-user-profile-box">
+            <div class="de-user-photo-box">
+                <img t-att-src="user_photo" />              
+            </div>
+            <div class="de-user-photo-border">
+                <span class="de-edit-user-photo de-ic-photo">
+                    <input type="file" class="de-image-input" accept=".png,.jpg,.jpeg,.bmp" />
+                </span>
+            </div>
+            <div class="de-user-info-box">
+                <form action="/" method="POST" class="de-portal-form">
+                    <input type="hidden" name="image" class="de-image-value" />
+                    <h3 class="de-user-title">
+                        Name <span style="color:red;">*</span>
+                    </h3>
+                    <div class="de-user-gray-border">
+                        <input type="text" class="de-user-input" name="name" />
+                    </div>
+                    <h3 class="de-user-title">
+                        Company <span style="color:red;">*</span>
+                    </h3>
+                    <div class="de-user-gray-border de-trigger-company de-trigger-selector" data-trigger-selector=".de-select-company">
+                        <span class="de-selector-label" />
+                        <input class="de-selector-input" type="hidden" name="parent_id" />                        
+                    </div>
+                    <div class="de-selector-container de-select-company de-hide">
+                        <div class="de-selector-box">
+                            <t t-foreach="company_list" t-as="c_list">                            
+                                <div class="de-selector-item" data-trigger-selector=".de-trigger-company" t-att-data-value-id="c_list['id']">
+                                    <t t-esc="c_list['name']" />
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                    <h3 class="de-user-title">
+                        Associated Entities <span style="color:red;">*</span>
+                    </h3>
+                    <div class="de-user-gray-border de-trigger-a-company de-trigger-selector" data-trigger-selector=".de-select-a-company">
+                        <t t-foreach="associated_company" t-as="a_com">
+                            <span class="de-chip" t-att-data-value-id="a_com.id">
+                                <span t-esc="a_com.name" />
+                                <span class="de-chip-delete de-ic-eraser" />
+                            </span>                            
+                        </t>                    
+                    </div>
+                    <div class="de-selector-container de-select-a-company de-hide">
+                        <div class="de-selector-box">
+                            <t t-foreach="company_list" t-as="c_list">                            
+                                <div class="de-selector-item de-chip-selector-item" data-trigger-selector=".de-trigger-a-company" t-att-data-value-id="c_list['id']">
+                                    <t t-esc="c_list['name']" />
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                    <h3 class="de-user-title">
+                        Permanent Site Access
+                    </h3>
+                    <div class="de-user-gray-border de-trigger-o-site de-trigger-selector" data-trigger-selector=".de-select-o-site">
+                                           
+                    </div>
+                    <div class="de-selector-container de-select-o-site de-hide">
+                        <div class="de-selector-box">
+                            <t t-foreach="site_list" t-as="s_list">                            
+                                <div class="de-selector-item de-chip-selector-item" data-trigger-selector=".de-trigger-o-site" t-att-data-value-id="s_list['id']">
+                                    <t t-esc="s_list['name']" />
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                    <h3 class="de-user-title">
+                        Email <span style="color:red;">*</span>
+                    </h3>
+                    <div class="de-user-gray-border">
+                        <input type="text" class="de-user-input" name="email" />
+                    </div>
+                    <h3 class="de-user-title">
+                        Mobile
+                    </h3>
+                    <div class="de-user-gray-border">
+                        <input type="text" class="de-user-input" name="mobile" />
+                    </div>
+                    <h3 class="de-user-title">
+                        Phone
+                    </h3>
+                    <div class="de-user-gray-border">
+                        <input type="text" class="de-user-input" name="phone" />
+                    </div>
+                    <h3 class="de-user-title">
+                        Job Position
+                    </h3>
+                    <div class="de-user-gray-border">
+                        <input type="text" class="de-user-input" name="job_position" />
+                    </div>  
+                    <h3 class="de-user-title">
+                        Pin Code <span style="color:red;">*</span>
+                    </h3>
+                    <div class="de-user-gray-border">
+                        <input type="text" class="de-user-input de-user-pin-code-form" name="pin_code" readonly="true"/>
+                    </div>
+                    <!-- <h3 class="de-user-title de-user-id-form" style="display: none;">
+                        ID Card Type
+                    </h3>
+                    <div class="de-user-gray-border de-user-id-form" style="display: none;">
+                        <select name="id_type" class="de-user-input">
+                            <option value="Passport">Passport</option>
+                            <option value="National ID Card" selected="selected">National ID Card</option>
+                            <option value="Driving License">Driving License</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                    <h3 class="de-user-title de-user-id-form" style="display: none;">
+                        ID Number
+                    </h3>
+                    <div class="de-user-gray-border de-user-id-form" style="display: none;">
+                        <input type="text" class="de-user-input" name="id_number" />
+                    </div> -->
+                </form>            
+            </div>
+            <button class="de-btn-cancel de-btn-half-left" t-att-data-partner-id="partner_id">Cancel</button>
+            <button class="de-btn-save de-btn-half-right">Save</button>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_chip">
+        <span class="de-chip" t-att-data-value-id="id" t-att-data-trigger-selector="trigger_selector">
+            <span t-esc="name" />
+            <span class="de-chip-delete de-ic-eraser" />
+        </span>
+    </t>
+
+    <t t-name="nrs_de_portal.de_need_password">
+        <div class="de-dialog-container">
+            <div class="de-dialog-box">
+                <span class="de-dialog-close de-ic-eraser" />
+                <div class="de-dialog-body">
+                    <div class="de-user-info-box">
+                        <h3 class="de-user-title">
+                            Please insert your password to continue
+                        </h3>
+                        <div class="de-user-gray-border de-password-box">
+                            <input type="password" name="password" class="de-user-password" />
+                        </div>
+                    </div>
+                    <br/><br/>                
+                </div>
+                <div class="de-dialog-footer">
+                    <button class="de-dialog-btn-confirm" t-att-data-action="action">
+                        Confirm Password
+                    </button>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_2fa_wizard">
+        <div class="de-dialog-container de-2fa-dialog">
+            <div class="de-dialog-box">
+                <span class="de-dialog-close de-ic-eraser" />
+                <div class="de-dialog-body">
+                    <div class="de-user-info-box">
+                        <span class="d-flex flex-row justify-content-center">                        
+                            <h2 class="de-user-title">
+                                Scan this QR code to Enable two-factor authentication 
+                            </h2>
+                            <small>                            
+                                <span
+                                    tabindex="0"
+                                    role="button"
+                                    class="fas fa-question-circle de-tooltips-popover ml-1"
+                                    data-toggle="popover"
+                                />
+                            </small>
+                        </span>
+                        <h3 class="de-user-title">
+                            Scan this QR code below with the authenticatior app on your phone.
+                        </h3>
+                        <br/>
+                        <h3 class="de-2fa-text">
+                            Having trouble? Here is an alternative option:
+                        </h3>
+                        <h3 class="de-2fa-text">
+                            <span class="de-2fa-text">Enter the two-factor secret code manually:</span>
+                            <a data-toggle="collapse"
+                                   href="#collapseTotpSecret" role="button" aria-expanded="false"
+                                   aria-controls="collapseTotpSecret" class="de-2fa-text">See the secret code</a>
+                        </h3>
+                        <div class="collapse" id="collapseTotpSecret">
+                            <div class="card card-body">
+                                <h3 class="de-2fa-text">Your two-factor secret code:</h3>
+                                <code class="text-center de-2fa-text">
+                                    <t t-esc="data['secret']" />
+                                </code>
+                            </div>
+                        </div>
+                        <div class="">
+                            <img t-att-src="'data:image/png' + ';base64,' + data['qrcode']" />
+                        </div>
+                        <h3 class="de-user-title">Enter the 6-digit code from your app</h3>
+                        <div class="de-2fa-text">
+                            Once you scan the QR code, your app will display a 6 digit verification code you
+                            can enter below. Don't worry if the code changes in the app,
+                            it stays valid a bit longer.
+                        </div>
+                        <h3 class="de-user-title">
+                            Verification Code
+                        </h3>
+                        <div class="de-2fa-code-box">
+                            <div class="de-user-gray-border de-password-box">
+                                <input type="text" name="code" class="de-user-password" />
+                            </div>
+                        </div>
+                    </div>                               
+                </div>
+                <div class="de-dialog-footer">  
+                    <button class="de-dialog-btn-confirm" data-action="confirm" t-att-data-wizard-id="data['id']">
+                        Enable two-factor authentication
+                    </button>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="nrs_de_portal.de_change_agreement">
+        <div class="de-dialog-container de-submit-order-dialog">
+            <div class="de-dialog-box de-loader-dialog">
+                <span class="de-dialog-close de-ic-close" />
+                <div class="de-dialog-body">
+                    You have unticked your Privacy Policy agreement. Click Save if you want to proceed and we will remove you from the portal. Click Discard if you do not want to proceed
+                </div>                            
+                <div class="de-dialog-footer">
+                    <button type="button" class="btn de-dialog-btn-confirm de-uncheck-policy-agreement">Save</button>
+                    <button type="button" class="btn de-dialog-btn-confirm de-dialog-close">Discard</button>
+                </div>                            
+            </div>
+        </div>
+    </t>
+</templates>

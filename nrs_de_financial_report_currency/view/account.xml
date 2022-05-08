@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_move_form_inherit">
+        <field name="name">view_move_form_inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <field name="journal_id" position="after">
+                <field name="ns_is_usd_currency" invisible="1" />
+            </field>
+            <xpath expr="//page[@id='aml_tab']/field[@name='line_ids']/tree" position="inside">
+                <field name="ns_usd_currency_id" invisible="1" />
+                <field name="ns_debit_usd_budget" optional="show" readonly="1" force_save="1" attrs="{'column_invisible': [('parent.ns_is_usd_currency','=',True)]}"/>
+                <field name="ns_credit_usd_budget" optional="show" readonly="1" force_save="1" attrs="{'column_invisible': [('parent.ns_is_usd_currency','=',True)]}"/>
+                <field name="ns_debit_usd_real" optional="show" readonly="1" force_save="1" attrs="{'column_invisible': [('parent.ns_is_usd_currency','=',True)]}"/>
+                <field name="ns_credit_usd_real" optional="show" readonly="1" force_save="1" attrs="{'column_invisible': [('parent.ns_is_usd_currency','=',True)]}"/>
+            </xpath>
+            <xpath expr="//page[@id='invoice_tab']/field[@name='invoice_line_ids']/form/sheet/group[2]/field[@name='account_id']" position="before">
+                <field name="ns_fr" />
+            </xpath>
+            <xpath expr="//page[@id='aml_tab']/field[@name='line_ids']/form/group[1]/field[@name='account_id']" position="before">
+                <field name="ns_fr" />
+            </xpath>
+            <xpath expr="//page[@id='invoice_tab']/field[@name='invoice_line_ids']/tree/field[@name='product_id']" position="before">
+                <field name="ns_fr" optional="hide" />
+            </xpath>
+            <xpath expr="//page[@id='aml_tab']/field[@name='line_ids']/tree/field[@name='account_id']" position="before">
+                <field name="ns_fr" optional="hide" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

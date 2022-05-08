@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ns_rooms_form" model="ir.ui.view">
+        <field name="name">ns_rooms_form</field>
+        <field name="model">ns.ns_rooms</field>
+        <field name="arch" type="xml">
+        <form>
+          <header/>
+          <sheet string="Rooms">
+            <div name="button_box" class="oe_button_box">
+              <button class="oe_stat_button" icon="fa-pie-chart" type="action" name="%(nrs_de_capacity_management.space_action_in_room)d">
+                <field widget="statinfo" name="ns_ns_room__ns_space_count" string="Space"/>
+              </button>
+            </div>            
+            <widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+            <field name="active" invisible="1"/>
+            <div class="oe_title">
+                        <h1>
+                            <field name="ns_name" required="1" placeholder="Name..."/>
+                        </h1>
+                    </div>
+            <group name="studio_group_904e2f">
+              <group name="studio_group_904e2f_left">
+                <field name="ns_room_description" string="Room Description"/>
+                <field name="ns_floor" string="Floor"/>
+                <field name="company_id"/>
+              </group>
+              <group name="studio_group_904e2f_right">
+                <field name="ns_room_type" string="Room Type"/>
+                <field name="ns_remarks" string="Remarks"/>
+              </group>
+            </group>
+            <notebook name="studio_notebook_0XScf">
+              <page string="Space" name="studio_page_0XScf" attrs="{&quot;invisible&quot;: [[&quot;ns_room_type&quot;,&quot;!=&quot;,&quot;Space&quot;]]}">
+                <group name="studio_group_0XScf">
+                  <group name="studio_group_0XScf_left"/>
+                  <group name="studio_group_0XScf_right"/>
+                </group>
+              </page>
+            </notebook>
+          </sheet>
+          <div class="oe_chatter" name="oe_chatter">
+            <field name="message_follower_ids"/>
+            <field name="message_ids"/>
+            <field name="activity_ids"/>
+          </div>
+        </form>
+
+        </field>
+    </record>
+
+    <record id="ns_rooms_tree" model="ir.ui.view">
+        <field name="name">ns_rooms_tree</field>
+        <field name="model">ns.ns_rooms</field>
+        <field name="arch" type="xml">
+          <tree multi_edit='true'>
+            <field name="ns_sequence" widget="handle"/>
+            <field name="ns_name"/>
+            <field name="ns_room_description"/>
+            <field name="ns_room_type" optional="hide"/>
+          </tree>
+        </field>
+    </record>
+
+    <record id="ns_rooms_search" model="ir.ui.view">
+        <field name="name">ns_rooms_search</field>
+        <field name="model">ns.ns_rooms</field>
+        <field name="arch" type="xml">
+          <search>
+            <field name="ns_name"/>
+            <separator/>
+            <filter string="Archived" name="archived_ns_rooms" domain="[['active', '=', False]]"/>
+            <separator/>
+            <filter name="studio_filter_DNs2b" string="Space" domain="[[&quot;ns_room_type&quot;,&quot;=&quot;,&quot;Space&quot;]]"/>
+            <filter name="studio_filter_7Obky" string="Power" domain="[[&quot;ns_room_type&quot;,&quot;=&quot;,&quot;Power&quot;]]"/>
+            <filter name="studio_filter_MYvOc" string="Auxiliary" domain="[[&quot;ns_room_type&quot;,&quot;=&quot;,&quot;Auxiliary&quot;]]"/>
+            <separator name="studio_separator_8m2WE"/>
+          </search>
+        </field>
+    </record>
+
+</odoo>

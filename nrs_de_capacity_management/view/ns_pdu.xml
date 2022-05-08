@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ns_pdu_form" model="ir.ui.view">
+        <field name="name">ns_pdu_form</field>
+        <field name="model">ns.ns_pdu</field>
+        <field name="arch" type="xml">
+          <form>
+            <header/>
+            <sheet string="PDU">
+              <widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+              <field name="active" invisible="1"/>
+              <div class="oe_title">
+                          <h1>
+                              <field name="ns_name" required="1" placeholder="Name..."/>
+                          </h1>
+                      </div>
+              <group name="studio_group_dda3a6">
+                <group name="studio_group_dda3a6_left">
+                  <field name="ns_operation_site" />
+                  <field name="company_id"/>
+                </group>
+                <group name="studio_group_dda3a6_right"/>
+              </group>
+            </sheet>
+            <div class="oe_chatter" name="oe_chatter">
+              <field name="message_follower_ids"/>
+              <field name="message_ids"/>
+              <field name="activity_ids"/>
+            </div>
+          </form>
+        </field>
+    </record>
+
+    <record id="ns_pdu_tree" model="ir.ui.view">
+        <field name="name">ns_pdu_tree</field>
+        <field name="model">ns.ns_pdu</field>
+        <field name="arch" type="xml">
+          <tree>
+            <field name="ns_sequence" widget="handle"/>
+            <field name="ns_name"/>
+            <field name="ns_operation_site" />
+          </tree>
+        </field>
+    </record>
+
+    <record id="ns_pdu_search" model="ir.ui.view">
+        <field name="name">ns_pdu_search</field>
+        <field name="model">ns.ns_pdu</field>
+        <field name="arch" type="xml">
+          <search>
+            <field name="ns_name"/>
+            <separator/>
+            <filter string="Archived" name="archived_ns_pdu" domain="[['active', '=', False]]"/>
+            <separator/>
+          </search>
+        </field>
+    </record>
+
+</odoo>
